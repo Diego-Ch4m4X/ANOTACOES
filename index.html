@@ -1760,9 +1760,15 @@ html.tabs-reordering, body.tabs-reordering{
             box-sizing: border-box;
             min-width: 100%;
             min-height: 100%;
+            padding: 16px 16px 22px;
             white-space: pre-wrap;
             overflow-wrap: break-word;
             color: transparent;
+            font-family: var(--personalizacao-fonte-exibicao-direita);
+            font-size: var(--personalizacao-tamanho-fonte-exibicao-direita);
+            line-height: var(--personalizacao-espacamento-entre-linhas-editor, 1);
+            letter-spacing: .12px;
+            font-feature-settings: "liga" 1, "kern" 1;
             transform: translate3d(0,0,0);
             will-change: transform;
          }
@@ -1774,17 +1780,46 @@ html.tabs-reordering, body.tabs-reordering{
          }
 
          .editorSearchMirror .editorFindHit{
-            color: var(--editor-find-passive-fg, #111111) !important;
-            background: var(--editor-find-passive-bg, #FFE600);
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            /* Fundo semitransparente: mantém o realce sem esconder o texto real
+               do textarea que fica logo abaixo do overlay. */
+            background: rgba(255, 230, 0, 0.42);
             border-radius: 3px;
             box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18);
             padding: 0 1px;
          }
 
          .editorSearchMirror .editorFindHit.active{
-            color: var(--editor-find-active-fg, #FFFFFF) !important;
-            background: var(--editor-find-active-bg, #4C8DFF);
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+            color: transparent !important;
+            -webkit-text-fill-color: transparent;
+            /* O texto ativo usa a seleção nativa do textarea.
+               Aqui o overlay NÃO pode pintar um fundo sólido,
+               senão ele cobre a seleção azul e o texto parece “sumir”. */
+            background: transparent;
+            box-shadow: inset 0 0 0 1px rgba(76,141,255,.85);
+         }
+
+         .mdPreviewSearchHit{
+            /* Preview Markdown: os hits passivos precisam ficar visualmente tão legíveis
+               quanto no TXT. Forçamos fundo, cor e box-decoration-break para que o
+               realce continue aparecendo mesmo em headings, listas e linhas quebradas. */
+            background: rgba(255, 230, 0, 0.48) !important;
+            color: inherit !important;
+            -webkit-text-fill-color: currentColor !important;
+            border-radius: 3px;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16);
+            padding: 0 2px;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            text-decoration: none !important;
+         }
+
+         .mdPreviewSearchHit.active{
+            background: rgba(76, 141, 255, 0.24) !important;
+            color: inherit !important;
+            -webkit-text-fill-color: currentColor !important;
+            box-shadow: inset 0 0 0 1px rgba(76,141,255,.90);
          }
 
          textarea#editor::selection,
@@ -2073,12 +2108,83 @@ html.tabs-reordering, body.tabs-reordering{
          .modal.modal--info .footer .right {
             margin-left: auto;
          }
-         .helpText {
-            font-size: 12px;
-            color: var(--utility-help-text, var(--theme-text-muted, var(--muted)));
-            line-height: 1.4;
+         .modal.modal--sync {
+            width: min(460px, calc(100vw - 32px));
+            max-width: 100%;
+         }
+         .modal.modal--sync .body {
+            grid-template-columns: minmax(0, 1fr);
             padding-top: 16px;
-            font-family: var(--utility-help-font-family, "Lucida Console", "Courier New", monospace);
+            padding-bottom: 16px;
+         }
+         .syncStatusCard {
+            display: grid;
+            gap: 12px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 16px;
+            padding: 14px;
+            background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+         }
+         .syncStatusRow {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+         }
+         .syncStatusIcon {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(122,167,255,.24);
+            background: radial-gradient(circle at 30% 30%, rgba(122,167,255,.20), rgba(122,167,255,.06));
+            color: var(--theme-accent, var(--accent));
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+         }
+         .syncStatusIcon svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+            animation: syncSpin 1.05s linear infinite;
+         }
+         @keyframes syncSpin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+         }
+         .syncStatusText {
+            display: grid;
+            gap: 6px;
+            min-width: 0;
+         }
+         .syncStatusTitle {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--theme-text-primary, var(--text));
+         }
+         .syncStatusBody {
+            font-size: 13px;
+            line-height: 1.55;
+            color: var(--theme-text-muted, var(--muted));
+         }
+         .syncStatusHint {
+            border-top: 1px solid rgba(255,255,255,.08);
+            padding-top: 10px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: var(--theme-text-muted, var(--muted));
+         }
+         #fsSyncBackdrop[data-lock-close="true"] {
+            cursor: progress;
+         }
+         html.fs-sync-active,
+         html.fs-sync-active body {
+            cursor: progress;
+         }
+         @media (prefers-reduced-motion: reduce) {
+            .syncStatusIcon svg { animation: none !important; }
          }
          .dangerText {
             color: var(--utility-danger-text, #ffc9c9);
@@ -4287,6 +4393,32 @@ html.tree-grabbing .tree .node.selected {
       </div>
 
       <input id="importFile" class="is-hidden" type="file" accept=".json,application/json" aria-label="Importar arquivo JSON" />
+      <div class="modal-backdrop" id="fsSyncBackdrop" hidden data-lock-close="true" aria-hidden="true">
+         <div class="modal modal--sync" role="dialog" aria-modal="true" aria-labelledby="fsSyncTitle" aria-describedby="fsSyncText">
+            <header>
+               <div class="title">Sincronização em andamento</div>
+            </header>
+            <div class="body">
+               <div class="syncStatusCard" role="status" aria-live="assertive" aria-atomic="true">
+                  <div class="syncStatusRow">
+                     <div class="syncStatusIcon" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                           <path d="M12 3a9 9 0 1 1-6.364 2.636" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".28"/>
+                           <path d="M12 3a9 9 0 0 1 9 9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+                        </svg>
+                     </div>
+                     <div class="syncStatusText">
+                        <div class="syncStatusTitle" id="fsSyncTitle">Sincronizando…</div>
+                        <div class="syncStatusBody" id="fsSyncText">Aguarde enquanto a página conclui a operação na pasta raiz.</div>
+                     </div>
+                  </div>
+                  <div class="syncStatusHint" id="fsSyncHint">Durante esse processo, a interface fica temporariamente bloqueada para evitar cliques concorrentes e frustração.</div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <input id="importFile" class="is-hidden" type="file" accept=".json,application/json" aria-label="Importar arquivo JSON" />
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
       <!-- =====================================================================
      BLOCO 10 — SCRIPT PRINCIPAL DO APP (estado, árvore, abas, editor, preview)
@@ -4951,6 +5083,11 @@ html.tree-grabbing .tree .node.selected {
              btnDialogCancel: $("#btnDialogCancel"),
              btnDialogOk: $("#btnDialogOk"),
 
+             fsSyncBackdrop: $("#fsSyncBackdrop"),
+             fsSyncTitle: $("#fsSyncTitle"),
+             fsSyncText: $("#fsSyncText"),
+             fsSyncHint: $("#fsSyncHint"),
+
              importFile: $("#importFile"),
            };
 
@@ -5407,6 +5544,12 @@ const bindSidebarToggle = () => {
               _pendingInitialPickArmed: false,
               initialRootPickPromptSeen: false,
             },
+            fsUiSync: {
+              count: 0,
+              title: "",
+              text: "",
+              hint: "",
+            },
           };
 
           const ARVORE_RENOMEAR_DUPLO_CLIQUE_MS = 420;
@@ -5604,12 +5747,133 @@ const bindSidebarToggle = () => {
             }
           };
 
+          const clearMdPreviewSearchHighlights = () => {
+            if (!ui.mdPreview) return;
+            ui.mdPreview.querySelectorAll("mark.mdPreviewSearchHit").forEach((mark) => {
+              const parent = mark.parentNode;
+              if (!parent) return;
+              parent.replaceChild(document.createTextNode(mark.textContent || ""), mark);
+              parent.normalize();
+            });
+          };
+
+          const scheduleMdPreviewSearchRefresh = ({ scrollActive = false } = {}) => {
+            try {
+              requestAnimationFrame(() => {
+                try {
+                  requestAnimationFrame(() => applySearchRevealToCurrentPreview({ scrollActive }));
+                } catch (_) {}
+              });
+            } catch (_) {}
+          };
+
+          const applySearchRevealToCurrentPreview = ({ scrollActive = true } = {}) => {
+            const tab = getTab(state.activeTabId);
+            const activeNodeId = tab?.nodeId;
+            const reveal = state.searchReveal;
+
+            if (!tab || !activeNodeId || !reveal || reveal.nodeId !== activeNodeId || !ui.mdPreview || !ui.mdPreviewWrap) {
+              clearMdPreviewSearchHighlights();
+              return;
+            }
+
+            if (state.mdMode !== "preview" || ui.mdPreviewWrap.style.display === "none") {
+              clearMdPreviewSearchHighlights();
+              return;
+            }
+
+            const query = String(reveal.query || "").trim();
+            if (!query) {
+              clearMdPreviewSearchHighlights();
+              return;
+            }
+
+            const queryLower = query.toLowerCase();
+            clearMdPreviewSearchHighlights();
+
+            const walker = document.createTreeWalker(ui.mdPreview, NodeFilter.SHOW_TEXT, {
+              acceptNode(node) {
+                const textValue = String(node?.nodeValue || "");
+                if (!textValue || !textValue.toLowerCase().includes(queryLower)) return NodeFilter.FILTER_SKIP;
+                const parent = node.parentElement;
+                if (!parent) return NodeFilter.FILTER_SKIP;
+                if (parent.closest("script, style, noscript, textarea, mark.mdPreviewSearchHit")) return NodeFilter.FILTER_SKIP;
+                return NodeFilter.FILTER_ACCEPT;
+              }
+            });
+
+            const textNodes = [];
+            for (let current = walker.nextNode(); current; current = walker.nextNode()) {
+              textNodes.push(current);
+            }
+
+            const allMarks = [];
+            let hitIndex = 0;
+
+            textNodes.forEach((textNode) => {
+              const raw = String(textNode.nodeValue || "");
+              const lower = raw.toLowerCase();
+              if (!lower.includes(queryLower)) return;
+
+              const frag = document.createDocumentFragment();
+              let cursor = 0;
+              let foundAt = lower.indexOf(queryLower, cursor);
+
+              while (foundAt !== -1) {
+                if (foundAt > cursor) {
+                  frag.appendChild(document.createTextNode(raw.slice(cursor, foundAt)));
+                }
+
+                const mark = document.createElement("mark");
+                mark.className = "mdPreviewSearchHit";
+                mark.textContent = raw.slice(foundAt, foundAt + query.length);
+                mark.dataset.hitIndex = String(hitIndex);
+                allMarks.push(mark);
+                frag.appendChild(mark);
+
+                cursor = foundAt + query.length;
+                hitIndex += 1;
+                foundAt = lower.indexOf(queryLower, cursor);
+              }
+
+              if (cursor < raw.length) {
+                frag.appendChild(document.createTextNode(raw.slice(cursor)));
+              }
+
+              textNode.parentNode?.replaceChild(frag, textNode);
+            });
+
+            if (!allMarks.length) {
+              clearMdPreviewSearchHighlights();
+              return;
+            }
+
+            const activeIndex = Math.max(0, Math.min(reveal.activeIndex ?? 0, allMarks.length - 1));
+            reveal.activeIndex = activeIndex;
+            const activeMark = allMarks[activeIndex] || allMarks[0];
+            if (activeMark) {
+              activeMark.classList.add("active");
+              if (scrollActive) {
+                try {
+                  activeMark.scrollIntoView({ block: "center", inline: "nearest", behavior: "auto" });
+                } catch (_) {}
+              }
+            }
+            scheduleMdPreviewToTopVisibility();
+          };
+
           const openSearchResultInEditor = (nodeId) => {
             const query = getSearchQueryNormalized();
+            const node = getNode(nodeId);
             queueSearchReveal(nodeId, query);
+            if (node && node.ext === "md") state.mdMode = "preview";
             openInTab(nodeId);
 
             requestAnimationFrame(() => {
+              if (node && node.ext === "md") {
+                scheduleMdPreviewSearchRefresh({ scrollActive: true });
+                return;
+              }
               applySearchRevealToCurrentEditor({ forceSelect: true });
             });
           };
@@ -6191,9 +6455,174 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              }
            };
 
+           const isFsSyncOverlayActive = () => !!(state.fsUiSync && state.fsUiSync.count > 0);
+
+           const setFsSyncInteractionLock = (locked) => {
+             const next = !!locked;
+             document.documentElement.classList.toggle("fs-sync-active", next);
+             if (ui.app) {
+               ui.app.setAttribute("aria-busy", next ? "true" : "false");
+               if ("inert" in ui.app) ui.app.inert = next;
+             }
+           };
+
+           const updateFsSyncOverlayCopy = ({ title = "Sincronizando…", text = "Aguarde enquanto a página conclui a operação na pasta raiz.", hint = "Durante esse processo, a interface fica temporariamente bloqueada para evitar cliques concorrentes e frustração." } = {}) => {
+             if (ui.fsSyncTitle) ui.fsSyncTitle.textContent = title;
+             if (ui.fsSyncText) ui.fsSyncText.textContent = text;
+             if (ui.fsSyncHint) ui.fsSyncHint.textContent = hint;
+           };
+
+           const beginFsSyncOverlay = ({ title = "Sincronizando…", text = "Aguarde enquanto a página conclui a operação na pasta raiz.", hint = "Durante esse processo, a interface fica temporariamente bloqueada para evitar cliques concorrentes e frustração." } = {}) => {
+             state.fsUiSync.count += 1;
+             state.fsUiSync.title = title;
+             state.fsUiSync.text = text;
+             state.fsUiSync.hint = hint;
+             updateFsSyncOverlayCopy({ title, text, hint });
+             setStatus(text);
+             if (state.fsUiSync.count === 1) {
+               openModal(ui.fsSyncBackdrop);
+               setFsSyncInteractionLock(true);
+             }
+             updateActionButtons();
+             updateFsRootToolbarVisualState();
+             return state.fsUiSync.count;
+           };
+
+           const endFsSyncOverlay = () => {
+             if (state.fsUiSync.count > 0) state.fsUiSync.count -= 1;
+             if (state.fsUiSync.count > 0) {
+               updateActionButtons();
+               updateFsRootToolbarVisualState();
+               return state.fsUiSync.count;
+             }
+             state.fsUiSync.count = 0;
+             setFsSyncInteractionLock(false);
+             closeModal(ui.fsSyncBackdrop);
+             setStatus("Pronto.");
+             updateActionButtons();
+             updateFsRootToolbarVisualState();
+             return 0;
+           };
+
+           const withFsSyncOverlay = async (options, task) => {
+             beginFsSyncOverlay(options);
+             try {
+               return await task();
+             } finally {
+               endFsSyncOverlay();
+             }
+           };
+
            /* =========================
               Dados
               ========================= */
+           const FS_HANDLE_DB_NAME = "anotacoes-fs-handles";
+           const FS_HANDLE_STORE_NAME = "handles";
+           const FS_ROOT_HANDLE_KEY = "root-directory";
+           const FS_ROOT_PARENT_HANDLE_KEY = "root-parent-directory";
+
+           const openFsHandleDb = async () => {
+             return await new Promise((resolve, reject) => {
+               const request = indexedDB.open(FS_HANDLE_DB_NAME, 1);
+               request.onupgradeneeded = () => {
+                 const db = request.result;
+                 if (!db.objectStoreNames.contains(FS_HANDLE_STORE_NAME)) {
+                   db.createObjectStore(FS_HANDLE_STORE_NAME);
+                 }
+               };
+               request.onsuccess = () => resolve(request.result);
+               request.onerror = () => reject(request.error || new Error("indexedDB open failed"));
+               request.onblocked = () => reject(new Error("indexedDB open blocked"));
+             });
+           };
+
+           const idbGet = async (key) => {
+             const db = await openFsHandleDb();
+             return await new Promise((resolve, reject) => {
+               const tx = db.transaction(FS_HANDLE_STORE_NAME, "readonly");
+               const store = tx.objectStore(FS_HANDLE_STORE_NAME);
+               const request = store.get(key);
+               request.onsuccess = () => resolve(request.result || null);
+               request.onerror = () => reject(request.error || new Error("indexedDB read failed"));
+               tx.oncomplete = () => db.close();
+               tx.onabort = () => reject(tx.error || new Error("indexedDB transaction aborted"));
+             });
+           };
+
+           const idbWrite = async (errorMessage, writer) => {
+             const db = await openFsHandleDb();
+             return await new Promise((resolve, reject) => {
+               const tx = db.transaction(FS_HANDLE_STORE_NAME, "readwrite");
+               const store = tx.objectStore(FS_HANDLE_STORE_NAME);
+               writer(store);
+               tx.oncomplete = () => { db.close(); resolve(true); };
+               tx.onerror = () => reject(tx.error || new Error(errorMessage));
+               tx.onabort = () => reject(tx.error || new Error("indexedDB transaction aborted"));
+             });
+           };
+
+           const idbSet = async (key, value) => idbWrite("indexedDB write failed", (store) => {
+             store.put(value, key);
+           });
+
+           const idbDelete = async (key) => idbWrite("indexedDB delete failed", (store) => {
+             store.delete(key);
+           });
+
+           const saveFsRootHandle = async (handle) => {
+             if (!handle) return false;
+             try {
+               await idbSet(FS_ROOT_HANDLE_KEY, handle);
+               return true;
+             } catch (_) {
+               return false;
+             }
+           };
+
+           const loadFsRootHandle = async () => {
+             try {
+               return await idbGet(FS_ROOT_HANDLE_KEY);
+             } catch (_) {
+               return null;
+             }
+           };
+
+           const clearFsRootHandle = async () => {
+             try {
+               await idbDelete(FS_ROOT_HANDLE_KEY);
+               return true;
+             } catch (_) {
+               return false;
+             }
+           };
+
+           const saveFsRootParentHandle = async (handle) => {
+             if (!handle) return false;
+             try {
+               await idbSet(FS_ROOT_PARENT_HANDLE_KEY, handle);
+               return true;
+             } catch (_) {
+               return false;
+             }
+           };
+
+           const loadFsRootParentHandle = async () => {
+             try {
+               return await idbGet(FS_ROOT_PARENT_HANDLE_KEY);
+             } catch (_) {
+               return null;
+             }
+           };
+
+           const clearFsRootParentHandle = async () => {
+             try {
+               await idbDelete(FS_ROOT_PARENT_HANDLE_KEY);
+               return true;
+             } catch (_) {
+               return false;
+             }
+           };
+
            /* =========================
               File System Access
               Segurança:
@@ -6487,50 +6916,65 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
            const syncFsStateFromHandle = async (rootHandle, { focusNodeId = null, preserveUiSession = true, silent = false } = {}) => {
              if (!rootHandle) return false;
 
-             const prevData = preserveUiSession ? state.data : null;
-             const prevTabs = preserveUiSession ? [...state.tabs] : [];
-             const prevClosedTabs = preserveUiSession ? [...state.closedTabs] : [];
-             const prevActiveTabId = preserveUiSession ? state.activeTabId : null;
-             const prevSelectedId = preserveUiSession ? state.selectedId : null;
-             const prevTabState = preserveUiSession ? new Map(state.tabState) : new Map();
-             const prevDirty = preserveUiSession ? new Set(state.dirty) : new Set();
-             const prevMdMode = state.mdMode;
+             const syncCopy = preserveUiSession
+               ? {
+                   title: "Sincronizando a pasta raiz…",
+                   text: "Lendo e reconciliando arquivos e pastas reais. Aguarde um instante.",
+                   hint: "A interface fica temporariamente bloqueada para evitar cliques concorrentes enquanto a árvore termina de sincronizar.",
+                 }
+               : {
+                   title: "Conectando a pasta raiz…",
+                   text: "Lendo a pasta escolhida e montando a árvore inicial. Aguarde um instante.",
+                   hint: "A interface fica temporariamente bloqueada para evitar frustração durante a carga inicial da pasta raiz.",
+                 };
 
-             const { data, handles } = await buildDataFromFsRoot(rootHandle, prevData);
+             return await withFsSyncOverlay(syncCopy, async () => {
+               const prevData = preserveUiSession ? state.data : null;
+               const prevTabs = preserveUiSession ? [...state.tabs] : [];
+               const prevClosedTabs = preserveUiSession ? [...state.closedTabs] : [];
+               const prevActiveTabId = preserveUiSession ? state.activeTabId : null;
+               const prevSelectedId = preserveUiSession ? state.selectedId : null;
+               const prevTabState = preserveUiSession ? new Map(state.tabState) : new Map();
+               const prevDirty = preserveUiSession ? new Set(state.dirty) : new Set();
+               const prevMdMode = state.mdMode;
 
-             state.data = data;
-             state.fs.connected = true;
-             state.fs.rootHandle = rootHandle;
-             state.fs.nodeHandles = handles;
-             state.fs.currentRootName = rootHandle.name || "";
-             clearPendingFsReconnect();
-             state.fs._pendingReconnectArmed = false;
-             state._searchCache.clear();
+               const { data, handles } = await buildDataFromFsRoot(rootHandle, prevData);
 
-             state.tabs = prevTabs.filter((tab) => tab && tab.id && data.nodes[tab.nodeId]);
-             state.closedTabs = prevClosedTabs.filter((tab) => tab && tab.id && data.nodes[tab.nodeId]);
-             state.tabState = new Map();
-             for (const [tabId, tabState] of prevTabState.entries()) {
-               if (state.tabs.some((tab) => tab.id === tabId)) state.tabState.set(tabId, tabState);
-             }
-             state.dirty = new Set([...prevDirty].filter((nodeId) => !!data.nodes[nodeId]));
-             state.activeTabId = state.tabs.some((tab) => tab.id === prevActiveTabId) ? prevActiveTabId : (state.tabs[0]?.id || null);
-             state.selectedId = (focusNodeId && data.nodes[focusNodeId])
-               ? focusNodeId
-               : (prevSelectedId && data.nodes[prevSelectedId] ? prevSelectedId : data.rootId);
-             state.treeFocusId = state.selectedId;
-             state.mdMode = prevMdMode;
+               state.data = data;
+               state.fs.connected = true;
+               state.fs.rootHandle = rootHandle;
+               state.fs.nodeHandles = handles;
+               state.fs.currentRootName = rootHandle.name || "";
+               saveFsRootHandle(rootHandle).catch(() => {});
+               clearPendingFsReconnect();
+               state.fs._pendingReconnectArmed = false;
+               state._searchCache.clear();
 
-             clearSearchReveal();
-             scheduleRenderTree();
-             renderTabs();
-             updateEditorForActiveTab();
-             updateActionButtons();
-             saveData();
-             saveTabs();
-             saveClosedTabs();
-             if (!silent) toast(`Pasta raiz conectada: ${rootHandle.name} ✅`);
-             return true;
+               state.tabs = prevTabs.filter((tab) => tab && tab.id && data.nodes[tab.nodeId]);
+               state.closedTabs = prevClosedTabs.filter((tab) => tab && tab.id && data.nodes[tab.nodeId]);
+               state.tabState = new Map();
+               for (const [tabId, tabState] of prevTabState.entries()) {
+                 if (state.tabs.some((tab) => tab.id === tabId)) state.tabState.set(tabId, tabState);
+               }
+               state.dirty = new Set([...prevDirty].filter((nodeId) => !!data.nodes[nodeId]));
+               state.activeTabId = state.tabs.some((tab) => tab.id === prevActiveTabId) ? prevActiveTabId : (state.tabs[0]?.id || null);
+               state.selectedId = (focusNodeId && data.nodes[focusNodeId])
+                 ? focusNodeId
+                 : (prevSelectedId && data.nodes[prevSelectedId] ? prevSelectedId : data.rootId);
+               state.treeFocusId = state.selectedId;
+               state.mdMode = prevMdMode;
+
+               clearSearchReveal();
+               scheduleRenderTree();
+               renderTabs();
+               updateEditorForActiveTab();
+               updateActionButtons();
+               saveData();
+               saveTabs();
+               saveClosedTabs();
+               if (!silent) toast(`Pasta raiz conectada: ${rootHandle.name} ✅`);
+               return true;
+             });
            };
 
            const chooseFsRootFolder = async ({ silentError = false } = {}) => {
@@ -6543,7 +6987,7 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              }
 
              if (state.fs?.pendingReconnectActive && state.fs?.pendingReconnectHandle) {
-               pulseStatus("Tentando reativar o acesso atual à pasta raiz…", 1800);
+               pulseStatus("Tentando reativar a pasta raiz lembrada…", 1800);
                const restored = await tryReconnectPendingFsRootFromUserGesture();
                if (restored) {
                  clearPendingInitialFsRootPick();
@@ -6554,25 +6998,19 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
 
              try {
                pulseStatus("Escolha a pasta raiz no Chrome…", 2200);
-               const handle = await window.showDirectoryPicker({ mode: "read" });
+               const handle = await window.showDirectoryPicker({ mode: "readwrite" });
+               await saveFsRootHandle(handle);
+               await clearFsRootParentHandle().catch(() => {});
                clearPendingFsReconnect();
                clearPendingInitialFsRootPick();
                try {
-                 const allowed = await ensureFsHandlePermission(handle, "read", { prompt: true });
-                 if (!allowed) {
-                   if (!silentError) {
-                    toast("Acesso de leitura à pasta raiz não foi autorizado. No Chrome, permita o acesso para continuar.");
-                    pulseStatus("Permissão de leitura da pasta raiz pendente.", 2600);
-                  }
-                   return false;
-                 }
                  await syncFsStateFromHandle(handle, { preserveUiSession: false });
                } catch (syncError) {
-                 const allowed = await ensureFsHandlePermission(handle, "read", { prompt: true });
+                 const allowed = await ensureFsHandlePermission(handle, "readwrite", { prompt: true });
                  if (!allowed) {
                    if (!silentError) {
-                    toast("Acesso de leitura à pasta raiz não foi autorizado. No Chrome, permita o acesso para continuar.");
-                    pulseStatus("Permissão de leitura da pasta raiz pendente.", 2600);
+                    toast("Acesso à pasta raiz não foi autorizado. No Chrome, permita o acesso para continuar.");
+                    pulseStatus("Permissão da pasta raiz pendente.", 2600);
                   }
                    return false;
                  }
@@ -6580,6 +7018,9 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
                }
                return true;
              } catch (error) {
+               if (error && error.name !== "AbortError") {
+                 try { console.error("[ANOTACOES][FS] Falha ao escolher/sincronizar a pasta raiz:", error); } catch (_) {}
+               }
                if (!silentError && error && error.name !== "AbortError") {
                  toast("Não foi possível abrir a pasta raiz. Tente novamente pelo botão da pasta.");
                }
@@ -7898,25 +8339,31 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              const oldParentId = src.parentId;
              if (!oldParentId) return false;
 
-              if (oldParentId === targetParentId) {
-                const sameParentMove = applyTreeMoveInMemory({ srcId: src.id, targetParentId, insertIndex: resolved.insertIndex });
-                if (!sameParentMove) return false;
-                state.selectedId = src.id;
-                state.treeFocusId = src.id;
-                scheduleRenderTree();
-                try {
-                  await persistFsFolderOrderForFolderId(targetParentId);
-                  try { saveData(); } catch (_) {}
-                  toast("Ordem da pasta atualizada ✅");
-                  return true;
-                } catch (error) {
-                  sameParentMove.rollback();
-                  scheduleRenderTree();
-                  try { saveData(); } catch (_) {}
-                  toast("Não foi possível gravar a nova ordem desta pasta.");
-                  return false;
-                }
-              }
+             if (oldParentId === targetParentId) {
+               return await withFsSyncOverlay({
+                 title: "Reordenando itens…",
+                 text: "Gravando a nova ordem da pasta. Aguarde um instante.",
+                 hint: "A interface fica bloqueada só enquanto a nova ordem é confirmada para evitar reordenações concorrentes.",
+               }, async () => {
+                 const sameParentMove = applyTreeMoveInMemory({ srcId: src.id, targetParentId, insertIndex: resolved.insertIndex });
+                 if (!sameParentMove) return false;
+                 state.selectedId = src.id;
+                 state.treeFocusId = src.id;
+                 scheduleRenderTree();
+                 try {
+                   await persistFsFolderOrderForFolderId(targetParentId);
+                   try { saveData(); } catch (_) {}
+                   toast("Ordem da pasta atualizada ✅");
+                   return true;
+                 } catch (error) {
+                   sameParentMove.rollback();
+                   scheduleRenderTree();
+                   try { saveData(); } catch (_) {}
+                   toast("Não foi possível gravar a nova ordem desta pasta.");
+                   return false;
+                 }
+               });
+             }
 
              const srcHandle = getFsHandleForNode(src.id);
              const srcParentHandle = getFsHandleForNode(oldParentId);
@@ -7927,65 +8374,75 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              }
 
              const entryName = isFile(src) ? buildFsFileName(src.name, src.ext) : src.name;
-             const oldRelPath = src.relPath || "";
              const targetParentRelPath = getNode(targetParentId)?.relPath || "";
              const newRelPath = joinFsRelPath(targetParentRelPath, entryName);
+             let overwriteNodeId = null;
 
              try {
-               const permissionGranted = await ensureFsHandlePermission(state.fs.rootHandle, "readwrite", { prompt: true });
-               if (!permissionGranted) {
-                 toast("Permissão de escrita não concedida para mover este item.");
-                 return false;
-               }
-
-               const collisionKind = await getFsEntryCollisionKind(targetParentHandle, entryName);
-               if (collisionKind) {
-                 if (isFile(src) && collisionKind === "file") {
-                   const ok = await confirmOverwrite({
-                     name: src.name,
-                     ext: src.ext,
-                     folderId: targetParentId,
-                     actionLabel: "Mover nota",
-                   });
-                   if (!ok) return false;
-                 } else {
-                   const itemLabel = collisionKind === "directory" ? "pasta" : "arquivo";
-                   toast(`Já existe uma ${itemLabel} com este nome na pasta de destino.`);
+               return await withFsSyncOverlay({
+                 title: "Movendo item…",
+                 text: "Aplicando a movimentação real e sincronizando a árvore. Aguarde um instante.",
+                 hint: "A interface fica bloqueada só enquanto a movimentação termina para evitar estados intermediários confusos.",
+               }, async () => {
+                 const permissionGranted = await ensureFsHandlePermission(state.fs.rootHandle, "readwrite", { prompt: true });
+                 if (!permissionGranted) {
+                   toast("Permissão de escrita não concedida para mover este item.");
                    return false;
                  }
-               }
 
-               await moveFsEntryBetweenDirectories({
-                 entryHandle: srcHandle,
-                 srcParentHandle,
-                 dstParentHandle: targetParentHandle,
-                 nextName: entryName,
-                 overwrite: isFile(src) && collisionKind === "file",
+                 const collisionKind = await getFsEntryCollisionKind(targetParentHandle, entryName);
+                 if (collisionKind) {
+                   if (isFile(src) && collisionKind === "file") {
+                     const ok = await confirmOverwrite({
+                       name: src.name,
+                       ext: src.ext,
+                       folderId: targetParentId,
+                       actionLabel: "Mover nota",
+                     });
+                     if (!ok) return false;
+                     overwriteNodeId = findDuplicateFileInFolder(targetParentId, src.name, src.ext, src.id);
+                   } else {
+                     const itemLabel = collisionKind === "directory" ? "pasta" : "arquivo";
+                     toast(`Já existe uma ${itemLabel} com este nome na pasta de destino.`);
+                     return false;
+                   }
+                 }
+
+                 await moveFsEntryBetweenDirectories({
+                   entryHandle: srcHandle,
+                   srcParentHandle,
+                   dstParentHandle: targetParentHandle,
+                   nextName: entryName,
+                   overwrite: !!overwriteNodeId,
+                 });
+
+                 if (overwriteNodeId && overwriteNodeId !== src.id) {
+                   closeTabsForNodeId(overwriteNodeId);
+                   removeFsSubtreeLocally(overwriteNodeId);
+                 }
+
+                 const crossParentMove = applyTreeMoveInMemory({ srcId: src.id, targetParentId, insertIndex: resolved.insertIndex });
+                 if (!crossParentMove) throw new Error("Falha ao atualizar a árvore em memória após mover.");
+                 const remappedMove = remapFsSubtreeLocal({ nodeId: src.id, targetParentId, nextRelPath: newRelPath, nextName: src.name });
+                 if (!remappedMove?.nextRootId) throw new Error("Falha ao remapear os identificadores após mover.");
+                 replaceChildId(targetParentId, src.id, remappedMove.nextRootId);
+                 state.selectedId = remappedMove.nextRootId;
+                 state.treeFocusId = remappedMove.nextRootId;
+
+                 await persistFsFolderOrderForFolderId(oldParentId).catch(() => {});
+                 await persistFsFolderOrderForFolderId(targetParentId).catch(() => {});
+                 try { saveData(); saveTabs(); saveClosedTabs(); } catch (_) {}
+                 scheduleRenderTree();
+                 renderTabs();
+                 updateEditorForActiveTab();
+                 updateActionButtons();
+                 toast("Item movido ✅");
+                 return true;
                });
-
-                const crossFolderMove = applyTreeMoveInMemory({ srcId: src.id, targetParentId, insertIndex: resolved.insertIndex });
-                if (crossFolderMove) {
-                  state.selectedId = src.id;
-                  state.treeFocusId = src.id;
-                  scheduleRenderTree();
-                  try {
-                    await persistFsFolderOrderForFolderId(crossFolderMove.sourceParentId);
-                    await persistFsFolderOrderForFolderId(crossFolderMove.targetParentId);
-                  } catch (orderError) {
-                    console.warn("Não foi possível persistir a ordem das pastas após mover:", orderError);
-                  }
-                }
-
-                remapFsSessionRefsByRelPath(oldRelPath, newRelPath);
-                await refreshFsTree({ silent: true });
-                setSelected(makeFsNodeId(src.type === "folder" ? "directory" : "file", newRelPath));
-                scheduleRenderTree();
-                toast(`${isFolder(src) ? "Pasta" : "Arquivo"} movido fisicamente ✅`);
-                return true;
              } catch (error) {
-               console.error("Falha ao mover item real na árvore:", error);
-               toast("A movimentação física não foi concluída. A árvore foi mantida sem alteração indevida.");
-               await refreshFsTree({ silent: true }).catch(() => {});
+               console.error("Falha ao mover item:", error);
+               try { await refreshFsTree({ silent: true }); } catch (_) {}
+               toast("Não foi possível mover este item no sistema de arquivos.");
                return false;
              }
            };
@@ -8714,9 +9171,11 @@ setTimeout(() => updateTabNavButtons(), 60);
               Editor / Preview MD
               ========================= */
            const setDirty = (nodeId, val) => {
+             const wasDirty = state.dirty.has(nodeId);
              if (val) state.dirty.add(nodeId);
              else state.dirty.delete(nodeId);
-             renderTabs();
+             const isDirty = state.dirty.has(nodeId);
+             if (wasDirty !== isDirty) renderTabs();
              updateSaveBadge();
            };
 
@@ -9784,6 +10243,30 @@ const measure = (viewport, pre, code, block) => {
              } catch {}
            };
 
+const syncMdPreviewToTopVisibility = () => {
+             const wrap = ui?.mdPreviewWrap;
+             const btn = ui?.btnToTop;
+             const host = btn?.closest?.(".toTop");
+             if (!wrap || !btn || !host) return;
+
+             const isVisible = getComputedStyle(wrap).display !== "none";
+             const needsOverflowY = isVisible && (Math.ceil(wrap.scrollHeight) - Math.ceil(wrap.clientHeight) > 1);
+             host.style.display = needsOverflowY ? "" : "none";
+             btn.hidden = !needsOverflowY;
+             btn.setAttribute("aria-hidden", needsOverflowY ? "false" : "true");
+           };
+
+           const scheduleMdPreviewToTopVisibility = (() => {
+             let rafId = 0;
+             return () => {
+               if (rafId) cancelAnimationFrame(rafId);
+               rafId = requestAnimationFrame(() => {
+                 rafId = 0;
+                 syncMdPreviewToTopVisibility();
+               });
+             };
+           })();
+
 const renderMarkdownPreview = (mdText, tabId) => {
              const md = ensureMarkdown();
              if (!md) {
@@ -9795,7 +10278,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
 
              let html = md.render(src);
 
-             // Sanitiza ANTES de qualquer parse intermediário para evitar side effects com HTML cru.
+             // emojis: online -> <img>, offline -> unicode
              html = applyEmojiImagesToHtml(html);
              html = sanitizeMarkdownHtml(html);
 
@@ -9823,6 +10306,8 @@ const renderMarkdownPreview = (mdText, tabId) => {
              updateMdPreviewContrast(ui.mdPreview);
              try { updateEditorEmptyContrast(); } catch {}
              try { updateEditorChromeContrast(); } catch {}
+             scheduleMdPreviewToTopVisibility();
+             try { scheduleMdPreviewSearchRefresh({ scrollActive: false }); } catch (_) {}
            };
 
            ui.btnMdEdit.addEventListener("click", () => {
@@ -9835,6 +10320,18 @@ const renderMarkdownPreview = (mdText, tabId) => {
            });
           // Ctrl+Alt+E foi consolidado no router global de atalhos.
            ui.btnToTop.addEventListener("click", () => ui.mdPreviewWrap.scrollTo({ top: 0, behavior: "smooth" }));
+           ui.mdPreviewWrap.addEventListener("scroll", () => {
+             scheduleMdPreviewToTopVisibility();
+           }, { passive: true });
+           addWindowResizeTask(scheduleMdPreviewToTopVisibility);
+           try {
+             if ("ResizeObserver" in window) {
+               const roMdTop = new ResizeObserver(() => scheduleMdPreviewToTopVisibility());
+               if (ui.mdPreviewWrap) roMdTop.observe(ui.mdPreviewWrap);
+               if (ui.mdPreview) roMdTop.observe(ui.mdPreview);
+               window.__mdTopResizeObserver = roMdTop;
+             }
+           } catch (_) {}
 
            const restoreEditorViewState = (tabState) => {
              const start = Math.min(tabState?.selectionStart ?? 0, ui.editor.value.length);
@@ -10027,7 +10524,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
            }
 
            /* ===== Modal / Dialog ===== */
-           const MODAL_BACKDROPS = [ui.dialogBackdrop, ui.customizeBackdrop].filter(Boolean);
+           const MODAL_BACKDROPS = [ui.dialogBackdrop, ui.customizeBackdrop, ui.fsSyncBackdrop].filter(Boolean);
 
            const getBackdropModal = (backdropEl) => backdropEl?.querySelector('.modal') || null;
 
@@ -10069,6 +10566,9 @@ const renderMarkdownPreview = (mdText, tabId) => {
              }
              if (backdropEl === ui.customizeBackdrop && ui.btnCustomizeCancel) {
                return () => ui.btnCustomizeCancel.click();
+             }
+             if (backdropEl === ui.fsSyncBackdrop) {
+               return () => shakeModal(backdropEl);
              }
              return () => closeModal(backdropEl);
            };
@@ -10282,15 +10782,27 @@ const renderMarkdownPreview = (mdText, tabId) => {
              if (!parentDirHandle) return toast("Pasta de destino indisponível.");
 
              try {
-               const allowed = await ensureFsHandlePermission(parentDirHandle, "readwrite", { prompt: true });
-               if (!allowed) return toast("Permissão de escrita não concedida para criar pasta.");
-               await parentDirHandle.getDirectoryHandle(pname, { create: true });
-               const focusId = makeFsNodeId("directory", joinFsRelPath(getNode(parentId)?.relPath || "", pname));
-               await refreshFsTree({ silent: true });
-               await persistFsFolderOrderForFolderId(parentId).catch(() => {});
-               setSelected(focusId);
-               toast("Pasta criada ✅");
-             } catch (_) {
+               await withFsSyncOverlay({
+                 title: "Criando pasta…",
+                 text: "Gravando a nova pasta e sincronizando a árvore. Aguarde um instante.",
+                 hint: "A interface fica bloqueada só enquanto a criação termina para evitar ações concorrentes.",
+               }, async () => {
+                 const allowed = await ensureFsHandlePermission(parentDirHandle, "readwrite", { prompt: true });
+                 if (!allowed) return toast("Permissão de escrita não concedida para criar pasta.");
+                 const newDirHandle = await parentDirHandle.getDirectoryHandle(pname, { create: true });
+                 const focusId = createLocalFsFolderNode({ parentId, folderName: pname, handle: newDirHandle });
+                 if (!focusId) throw new Error("Falha ao reconciliar a pasta criada em memória.");
+                 state.selectedId = focusId;
+                 state.treeFocusId = focusId;
+                 await persistFsFolderOrderForFolderId(parentId).catch(() => {});
+                 try { saveData(); } catch (_) {}
+                 scheduleRenderTree();
+                 updateActionButtons();
+                 toast("Pasta criada ✅");
+               });
+             } catch (error) {
+               console.error("Falha ao criar a pasta:", error);
+               try { await refreshFsTree({ silent: true }); } catch (_) {}
                toast("Não foi possível criar a pasta.");
              }
            };
@@ -10319,16 +10831,24 @@ const renderMarkdownPreview = (mdText, tabId) => {
                if (!ok) return;
 
                try {
-                 await writeFsFileContent(dupId, "");
-                 const existing = getNode(dupId);
-                 if (existing && isFile(existing)) {
-                   existing.content = "";
-                   invalidateSearchCache(existing.id);
-                   updateNodeUpdatedAt(existing.id);
-                   setDirty(existing.id, false);
-                   openInTab(existing.id);
-                 }
-                 toast("Nota substituída ✅");
+                 await withFsSyncOverlay({
+                   title: "Substituindo nota…",
+                   text: "Atualizando o arquivo real e sincronizando o conteúdo em memória. Aguarde um instante.",
+                   hint: "A interface fica bloqueada só enquanto a substituição termina para evitar conflito de ações.",
+                 }, async () => {
+                   await writeFsFileContent(dupId, "");
+                   const existing = getNode(dupId);
+                   if (existing && isFile(existing)) {
+                     existing.content = "";
+                     existing.size = 0;
+                     invalidateSearchCache(existing.id);
+                     updateNodeUpdatedAt(existing.id);
+                     setDirty(existing.id, false);
+                     openInTab(existing.id);
+                     try { saveData(); saveTabs(); saveClosedTabs(); } catch (_) {}
+                   }
+                   toast("Nota substituída ✅");
+                 });
                } catch (_) {
                  toast("Não foi possível substituir a nota.");
                }
@@ -10339,17 +10859,29 @@ const renderMarkdownPreview = (mdText, tabId) => {
              if (!parentDirHandle) return toast("Pasta de destino indisponível.");
 
              try {
-               const allowed = await ensureFsHandlePermission(parentDirHandle, "readwrite", { prompt: true });
-               if (!allowed) return toast("Permissão de escrita não concedida para criar nota.");
-               const fileName = buildFsFileName(baseName, res.ext);
-               await parentDirHandle.getFileHandle(fileName, { create: true });
-               const focusId = makeFsNodeId("file", joinFsRelPath(getNode(parentId)?.relPath || "", fileName));
-               await refreshFsTree({ silent: true });
-               await persistFsFolderOrderForFolderId(parentId).catch(() => {});
-               setSelected(focusId);
-               openInTab(focusId);
-               toast("Nota criada ✅");
-             } catch (_) {
+               await withFsSyncOverlay({
+                 title: "Criando nota…",
+                 text: "Gravando a nova nota e sincronizando a árvore. Aguarde um instante.",
+                 hint: "A interface fica bloqueada só enquanto a criação termina para evitar ações concorrentes.",
+               }, async () => {
+                 const allowed = await ensureFsHandlePermission(parentDirHandle, "readwrite", { prompt: true });
+                 if (!allowed) return toast("Permissão de escrita não concedida para criar nota.");
+                 const fileName = buildFsFileName(baseName, res.ext);
+                 const newFileHandle = await parentDirHandle.getFileHandle(fileName, { create: true });
+                 const focusId = createLocalFsFileNode({ parentId, baseName, ext: res.ext, handle: newFileHandle, content: "" });
+                 if (!focusId) throw new Error("Falha ao reconciliar a nota criada em memória.");
+                 state.selectedId = focusId;
+                 state.treeFocusId = focusId;
+                 await persistFsFolderOrderForFolderId(parentId).catch(() => {});
+                 openInTab(focusId);
+                 try { saveData(); saveTabs(); saveClosedTabs(); } catch (_) {}
+                 scheduleRenderTree();
+                 updateActionButtons();
+                 toast("Nota criada ✅");
+               });
+             } catch (error) {
+               console.error("Falha ao criar a nota:", error);
+               try { await refreshFsTree({ silent: true }); } catch (_) {}
                toast("Não foi possível criar a nota.");
              }
            };
@@ -10484,17 +11016,28 @@ const renderMarkdownPreview = (mdText, tabId) => {
 
              const entryName = n.type === "file" ? buildFsFileName(n.name, n.ext) : n.name;
              try {
-               await parentDirHandle.removeEntry(entryName, { recursive: n.type === "folder" });
-               const toCloseNodeIds = new Set([id, ...(n.type === "folder" ? descendants(id) : [])]);
-               const tabIds = state.tabs.filter((t) => toCloseNodeIds.has(t.nodeId)).map((t) => t.id);
-               for (const tid of tabIds) closeTab(tid, true);
-               await refreshFsTree({ silent: true });
-               await persistFsFolderOrderForFolderId(parentNode.id || state.data.rootId).catch(() => {});
-               state.selectedId = parentNode.id || state.data.rootId;
-               scheduleRenderTree();
-               updateEditorForActiveTab();
-               toast("Deletado ✅");
-             } catch (_) {
+               await withFsSyncOverlay({
+                 title: "Deletando item…",
+                 text: "Removendo o item real e sincronizando a árvore. Aguarde um instante.",
+                 hint: "A interface fica bloqueada só enquanto a exclusão termina para evitar conflito de ações.",
+               }, async () => {
+                 await parentDirHandle.removeEntry(entryName, { recursive: n.type === "folder" });
+                 const toCloseNodeIds = new Set([id, ...(n.type === "folder" ? descendants(id) : [])]);
+                 const tabIds = state.tabs.filter((t) => toCloseNodeIds.has(t.nodeId)).map((t) => t.id);
+                 for (const tid of tabIds) closeTab(tid, true);
+                 removeFsSubtreeLocally(id);
+                 state.selectedId = parentNode.id || state.data.rootId;
+                 state.treeFocusId = state.selectedId;
+                 try { saveData(); saveTabs(); saveClosedTabs(); } catch (_) {}
+                 scheduleRenderTree();
+                 renderTabs();
+                 updateEditorForActiveTab();
+                 updateActionButtons();
+                 toast("Deletado ✅");
+               });
+             } catch (error) {
+               console.error("Falha ao deletar item:", error);
+               try { await refreshFsTree({ silent: true }); } catch (_) {}
                toast("Não foi possível deletar este item no sistema de arquivos.");
              }
            };

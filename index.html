@@ -4705,6 +4705,11 @@ html.tree-grabbing .tree .node.selected {
            if (!out.o) out.o = out.open_mouth || '😮';
            if (!out.x) out.x = out.heavy_multiplication_x || out.negative_squared_cross_mark || out.cross_mark || '❌';
 
+           // Aliases clássicos adicionais que alguns bundles não trazem
+           if (!out.metal) out.metal = out.sign_of_the_horns || '🤘';
+           if (!out.fu) out.fu = out.middle_finger || out.reversed_hand_with_middle_finger_extended || '🖕';
+           if (!out.neckbeard) out.neckbeard = out.bearded_person || out.person_beard || out.man_beard || '🧔';
+
            return out;
          }
 

@@ -3072,6 +3072,51 @@ html.tabs-reordering, body.tabs-reordering{
              color: var(--md-code-fg, var(--personalizacao-cor-texto-exibicao-direita)) !important;
           }
 
+
+          /* Syntax highlighting (Highlight.js) — compatibilidade local/offline
+             Observação: o bundle JS gera classes .hljs-*; este bloco garante a cor no preview
+             sem depender de uma folha externa diferente da já usada pelo app. */
+          .markdown-body .code-viewport pre code.hljs{
+             background: transparent !important;
+             color: var(--md-code-fg, var(--personalizacao-cor-texto-exibicao-direita)) !important;
+          }
+          .markdown-body .code-viewport pre code.hljs .hljs-comment,
+          .markdown-body .code-viewport pre code.hljs .hljs-quote{ color: #8b949e; }
+          .markdown-body .code-viewport pre code.hljs .hljs-keyword,
+          .markdown-body .code-viewport pre code.hljs .hljs-selector-tag,
+          .markdown-body .code-viewport pre code.hljs .hljs-subst{ color: #ff7b72; }
+          .markdown-body .code-viewport pre code.hljs .hljs-number,
+          .markdown-body .code-viewport pre code.hljs .hljs-literal,
+          .markdown-body .code-viewport pre code.hljs .hljs-variable,
+          .markdown-body .code-viewport pre code.hljs .hljs-template-variable,
+          .markdown-body .code-viewport pre code.hljs .hljs-tag .hljs-attr{ color: #79c0ff; }
+          .markdown-body .code-viewport pre code.hljs .hljs-string,
+          .markdown-body .code-viewport pre code.hljs .hljs-doctag{ color: #a5d6ff; }
+          .markdown-body .code-viewport pre code.hljs .hljs-title,
+          .markdown-body .code-viewport pre code.hljs .hljs-title.class_,
+          .markdown-body .code-viewport pre code.hljs .hljs-title.class,
+          .markdown-body .code-viewport pre code.hljs .hljs-title.function,
+          .markdown-body .code-viewport pre code.hljs .hljs-section,
+          .markdown-body .code-viewport pre code.hljs .hljs-attribute{ color: #d2a8ff; }
+          .markdown-body .code-viewport pre code.hljs .hljs-type,
+          .markdown-body .code-viewport pre code.hljs .hljs-built_in,
+          .markdown-body .code-viewport pre code.hljs .hljs-builtin-name{ color: #ffa657; }
+          .markdown-body .code-viewport pre code.hljs .hljs-regexp,
+          .markdown-body .code-viewport pre code.hljs .hljs-link{ color: #a5d6ff; }
+          .markdown-body .code-viewport pre code.hljs .hljs-meta{ color: #79c0ff; }
+          .markdown-body .code-viewport pre code.hljs .hljs-symbol,
+          .markdown-body .code-viewport pre code.hljs .hljs-bullet{ color: #f2cc60; }
+          .markdown-body .code-viewport pre code.hljs .hljs-emphasis{ font-style: italic; }
+          .markdown-body .code-viewport pre code.hljs .hljs-strong{ font-weight: 700; }
+          .markdown-body .code-viewport pre code.hljs .hljs-addition{ color: #7ee787; }
+          .markdown-body .code-viewport pre code.hljs .hljs-deletion{ color: #ffa198; }
+
+          /* SVG inline no Preview Markdown — escopo restrito ao preview */
+          .md-preview-wrap .markdown-body svg{
+             max-width: 100%;
+             vertical-align: middle;
+          }
+
           /* Wrap (por bloco) */
           .markdown-body figure.code-block.wrap .code-viewport pre{
              width: 100%;
@@ -4755,8 +4800,9 @@ html.tree-grabbing .tree .node.selected {
            if (!html) return html;
 
            // Atalho rápido: se não houver shortcode plausível, nem tenta parsear HTML.
-           // Ex.: "10:30:00" / URLs / paths — possuem ':' mas NÃO são emoji.
-           const reLikelyShort = /:([a-z][a-z0-9_+\-]{1,50}):/i;
+           // Compatível com shortcodes GitHub de 1 caractere e iniciados por + / - / dígitos
+           // (ex.: :a: :b: :o: :x: :v: :m: :+1: :-1: :100: :1234:).
+           const reLikelyShort = /:([a-z0-9_+\-]{1,50}):/i;
            if (!reLikelyShort.test(html)) return html;
 
            // Parse rápido (container) em vez de DOMParser de documento inteiro
@@ -4764,7 +4810,7 @@ html.tree-grabbing .tree .node.selected {
            host.innerHTML = html;
 
            // Regex global para substituição por nó (reinicia lastIndex por nó)
-           const reShort = /:([a-z][a-z0-9_+\-]{1,50}):/gi;
+           const reShort = /:([a-z0-9_+\-]{1,50}):/gi;
 
            // Limites defensivos (evita freeze em HTML enorme)
            const MAX_TEXT_NODES = 3500;     // suficiente para notas grandes, sem travar
@@ -9464,6 +9510,15 @@ setTimeout(() => updateTabNavButtons(), 60);
              }
            };
 
+          const isSvgPreviewContext = (node) => {
+            try {
+              if (!node || node.nodeType !== 1) return false;
+              return node.namespaceURI === "http://www.w3.org/2000/svg" || !!(node.closest && node.closest("svg"));
+            } catch (_) {
+              return false;
+            }
+          };
+
            const isSafeMathInlineStyle = (styleValue) => {
              const raw = String(styleValue || '').trim();
              if (!raw) return false;
@@ -9512,7 +9567,12 @@ setTimeout(() => updateTabNavButtons(), 60);
                      return;
                    }
 
-                   if (name === "id" || name.startsWith("data-")) {
+                   if (name === "id") {
+                     if (!isSvgPreviewContext(node)) data.keepAttr = false;
+                     return;
+                   }
+
+                   if (name.startsWith("data-")) {
                      data.keepAttr = false;
                      return;
                    }
@@ -9553,18 +9613,21 @@ setTimeout(() => updateTabNavButtons(), 60);
              const clean = window.DOMPurify.sanitize(html, {
                USE_PROFILES: { html: true },
                ALLOW_DATA_ATTR: false,
-               FORBID_TAGS: ['script', 'style', 'iframe', 'object', 'embed', 'svg'],
-               FORBID_ATTR: [/^on/i, 'srcset', 'id'],
+               FORBID_TAGS: ['script', 'style', 'iframe', 'object', 'embed', 'foreignobject'],
+               FORBID_ATTR: [/^on/i, 'srcset'],
                ADD_TAGS: [
                  'math-renderer','math','mi','mn','mo','mrow','msup','msub','msubsup','mfrac','msqrt','mroot','mtext','mover','munder','munderover','mtable','mtr','mtd','semantics','annotation','annotation-xml',
                  'span',
                  'img',
-                 'input'
+                 'input',
+                 'svg','g','path','circle','ellipse','rect','line','polyline','polygon','defs','symbol','use','title','desc','clipPath','mask','pattern','linearGradient','radialGradient','stop','text','tspan','animate','animateTransform'
                ],
                ADD_ATTR: [
-                 'xmlns','display','mathvariant','encoding','class','aria-hidden','role',
-                 'target','rel','loading','decoding','width','height','alt','title','aria-label',
-                 'type','checked','disabled','src','style'
+                 'xmlns','xmlns:xlink','display','mathvariant','encoding','class','aria-hidden','role',
+                 'id','target','rel','loading','decoding','width','height','alt','title','aria-label',
+                 'type','checked','disabled','src','style',
+                 'viewBox','preserveAspectRatio','fill','fill-opacity','fill-rule','stroke','stroke-width','stroke-linecap','stroke-linejoin','stroke-dasharray','stroke-dashoffset','stroke-opacity',
+                 'cx','cy','r','rx','ry','x','y','x1','x2','y1','y2','d','points','transform','opacity','offset','stop-color','stop-opacity','href','xlink:href','focusable'
                ],
              });
 
@@ -10040,6 +10103,14 @@ const measure = (viewport, pre, code, block) => {
            };
 
             
+
+
+          // Preserva NBSP (ex.: ALT+255 no Windows) como caractere real no preview Markdown.
+          // GitHub mantém esse espaço não separável; aqui fazemos o mesmo sem alterar o conteúdo salvo.
+          const MD_PREVIEW_NBSP_SENTINEL = "MD_NBSP";
+          const protectMarkdownSpecialChars = (src) => String(src || "").replace(/ /g, MD_PREVIEW_NBSP_SENTINEL);
+          const restoreMarkdownSpecialCharsInHtml = (html) => String(html || "").replaceAll(MD_PREVIEW_NBSP_SENTINEL, "&nbsp;");
+
            // --- WCAG Relative Luminance: contraste automático para caixas de código (preview MD) ----
            // Objetivo: garantir que o TEXTO do <pre> e os BOTÕES (Copiar / Quebra linha)
            // tenham cor legível baseada na cor REAL de fundo do próprio <pre>.
@@ -10274,13 +10345,14 @@ const renderMarkdownPreview = (mdText, tabId) => {
                return;
              }
 
-             const src = preprocessMarkdownForImages(mdText || "");
+             const src = protectMarkdownSpecialChars(preprocessMarkdownForImages(mdText || ""));
 
              let html = md.render(src);
 
              // emojis: online -> <img>, offline -> unicode
              html = applyEmojiImagesToHtml(html);
              html = sanitizeMarkdownHtml(html);
+             html = restoreMarkdownSpecialCharsInHtml(html);
 
              ui.mdPreview.innerHTML = html;
              postprocessLinksAndImages(ui.mdPreview);

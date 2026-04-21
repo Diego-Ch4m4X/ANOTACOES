@@ -49,7 +49,7 @@
       }</script>
             <!-- Segurança (CSP via META): reforça contra XSS no Preview Markdown.
            Observação: diretivas sem suporte em <meta>, como frame-ancestors, ficam fora desta política e só podem ser aplicadas por header HTTP. -->
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'nonce-noteapp'; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp'; script-src-elem 'self' 'nonce-noteapp'; script-src-attr 'none';" />
+      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-TsGyjuDs8tvv6pa4PMa762EqZRrRKMl+ClUTdqXQeJI='; style-src-elem 'self' 'nonce-noteapp' 'sha256-TsGyjuDs8tvv6pa4PMa762EqZRrRKMl+ClUTdqXQeJI='; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp' 'sha256-Y8REL7dPtkrKUk+WmQy1H0SFwh/IxthHLDpeN/moqgE='; script-src-elem 'self' 'nonce-noteapp' 'sha256-Y8REL7dPtkrKUk+WmQy1H0SFwh/IxthHLDpeN/moqgE='; script-src-attr 'none';" />
       <meta name="referrer" content="no-referrer" />
       <title>ANOTAÇÕES — Workspace local-first para .txt/.md em pasta real</title>
       <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20color%3D%22%23FFFFFF%22%3E%3Cg%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20fill%3D%22currentColor%22%20fill-opacity%3D%220.3%22%20d%3D%22M22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M20%205v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%3BM22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%2F%3E%3C%2Fpath%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M8%208h8M8%2012h8M8%2016h5M4%205v14c0%200.55%200.45%201%201%201h14%3BM10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%2F%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
@@ -128,7 +128,8 @@
             --content-code-font-family: var(--font-family-code-preview);
             --content-code-font-size: calc(var(--content-font-size) - 2.5px);
             --content-code-max-height: 260px;
-            --content-line-height: 1; /* 1 = sem espaçamento extra entre linhas (TXT e Preview Markdown) */
+            --content-line-height: 1; /* 1 = sem espaçamento extra no editor TXT */
+            --markdown-line-height: 1.6; /* prosa do preview Markdown com leitura mais confortável */
             --editor-surface-contrast: #5F5F5F;
 
             /* ================================================================
@@ -2672,7 +2673,7 @@ html.tabs-reordering, body.tabs-reordering{
             max-width: 100%;
             font-family: var(--personalizacao-fonte-exibicao-direita) !important;
             font-size: var(--personalizacao-tamanho-fonte-exibicao-direita) !important;
-            line-height: var(--personalizacao-espacamento-entre-linhas-editor, 1) !important;
+            line-height: var(--markdown-line-height, 1.6) !important;
             overflow-wrap: anywhere;
             word-break: break-word;
 }
@@ -8260,15 +8261,11 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
            // Sem isso, ao redimensionar a sidebar o SVG antigo pode ficar com largura/clip defasados,
            // dando a impressão de que as linhas “não seguem” o conteúdo.
            const scheduleTreeGuidesSync = () => scheduleRenderTree();
-           if (!window.__treeGuidesResizeBound) {
-             window.__treeGuidesResizeBound = true;
-             addWindowResizeTask(scheduleTreeGuidesSync);
-             if ("ResizeObserver" in window) {
-               const roTree = new ResizeObserver(() => scheduleTreeGuidesSync());
-               try { if (ui.tree) roTree.observe(ui.tree); } catch (_) {}
-               try { if (ui.sidebar) roTree.observe(ui.sidebar); } catch (_) {}
-               window.__treeGuidesResizeObserver = roTree;
-             }
+           addWindowResizeTask(scheduleTreeGuidesSync);
+           if ("ResizeObserver" in window) {
+             const treeGuidesResizeObserver = new ResizeObserver(() => scheduleTreeGuidesSync());
+             try { if (ui.tree) treeGuidesResizeObserver.observe(ui.tree); } catch (_) {}
+             try { if (ui.sidebar) treeGuidesResizeObserver.observe(ui.sidebar); } catch (_) {}
            }
 
 
@@ -10117,9 +10114,24 @@ const measure = (viewport, pre, code, block) => {
 
           // Preserva NBSP (ex.: ALT+255 no Windows) como caractere real no preview Markdown.
           // GitHub mantém esse espaço não separável; aqui fazemos o mesmo sem alterar o conteúdo salvo.
-          const MD_PREVIEW_NBSP_SENTINEL = "__MD_NBSP_SENTINEL__";
-          const protectMarkdownSpecialChars = (src) => String(src || "").replace(/\u00A0/g, MD_PREVIEW_NBSP_SENTINEL);
-          const restoreMarkdownSpecialCharsInHtml = (html) => String(html || "").replaceAll(MD_PREVIEW_NBSP_SENTINEL, "&nbsp;");
+          const createMarkdownNbspSentinel = (src) => {
+             const base = String(src || "");
+             let token = "";
+             do {
+               token = `MDNBSPTOKEN${Date.now().toString(36).toUpperCase()}${Math.random().toString(36).slice(2).toUpperCase()}TOKEN`;
+             } while (base.includes(token));
+             return token;
+           };
+           const protectMarkdownSpecialChars = (src) => {
+             const base = String(src || "");
+             if (!base.includes(" ")) return { text: base, nbspSentinel: "" };
+             const nbspSentinel = createMarkdownNbspSentinel(base);
+             return { text: base.replace(/ /g, nbspSentinel), nbspSentinel };
+           };
+           const restoreMarkdownSpecialCharsInHtml = (html, nbspSentinel) => {
+             const base = String(html || "");
+             return nbspSentinel ? base.split(nbspSentinel).join("&nbsp;") : base;
+           };
 
            // --- WCAG Relative Luminance: contraste automático para caixas de código (preview MD) ----
            // Objetivo: garantir que o TEXTO do <pre> e os BOTÕES (Copiar / Quebra linha)
@@ -10355,14 +10367,14 @@ const renderMarkdownPreview = (mdText, tabId) => {
                return;
              }
 
-             const src = protectMarkdownSpecialChars(preprocessMarkdownForImages(mdText || ""));
+             const { text: src, nbspSentinel } = protectMarkdownSpecialChars(preprocessMarkdownForImages(mdText || ""));
 
              let html = md.render(src);
 
              // emojis: online -> <img>, offline -> unicode
              html = applyEmojiImagesToHtml(html);
+             html = restoreMarkdownSpecialCharsInHtml(html, nbspSentinel);
              html = sanitizeMarkdownHtml(html);
-             html = restoreMarkdownSpecialCharsInHtml(html);
 
              ui.mdPreview.innerHTML = html;
              postprocessLinksAndImages(ui.mdPreview);

@@ -24,7 +24,7 @@
       <meta name="twitter:image" content="./social-preview.png" />
       <meta name="twitter:image:alt" content="Workspace local-first ANOTAÇÕES com árvore de arquivos real, abas, editor e preview Markdown." />
       <!-- Quando a URL pública final estiver definida, adicione rel="canonical" apontando para ela. -->
-      <script type="application/ld+json">{
+      <script type="application/ld+json" nonce="noteapp">{
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "ANOTAÇÕES",
@@ -51,7 +51,6 @@
            Observação: diretivas sem suporte em <meta>, como frame-ancestors, ficam fora desta política e só podem ser aplicadas por header HTTP. -->
       <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'unsafe-inline'; style-src-elem 'self' 'nonce-noteapp'; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp'; script-src-elem 'self' 'nonce-noteapp'; script-src-attr 'none';" />
       <meta name="referrer" content="no-referrer" />
-      <meta http-equiv="Referrer-Policy" content="no-referrer" />
       <title>ANOTAÇÕES — Workspace local-first para .txt/.md em pasta real</title>
       <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20color%3D%22%23FFFFFF%22%3E%3Cg%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20fill%3D%22currentColor%22%20fill-opacity%3D%220.3%22%20d%3D%22M22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M20%205v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%3BM22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%2F%3E%3C%2Fpath%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M8%208h8M8%2012h8M8%2016h5M4%205v14c0%200.55%200.45%201%201%201h14%3BM10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%2F%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
 
@@ -130,6 +129,7 @@
             --content-code-font-size: calc(var(--content-font-size) - 2.5px);
             --content-code-max-height: 260px;
             --content-line-height: 1; /* 1 = sem espaçamento extra entre linhas (TXT e Preview Markdown) */
+            --editor-surface-contrast: #5F5F5F;
 
             /* ================================================================
                06) TEMA DA ÁRVORE / NAVEGAÇÃO LATERAL
@@ -150,11 +150,11 @@
             /* ================================================================
                07) TEMA DAS ABAS / ESTADOS DE NAVEGAÇÃO
                ================================================================ */
-            --tab-bg: color-mix(in srgb, var(--theme-surface-canvas) 91%, white 9%);
-            --tab-bg-hover: color-mix(in srgb, var(--theme-surface-canvas) 84%, white 16%);
-            --tab-border: color-mix(in srgb, var(--theme-surface-canvas) 60%, white 40%);
-            --tab-text: color-mix(in srgb, var(--theme-text-muted) 78%, var(--theme-surface-canvas) 22%);
-            --tab-text-muted: color-mix(in srgb, var(--theme-text-muted) 68%, var(--theme-surface-canvas) 32%);
+            --tab-bg: #212734;
+            --tab-bg-hover: #323844;
+            --tab-border: #6D7179;
+            --tab-text: #7E8DA9;
+            --tab-text-muted: #707D98;
 
             /* ================================================================
                08) TEMA DE FEEDBACK / BADGES / TOASTS
@@ -173,7 +173,7 @@
             /* ================================================================
                09) TEMA DE MENUS DE CONTEXTO
                ================================================================ */
-            --menu-surface-bg: color-mix(in srgb, var(--theme-surface-panel) 96%, transparent);
+            --menu-surface-bg: rgba(15, 26, 46, 0.96);
             --menu-border: var(--theme-border-default);
             --menu-shadow: var(--theme-shadow-lg);
             --menu-radius: 14px;
@@ -192,7 +192,7 @@
                ================================================================ */
             --modal-backdrop-bg: rgba(0, 0, 0, 0.55);
             --modal-backdrop-blur: blur(7px);
-            --modal-surface-bg: color-mix(in srgb, var(--theme-surface-panel) 96%, transparent);
+            --modal-surface-bg: rgba(15, 26, 46, 0.96);
             --modal-border: var(--theme-border-default);
             --modal-shadow: var(--theme-shadow-lg);
             --modal-radius: 16px;
@@ -215,7 +215,7 @@
             /* ================================================================
                11) TEMA DE TOASTS / OVERLAYS AUXILIARES
                ================================================================ */
-            --toast-surface-bg: color-mix(in srgb, var(--theme-surface-panel) 92%, transparent);
+            --toast-surface-bg: rgba(15, 26, 46, 0.92);
             --toast-border: var(--theme-border-default);
             --toast-shadow: var(--theme-shadow-lg);
 
@@ -233,7 +233,7 @@
             --utility-results-badge-border: rgba(255,255,255,.08);
             --utility-results-badge-bg: rgba(255,255,255,.035);
             --utility-results-badge-text: var(--theme-text-muted);
-            --utility-hint-bg: linear-gradient(180deg, color-mix(in srgb, var(--theme-surface-canvas) 25%, var(--personalizacao-fundo-exibicao-direita) 75%), var(--theme-surface-canvas));
+            --utility-hint-bg: linear-gradient(180deg, #24262A, var(--theme-surface-canvas));
             --utility-hint-text: var(--theme-text-muted);
             --utility-help-text: var(--theme-text-muted);
             --utility-help-font-family: "Lucida Console", "Courier New", monospace;
@@ -1212,7 +1212,7 @@ body {
             right: 0;
             bottom: 0;
             height: 2px;
-            background: hsl(from var(--personalizacao-fundo-exibicao-direita) h s calc(l + 18));
+            background: var(--editor-surface-contrast);
             z-index: 0;
             pointer-events: none;
          }
@@ -1377,7 +1377,7 @@ body {
          html.tabs-wrap-enabled .tab[aria-selected="true"]:focus-visible {
             margin-bottom: 0;
             border-radius: 10px;
-            border: 2px solid hsl(from var(--personalizacao-fundo-exibicao-direita) h s calc(l + 18));
+            border: 2px solid var(--editor-surface-contrast);
          }
          html.tabs-wrap-enabled .tab[aria-selected="true"].tab-wrap-bottom-row,
          html.tabs-wrap-enabled .tab[aria-selected="true"].tab-wrap-bottom-row:hover,
@@ -1408,7 +1408,7 @@ html.tabs-reordering, body.tabs-reordering{
          .tab {
             /* estado base da aba; selecionada sobrescreve apenas o necessário abaixo */
             --tab-current-fg: var(--tab-text-muted);
-            --tab-current-accent: color-mix(in srgb, var(--tab-text-muted) 92%, white 8%);
+            --tab-current-accent: #7B87A0;
             --tab-current-close: color-mix(in srgb, var(--theme-text-primary, var(--text)) 58%, var(--theme-text-muted, var(--muted)) 42%);
             --tab-current-dirty: var(--warn);
             display: inline-flex;
@@ -1514,13 +1514,13 @@ html.tabs-reordering, body.tabs-reordering{
             transform: none;
             margin-bottom: -2px;
             border-radius: 10px 10px 0 0;
-            border: 2px solid hsl(from var(--personalizacao-fundo-exibicao-direita) h s calc(l + 18));
+            border: 2px solid var(--editor-surface-contrast);
             border-bottom: none;
             border-bottom-color: transparent;
             background: linear-gradient(180deg, color-mix(in srgb, var(--theme-surface-canvas, var(--bg)) 25%, var(--personalizacao-fundo-exibicao-direita) 75%), var(--theme-surface-canvas, var(--bg)));
             box-shadow:
                inset 0 1px 0 rgba(255,255,255,.10),
-               0 -1px 0 hsl(from var(--personalizacao-fundo-exibicao-direita) h s calc(l + 18));
+               0 -1px 0 var(--editor-surface-contrast);
             --tab-current-fg: color-mix(in srgb, var(--theme-text-primary, var(--text)) 95%, white 5%);
             --tab-current-accent: color-mix(in srgb, var(--theme-text-primary, var(--text)) 95%, white 5%);
             --tab-current-close: color-mix(in srgb, var(--theme-text-primary, var(--text)) 96%, white 4%);
@@ -1530,13 +1530,13 @@ html.tabs-reordering, body.tabs-reordering{
          .tab:not([aria-selected="true"]):hover {
             background: var(--tab-bg-hover);
             background-image: none;
-            border-color: color-mix(in srgb, var(--tab-border) 60%, white 40%);
+            border-color: #8890A0;
          }
          /* No modo sem quebra, a aba inativa em hover não deve avançar visualmente
             sobre a linha colorida de encaixe; somente a aba ativa mantém esse recorte. */
          html:not(.tabs-wrap-enabled) .tab:not([aria-selected="true"]):hover {
             margin-bottom: 0;
-            clip-path: inset(0 0 2px 0 round 10px 10px 0 0);
+            clip-path: inset(0 0 2px 0);
          }
 
 
@@ -3038,13 +3038,6 @@ html.tabs-reordering, body.tabs-reordering{
 .markdown-body .code-viewport::-webkit-scrollbar-track{ background: var(--personalizacao-fundo-exibicao-direita); }
 .markdown-body .code-viewport::-webkit-scrollbar-thumb{ background: var(--auto-contrast-fg); border: 2px solid var(--personalizacao-fundo-exibicao-direita); }
 
-
-          @supports (scrollbar-gutter: stable){
-             .markdown-body .code-viewport{
-                scrollbar-gutter: stable;
-             }
-          }
-
           .markdown-body figure.code-block.expanded .code-viewport{
              max-height: none;
           }
@@ -3720,14 +3713,14 @@ html.tabs-reordering, body.tabs-reordering{
   position:absolute; left:calc(var(--cc-pad) + var(--cc-swatch) + var(--cc-swatch-gap))!important;
   right:calc(var(--cc-right-btn-w) + var(--cc-pad))!important; top:50%!important; transform:translateY(-50%);
   height:calc(var(--cc-control-h) - 8px)!important; border-radius:var(--cc-hex-radius)!important;
-  border:var(--cc-hex-border)!important; box-shadow:var(--cc-hex-shadow)!important;
+  border:var(--cc-hex-border)!important; box-shadow: none !important;
   background:var(--hexBg)!important; color:var(--hexText)!important;
   padding:0 var(--cc-hex-pad-x)!important; font-family:var(--font-family-mono, var(--mono))!important; font-size:11px!important;
   font-weight:900; letter-spacing:.08em; text-transform:uppercase; outline:none;
 }
 #customizeBackdrop .color-control .hex:is(:focus, :focus-visible){
   outline: var(--cc-hex-focus-outline) !important;
-  box-shadow: var(--cc-hex-focus-shadow) !important;
+  box-shadow: none !important;
 }
 #customizeBackdrop .color-control .hex.invalid{
   border-color: rgba(255, 80, 80, .85)!important;
@@ -3736,7 +3729,7 @@ html.tabs-reordering, body.tabs-reordering{
 #customizeBackdrop .color-control .right-btn{
   position:absolute; right:0; top:0; width:var(--cc-right-btn-w)!important; height:100%!important;
   border:0!important; padding:0!important; display:grid!important; place-items:center!important;
-  cursor:pointer; border-left:var(--cc-right-border-current)!important; box-shadow:var(--cc-right-shadow)!important;
+  cursor:pointer; border-left:var(--cc-right-border-current)!important; box-shadow: none !important;
   border-top-left-radius:0!important; border-bottom-left-radius:0!important;
   background:var(--cc-right-bg)!important; backdrop-filter:var(--cc-right-backdrop-current)!important;
 }
@@ -4038,7 +4031,7 @@ html.tree-grabbing .tree .node.selected {
                <div id="tree" class="tree" role="tree" aria-label="Páginas e pastas" tabindex="0"></div>
             </aside>
 
-            <section class="editor" id="editorPanel" role="region" aria-label="Editor">
+            <section class="editor" id="editorPanel" aria-label="Editor">
                <!-- Tabs -->
                <!-- Tabs (barra com navegação estilo Notepad++) -->
 <div class="tabsBar" id="tabsBar">
@@ -4067,7 +4060,7 @@ html.tree-grabbing .tree .node.selected {
                         <span class="emptyHeroGlyph">✦</span>
                      </div>
                      <div class="emptyEyebrow">Espaço pronto para produzir</div>
-                     <h3 id="emptyTitle">Selecione uma nota</h3>
+                     <h2 id="emptyTitle">Selecione uma nota</h2>
                      <p id="emptyText">
                         Escolha uma nota na árvore à esquerda. Para Markdown (<code>.md</code>), você verá o preview
                         pronto e poderá clicar em <b>Editar MD</b> para editar.
@@ -4082,7 +4075,8 @@ html.tree-grabbing .tree .node.selected {
 
                <!-- Preview (só para .md) — ✅ SEM ÍNDICE -->
                <div id="mdPreviewWrap" class="md-preview-wrap">
-                  <article id="mdPreview" class="markdown-body" aria-live="polite" aria-label="Visualização Markdown"></article>
+                  <article id="mdPreview" class="markdown-body" aria-label="Visualização Markdown"></article>
+                  <span id="mdPreviewStatus" class="sr-only" aria-live="polite" aria-atomic="true"></span>
 
                   <div class="toTop">
                      <button type="button" id="btnToTop" class="ghost" title="Voltar ao topo" aria-label="Voltar ao topo">↑ <span>Topo</span></button>
@@ -4438,7 +4432,7 @@ html.tree-grabbing .tree .node.selected {
       </div>
 
       <input id="importFile" class="is-hidden" type="file" accept=".json,application/json" aria-label="Importar arquivo JSON" />
-      <div class="modal-backdrop" id="fsSyncBackdrop" hidden data-lock-close="true" aria-hidden="true">
+      <div class="modal-backdrop" id="fsSyncBackdrop" hidden data-lock-close="true">
          <div class="modal modal--sync" role="dialog" aria-modal="true" aria-labelledby="fsSyncTitle" aria-describedby="fsSyncText">
             <header>
                <div class="title">Sincronização em andamento</div>
@@ -4463,7 +4457,7 @@ html.tree-grabbing .tree .node.selected {
          </div>
       </div>
 
-      <input id="importFile" class="is-hidden" type="file" accept=".json,application/json" aria-label="Importar arquivo JSON" />
+      
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
       <!-- =====================================================================
      BLOCO 10 — SCRIPT PRINCIPAL DO APP (estado, árvore, abas, editor, preview)
@@ -4490,7 +4484,6 @@ html.tree-grabbing .tree .node.selected {
         return false;
       }
     };
-    try { if (typeof window !== 'undefined' && !window.isModalOpen) window.isModalOpen = isModalOpen; } catch (_) {}
 
 
            // --- Tree unit (largura por nível) ---------------------------------
@@ -5070,6 +5063,7 @@ html.tree-grabbing .tree .node.selected {
 
              mdPreviewWrap: $("#mdPreviewWrap"),
              mdPreview: $("#mdPreview"),
+             mdPreviewStatus: $("#mdPreviewStatus"),
              btnToTop: $("#btnToTop"),
 
              toast: $("#toast"),
@@ -7637,6 +7631,16 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
                }
 
                setVar(r, "--personalizacao-fundo-exibicao-direita", p.editorFundo);
+               {
+                 const rgb = hexToRgb(p.editorFundo);
+                 const editorSurfaceContrast = rgb
+                   ? `#${[rgb.r, rgb.g, rgb.b]
+                       .map((channel) => Math.round((channel * 0.76) + (255 * 0.24)))
+                       .map((channel) => channel.toString(16).padStart(2, "0").toUpperCase())
+                       .join("")}`
+                   : "#5F5F5F";
+                 setVar(r, "--editor-surface-contrast", editorSurfaceContrast);
+               }
                setVar(r, "--personalizacao-cor-texto-exibicao-direita", p.editorTexto);
                setVar(r, "--personalizacao-fonte-exibicao-direita", p.editorFonte);
                setVar(r, "--personalizacao-tamanho-fonte-exibicao-direita", `${p.editorTamanho}px`);
@@ -9619,7 +9623,7 @@ setTimeout(() => updateTabNavButtons(), 60);
                USE_PROFILES: { html: true },
                ALLOW_DATA_ATTR: false,
                FORBID_TAGS: ['script', 'style', 'iframe', 'object', 'embed', 'foreignobject'],
-               FORBID_ATTR: [/^on/i, 'srcset'],
+               FORBID_ATTR: ['srcset'],
                ADD_TAGS: [
                  'math-renderer','math','mi','mn','mo','mrow','msup','msub','msubsup','mfrac','msqrt','mroot','mtext','mover','munder','munderover','mtable','mtr','mtd','semantics','annotation','annotation-xml',
                  'span',
@@ -9645,7 +9649,8 @@ setTimeout(() => updateTabNavButtons(), 60);
                }
                if (typeof clean.toString === 'function') return String(clean);
              }
-             return html;           };
+             return escapeHtml(html);
+           };
 
            const addHeadingAnchors = (rootEl) => {
              rootEl.querySelectorAll("h1,h2,h3,h4,h5,h6").forEach((h) => {
@@ -10012,7 +10017,7 @@ const measure = (viewport, pre, code, block) => {
            };
 
            const getPreviewUrlType = (rawValue, attributeName = "href") => {
-             const raw = String(rawValue || "").trim().replace(/ /g, "");
+             const raw = String(rawValue || "").trim().replace(/\u0000/g, "");
              if (!raw) return null;
              const low = raw.toLowerCase();
 
@@ -10112,8 +10117,8 @@ const measure = (viewport, pre, code, block) => {
 
           // Preserva NBSP (ex.: ALT+255 no Windows) como caractere real no preview Markdown.
           // GitHub mantém esse espaço não separável; aqui fazemos o mesmo sem alterar o conteúdo salvo.
-          const MD_PREVIEW_NBSP_SENTINEL = "MD_NBSP";
-          const protectMarkdownSpecialChars = (src) => String(src || "").replace(/ /g, MD_PREVIEW_NBSP_SENTINEL);
+          const MD_PREVIEW_NBSP_SENTINEL = "__MD_NBSP_SENTINEL__";
+          const protectMarkdownSpecialChars = (src) => String(src || "").replace(/\u00A0/g, MD_PREVIEW_NBSP_SENTINEL);
           const restoreMarkdownSpecialCharsInHtml = (html) => String(html || "").replaceAll(MD_PREVIEW_NBSP_SENTINEL, "&nbsp;");
 
            // --- WCAG Relative Luminance: contraste automático para caixas de código (preview MD) ----
@@ -10510,9 +10515,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
                }
              } catch (_) {}
            };
-
-           // Expor hook para re-render do preview (usado quando o map de emoji atualiza)
-           window.__anotacoes_rerenderPreview = () => {
+           const rerenderActiveMarkdownPreview = () => {
              try {
                const tab = getTab(state.activeTabId);
                const n = tab ? getNode(tab.nodeId) : null;
@@ -11590,7 +11593,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
             ['cfgTabsWrapBtn', 'tabsWrap', TABS_WRAP_TOGGLE_TEXT]
           ];
 
-          window.__mempad_rerenderPreview = window.__anotacoes_rerenderPreview;
+          
           // ✅ Sincroniza a UI dos toggles com o estado REAL em state.prefs.
           // Motivo: durante o preview ao vivo, o botão muda (aria-pressed/text).
           // Se o usuário clicar "Cancelar", nós revertamos state.prefs, mas a UI também precisa voltar junto.
@@ -13246,7 +13249,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
                 const bundledEmojiMap = getBundledEmojiMap();
                 if (bundledEmojiMap && typeof bundledEmojiMap === 'object' && Object.keys(bundledEmojiMap).length) {
                   setEmojiMap(bundledEmojiMap);
-                  if (window.__anotacoes_rerenderPreview) window.__anotacoes_rerenderPreview();
+                  if (updated) rerenderActiveMarkdownPreview();
                 }
               } catch (_) {}
             } else {

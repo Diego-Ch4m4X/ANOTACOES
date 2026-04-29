@@ -49,7 +49,7 @@
       }</script>
             <!-- Segurança (CSP via META): reforça contra XSS no Preview Markdown.
            Observação: diretivas sem suporte em <meta>, como frame-ancestors, ficam fora desta política e só podem ser aplicadas por header HTTP. -->
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-Mx4DGfxY9SC/Fd6BEh0MxcDvOmZJIfgrwXoa0/UBkvo='; style-src-elem 'self' 'nonce-noteapp' 'sha256-Mx4DGfxY9SC/Fd6BEh0MxcDvOmZJIfgrwXoa0/UBkvo='; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp' 'sha256-Dwq5mc9WP/WpLnTSEP5MTgPtF8tCo/0xirfES0uXIQE='; script-src-elem 'self' 'nonce-noteapp' 'sha256-Dwq5mc9WP/WpLnTSEP5MTgPtF8tCo/0xirfES0uXIQE='; script-src-attr 'none';" />
+      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-Mx4DGfxY9SC/Fd6BEh0MxcDvOmZJIfgrwXoa0/UBkvo='; style-src-elem 'self' 'nonce-noteapp' 'sha256-Mx4DGfxY9SC/Fd6BEh0MxcDvOmZJIfgrwXoa0/UBkvo='; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp' 'sha256-Q94RDi1m5Qy3yClod2NGF0SueW6ncn8+q1rvQEBtlA8='; script-src-elem 'self' 'nonce-noteapp' 'sha256-Q94RDi1m5Qy3yClod2NGF0SueW6ncn8+q1rvQEBtlA8='; script-src-attr 'none';" />
       <meta name="referrer" content="no-referrer" />
       <title>ANOTAÇÕES — Workspace local-first para .txt/.md em pasta real</title>
       <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20color%3D%22%23FFFFFF%22%3E%3Cg%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20fill%3D%22currentColor%22%20fill-opacity%3D%220.3%22%20d%3D%22M22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M20%205v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%3BM22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%2F%3E%3C%2Fpath%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M8%208h8M8%2012h8M8%2016h5M4%205v14c0%200.55%200.45%201%201%201h14%3BM10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%2F%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
@@ -9709,6 +9709,78 @@ setTimeout(() => updateTabNavButtons(), 60);
                     const rounded = Math.round(value * 1000) / 1000;
                     return Number.isInteger(rounded) ? String(rounded) : String(rounded);
                   };
+
+                  /*
+                   * Correção defensiva de alinhamento dos participantes:
+                   * alguns builds/temas do Mermaid deixam o texto dos retângulos
+                   * do sequenceDiagram levemente deslocado quando o SVG é
+                   * pós-processado para contraste/tamanho. Em vez de criar outro
+                   * renderizador, normalizamos o SVG já gerado: cada label de ator
+                   * volta para o centro geométrico do retângulo correspondente.
+                   */
+                  const readSvgTextNumber = (textNode, attr) => {
+                    const direct = parseFloat(textNode.getAttribute(attr) || "");
+                    if (Number.isFinite(direct)) return direct;
+
+                    const tspan = textNode.querySelector("tspan");
+                    if (!tspan) return NaN;
+
+                    const nested = parseFloat(tspan.getAttribute(attr) || "");
+                    return Number.isFinite(nested) ? nested : NaN;
+                  };
+
+                  const setSvgTextCoordinate = (textNode, attr, value) => {
+                    const formatted = formatSvgNumber(value);
+                    textNode.setAttribute(attr, formatted);
+
+                    Array.from(textNode.querySelectorAll("tspan")).forEach((tspan, index) => {
+                      if (attr === "x") {
+                        tspan.setAttribute("x", formatted);
+                      } else if (attr === "y" && index === 0) {
+                        tspan.setAttribute("y", formatted);
+                      }
+                    });
+                  };
+
+                  const sequenceActorTexts = Array.from(svg.querySelectorAll(
+                    "text.actor, text.actor-name, .actor > text, .actor-name text"
+                  )).filter((textNode) => {
+                    const label = (textNode.textContent || "").trim();
+                    return label.length > 0;
+                  });
+
+                  const usedActorTexts = new Set();
+
+                  actorRects.forEach((item) => {
+                    const centerX = item.x + (item.width / 2);
+                    const centerY = item.y + (item.height / 2);
+
+                    const candidate = sequenceActorTexts
+                      .filter((textNode) => !usedActorTexts.has(textNode))
+                      .map((textNode) => {
+                        const textX = readSvgTextNumber(textNode, "x");
+                        const textY = readSvgTextNumber(textNode, "y");
+                        const xDistance = Number.isFinite(textX) ? Math.abs(textX - centerX) : 0;
+                        const yDistance = Number.isFinite(textY) ? Math.abs(textY - centerY) : 0;
+                        const xIsCompatible = !Number.isFinite(textX) || (textX >= item.x - 24 && textX <= item.x + item.width + 24);
+                        const yIsCompatible = Number.isFinite(textY) && (textY >= item.y - 16 && textY <= item.y + item.height + 16);
+
+                        return { textNode, xDistance, yDistance, score: xDistance + (yDistance * 2), xIsCompatible, yIsCompatible };
+                      })
+                      .filter((candidateItem) => candidateItem.xIsCompatible && candidateItem.yIsCompatible)
+                      .sort((a, b) => a.score - b.score)[0];
+
+                    if (!candidate) return;
+
+                    usedActorTexts.add(candidate.textNode);
+                    setSvgTextCoordinate(candidate.textNode, "x", centerX);
+                    setSvgTextCoordinate(candidate.textNode, "y", centerY);
+                    candidate.textNode.setAttribute("text-anchor", "middle");
+                    candidate.textNode.setAttribute("dominant-baseline", "middle");
+                    candidate.textNode.setAttribute("alignment-baseline", "middle");
+                    candidate.textNode.style.setProperty("text-anchor", "middle");
+                    candidate.textNode.style.setProperty("dominant-baseline", "middle");
+                  });
 
                   Array.from(svg.querySelectorAll("line.actor-line")).forEach((line) => {
                     const x1 = parseFloat(line.getAttribute("x1") || "");

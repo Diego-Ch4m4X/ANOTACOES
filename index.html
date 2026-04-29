@@ -49,7 +49,7 @@
       }</script>
             <!-- Segurança (CSP via META): reforça contra XSS no Preview Markdown.
            Observação: diretivas sem suporte em <meta>, como frame-ancestors, ficam fora desta política e só podem ser aplicadas por header HTTP. -->
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-TsGyjuDs8tvv6pa4PMa762EqZRrRKMl+ClUTdqXQeJI='; style-src-elem 'self' 'nonce-noteapp' 'sha256-TsGyjuDs8tvv6pa4PMa762EqZRrRKMl+ClUTdqXQeJI='; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp' 'sha256-Y8REL7dPtkrKUk+WmQy1H0SFwh/IxthHLDpeN/moqgE='; script-src-elem 'self' 'nonce-noteapp' 'sha256-Y8REL7dPtkrKUk+WmQy1H0SFwh/IxthHLDpeN/moqgE='; script-src-attr 'none';" />
+      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-Mx4DGfxY9SC/Fd6BEh0MxcDvOmZJIfgrwXoa0/UBkvo='; style-src-elem 'self' 'nonce-noteapp' 'sha256-Mx4DGfxY9SC/Fd6BEh0MxcDvOmZJIfgrwXoa0/UBkvo='; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp' 'sha256-Dwq5mc9WP/WpLnTSEP5MTgPtF8tCo/0xirfES0uXIQE='; script-src-elem 'self' 'nonce-noteapp' 'sha256-Dwq5mc9WP/WpLnTSEP5MTgPtF8tCo/0xirfES0uXIQE='; script-src-attr 'none';" />
       <meta name="referrer" content="no-referrer" />
       <title>ANOTAÇÕES — Workspace local-first para .txt/.md em pasta real</title>
       <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20color%3D%22%23FFFFFF%22%3E%3Cg%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20fill%3D%22currentColor%22%20fill-opacity%3D%220.3%22%20d%3D%22M22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M20%205v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%3BM22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%2F%3E%3C%2Fpath%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M8%208h8M8%2012h8M8%2016h5M4%205v14c0%200.55%200.45%201%201%201h14%3BM10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%2F%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
@@ -3001,6 +3001,187 @@ html.tabs-reordering, body.tabs-reordering{
 
          
           /* ===========================
+            GitHub Alerts / Admonitions — suporte local aos blocos:
+            > [!NOTE], > [!TIP], > [!IMPORTANT], > [!WARNING], > [!CAUTION]
+            Implementado por pós-processamento seguro no DOM já sanitizado.
+            Compatibilidade W3C: evita color-mix(var(...)) nos tokens desta seção,
+            pois o Nu Validator pode reportar variáveis CSS como cor não resolvida.
+            =========================== */
+         .md-preview-wrap .markdown-body blockquote.md-alert{
+            --md-alert-accent: #2f81f7;
+            --md-alert-bg: rgba(47, 129, 247, .10);
+            --md-alert-border: rgba(47, 129, 247, .42);
+            --md-alert-inset: rgba(47, 129, 247, .30);
+            margin: 16px 0 !important;
+            padding: 12px 14px !important;
+            border: 1px solid var(--md-alert-border) !important;
+            border-left: 4px solid var(--md-alert-accent) !important;
+            border-radius: 12px !important;
+            background: var(--md-alert-bg) !important;
+            box-shadow:
+               inset 1px 0 0 var(--md-alert-inset),
+               0 10px 24px rgba(0,0,0,.14) !important;
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert-note{
+            --md-alert-accent: #2f81f7;
+            --md-alert-bg: rgba(47, 129, 247, .10);
+            --md-alert-border: rgba(47, 129, 247, .42);
+            --md-alert-inset: rgba(47, 129, 247, .30);
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert-tip{
+            --md-alert-accent: #3fb950;
+            --md-alert-bg: rgba(63, 185, 80, .10);
+            --md-alert-border: rgba(63, 185, 80, .42);
+            --md-alert-inset: rgba(63, 185, 80, .30);
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert-important{
+            --md-alert-accent: #a371f7;
+            --md-alert-bg: rgba(163, 113, 247, .10);
+            --md-alert-border: rgba(163, 113, 247, .42);
+            --md-alert-inset: rgba(163, 113, 247, .30);
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert-warning{
+            --md-alert-accent: #d29922;
+            --md-alert-bg: rgba(210, 153, 34, .11);
+            --md-alert-border: rgba(210, 153, 34, .44);
+            --md-alert-inset: rgba(210, 153, 34, .32);
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert-caution{
+            --md-alert-accent: #f85149;
+            --md-alert-bg: rgba(248, 81, 73, .10);
+            --md-alert-border: rgba(248, 81, 73, .44);
+            --md-alert-inset: rgba(248, 81, 73, .32);
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert .md-alert-title{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 8px 0 !important;
+            color: var(--md-alert-accent) !important;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: .01em;
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert .md-alert-title *{
+            color: inherit !important;
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert .md-alert-icon{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.25em;
+            min-width: 1.25em;
+            height: 1.25em;
+            font-size: 1em;
+            line-height: 1;
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert .md-alert-label{
+            text-transform: none;
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert > :last-child{
+            margin-bottom: 0 !important;
+         }
+         .md-preview-wrap .markdown-body blockquote.md-alert > p:first-of-type{
+            margin-top: 0 !important;
+         }
+
+         /* ===========================
+            Details / Summary — acabamento visual seguro para HTML permitido no Markdown.
+            Mantém funcionamento nativo do navegador, sem listener paralelo.
+            Compatibilidade W3C: usa tokens rgba() estáveis em vez de color-mix(var(...))
+            nas variáveis locais do componente.
+            =========================== */
+         .md-preview-wrap .markdown-body details{
+            --md-details-fg: var(--auto-contrast-fg, var(--personalizacao-cor-texto-exibicao-direita));
+            --md-details-border: rgba(255, 255, 255, .24);
+            --md-details-bg: rgba(255, 255, 255, .055);
+            --md-details-summary-bg: rgba(255, 255, 255, .095);
+            --md-details-marker-bg: rgba(255, 255, 255, .14);
+            --md-details-summary-hover-bg: rgba(255, 255, 255, .15);
+            --md-details-pad-x: 14px;
+            --md-details-pad-y: 14px;
+            --md-details-marker-size: 18px;
+            --md-details-summary-gap: 10px;
+            --md-details-content-indent: calc(var(--md-details-pad-x) + var(--md-details-marker-size) + var(--md-details-summary-gap));
+            margin: 16px 0;
+            padding: 0 var(--md-details-pad-x) 0 var(--md-details-content-indent);
+            border: 1px solid var(--md-details-border);
+            border-radius: 14px;
+            background: var(--md-details-bg);
+            color: var(--md-details-fg) !important;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(0,0,0,.12);
+         }
+         .md-preview-wrap .markdown-body details[open]{
+            padding-bottom: var(--md-details-pad-y);
+            box-shadow: 0 14px 30px rgba(0,0,0,.16);
+         }
+         .md-preview-wrap .markdown-body details > summary{
+            display: grid;
+            grid-template-columns: var(--md-details-marker-size) minmax(0, 1fr);
+            align-items: center;
+            column-gap: var(--md-details-summary-gap);
+            min-height: 42px;
+            margin-inline-start: calc(-1 * var(--md-details-content-indent));
+            margin-inline-end: calc(-1 * var(--md-details-pad-x));
+            padding: 10px var(--md-details-pad-x);
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+            color: var(--md-details-fg) !important;
+            background: var(--md-details-summary-bg);
+            font-weight: 800;
+            line-height: 1.35;
+         }
+         .md-preview-wrap .markdown-body details > summary::-webkit-details-marker{
+            display: none;
+         }
+         .md-preview-wrap .markdown-body details > summary::before{
+            content: "›";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: var(--md-details-marker-size);
+            min-width: var(--md-details-marker-size);
+            height: var(--md-details-marker-size);
+            border-radius: 999px;
+            color: inherit;
+            background: var(--md-details-marker-bg);
+            transform: rotate(0deg);
+            transition: transform 160ms var(--ui-ease), background-color 160ms var(--ui-ease);
+         }
+         .md-preview-wrap .markdown-body details[open] > summary{
+            margin-bottom: var(--md-details-pad-y);
+            border-bottom: 1px solid var(--md-details-border);
+         }
+         .md-preview-wrap .markdown-body details[open] > summary::before{
+            transform: rotate(90deg);
+         }
+         .md-preview-wrap .markdown-body details > summary:hover,
+         .md-preview-wrap .markdown-body details > summary:focus-visible{
+            outline: none;
+            background: var(--md-details-summary-hover-bg);
+         }
+         .md-preview-wrap .markdown-body details > summary:focus-visible{
+            box-shadow: inset var(--ui-focus-ring);
+         }
+         .md-preview-wrap .markdown-body details > :not(summary){
+            margin-left: 0;
+            margin-right: 0;
+         }
+         .md-preview-wrap .markdown-body details > summary + *{
+            margin-top: 0 !important;
+         }
+         .md-preview-wrap .markdown-body details > :last-child{
+            margin-bottom: 0 !important;
+         }
+         .md-preview-wrap .markdown-body details :where(p, li, td, th){
+            color: inherit;
+         }
+
+
+         
+          /* ===========================
              Bloco de Código (Preview Markdown) — layout tipo "Caixa_CODIGO"
              - Botões: [Quebrar linha] [Copiar] (nessa ordem)
              - "Quebrar linha" aparece só quando há overflow horizontal (código comprido)
@@ -3109,6 +3290,129 @@ html.tabs-reordering, body.tabs-reordering{
           .md-preview-wrap .markdown-body svg{
              max-width: 100%;
              vertical-align: middle;
+          }
+
+          /* Mermaid no Preview Markdown — renderização local/offline dos fences ```mermaid
+             Reaproveita o pipeline existente do markdown-it + DOMPurify, sem criar editor paralelo. */
+          .md-preview-wrap .markdown-body .mermaid{
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             width: 100%;
+             min-height: 120px;
+             margin: 1em 0;
+             padding: 16px;
+             overflow: auto;
+             border: 1px solid var(--md-code-border);
+             border-radius: var(--md-code-radius);
+             background: var(--personalizacao-fundo-exibicao-direita);
+             color: var(--md-code-fg, var(--personalizacao-cor-texto-exibicao-direita));
+          }
+          .md-preview-wrap .markdown-body .mermaid svg{
+             display: block;
+             width: auto !important;
+             max-width: 100% !important;
+             height: auto !important;
+             margin: 0 auto;
+          }
+          /* Mermaid — contraste automático no SVG gerado.
+             O Mermaid injeta estilos próprios no SVG; por isso estas regras usam
+             escopo forte + !important somente dentro do preview Markdown.
+             Objetivo: evitar texto preto em tema escuro e preservar leitura dos
+             diagramas sem depender de CDN, GitHub ou StackEdit.
+             Compatibilidade W3C: usa tokens rgba() estáveis para evitar falso positivo
+             do Nu Validator com color-mix(var(...)). */
+          .md-preview-wrap .markdown-body .mermaid{
+             --md-mermaid-fg: var(--auto-contrast-fg, var(--personalizacao-cor-texto-exibicao-direita));
+             --md-mermaid-muted-fg: rgba(255, 255, 255, .78);
+             --md-mermaid-edge: rgba(255, 255, 255, .86);
+             --md-mermaid-shape-fill: var(--personalizacao-fundo-exibicao-direita, #2D2D2D);
+             --md-mermaid-shape-stroke: rgba(255, 255, 255, .72);
+             --md-mermaid-label-bg: rgba(255, 255, 255, .10);
+             --md-mermaid-note-bg: rgba(255, 255, 255, .18);
+             --md-mermaid-activation-bg: rgba(255, 255, 255, .16);
+          }
+          .md-preview-wrap .markdown-body .mermaid svg text,
+          .md-preview-wrap .markdown-body .mermaid svg tspan,
+          .md-preview-wrap .markdown-body .mermaid svg .label,
+          .md-preview-wrap .markdown-body .mermaid svg .nodeLabel,
+          .md-preview-wrap .markdown-body .mermaid svg .edgeLabel,
+          .md-preview-wrap .markdown-body .mermaid svg .messageText,
+          .md-preview-wrap .markdown-body .mermaid svg .actor-line,
+          .md-preview-wrap .markdown-body .mermaid svg .actor-name,
+          .md-preview-wrap .markdown-body .mermaid svg .noteText,
+          .md-preview-wrap .markdown-body .mermaid svg .loopText,
+          .md-preview-wrap .markdown-body .mermaid svg .labelText {
+             fill: var(--md-mermaid-fg) !important;
+             color: var(--md-mermaid-fg) !important;
+          }
+          .md-preview-wrap .markdown-body .mermaid svg .node rect,
+          .md-preview-wrap .markdown-body .mermaid svg .node circle,
+          .md-preview-wrap .markdown-body .mermaid svg .node ellipse,
+          .md-preview-wrap .markdown-body .mermaid svg .node polygon,
+          .md-preview-wrap .markdown-body .mermaid svg .node path,
+          .md-preview-wrap .markdown-body .mermaid svg rect.actor,
+          .md-preview-wrap .markdown-body .mermaid svg .actor > rect,
+          .md-preview-wrap .markdown-body .mermaid svg .labelBox,
+          .md-preview-wrap .markdown-body .mermaid svg .note,
+          .md-preview-wrap .markdown-body .mermaid svg .cluster rect {
+             fill: var(--md-mermaid-shape-fill) !important;
+             stroke: var(--md-mermaid-shape-stroke) !important;
+          }
+          .md-preview-wrap .markdown-body .mermaid svg .note {
+             fill: var(--md-mermaid-note-bg) !important;
+          }
+          .md-preview-wrap .markdown-body .mermaid svg .edgeLabel,
+          .md-preview-wrap .markdown-body .mermaid svg .edgeLabel p,
+          .md-preview-wrap .markdown-body .mermaid svg .labelBkg {
+             background-color: var(--md-mermaid-label-bg) !important;
+             color: var(--md-mermaid-fg) !important;
+             fill: var(--md-mermaid-label-bg) !important;
+          }
+          .md-preview-wrap .markdown-body .mermaid svg .flowchart-link,
+          .md-preview-wrap .markdown-body .mermaid svg .edgePath .path,
+          .md-preview-wrap .markdown-body .mermaid svg .messageLine0,
+          .md-preview-wrap .markdown-body .mermaid svg .messageLine1,
+          .md-preview-wrap .markdown-body .mermaid svg .loopLine,
+          .md-preview-wrap .markdown-body .mermaid svg line,
+          .md-preview-wrap .markdown-body .mermaid svg path.relation {
+             stroke: var(--md-mermaid-edge) !important;
+          }
+          .md-preview-wrap .markdown-body .mermaid svg marker path,
+          .md-preview-wrap .markdown-body .mermaid svg .arrowheadPath {
+             fill: var(--md-mermaid-edge) !important;
+             stroke: var(--md-mermaid-edge) !important;
+          }
+          .md-preview-wrap .markdown-body .mermaid svg .activation0,
+          .md-preview-wrap .markdown-body .mermaid svg .activation1,
+          .md-preview-wrap .markdown-body .mermaid svg .activation2 {
+             fill: var(--md-mermaid-activation-bg) !important;
+             stroke: var(--md-mermaid-shape-stroke) !important;
+          }
+          .md-preview-wrap .markdown-body .mermaid.mermaid-error,
+          .md-preview-wrap .markdown-body .mermaid.mermaid-unavailable{
+             display: block;
+             white-space: normal;
+          }
+          .md-preview-wrap .markdown-body .mermaid-status{
+             margin: 0 0 10px;
+             color: var(--feedback-text-warning, #fff3bf);
+             font-weight: 700;
+          }
+          .md-preview-wrap .markdown-body .mermaid pre{
+             margin: 0;
+             overflow: auto;
+             white-space: pre;
+          }
+          .md-mermaid-render-box{
+             position: absolute;
+             left: -100000px;
+             top: -100000px;
+             width: 1px;
+             height: 1px;
+             overflow: hidden;
+             pointer-events: none;
+             opacity: 0;
           }
 
           /* Wrap (por bloco) */
@@ -3957,6 +4261,7 @@ html.tree-grabbing .tree .node.selected {
       <script src="./libs/markdown-it.min.js" defer></script>
       <script src="./libs/markdown-it-footnote.min.js" defer></script>
       <script src="./libs/markdown-it-task-lists.min.js" defer></script>
+      <script src="./libs/mermaid.min.js" defer></script>
    </head>
 
    <body>
@@ -9268,6 +9573,328 @@ setTimeout(() => updateTabNavButtons(), 60);
             };
 
 
+           /* Mermaid no Preview Markdown:
+               - Mantém o preview local-first: usa apenas ./libs/mermaid.min.js quando existir.
+               - Não torna Mermaid dependência obrigatória do preview: se a lib faltar, o Markdown segue funcional.
+               - O SVG gerado passa por DOMPurify antes de entrar no DOM. */
+            const mdMermaidReady = () =>
+              !!(window.mermaid && (typeof window.mermaid.render === "function" || window.mermaid.mermaidAPI?.render));
+
+            let __mdMermaidInitialized = false;
+            let __mdMermaidCounter = 0;
+            let __mdMermaidRenderBox = null;
+
+            const getMarkdownMermaidRenderBox = () => {
+              if (__mdMermaidRenderBox && document.body.contains(__mdMermaidRenderBox)) return __mdMermaidRenderBox;
+              __mdMermaidRenderBox = document.createElement("div");
+              __mdMermaidRenderBox.className = "md-mermaid-render-box";
+              __mdMermaidRenderBox.setAttribute("aria-hidden", "true");
+              document.body.appendChild(__mdMermaidRenderBox);
+              return __mdMermaidRenderBox;
+            };
+
+            const initMarkdownMermaidOnce = () => {
+              if (!mdMermaidReady()) return false;
+              if (__mdMermaidInitialized) return true;
+
+              try {
+                window.mermaid.initialize({
+                  startOnLoad: false,
+                  logLevel: 5,
+                  arrowMarkerAbsolute: false,
+                  theme: "dark",
+                  securityLevel: "antiscript",
+                  flowchart: {
+                    htmlLabels: false,
+                    curve: "linear",
+                    useMaxWidth: false
+                  },
+                  sequence: {
+                    diagramMarginX: 50,
+                    diagramMarginY: 10,
+                    actorMargin: 50,
+                    width: 150,
+                    height: 65,
+                    boxMargin: 10,
+                    boxTextMargin: 5,
+                    noteMargin: 10,
+                    messageMargin: 35,
+                    mirrorActors: true,
+                    bottomMarginAdj: 1,
+                    useMaxWidth: false
+                  },
+                  gantt: {
+                    titleTopMargin: 25,
+                    barHeight: 20,
+                    barGap: 4,
+                    topPadding: 50,
+                    leftPadding: 75,
+                    gridLineStartPadding: 35,
+                    fontSize: 11,
+                    fontFamily: '"Open-Sans", "sans-serif"',
+                    numberSectionStyles: 4,
+                    axisFormat: "%Y-%m-%d"
+                  }
+                });
+
+                __mdMermaidInitialized = true;
+                return true;
+              } catch (_) {
+                return false;
+              }
+            };
+
+            const sanitizeMermaidSvg = (svgText) => {
+              const svg = String(svgText || "");
+              if (!svg || !window.DOMPurify) return "";
+
+              installMarkdownPurifyHooksOnce();
+
+              // Mermaid injeta <style> dentro do SVG. Como a CSP atual aceita nonce para style-src-elem,
+              // adicionamos o mesmo nonce antes da sanitização para preservar a renderização sem liberar unsafe-inline.
+              const withStyleNonce = svg.replace(/<style(\s|>)/gi, '<style nonce="noteapp"$1');
+
+              const clean = window.DOMPurify.sanitize(withStyleNonce, {
+                USE_PROFILES: { svg: true, svgFilters: true },
+                ADD_TAGS: ["style"],
+                ADD_ATTR: [
+                  "nonce","style","class","id","role","aria-label","aria-roledescription","focusable",
+                  "xmlns","xmlns:xlink","href","xlink:href","viewBox","preserveAspectRatio",
+                  "marker-start","marker-mid","marker-end","dominant-baseline","text-anchor",
+                  "font-family","font-size","font-weight","transform-origin"
+                ],
+                FORBID_TAGS: ["script","iframe","object","embed","foreignObject","foreignobject"]
+              });
+
+              return (typeof clean === "string") ? clean : "";
+            };
+
+            const normalizeMermaidSvgSize = (svgText) => {
+              const raw = String(svgText || "").trim();
+              if (!raw) return "";
+
+              try {
+                const template = document.createElement("template");
+                template.innerHTML = raw;
+
+                const svg = template.content.querySelector("svg");
+                if (!svg) return raw;
+
+                /*
+                 * Correção defensiva para sequenceDiagram:
+                 * alguns temas/overrides do Mermaid podem desenhar a lifeline por trás
+                 * ou por cima dos retângulos dos participantes. Ajustamos os segmentos
+                 * `.actor-line` para começarem no fim do retângulo superior e terminarem
+                 * antes do retângulo inferior, preservando a aparência GitHub/StackEdit.
+                 */
+                const actorRects = Array.from(svg.querySelectorAll("rect.actor, .actor > rect"))
+                  .map((rect) => {
+                    const x = parseFloat(rect.getAttribute("x") || "");
+                    const y = parseFloat(rect.getAttribute("y") || "");
+                    const width = parseFloat(rect.getAttribute("width") || "");
+                    const height = parseFloat(rect.getAttribute("height") || "");
+                    return { rect, x, y, width, height };
+                  })
+                  .filter((item) =>
+                    Number.isFinite(item.x) &&
+                    Number.isFinite(item.y) &&
+                    Number.isFinite(item.width) &&
+                    Number.isFinite(item.height) &&
+                    item.width > 0 &&
+                    item.height > 0
+                  );
+
+                if (actorRects.length) {
+                  const formatSvgNumber = (value) => {
+                    const rounded = Math.round(value * 1000) / 1000;
+                    return Number.isInteger(rounded) ? String(rounded) : String(rounded);
+                  };
+
+                  Array.from(svg.querySelectorAll("line.actor-line")).forEach((line) => {
+                    const x1 = parseFloat(line.getAttribute("x1") || "");
+                    const x2 = parseFloat(line.getAttribute("x2") || "");
+                    const y1 = parseFloat(line.getAttribute("y1") || "");
+                    const y2 = parseFloat(line.getAttribute("y2") || "");
+                    const lineX = Number.isFinite(x1) ? x1 : x2;
+
+                    if (!Number.isFinite(lineX) || !Number.isFinite(y1) || !Number.isFinite(y2)) return;
+
+                    const relatedRects = actorRects
+                      .filter((item) => lineX >= item.x - 1 && lineX <= item.x + item.width + 1)
+                      .sort((a, b) => a.y - b.y);
+
+                    if (!relatedRects.length) return;
+
+                    const topRect = relatedRects[0];
+                    const bottomRect = relatedRects[relatedRects.length - 1];
+                    const topLimit = topRect.y + topRect.height;
+                    const bottomLimit = bottomRect.y;
+
+                    if (Number.isFinite(topLimit) && y1 < topLimit) {
+                      line.setAttribute("y1", formatSvgNumber(topLimit));
+                    }
+
+                    if (relatedRects.length > 1 && Number.isFinite(bottomLimit) && y2 > bottomLimit) {
+                      line.setAttribute("y2", formatSvgNumber(bottomLimit));
+                    }
+                  });
+                }
+
+                const viewBox = svg.getAttribute("viewBox") || svg.getAttribute("viewbox") || "";
+                const viewBoxNumbers = viewBox.trim().split(/[\s,]+/).map(Number).filter(Number.isFinite);
+                const viewBoxWidth = viewBoxNumbers.length >= 4 ? viewBoxNumbers[2] : NaN;
+                const attrWidth = parseFloat(String(svg.getAttribute("width") || "").replace(/px$/i, ""));
+                const baseWidth = Number.isFinite(viewBoxWidth) && viewBoxWidth > 0
+                  ? viewBoxWidth
+                  : (Number.isFinite(attrWidth) && attrWidth > 0 ? attrWidth : 900);
+
+                /*
+                 * Normalização visual do Mermaid:
+                 * - Mermaid pode devolver SVG com width=100% quando useMaxWidth está ativo ou herdado.
+                 * - Em previews largos isso ampliava o diagrama de forma desproporcional.
+                 * - A largura exibida passa a respeitar o tamanho lógico do viewBox, com teto seguro.
+                 * - Não altera a sintaxe Mermaid nem cria renderizador paralelo.
+                 */
+                const displayWidth = Math.round(Math.min(Math.max(baseWidth, 240), 980));
+
+                svg.style.setProperty("display", "block");
+                svg.style.setProperty("width", `min(100%, ${displayWidth}px)`);
+                svg.style.setProperty("max-width", "100%");
+                svg.style.setProperty("height", "auto");
+                svg.style.setProperty("margin", "0 auto");
+
+                if (!svg.getAttribute("preserveAspectRatio")) {
+                  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+                }
+
+                return template.innerHTML;
+              } catch (_) {
+                return raw;
+              }
+            };
+
+            const renderMermaidSvg = (source, svgId, renderBox) => {
+              const graph = String(source || "");
+              const mermaid = window.mermaid;
+
+              return new Promise((resolve, reject) => {
+                try {
+                  if (typeof mermaid.render === "function") {
+                    const out = mermaid.render(svgId, graph);
+                    if (out && typeof out.then === "function") {
+                      out.then((result) => resolve({
+                        svg: result?.svg || "",
+                        bindFunctions: result?.bindFunctions
+                      })).catch(reject);
+                      return;
+                    }
+                    if (typeof out === "string") {
+                      resolve({ svg: out });
+                      return;
+                    }
+                    if (out && typeof out === "object" && typeof out.svg === "string") {
+                      resolve({ svg: out.svg, bindFunctions: out.bindFunctions });
+                      return;
+                    }
+                  }
+
+                  if (mermaid.mermaidAPI?.render) {
+                    mermaid.mermaidAPI.render(svgId, graph, (svgCode, bindFunctions) => {
+                      let svg = String(svgCode || "");
+                      if (!svg) {
+                        const rendered = Array.from(renderBox.querySelectorAll("svg")).find((node) => node.id === svgId);
+                        svg = rendered ? rendered.outerHTML : "";
+                      }
+                      resolve({ svg, bindFunctions });
+                    }, renderBox);
+                    return;
+                  }
+
+                  reject(new Error("Mermaid render API indisponível."));
+                } catch (err) {
+                  reject(err);
+                }
+              });
+            };
+
+            const showMermaidFallback = (block, source, message, className) => {
+              const status = document.createElement("div");
+              status.className = "mermaid-status";
+              status.textContent = message;
+
+              const pre = document.createElement("pre");
+              const code = document.createElement("code");
+              code.className = "language-mermaid";
+              code.textContent = source;
+              pre.appendChild(code);
+
+              block.classList.remove("mermaid-rendering");
+              block.classList.add(className);
+              block.setAttribute("aria-busy", "false");
+              block.replaceChildren(status, pre);
+            };
+
+            const renderMermaidDiagrams = async (rootEl) => {
+              const root = rootEl || ui?.mdPreview || document;
+              const blocks = Array.from(root.querySelectorAll(".mermaid")).filter((block) => !block.dataset.mermaidRendered);
+              if (!blocks.length) return;
+
+              if (!initMarkdownMermaidOnce()) {
+                blocks.forEach((block) => {
+                  const source = block.textContent || "";
+                  block.dataset.mermaidRendered = "unavailable";
+                  showMermaidFallback(
+                    block,
+                    source,
+                    "⚠️ Mermaid não carregado. Coloque mermaid.min.js em ./libs/ para renderizar este diagrama.",
+                    "mermaid-unavailable"
+                  );
+                });
+                return;
+              }
+
+              const renderBox = getMarkdownMermaidRenderBox();
+
+              for (const block of blocks) {
+                const source = block.textContent || "";
+                if (!source.trim()) continue;
+
+                const svgId = `md-mermaid-${++__mdMermaidCounter}`;
+                block.dataset.mermaidRendered = "pending";
+                block.classList.add("mermaid-rendering");
+                block.setAttribute("aria-busy", "true");
+
+                try {
+                  renderBox.textContent = "";
+                  const result = await renderMermaidSvg(source, svgId, renderBox);
+                  const safeSvg = normalizeMermaidSvgSize(sanitizeMermaidSvg(result.svg));
+
+                  if (!safeSvg || !/<svg[\s>]/i.test(safeSvg)) {
+                    throw new Error("SVG Mermaid vazio ou bloqueado pela sanitização.");
+                  }
+
+                  block.classList.remove("mermaid-rendering", "mermaid-error", "mermaid-unavailable");
+                  block.setAttribute("aria-busy", "false");
+                  block.dataset.mermaidRendered = "ok";
+                  block.innerHTML = safeSvg;
+                } catch (err) {
+                  block.dataset.mermaidRendered = "error";
+                  showMermaidFallback(
+                    block,
+                    source,
+                    "⚠️ Erro ao renderizar Mermaid. Confira a sintaxe do diagrama.",
+                    "mermaid-error"
+                  );
+                  try { console.warn("Mermaid render error:", err); } catch (_) {}
+                } finally {
+                  renderBox.textContent = "";
+                }
+              }
+
+              try { scheduleMdPreviewToTopVisibility(); } catch (_) {}
+            };
+
+
            const buildMarkdownIt = () => {
              try {
                // Evita warnings do Highlight.js no DevTools quando o bloco já veio renderizado
@@ -9290,6 +9917,9 @@ setTimeout(() => updateTabNavButtons(), 60);
                breaks: false,
                highlight: (str, lang) => {
                   const safeLang = sanitizeFenceLang(lang);
+                  if (safeLang.toLowerCase() === "mermaid") {
+                    return `<div class="mermaid">${escapeHtml(str)}</div>`;
+                  }
                  try {
                    if (safeLang && window.hljs.getLanguage(safeLang)) {
                      const v = window.hljs.highlight(str, { language: safeLang, ignoreIllegals: true }).value;
@@ -9299,6 +9929,21 @@ setTimeout(() => updateTabNavButtons(), 60);
                  return `<pre><code class="hljs">${escapeHtml(str)}</code></pre>`;
                },
              });
+
+             const defaultFenceRenderer = md.renderer.rules.fence;
+             md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+               const token = tokens[idx];
+               const info = String(token?.info || "").trim();
+               const lang = sanitizeFenceLang(info.split(/\s+/)[0] || "").toLowerCase();
+
+               if (lang === "mermaid") {
+                 return `<div class="mermaid">${escapeHtml(token.content || "")}</div>\n`;
+               }
+
+               return defaultFenceRenderer
+                 ? defaultFenceRenderer(tokens, idx, options, env, self)
+                 : self.renderToken(tokens, idx, options);
+             };
 
              if (window.markdownitFootnote) md.use(window.markdownitFootnote);
              if (window.markdownitTaskLists) md.use(window.markdownitTaskLists, { enabled: true, label: true, labelAfter: true });
@@ -9626,12 +10271,13 @@ setTimeout(() => updateTabNavButtons(), 60);
                  'span',
                  'img',
                  'input',
+                 'details','summary',
                  'svg','g','path','circle','ellipse','rect','line','polyline','polygon','defs','symbol','use','title','desc','clipPath','mask','pattern','linearGradient','radialGradient','stop','text','tspan','animate','animateTransform'
                ],
                ADD_ATTR: [
                  'xmlns','xmlns:xlink','display','mathvariant','encoding','class','aria-hidden','role',
                  'id','target','rel','loading','decoding','width','height','alt','title','aria-label',
-                 'type','checked','disabled','src','style',
+                 'type','checked','disabled','open','src','style',
                  'viewBox','preserveAspectRatio','fill','fill-opacity','fill-rule','stroke','stroke-width','stroke-linecap','stroke-linejoin','stroke-dasharray','stroke-dashoffset','stroke-opacity',
                  'cx','cy','r','rx','ry','x','y','x1','x2','y1','y2','d','points','transform','opacity','offset','stop-color','stop-opacity','href','xlink:href','focusable'
                ],
@@ -10213,7 +10859,25 @@ const measure = (viewport, pre, code, block) => {
                  bq.style.setProperty("--auto-contrast-fg", fg);
                 bq.style.setProperty("--md-bq-fg", "var(--auto-contrast-fg)");
                });
-               // 3) Botão "↑ Topo": cor automática (WCAG) conforme fundo efetivo do botão
+
+               // Details/Summary: mesmo cálculo de contraste aplicado ao card recolhível.
+               root.querySelectorAll?.(".markdown-body details").forEach((details) => {
+                 const rgb = mdEffectiveBgRgb(details);
+                 const fg = mdPickFgFromRgb(rgb.r, rgb.g, rgb.b);
+                 details.style.setProperty("--auto-contrast-fg", fg);
+                 details.style.setProperty("--md-details-fg", "var(--auto-contrast-fg)");
+               });
+               // 3) Mermaid: aplica o mesmo contraste automático ao container que recebe o SVG.
+               // As regras CSS internas do Mermaid são sobrescritas por variáveis locais do bloco,
+               // evitando texto preto/invisível quando o preview usa tema escuro ou personalizado.
+               root.querySelectorAll?.(".markdown-body .mermaid").forEach((block) => {
+                 const rgb = mdEffectiveBgRgb(block);
+                 const fg = mdPickFgFromRgb(rgb.r, rgb.g, rgb.b);
+                 block.style.setProperty("--auto-contrast-fg", fg);
+                 block.style.setProperty("--md-mermaid-fg", "var(--auto-contrast-fg)");
+               });
+
+               // 4) Botão "↑ Topo": cor automática (WCAG) conforme fundo efetivo do botão
                const toTopBtn = (root.querySelector?.("#btnToTop") || document.getElementById("btnToTop"));
                if (toTopBtn) {
                  const rgb = mdEffectiveBgRgb(toTopBtn);
@@ -10336,7 +11000,94 @@ const measure = (viewport, pre, code, block) => {
              } catch {}
            };
 
-const syncMdPreviewToTopVisibility = () => {
+const decorateGithubAlerts = (rootEl) => {
+             const root = rootEl || ui?.mdPreview || document;
+             const alerts = {
+               note: { label: "Note", icon: "ⓘ" },
+               tip: { label: "Tip", icon: "💡" },
+               important: { label: "Important", icon: "▣" },
+               warning: { label: "Warning", icon: "⚠" },
+               caution: { label: "Caution", icon: "⛔" }
+             };
+
+             const removeLeadingEmptyNodes = (el) => {
+               if (!el) return;
+               let guard = 0;
+               while (el.firstChild && guard++ < 20) {
+                 const first = el.firstChild;
+                 if (first.nodeType === Node.TEXT_NODE) {
+                   const cleaned = String(first.nodeValue || "").replace(/^\s+/, "");
+                   if (cleaned) {
+                     first.nodeValue = cleaned;
+                     break;
+                   }
+                   first.remove();
+                   continue;
+                 }
+                 if (first.nodeName === "BR") {
+                   first.remove();
+                   continue;
+                 }
+                 break;
+               }
+             };
+
+             const stripAlertMarker = (container, type) => {
+               if (!container) return false;
+               const markerRe = new RegExp(`^\\s*\\[!${type}\\]\\s*`, "i");
+               const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+               let textNode = null;
+
+               while ((textNode = walker.nextNode())) {
+                 const value = String(textNode.nodeValue || "");
+                 if (!value.trim()) continue;
+                 if (!markerRe.test(value)) return false;
+                 textNode.nodeValue = value.replace(markerRe, "");
+                 removeLeadingEmptyNodes(container);
+                 return true;
+               }
+
+               return false;
+             };
+
+             root.querySelectorAll("blockquote:not(.md-alert)").forEach((blockquote) => {
+               const firstElement = Array.from(blockquote.children).find((el) => el?.nodeType === Node.ELEMENT_NODE);
+               if (!firstElement) return;
+
+               const firstText = String(firstElement.textContent || "").trimStart();
+               const match = firstText.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
+               if (!match) return;
+
+               const type = match[1].toLowerCase();
+               const meta = alerts[type];
+               if (!meta) return;
+
+               if (!stripAlertMarker(firstElement, type)) return;
+               if (!String(firstElement.textContent || "").trim() && !firstElement.querySelector("img,svg,code,a,strong,em")) {
+                 firstElement.remove();
+               }
+
+               const title = document.createElement("div");
+               title.className = "md-alert-title";
+
+               const icon = document.createElement("span");
+               icon.className = "md-alert-icon";
+               icon.setAttribute("aria-hidden", "true");
+               icon.textContent = meta.icon;
+
+               const label = document.createElement("span");
+               label.className = "md-alert-label";
+               label.textContent = meta.label;
+
+               title.append(icon, label);
+               blockquote.classList.add("md-alert", `md-alert-${type}`);
+               blockquote.setAttribute("data-alert", type);
+               blockquote.setAttribute("role", "note");
+               blockquote.insertBefore(title, blockquote.firstChild);
+             });
+           };
+
+           const syncMdPreviewToTopVisibility = () => {
              const wrap = ui?.mdPreviewWrap;
              const btn = ui?.btnToTop;
              const host = btn?.closest?.(".toTop");
@@ -10380,7 +11131,9 @@ const renderMarkdownPreview = (mdText, tabId) => {
              postprocessLinksAndImages(ui.mdPreview);
              markTightLists(ui.mdPreview);
              wrapTables(ui.mdPreview);
+             decorateGithubAlerts(ui.mdPreview);
              addHeadingAnchors(ui.mdPreview);
+             renderMermaidDiagrams(ui.mdPreview);
              decorateCodeBlocks(ui.mdPreview, tabId);
 
              try {

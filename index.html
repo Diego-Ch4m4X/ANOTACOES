@@ -49,7 +49,7 @@
       }</script>
             <!-- Segurança (CSP via META): reforça contra XSS no Preview Markdown.
            Observação: diretivas sem suporte em <meta>, como frame-ancestors, ficam fora desta política e só podem ser aplicadas por header HTTP. -->
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-hD7ExbTQvaUJfcuyPznn1KXwtlKvt6f3BZxdhw1Egh4='; style-src-elem 'self' 'nonce-noteapp' 'sha256-hD7ExbTQvaUJfcuyPznn1KXwtlKvt6f3BZxdhw1Egh4='; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp' 'sha256-Jv1t/Q8cm/XYhTYlr5XPF7JfK48NbrM0FqTDWPcDQs8='; script-src-elem 'self' 'nonce-noteapp' 'sha256-Jv1t/Q8cm/XYhTYlr5XPF7JfK48NbrM0FqTDWPcDQs8='; script-src-attr 'none';" />
+      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-hLOZfoy6uFY0gD0kM56OGILH8XxpYkk5nYJ1oNymr0k='; style-src-elem 'self' 'nonce-noteapp' 'sha256-hLOZfoy6uFY0gD0kM56OGILH8XxpYkk5nYJ1oNymr0k='; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp' 'sha256-Bf+0PZxSAyqu+cP+qnNyODsCoPTUAp0nK4it/ERmXUk='; script-src-elem 'self' 'nonce-noteapp' 'sha256-Bf+0PZxSAyqu+cP+qnNyODsCoPTUAp0nK4it/ERmXUk='; script-src-attr 'none';" />
       <meta name="referrer" content="no-referrer" />
       <title>ANOTAÇÕES — Workspace local-first para .txt/.md em pasta real</title>
       <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20color%3D%22%23FFFFFF%22%3E%3Cg%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20fill%3D%22currentColor%22%20fill-opacity%3D%220.3%22%20d%3D%22M22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M20%205v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%3BM22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%2F%3E%3C%2Fpath%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M8%208h8M8%2012h8M8%2016h5M4%205v14c0%200.55%200.45%201%201%201h14%3BM10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%2F%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
@@ -3219,10 +3219,32 @@ html.tabs-reordering, body.tabs-reordering{
 .markdown-body .code-viewport::-webkit-scrollbar{ width: 10px; height: 10px; }
 .markdown-body .code-viewport::-webkit-scrollbar-track{ background: var(--personalizacao-fundo-exibicao-direita); }
 .markdown-body .code-viewport::-webkit-scrollbar-thumb{ background: var(--auto-contrast-fg); border: 2px solid var(--personalizacao-fundo-exibicao-direita); }
+          .markdown-body figure.code-block.expanded .code-viewport{
+             max-height: none;
+          }
 
-          .markdown-body figure.code-block.expanded .code-viewport,
+          /* Mermaid renderizado não deve parecer uma caixa de código.
+             Regra mitigatória: se algum fluxo legado ainda gerar figure.code-block--mermaid,
+             reaproveitamos a classe existente e neutralizamos header, footer, borda e fundo. */
+          .markdown-body figure.code-block.code-block--mermaid{
+             margin: 1em 0;
+          }
+          .markdown-body figure.code-block.code-block--mermaid .code-header,
+          .markdown-body figure.code-block.code-block--mermaid .code-footer{
+             display: none !important;
+          }
           .markdown-body figure.code-block.code-block--mermaid .code-viewport{
              max-height: none;
+             overflow: visible;
+             border: 0;
+             border-radius: 0;
+             background: transparent !important;
+             scrollbar-width: auto;
+          }
+          .markdown-body figure.code-block.code-block--mermaid .code-viewport pre{
+             width: 100%;
+             min-width: 0;
+             padding: 0 !important;
           }
 
           /* Reset do <pre> gerado pelo markdown — o "card" é o .code-viewport */
@@ -3302,12 +3324,12 @@ html.tabs-reordering, body.tabs-reordering{
              width: 100%;
              min-height: 120px;
              margin: 1em 0;
-             padding: 16px;
+             padding: 0;
              overflow: auto;
-             border: 1px solid var(--md-code-border);
-             border-radius: var(--md-code-radius);
-             background: var(--personalizacao-fundo-exibicao-direita);
-             color: var(--md-code-fg, var(--personalizacao-cor-texto-exibicao-direita));
+             border: 0;
+             border-radius: 0;
+             background: transparent;
+             color: var(--md-mermaid-fg, var(--auto-contrast-fg, var(--personalizacao-cor-texto-exibicao-direita)));
           }
           .md-preview-wrap .markdown-body .mermaid svg{
              display: block;
@@ -3317,147 +3339,18 @@ html.tabs-reordering, body.tabs-reordering{
              margin: 0 auto;
           }
           /* Mermaid — contraste automático no SVG gerado.
-             O Mermaid injeta estilos próprios no SVG; por isso estas regras usam
-             escopo específico do preview Markdown sem elevar prioridade artificial.
-             Objetivo: evitar texto preto em tema escuro e preservar leitura dos
-             diagramas sem depender de CDN, GitHub ou StackEdit.
-             Compatibilidade W3C: usa tokens rgba() estáveis para evitar falso positivo
-             do Nu Validator com color-mix(var(...)). */
+             A cor base agora é calculada no JavaScript antes de cada renderização
+             e enviada ao Mermaid via themeVariables. Assim, o contraste acompanha
+             o fundo personalizado do preview sem sobrescrever cores intencionais
+             definidas no próprio diagrama (ex.: classDef/style/themeVariables).
+             Este CSS fica restrito a variáveis e fallback visual do contêiner. */
           .md-preview-wrap .markdown-body .mermaid{
              --md-mermaid-fg: var(--auto-contrast-fg, var(--personalizacao-cor-texto-exibicao-direita));
-             --md-mermaid-muted-fg: rgba(255, 255, 255, .78);
-             --md-mermaid-edge: rgba(255, 255, 255, .86);
-             --md-mermaid-shape-fill: var(--personalizacao-fundo-exibicao-direita, #2D2D2D);
-             --md-mermaid-shape-stroke: rgba(255, 255, 255, .72);
-             --md-mermaid-label-bg: rgba(255, 255, 255, .10);
-             --md-mermaid-note-bg: rgba(255, 255, 255, .18);
-             --md-mermaid-activation-bg: rgba(255, 255, 255, .16);
-          }
-          .md-preview-wrap .markdown-body .mermaid svg text,
-          .md-preview-wrap .markdown-body .mermaid svg tspan,
-          .md-preview-wrap .markdown-body .mermaid svg .label,
-          .md-preview-wrap .markdown-body .mermaid svg .nodeLabel,
-          .md-preview-wrap .markdown-body .mermaid svg .edgeLabel,
-          .md-preview-wrap .markdown-body .mermaid svg .messageText,
-          .md-preview-wrap .markdown-body .mermaid svg .actor-line,
-          .md-preview-wrap .markdown-body .mermaid svg .actor-name,
-          .md-preview-wrap .markdown-body .mermaid svg .noteText,
-          .md-preview-wrap .markdown-body .mermaid svg .loopText,
-          .md-preview-wrap .markdown-body .mermaid svg .labelText {
-             fill: var(--md-mermaid-fg);
              color: var(--md-mermaid-fg);
           }
-          .md-preview-wrap .markdown-body .mermaid svg text.noteText,
-          .md-preview-wrap .markdown-body .mermaid svg .noteText,
-          .md-preview-wrap .markdown-body .mermaid svg g.note text,
-          .md-preview-wrap .markdown-body .mermaid svg .noteGroup text,
-          .md-preview-wrap .markdown-body .mermaid svg text.noteText tspan,
-          .md-preview-wrap .markdown-body .mermaid svg g.note text tspan,
-          .md-preview-wrap .markdown-body .mermaid svg .noteGroup text tspan {
-             text-anchor: middle;
-             dominant-baseline: middle;
-             alignment-baseline: middle;
-          }
-          .md-preview-wrap .markdown-body .mermaid svg g.note foreignObject,
-          .md-preview-wrap .markdown-body .mermaid svg g.note foreignobject,
-          .md-preview-wrap .markdown-body .mermaid svg g.notes foreignObject,
-          .md-preview-wrap .markdown-body .mermaid svg g.notes foreignobject,
-          .md-preview-wrap .markdown-body .mermaid svg g.statediagram-note foreignObject,
-          .md-preview-wrap .markdown-body .mermaid svg g.statediagram-note foreignobject,
-          .md-preview-wrap .markdown-body .mermaid svg g.label.noteLabel foreignObject,
-          .md-preview-wrap .markdown-body .mermaid svg g.label.noteLabel foreignobject,
-          .md-preview-wrap .markdown-body .mermaid svg .note foreignObject,
-          .md-preview-wrap .markdown-body .mermaid svg .note foreignobject,
-          .md-preview-wrap .markdown-body .mermaid svg .noteGroup foreignObject,
-          .md-preview-wrap .markdown-body .mermaid svg .noteGroup foreignobject {
-             overflow: visible;
-          }
-          .md-preview-wrap .markdown-body .mermaid svg g.note foreignObject > div,
-          .md-preview-wrap .markdown-body .mermaid svg g.note foreignobject > div,
-          .md-preview-wrap .markdown-body .mermaid svg g.notes foreignObject > div,
-          .md-preview-wrap .markdown-body .mermaid svg g.notes foreignobject > div,
-          .md-preview-wrap .markdown-body .mermaid svg g.statediagram-note foreignObject > div,
-          .md-preview-wrap .markdown-body .mermaid svg g.statediagram-note foreignobject > div,
-          .md-preview-wrap .markdown-body .mermaid svg g.label.noteLabel foreignObject > div,
-          .md-preview-wrap .markdown-body .mermaid svg g.label.noteLabel foreignobject > div,
-          .md-preview-wrap .markdown-body .mermaid svg .note foreignObject > div,
-          .md-preview-wrap .markdown-body .mermaid svg .note foreignobject > div,
-          .md-preview-wrap .markdown-body .mermaid svg .noteGroup foreignObject > div,
-          .md-preview-wrap .markdown-body .mermaid svg .noteGroup foreignobject > div {
-             box-sizing: border-box;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             width: 100%;
-             height: 100%;
-             margin: 0;
-             padding: 0 10px;
-             text-align: center;
-             line-height: 1.25;
-          }
-          .md-preview-wrap .markdown-body .mermaid svg g.note foreignObject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg g.note foreignobject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg g.notes foreignObject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg g.notes foreignobject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg g.statediagram-note foreignObject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg g.statediagram-note foreignobject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg g.label.noteLabel foreignObject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg g.label.noteLabel foreignobject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg .note foreignObject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg .note foreignobject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg .noteGroup foreignObject :where(.nodeLabel, .noteText, span, p),
-          .md-preview-wrap .markdown-body .mermaid svg .noteGroup foreignobject :where(.nodeLabel, .noteText, span, p) {
-             display: block;
-             width: 100%;
-             max-width: 100%;
-             margin: 0 auto;
-             text-align: center;
-             white-space: pre-line;
-             overflow-wrap: normal;
-             word-break: normal;
-          }
-          .md-preview-wrap .markdown-body .mermaid svg .node rect,
-          .md-preview-wrap .markdown-body .mermaid svg .node circle,
-          .md-preview-wrap .markdown-body .mermaid svg .node ellipse,
-          .md-preview-wrap .markdown-body .mermaid svg .node polygon,
-          .md-preview-wrap .markdown-body .mermaid svg .node path,
-          .md-preview-wrap .markdown-body .mermaid svg rect.actor,
-          .md-preview-wrap .markdown-body .mermaid svg .actor > rect,
-          .md-preview-wrap .markdown-body .mermaid svg .labelBox,
-          .md-preview-wrap .markdown-body .mermaid svg .note,
-          .md-preview-wrap .markdown-body .mermaid svg .cluster rect {
-             fill: var(--md-mermaid-shape-fill);
-             stroke: var(--md-mermaid-shape-stroke);
-          }
-          .md-preview-wrap .markdown-body .mermaid svg .note {
-             fill: var(--md-mermaid-note-bg);
-          }
-          .md-preview-wrap .markdown-body .mermaid svg .edgeLabel,
-          .md-preview-wrap .markdown-body .mermaid svg .edgeLabel p,
-          .md-preview-wrap .markdown-body .mermaid svg .labelBkg {
-             background-color: var(--md-mermaid-label-bg);
+          .md-preview-wrap .markdown-body .mermaid svg{
              color: var(--md-mermaid-fg);
-             fill: var(--md-mermaid-label-bg);
-          }
-          .md-preview-wrap .markdown-body .mermaid svg .flowchart-link,
-          .md-preview-wrap .markdown-body .mermaid svg .edgePath .path,
-          .md-preview-wrap .markdown-body .mermaid svg .messageLine0,
-          .md-preview-wrap .markdown-body .mermaid svg .messageLine1,
-          .md-preview-wrap .markdown-body .mermaid svg .loopLine,
-          .md-preview-wrap .markdown-body .mermaid svg line,
-          .md-preview-wrap .markdown-body .mermaid svg path.relation {
-             stroke: var(--md-mermaid-edge);
-          }
-          .md-preview-wrap .markdown-body .mermaid svg marker path,
-          .md-preview-wrap .markdown-body .mermaid svg .arrowheadPath {
-             fill: var(--md-mermaid-edge);
-             stroke: var(--md-mermaid-edge);
-          }
-          .md-preview-wrap .markdown-body .mermaid svg .activation0,
-          .md-preview-wrap .markdown-body .mermaid svg .activation1,
-          .md-preview-wrap .markdown-body .mermaid svg .activation2 {
-             fill: var(--md-mermaid-activation-bg);
-             stroke: var(--md-mermaid-shape-stroke);
+             background: transparent;
           }
           .md-preview-wrap .markdown-body .mermaid.mermaid-error,
           .md-preview-wrap .markdown-body .mermaid.mermaid-unavailable{
@@ -9695,74 +9588,575 @@ setTimeout(() => updateTabNavButtons(), 60);
               renderBox.style.setProperty("overflow", "visible");
             };
 
-            const initMarkdownMermaidOnce = () => {
-              if (!mdMermaidReady()) return false;
-              if (__mdMermaidInitialized) return true;
+            const mdClampChannel = (value) => Math.min(255, Math.max(0, Math.round(Number(value) || 0)));
+
+            const mdRgbToHex = (rgb) => {
+              const r = mdClampChannel(rgb?.r);
+              const g = mdClampChannel(rgb?.g);
+              const b = mdClampChannel(rgb?.b);
+              return `#${[r, g, b].map((n) => n.toString(16).padStart(2, "0")).join("")}`;
+            };
+
+            const mdMixRgb = (from, to, amount) => {
+              const t = Math.min(1, Math.max(0, Number(amount) || 0));
+              return {
+                r: mdClampChannel((from.r * (1 - t)) + (to.r * t)),
+                g: mdClampChannel((from.g * (1 - t)) + (to.g * t)),
+                b: mdClampChannel((from.b * (1 - t)) + (to.b * t))
+              };
+            };
+
+            const getMarkdownMermaidPalette = (referenceEl) => {
+              let bg = { r: 45, g: 45, b: 45 };
+              try {
+                if (referenceEl && typeof mdEffectiveBgRgb === "function") {
+                  const resolved = mdEffectiveBgRgb(referenceEl);
+                  if (resolved && Number.isFinite(resolved.r) && Number.isFinite(resolved.g) && Number.isFinite(resolved.b)) {
+                    bg = resolved;
+                  }
+                }
+              } catch (_) {}
+
+              let fgHex = "#FFFFFF";
+              try { fgHex = mdPickFgFromRgb(bg.r, bg.g, bg.b); } catch (_) {}
+
+              const onLightBackground = fgHex === "#111111";
+              const white = { r: 255, g: 255, b: 255 };
+              const black = { r: 17, g: 17, b: 17 };
+
+              /*
+               * Auto-contraste Mermaid v5:
+               * - o preenchimento dos nós acompanha a cor do fundo do preview;
+               * - linhas, setas, contornos, bolinhas e textos usam alto contraste real;
+               * - evita o erro da V4: retângulos pretos fixos e texto invisível;
+               * - mantém o comportamento local-first e não cria renderizador paralelo.
+               */
+              const nodeFillRgb = onLightBackground
+                ? mdMixRgb(bg, black, 0.035)
+                : mdMixRgb(bg, white, 0.135);
+              const labelFillRgb = onLightBackground
+                ? mdMixRgb(bg, black, 0.055)
+                : mdMixRgb(bg, white, 0.19);
+              const noteFillRgb = onLightBackground
+                ? mdMixRgb(bg, black, 0.075)
+                : mdMixRgb(bg, white, 0.215);
+
+              const edgeHex = onLightBackground ? "#24292F" : "#F0F6FC";
+              const strokeHex = onLightBackground ? "#57606A" : "#D0D7DE";
+              const textHex = onLightBackground ? "#111111" : "#FFFFFF";
+
+              return {
+                bg,
+                onLightBackground,
+                bgHex: mdRgbToHex(bg),
+                shapeHex: mdRgbToHex(nodeFillRgb),
+                labelHex: mdRgbToHex(labelFillRgb),
+                noteHex: mdRgbToHex(noteFillRgb),
+                strokeHex,
+                edgeHex,
+                fgHex: textHex,
+                edgeLabelTextHex: textHex,
+                markerHex: edgeHex,
+                stateDotHex: edgeHex,
+                barHex: onLightBackground ? "#57606A" : "#D0D7DE"
+              };
+            };
+
+            const buildMarkdownMermaidConfig = (referenceEl, source = "") => {
+              const palette = getMarkdownMermaidPalette(referenceEl);
+              const { bgHex, fgHex, shapeHex, labelHex, noteHex, strokeHex, edgeHex, onLightBackground } = palette;
+              const hasExplicitColoring = mdMermaidSourceHasExplicitColoring(source);
+
+              const baseConfig = {
+                startOnLoad: false,
+                logLevel: 5,
+                arrowMarkerAbsolute: false,
+                theme: "base",
+                securityLevel: "antiscript",
+                flowchart: {
+                  htmlLabels: false,
+                  curve: "linear",
+                  useMaxWidth: false
+                },
+                state: {
+                  htmlLabels: false,
+                  useMaxWidth: false
+                },
+                sequence: {
+                  diagramMarginX: 50,
+                  diagramMarginY: 10,
+                  actorMargin: 50,
+                  width: 150,
+                  height: 65,
+                  boxMargin: 10,
+                  boxTextMargin: 5,
+                  noteMargin: 10,
+                  messageMargin: 35,
+                  mirrorActors: true,
+                  bottomMarginAdj: 1,
+                  useMaxWidth: false
+                },
+                gantt: {
+                  titleTopMargin: 25,
+                  barHeight: 20,
+                  barGap: 4,
+                  topPadding: 50,
+                  leftPadding: 75,
+                  gridLineStartPadding: 35,
+                  fontSize: 11,
+                  fontFamily: '"Open-Sans", "sans-serif"',
+                  numberSectionStyles: 4,
+                  axisFormat: "%Y-%m-%d"
+                }
+              };
+
+              const themeVariables = {
+                darkMode: !onLightBackground,
+                background: bgHex,
+                mainBkg: shapeHex,
+                secondBkg: labelHex,
+                tertiaryColor: labelHex,
+                fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+                fontSize: "16px",
+                primaryColor: shapeHex,
+                primaryTextColor: fgHex,
+                primaryBorderColor: strokeHex,
+                secondaryColor: labelHex,
+                secondaryTextColor: fgHex,
+                secondaryBorderColor: strokeHex,
+                tertiaryTextColor: fgHex,
+                tertiaryBorderColor: strokeHex,
+                lineColor: edgeHex,
+                defaultLinkColor: edgeHex,
+                textColor: fgHex,
+                labelTextColor: fgHex,
+                edgeLabelBackground: labelHex,
+                clusterBkg: shapeHex,
+                clusterBorder: strokeHex,
+                noteBkgColor: noteHex,
+                noteTextColor: fgHex,
+                noteBorderColor: strokeHex,
+                actorBkg: shapeHex,
+                actorBorder: strokeHex,
+                actorTextColor: fgHex,
+                actorLineColor: edgeHex,
+                signalColor: edgeHex,
+                signalTextColor: fgHex,
+                activationBkgColor: labelHex,
+                activationBorderColor: strokeHex,
+                taskBkgColor: shapeHex,
+                taskTextColor: fgHex,
+                taskBorderColor: strokeHex,
+                gridColor: strokeHex,
+                sectionBkgColor: noteHex,
+                altSectionBkgColor: labelHex,
+                titleColor: fgHex,
+                cScale0: shapeHex,
+                cScale1: labelHex,
+                cScale2: noteHex
+              };
+
+              if (hasExplicitColoring) {
+                /*
+                 * Preservação de personalização Mermaid:
+                 * quando o código declara classDef/style/linkStyle/init, o app não deve
+                 * “pintar por cima” nem transformar classe parcial em estilo completo.
+                 * Aqui o tema-base fica neutro e acompanha o fundo real do preview:
+                 * - estado sem fill explícito herda o fundo da página;
+                 * - classDef com fill/color/stroke continua sendo aplicado pelo Mermaid;
+                 * - classDef parcial, como `font-style:italic`, não ganha fundo extra.
+                 * Sem uso de !important.
+                 */
+                const neutralThemeVariables = {
+                  darkMode: !onLightBackground,
+                  background: bgHex,
+                  fontFamily: themeVariables.fontFamily,
+                  fontSize: themeVariables.fontSize,
+                  mainBkg: bgHex,
+                  primaryColor: bgHex,
+                  secondBkg: bgHex,
+                  secondaryColor: bgHex,
+                  tertiaryColor: bgHex,
+                  clusterBkg: bgHex,
+                  noteBkgColor: bgHex,
+                  edgeLabelBackground: bgHex,
+                  primaryTextColor: fgHex,
+                  secondaryTextColor: fgHex,
+                  tertiaryTextColor: fgHex,
+                  textColor: fgHex,
+                  labelTextColor: fgHex,
+                  noteTextColor: fgHex,
+                  actorTextColor: fgHex,
+                  signalTextColor: fgHex,
+                  taskTextColor: fgHex,
+                  titleColor: fgHex,
+                  primaryBorderColor: strokeHex,
+                  secondaryBorderColor: strokeHex,
+                  tertiaryBorderColor: strokeHex,
+                  clusterBorder: strokeHex,
+                  noteBorderColor: strokeHex,
+                  actorBorder: strokeHex,
+                  activationBorderColor: strokeHex,
+                  taskBorderColor: strokeHex,
+                  lineColor: edgeHex,
+                  defaultLinkColor: edgeHex,
+                  actorLineColor: edgeHex,
+                  signalColor: edgeHex,
+                  gridColor: strokeHex,
+                  activationBkgColor: bgHex,
+                  sectionBkgColor: bgHex,
+                  altSectionBkgColor: bgHex,
+                  cScale0: bgHex,
+                  cScale1: bgHex,
+                  cScale2: bgHex
+                };
+                return { ...baseConfig, themeVariables: neutralThemeVariables };
+              }
+
+              return { ...baseConfig, themeVariables };
+            };
+
+            const mdMermaidSourceHasExplicitColoring = (source) =>
+              /(^|\n)\s*(?:classDef\s+|style\s+\S+|linkStyle\s+|%%\{\s*init\s*:|themeVariables\s*:)/i.test(String(source || ""));
+
+            const mdMermaidParseStyleProps = (styleText) => {
+              const props = Object.create(null);
+              String(styleText || "")
+                .split(/[;,]/)
+                .map((item) => item.trim())
+                .filter(Boolean)
+                .forEach((item) => {
+                  const idx = item.indexOf(":");
+                  if (idx <= 0) return;
+                  const prop = item.slice(0, idx).trim().toLowerCase();
+                  const value = item.slice(idx + 1).trim();
+                  if (prop && value) props[prop] = value;
+                });
+              return props;
+            };
+
+            const mdMermaidResolveCssColorRgb = (cssColor) => {
+              const raw = String(cssColor || "").trim();
+              if (!raw || /^(?:none|transparent)$/i.test(raw)) return null;
 
               try {
-                window.mermaid.initialize({
-                  startOnLoad: false,
-                  logLevel: 5,
-                  arrowMarkerAbsolute: false,
-                  theme: "dark",
-                  themeVariables: {
-                    fontFamily: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                    fontSize: "16px",
-                    primaryColor: "#1f1f1f",
-                    primaryTextColor: "#f0f6fc",
-                    primaryBorderColor: "#d0d7de",
-                    lineColor: "#d0d7de",
-                    labelTextColor: "#f0f6fc",
-                    noteBkgColor: "#4b4f52",
-                    noteTextColor: "#f0f6fc",
-                    noteBorderColor: "#4b4f52",
-                    actorBkg: "#1f1f1f",
-                    actorBorder: "#d0d7de",
-                    actorTextColor: "#f0f6fc"
-                  },
-                  securityLevel: "antiscript",
-                  flowchart: {
-                    htmlLabels: false,
-                    curve: "linear",
-                    useMaxWidth: false
-                  },
-                  state: {
-                    htmlLabels: false,
-                    useMaxWidth: false
-                  },
-                  sequence: {
-                    diagramMarginX: 50,
-                    diagramMarginY: 10,
-                    actorMargin: 50,
-                    width: 150,
-                    height: 65,
-                    boxMargin: 10,
-                    boxTextMargin: 5,
-                    noteMargin: 10,
-                    messageMargin: 35,
-                    mirrorActors: true,
-                    bottomMarginAdj: 1,
-                    useMaxWidth: false
-                  },
-                  gantt: {
-                    titleTopMargin: 25,
-                    barHeight: 20,
-                    barGap: 4,
-                    topPadding: 50,
-                    leftPadding: 75,
-                    gridLineStartPadding: 35,
-                    fontSize: 11,
-                    fontFamily: '"Open-Sans", "sans-serif"',
-                    numberSectionStyles: 4,
-                    axisFormat: "%Y-%m-%d"
-                  }
+                const probe = document.createElement("span");
+                probe.style.position = "absolute";
+                probe.style.left = "-100000px";
+                probe.style.top = "0";
+                probe.style.width = "1px";
+                probe.style.height = "1px";
+                probe.style.overflow = "hidden";
+                probe.style.color = raw;
+                if (!probe.style.color) return null;
+                document.body.appendChild(probe);
+                const parsed = mdParseRgba(getComputedStyle(probe).color);
+                probe.remove();
+                return parsed ? { r: parsed.r, g: parsed.g, b: parsed.b } : null;
+              } catch (_) {
+                return null;
+              }
+            };
+
+            const mdMermaidPickReadableTextFromFill = (fillColor) => {
+              const rgb = mdMermaidResolveCssColorRgb(fillColor);
+              if (!rgb) return "";
+              try { return mdPickFgFromRgb(rgb.r, rgb.g, rgb.b); } catch (_) { return ""; }
+            };
+
+            const mdMermaidParseClassDefsAndAssignments = (source) => {
+              const classDefs = new Map();
+              const stateClassNames = new Map();
+
+              String(source || "").split(/\r?\n/).forEach((rawLine) => {
+                const line = rawLine.trim().replace(/;\s*$/, "");
+                if (!line || line.startsWith("%%")) return;
+
+                const classDefMatch = line.match(/^classDef\s+([A-Za-z][\w-]*)\s+(.+)$/i);
+                if (classDefMatch) {
+                  classDefs.set(classDefMatch[1], mdMermaidParseStyleProps(classDefMatch[2]));
+                  return;
+                }
+
+                const classMatch = line.match(/^class\s+(.+?)\s+([A-Za-z][\w-]*(?:\s*,\s*[A-Za-z][\w-]*)*)$/i);
+                if (!classMatch) return;
+
+                const targets = classMatch[1].split(",").map((item) => item.trim()).filter(Boolean);
+                const classNames = classMatch[2].split(",").map((item) => item.trim()).filter(Boolean);
+
+                targets.forEach((target) => {
+                  if (!stateClassNames.has(target)) stateClassNames.set(target, new Set());
+                  const bucket = stateClassNames.get(target);
+                  classNames.forEach((className) => bucket.add(className));
+                });
+              });
+
+              return { classDefs, stateClassNames };
+            };
+
+            const applyMarkdownMermaidExplicitClassTextContrast = (svg, source) => {
+              if (!svg) return;
+
+              const { classDefs, stateClassNames } = mdMermaidParseClassDefsAndAssignments(source);
+              if (!classDefs.size || !stateClassNames.size) return;
+
+              const normalizeText = (value) => String(value || "").replace(/\s+/g, " ").trim();
+
+              const applyTextColor = (node, color) => {
+                if (!node || !node.style || !color) return;
+                node.style.setProperty("color", color);
+                if (node instanceof SVGElement) node.style.setProperty("fill", color);
+              };
+
+              const findLabelNodes = (stateName) => {
+                const expected = normalizeText(stateName);
+                if (!expected) return [];
+
+                return Array.from(svg.querySelectorAll("text, tspan, .nodeLabel, .stateLabel, .labelText"))
+                  .filter((node) => normalizeText(node.textContent) === expected);
+              };
+
+              stateClassNames.forEach((classNames, stateName) => {
+                let explicitTextColor = "";
+                let fillColor = "";
+
+                classNames.forEach((className) => {
+                  const props = classDefs.get(className);
+                  if (!props) return;
+                  if (props.color) explicitTextColor = props.color;
+                  if (props.fill) fillColor = props.fill;
                 });
 
-                __mdMermaidInitialized = true;
+                /*
+                 * Respeito semântico ao Mermaid:
+                 * - `color` definido no código é preservado pelo próprio Mermaid e não é recalculado;
+                 * - `fill` definido no código é preenchimento do nó. Se não houver `color`, calculamos
+                 *   apenas um fallback legível para o texto com base nesse preenchimento explícito.
+                 * Isso corrige o caso `classDef X fill:white` em temas escuros sem reinterpretar
+                 * `fill` como se fosse cor de texto.
+                 */
+                if (explicitTextColor || !fillColor) return;
+
+                const readableText = mdMermaidPickReadableTextFromFill(fillColor);
+                if (!readableText) return;
+
+                findLabelNodes(stateName).forEach((labelNode) => {
+                  applyTextColor(labelNode, readableText);
+                  labelNode.querySelectorAll?.("span, p, div, text, tspan").forEach((child) => applyTextColor(child, readableText));
+                });
+              });
+            };
+
+            const injectMarkdownMermaidContrastStyle = (svgText, referenceEl, source) => {
+              const raw = String(svgText || "").trim();
+              if (!raw) return "";
+
+              try {
+                const template = document.createElement("template");
+                template.innerHTML = raw;
+
+                const svg = template.content.querySelector("svg");
+                if (!svg) return raw;
+
+                const palette = getMarkdownMermaidPalette(referenceEl);
+                const svgSelector = svg.id ? `svg#${svg.id}` : "svg";
+                const hasExplicitColoring = mdMermaidSourceHasExplicitColoring(source);
+
+                const setVisual = (node, prop, value) => {
+                  if (!node || !node.style || !value) return;
+                  node.style.setProperty(prop, value);
+                };
+
+                const setAll = (selector, styles) => {
+                  svg.querySelectorAll(selector).forEach((node) => {
+                    Object.entries(styles).forEach(([prop, value]) => setVisual(node, prop, value));
+                  });
+                };
+
+                svg.style.setProperty("background", "transparent");
+
+                if (!hasExplicitColoring) {
+                  /*
+                   * Sem personalização visual no código Mermaid:
+                   * o app pode aplicar auto-contraste completo no SVG renderizado.
+                   * Não usa prioridade CSS forçada.
+                   */
+                  svg.style.setProperty("color", palette.fgHex);
+
+                  setAll(`
+                    .node rect, .node circle, .node ellipse, .node polygon, .node path,
+                    rect.actor, .actor rect,
+                    .label-container, .labelBox,
+                    .stateGroup rect, .stateGroup .label-container,
+                    .composite rect, .cluster rect, .cluster polygon, .cluster path
+                  `, {
+                    fill: palette.shapeHex,
+                    stroke: palette.strokeHex,
+                    "stroke-width": "1.2px",
+                    opacity: "1"
+                  });
+
+                  setAll(`
+                    .note, .noteBox, .note rect, .noteGroup rect, .noteText rect
+                  `, {
+                    fill: palette.noteHex,
+                    stroke: palette.strokeHex,
+                    "stroke-width": "1.2px",
+                    opacity: "1"
+                  });
+
+                  setAll(`
+                    .edgeLabel rect, .edgeLabel .labelBkg, .edgeLabel .label-container, .labelBkg
+                  `, {
+                    fill: palette.labelHex,
+                    stroke: palette.labelHex,
+                    opacity: "0.96"
+                  });
+
+                  setAll(`
+                    .edgePath .path, .flowchart-link, .transition,
+                    .messageLine0, .messageLine1, .actor-line, line.actor-line,
+                    .loopLine, .note-edge, .dependencyLine, .relation, .sequenceLine,
+                    .branch, .state-transition, .statediagram-cluster .edge, .cluster .edge,
+                    path.path, path.relationshipLine, line.relationshipLine,
+                    path[class*="transition"], path[class*="edge"], line[class*="edge"]
+                  `, {
+                    fill: "none",
+                    stroke: palette.edgeHex,
+                    "stroke-width": "1.45px",
+                    opacity: "1"
+                  });
+
+                  setAll(`
+                    marker path, marker polygon,
+                    .marker, .arrowheadPath, .arrowMarkerPath
+                  `, {
+                    fill: palette.markerHex,
+                    stroke: palette.markerHex,
+                    opacity: "1"
+                  });
+
+                  setAll(`
+                    .divider, .stateGroup line, .stateGroup path,
+                    .composite line, .fork-join, .join, .fork,
+                    rect.fork, rect.join, rect[class*="fork"], rect[class*="join"]
+                  `, {
+                    fill: palette.barHex,
+                    stroke: palette.barHex,
+                    "stroke-width": "1.2px",
+                    opacity: "1"
+                  });
+
+                  svg.querySelectorAll("circle").forEach((circle) => {
+                    const r = Number(circle.getAttribute("r") || 0);
+                    const className = String(circle.getAttribute("class") || "");
+                    const likelyStateDot = (Number.isFinite(r) && r > 0 && r <= 10) || /(?:start|end|initial|final|terminal)/i.test(className);
+                    if (!likelyStateDot) return;
+                    setVisual(circle, "fill", palette.stateDotHex);
+                    setVisual(circle, "stroke", palette.stateDotHex);
+                    setVisual(circle, "stroke-width", "1.2px");
+                    setVisual(circle, "opacity", "1");
+                  });
+
+                  svg.querySelectorAll("rect").forEach((rect) => {
+                    const width = Number(rect.getAttribute("width") || 0);
+                    const height = Number(rect.getAttribute("height") || 0);
+                    const className = String(rect.getAttribute("class") || "");
+                    const likelyForkJoinBar = (/fork|join|divider/i.test(className)) ||
+                      (Number.isFinite(width) && Number.isFinite(height) && width >= 20 && height > 0 && height <= 10);
+                    if (!likelyForkJoinBar) return;
+                    setVisual(rect, "fill", palette.barHex);
+                    setVisual(rect, "stroke", palette.barHex);
+                    setVisual(rect, "stroke-width", "1.2px");
+                    setVisual(rect, "opacity", "1");
+                  });
+
+                  svg.querySelectorAll("text, tspan").forEach((node) => {
+                    setVisual(node, "fill", palette.fgHex);
+                    setVisual(node, "color", palette.fgHex);
+                    setVisual(node, "opacity", "1");
+                  });
+
+                  const style = document.createElement("style");
+                  style.setAttribute("nonce", "noteapp");
+                  style.textContent = `
+${svgSelector} text,
+${svgSelector} tspan,
+${svgSelector} .label text,
+${svgSelector} .nodeLabel,
+${svgSelector} text.actor,
+${svgSelector} .actor text,
+${svgSelector} .messageText,
+${svgSelector} .loopText,
+${svgSelector} .stateLabel text,
+${svgSelector} .state-title,
+${svgSelector} .edgeLabel text,
+${svgSelector} text.noteText,
+${svgSelector} .noteText tspan,
+${svgSelector} .labelText {
+  fill: ${palette.fgHex};
+  color: ${palette.fgHex};
+  opacity: 1;
+}
+${svgSelector} .edgePath .path,
+${svgSelector} .flowchart-link,
+${svgSelector} .transition,
+${svgSelector} .messageLine0,
+${svgSelector} .messageLine1,
+${svgSelector} .actor-line,
+${svgSelector} line.actor-line,
+${svgSelector} .loopLine,
+${svgSelector} .note-edge,
+${svgSelector} .dependencyLine,
+${svgSelector} .relation,
+${svgSelector} .sequenceLine,
+${svgSelector} .branch,
+${svgSelector} .state-transition,
+${svgSelector} path.path,
+${svgSelector} path.relationshipLine,
+${svgSelector} line.relationshipLine {
+  fill: none;
+  stroke: ${palette.edgeHex};
+  stroke-width: 1.45px;
+  opacity: 1;
+}
+${svgSelector} marker path,
+${svgSelector} marker polygon,
+${svgSelector} .marker,
+${svgSelector} .arrowheadPath,
+${svgSelector} .arrowMarkerPath {
+  fill: ${palette.markerHex};
+  stroke: ${palette.markerHex};
+  opacity: 1;
+}
+`;
+                  svg.appendChild(style);
+                } else {
+                  applyMarkdownMermaidExplicitClassTextContrast(svg, source);
+                }
+
+                return template.innerHTML;
+              } catch (_) {
+                return raw;
+              }
+            };
+
+            const configureMarkdownMermaidForBlock = (referenceEl, source = "") => {
+              if (!mdMermaidReady()) return false;
+              try {
+                window.mermaid.initialize(buildMarkdownMermaidConfig(referenceEl, source));
                 return true;
               } catch (_) {
                 return false;
               }
+            };
+
+            const initMarkdownMermaidOnce = () => {
+              if (!mdMermaidReady()) return false;
+              if (!__mdMermaidInitialized) {
+                __mdMermaidInitialized = configureMarkdownMermaidForBlock(null, "");
+              }
+              return __mdMermaidInitialized;
             };
 
             const sanitizeMermaidSvg = (svgText) => {
@@ -10567,6 +10961,7 @@ setTimeout(() => updateTabNavButtons(), 60);
               for (const block of blocks) {
                 const source = block.textContent || "";
                 syncMarkdownMermaidRenderBoxSize(renderBox, block);
+                configureMarkdownMermaidForBlock(block, source);
                 if (!source.trim()) continue;
 
                 const svgId = `md-mermaid-${++__mdMermaidCounter}`;
@@ -10577,7 +10972,7 @@ setTimeout(() => updateTabNavButtons(), 60);
                 try {
                   renderBox.textContent = "";
                   const result = await renderMermaidSvg(source, svgId, renderBox);
-                  const safeSvg = normalizeMermaidSvgSize(sanitizeMermaidSvg(result.svg));
+                  const safeSvg = normalizeMermaidSvgSize(injectMarkdownMermaidContrastStyle(sanitizeMermaidSvg(result.svg), block, source));
 
                   if (!safeSvg || !/<svg[\s>]/i.test(safeSvg)) {
                     throw new Error("SVG Mermaid vazio ou bloqueado pela sanitização.");

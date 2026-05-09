@@ -49,7 +49,7 @@
       }</script>
             <!-- Segurança (CSP via META): reforça contra XSS no Preview Markdown.
            Observação: diretivas sem suporte em <meta>, como frame-ancestors, ficam fora desta política e só podem ser aplicadas por header HTTP. -->
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-hLOZfoy6uFY0gD0kM56OGILH8XxpYkk5nYJ1oNymr0k='; style-src-elem 'self' 'nonce-noteapp' 'sha256-hLOZfoy6uFY0gD0kM56OGILH8XxpYkk5nYJ1oNymr0k='; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp' 'sha256-Bf+0PZxSAyqu+cP+qnNyODsCoPTUAp0nK4it/ERmXUk='; script-src-elem 'self' 'nonce-noteapp' 'sha256-Bf+0PZxSAyqu+cP+qnNyODsCoPTUAp0nK4it/ERmXUk='; script-src-attr 'none';" />
+      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-1qnJQ4GrkVyu1n3THmFx4b07tJSxJHg2uZqvc4iN9jI='; style-src-elem 'self' 'nonce-noteapp' 'sha256-1qnJQ4GrkVyu1n3THmFx4b07tJSxJHg2uZqvc4iN9jI='; style-src-attr 'unsafe-inline'; script-src 'self' 'nonce-noteapp' 'sha256-Bv4cJcx/j2p0RRhtMtz/VT1I0RNPHvthl48QGeqNrY0='; script-src-elem 'self' 'nonce-noteapp' 'sha256-Bv4cJcx/j2p0RRhtMtz/VT1I0RNPHvthl48QGeqNrY0='; script-src-attr 'none';" />
       <meta name="referrer" content="no-referrer" />
       <title>ANOTAÇÕES — Workspace local-first para .txt/.md em pasta real</title>
       <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20color%3D%22%23FFFFFF%22%3E%3Cg%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20fill%3D%22currentColor%22%20fill-opacity%3D%220.3%22%20d%3D%22M22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M20%205v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%3BM22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%2F%3E%3C%2Fpath%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M8%208h8M8%2012h8M8%2016h5M4%205v14c0%200.55%200.45%201%201%201h14%3BM10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%2F%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
@@ -126,7 +126,7 @@
             --content-font-family: var(--font-family-mono);
             --content-font-size: 14px;
             --content-code-font-family: var(--font-family-code-preview);
-            --content-code-font-size: calc(var(--content-font-size) - 2.5px);
+            --content-code-font-size: calc(var(--content-font-size) - 2pt);
             --content-code-max-height: 260px;
             --content-line-height: 1; /* 1 = sem espaçamento extra no editor TXT */
             --markdown-line-height: 1.6; /* prosa do preview Markdown com leitura mais confortável */
@@ -1409,7 +1409,9 @@ html.tabs-reordering, body.tabs-reordering{
          .tab {
             /* estado base da aba; selecionada sobrescreve apenas o necessário abaixo */
             --tab-current-fg: var(--tab-text-muted);
-            --tab-current-accent: #7B87A0;
+            --tab-current-accent: var(--tab-text-muted);
+            --tab-current-accent: color-mix(in srgb, var(--tab-text-muted) 92%, white 8%);
+            --tab-current-close: var(--theme-text-muted, var(--muted));
             --tab-current-close: color-mix(in srgb, var(--theme-text-primary, var(--text)) 58%, var(--theme-text-muted, var(--muted)) 42%);
             --tab-current-dirty: var(--warn);
             display: inline-flex;
@@ -1518,12 +1520,15 @@ html.tabs-reordering, body.tabs-reordering{
             border: 2px solid var(--editor-surface-contrast);
             border-bottom: none;
             border-bottom-color: transparent;
+            background: linear-gradient(180deg, var(--editor-surface-contrast), var(--theme-surface-canvas, var(--bg)));
             background: linear-gradient(180deg, color-mix(in srgb, var(--theme-surface-canvas, var(--bg)) 25%, var(--personalizacao-fundo-exibicao-direita) 75%), var(--theme-surface-canvas, var(--bg)));
             box-shadow:
                inset 0 1px 0 rgba(255,255,255,.10),
                0 -1px 0 var(--editor-surface-contrast);
+            --tab-current-fg: var(--theme-text-primary, var(--text));
             --tab-current-fg: color-mix(in srgb, var(--theme-text-primary, var(--text)) 95%, white 5%);
             --tab-current-accent: color-mix(in srgb, var(--theme-text-primary, var(--text)) 95%, white 5%);
+            --tab-current-close: var(--theme-text-primary, var(--text));
             --tab-current-close: color-mix(in srgb, var(--theme-text-primary, var(--text)) 96%, white 4%);
             --tab-current-dirty: var(--warn);
          }
@@ -1531,7 +1536,8 @@ html.tabs-reordering, body.tabs-reordering{
          .tab:not([aria-selected="true"]):hover {
             background: var(--tab-bg-hover);
             background-image: none;
-            border-color: #8890A0;
+            border-color: var(--tab-border);
+            border-color: color-mix(in srgb, var(--tab-border) 60%, white 40%);
          }
          /* No modo sem quebra, a aba inativa em hover não deve avançar visualmente
             sobre a linha colorida de encaixe; somente a aba ativa mantém esse recorte. */
@@ -1542,7 +1548,7 @@ html.tabs-reordering, body.tabs-reordering{
 
 
            /* ===== Acessibilidade: teclado nas abas (Tablist) ===== */
-          /* (código movido para <script> para evitar quebrar o CSS) */
+          /* (código movido para <script nonce="noteapp"> para evitar quebrar o CSS) */
 
           /* Context menu das abas */
          .ctxmenu {
@@ -1609,6 +1615,7 @@ html.tabs-reordering, body.tabs-reordering{
             display: flex;
             align-items: flex-end; /* Garante que as abas fiquem coladas na base */
             gap: var(--editor-head-gap);
+            background: linear-gradient(180deg, var(--theme-surface-canvas, var(--bg)), var(--personalizacao-fundo-exibicao-direita));
             background: linear-gradient(180deg, color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 5%, var(--theme-surface-canvas, var(--bg)) 95%), var(--personalizacao-fundo-exibicao-direita));
             backdrop-filter: blur(8px);
             box-shadow: inset 0 -1px 0 rgba(255,255,255,.02);
@@ -1909,6 +1916,7 @@ html.tabs-reordering, body.tabs-reordering{
             top:0;
             bottom:0;
             width:3px;
+            background: linear-gradient(180deg, var(--theme-accent, var(--accent)), var(--ok));
             background: linear-gradient(180deg, var(--theme-accent, var(--accent)), color-mix(in srgb, var(--ok) 60%, var(--theme-accent, var(--accent)) 40%));
          }
          @keyframes toastEnter{
@@ -2187,10 +2195,23 @@ html.tabs-reordering, body.tabs-reordering{
          @media (prefers-reduced-motion: reduce) {
             .syncStatusIcon svg { animation: none !important; }
          }
+         .helpText {
+            font-size: 12px;
+            color: var(--utility-help-text, var(--theme-text-muted, var(--muted)));
+            line-height: 1.4;
+            padding-top: 16px;
+            font-family: var(--utility-help-font-family, "Lucida Console", "Courier New", monospace);
+         }
          .dangerText {
             color: var(--utility-danger-text, #ffc9c9);
             font-size: 12px;
             line-height: 1.4;
+         }
+         .dangerText--inherit {
+            color: inherit;
+         }
+         .dangerText--spaced {
+            line-height: 1.6;
          }
 
          
@@ -2754,7 +2775,7 @@ html.tabs-reordering, body.tabs-reordering{
          .md-preview-wrap .markdown-body h4,
          .md-preview-wrap .markdown-body h5,
          .md-preview-wrap .markdown-body h6 {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
+            font-family: var(--personalizacao-fonte-exibicao-direita) !important;
             font-weight: 600 !important;
             line-height: 1.25 !important;
             margin-top: 24px !important;
@@ -2766,6 +2787,7 @@ html.tabs-reordering, body.tabs-reordering{
 
          .md-preview-wrap .markdown-body :is(h1, h2) {
             padding-bottom: .3em !important;
+            border-bottom: 1px solid rgba(255,255,255,.22) !important;
             border-bottom: 1px solid color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 22%, transparent) !important;
          }
 
@@ -2782,6 +2804,7 @@ html.tabs-reordering, body.tabs-reordering{
          .md-preview-wrap .markdown-body h5 { font-size: .875em !important; }
          .md-preview-wrap .markdown-body h6 {
             font-size: .85em !important;
+            color: rgba(255,255,255,.62) !important;
             color: color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 62%, transparent) !important;
          }
 
@@ -2807,6 +2830,7 @@ html.tabs-reordering, body.tabs-reordering{
          .md-preview-wrap .markdown-body hr{
             height: 0;
             border: 0;
+            border-top: 1px solid rgba(255,255,255,.18) !important;
             border-top: 1px solid color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 18%, transparent) !important;
             margin: 24px 0 !important;
             background: transparent !important;
@@ -2860,8 +2884,10 @@ html.tabs-reordering, body.tabs-reordering{
             height: 1em;
             display: inline-grid;
             place-content: center;
+            border: 1px solid rgba(255,255,255,.35);
             border: 1px solid color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 35%, transparent);
             border-radius: 4px;
+            background: rgba(45,45,45,.92);
             background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 92%, transparent);
             cursor: default;
          }
@@ -2899,6 +2925,7 @@ html.tabs-reordering, body.tabs-reordering{
             padding: .2em .4em !important;
             margin: 0 !important;
             color: inherit !important;
+            background: rgba(45,45,45,.84) !important;
             background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 84%, rgba(255,255,255,.08)) !important;
             border-radius: 6px !important;
             border: 0 !important;
@@ -2989,8 +3016,11 @@ html.tabs-reordering, body.tabs-reordering{
             =========================== */
          .md-preview-wrap .markdown-body blockquote{
             color: var(--md-bq-fg, inherit) !important;
+            background: rgba(0,0,0,.18) !important;
             background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 82%, #000 18%) !important;
+            border-left: 4px solid rgba(255,255,255,.62) !important;
             border-left: 4px solid color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 38%, #fff 62%) !important;
+            box-shadow: inset 1px 0 0 rgba(255,255,255,.28) !important;
             box-shadow: inset 1px 0 0 color-mix(in srgb, #fff 28%, transparent) !important;
             border-radius: 0 10px 10px 0 !important;
          }
@@ -3201,6 +3231,7 @@ html.tabs-reordering, body.tabs-reordering{
 
           /* Área rolável (viewport) */
           .markdown-body .code-viewport{
+             background: var(--personalizacao-fundo-exibicao-direita)!important;
              background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita),var(--auto-contrast-fg) 18%)!important;
              border: 1px solid var(--md-code-border);
              border-radius: var(--md-code-radius);
@@ -3264,7 +3295,7 @@ html.tabs-reordering, body.tabs-reordering{
              padding: 0;
              overflow: visible;
              white-space: pre;
-             font-family: Consolas, Monaco, "Lucida Console", monospace;
+             font-family: var(--personalizacao-fonte-bloco-codigo);
              font-size: var(--personalizacao-tamanho-fonte-bloco-codigo);
              line-height: 1.35;
              color: var(--md-code-fg, var(--personalizacao-cor-texto-exibicao-direita)) !important;
@@ -3472,15 +3503,18 @@ html.tabs-reordering, body.tabs-reordering{
           }
 
           .markdown-body .icon-btn:hover{
+             background: rgba(255,255,255,.16);
              background: color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita), transparent 84%);
           }
 
           .markdown-body .icon-btn:focus-visible{
+             outline: 2px solid rgba(255,255,255,.45);
              outline: 2px solid color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita), transparent 55%);
              outline-offset: 2px;
           }
 
           .markdown-body .icon-btn[aria-pressed="true"]{
+             background: rgba(255,255,255,.12);
              background: color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita), transparent 88%);
           }
 
@@ -3534,6 +3568,62 @@ html.tabs-reordering, body.tabs-reordering{
      1) cobrir também a scrollbar horizontal (Chrome/Edge)
      2) ficar “preso” no rodapé VISUAL do viewport enquanto o conteúdo rola
    - Usa a cor do fundo do editor (personalização) no final do fade. */
+
+/* Fallback para browsers sem suporte a color-mix()
+   - Mantém contraste, legibilidade e estados principais sem depender de mistura dinâmica. */
+@supports not (color: color-mix(in srgb, white 50%, black)){
+   .tab{
+      --tab-current-accent: var(--tab-text-muted);
+      --tab-current-close: var(--theme-text-muted, var(--muted));
+   }
+   .tab[aria-selected="true"],
+   .tab[aria-selected="true"]:hover,
+   .tab[aria-selected="true"]:focus,
+   .tab[aria-selected="true"]:focus-visible{
+      background: linear-gradient(180deg, var(--editor-surface-contrast), var(--theme-surface-canvas, var(--bg)));
+      --tab-current-fg: var(--theme-text-primary, var(--text));
+      --tab-current-accent: var(--theme-text-primary, var(--text));
+      --tab-current-close: var(--theme-text-primary, var(--text));
+   }
+   .tab:not([aria-selected="true"]):hover{ border-color: var(--tab-border); }
+   .ctxmenu{ background: rgba(15, 26, 46, 0.96); }
+   .editor-head{ background: linear-gradient(180deg, var(--theme-surface-canvas, var(--bg)), var(--personalizacao-fundo-exibicao-direita)); }
+   .hint{ background: linear-gradient(180deg, var(--editor-surface-contrast), var(--theme-surface-canvas, var(--bg))); }
+   .toast{ background: rgba(15, 26, 46, 0.92); }
+   .toast::before{ background: linear-gradient(180deg, var(--theme-accent, var(--accent)), var(--ok)); }
+   .modal{ background: rgba(15, 26, 46, 0.96); }
+   .md-preview-wrap .markdown-body :is(h1, h2){ border-bottom-color: rgba(255,255,255,.22) !important; }
+   .md-preview-wrap .markdown-body h6{ color: rgba(255,255,255,.62) !important; }
+   .md-preview-wrap .markdown-body hr{ border-top-color: rgba(255,255,255,.18) !important; }
+   .md-preview-wrap .markdown-body .task-list-item-checkbox,
+   .md-preview-wrap .markdown-body .task-list-item input[type="checkbox"]{
+      border-color: rgba(255,255,255,.35);
+      background: rgba(45,45,45,.92);
+   }
+   .md-preview-wrap .markdown-body :not(pre) > code,
+   .md-preview-wrap .markdown-body :not(pre) > tt{ background: rgba(45,45,45,.84) !important; }
+   .md-preview-wrap .markdown-body blockquote{
+      background: rgba(0,0,0,.18) !important;
+      border-left-color: rgba(255,255,255,.62) !important;
+      box-shadow: inset 1px 0 0 rgba(255,255,255,.28) !important;
+   }
+   .md-preview-wrap .markdown-body blockquote.md-alert{
+      background: rgba(0,0,0,.18) !important;
+      border-color: rgba(255,255,255,.22) !important;
+      border-left-color: var(--md-alert-accent) !important;
+   }
+   .md-preview-wrap .markdown-body details{
+      background: rgba(0,0,0,.18);
+      border-color: rgba(255,255,255,.22);
+   }
+   .md-preview-wrap .markdown-body details > summary{
+      background: rgba(255,255,255,.08);
+   }
+   .markdown-body .code-viewport{ background: var(--personalizacao-fundo-exibicao-direita) !important; }
+   .markdown-body .icon-btn:hover{ background: rgba(255,255,255,.16); }
+   .markdown-body .icon-btn:focus-visible{ outline-color: rgba(255,255,255,.45); }
+   .markdown-body .icon-btn[aria-pressed="true"]{ background: rgba(255,255,255,.12); }
+}
 
 /* Em browsers modernos, usa color-mix para manter o tom exato do fundo do editor */
 @supports (background: color-mix(in srgb, white 10%, transparent)){
@@ -9821,52 +9911,82 @@ setTimeout(() => updateTabNavButtons(), 60);
 
             const mdMermaidParseStyleProps = (styleText) => {
               const props = Object.create(null);
-              String(styleText || "")
-                .split(/[;,]/)
-                .map((item) => item.trim())
-                .filter(Boolean)
-                .forEach((item) => {
-                  const idx = item.indexOf(":");
-                  if (idx <= 0) return;
-                  const prop = item.slice(0, idx).trim().toLowerCase();
-                  const value = item.slice(idx + 1).trim();
-                  if (prop && value) props[prop] = value;
-                });
+              const declarations = [];
+              let buffer = "";
+              let quote = "";
+              let depth = 0;
+
+              const flush = () => {
+                const value = buffer.trim();
+                if (value) declarations.push(value);
+                buffer = "";
+              };
+
+              Array.from(String(styleText || "")).forEach((char, index, chars) => {
+                const prev = index > 0 ? chars[index - 1] : "";
+
+                if (quote) {
+                  buffer += char;
+                  if (char === quote && prev !== "\\") quote = "";
+                  return;
+                }
+
+                if (char === '"' || char === "'") {
+                  quote = char;
+                  buffer += char;
+                  return;
+                }
+
+                if (char === "(") {
+                  depth += 1;
+                  buffer += char;
+                  return;
+                }
+
+                if (char === ")") {
+                  depth = Math.max(0, depth - 1);
+                  buffer += char;
+                  return;
+                }
+
+                if ((char === "," || char === ";") && depth === 0) {
+                  flush();
+                  return;
+                }
+
+                buffer += char;
+              });
+
+              flush();
+
+              declarations.forEach((item) => {
+                const idx = item.indexOf(":");
+                if (idx <= 0) return;
+                const prop = item.slice(0, idx).trim().toLowerCase();
+                const value = item.slice(idx + 1).trim();
+                if (prop && value) props[prop] = value;
+              });
+
               return props;
-            };
-
-            const mdMermaidResolveCssColorRgb = (cssColor) => {
-              const raw = String(cssColor || "").trim();
-              if (!raw || /^(?:none|transparent)$/i.test(raw)) return null;
-
-              try {
-                const probe = document.createElement("span");
-                probe.style.position = "absolute";
-                probe.style.left = "-100000px";
-                probe.style.top = "0";
-                probe.style.width = "1px";
-                probe.style.height = "1px";
-                probe.style.overflow = "hidden";
-                probe.style.color = raw;
-                if (!probe.style.color) return null;
-                document.body.appendChild(probe);
-                const parsed = mdParseRgba(getComputedStyle(probe).color);
-                probe.remove();
-                return parsed ? { r: parsed.r, g: parsed.g, b: parsed.b } : null;
-              } catch (_) {
-                return null;
-              }
-            };
-
-            const mdMermaidPickReadableTextFromFill = (fillColor) => {
-              const rgb = mdMermaidResolveCssColorRgb(fillColor);
-              if (!rgb) return "";
-              try { return mdPickFgFromRgb(rgb.r, rgb.g, rgb.b); } catch (_) { return ""; }
             };
 
             const mdMermaidParseClassDefsAndAssignments = (source) => {
               const classDefs = new Map();
               const stateClassNames = new Map();
+              const stateDisplayNames = new Map();
+
+              const addStateClass = (target, className) => {
+                const stateId = String(target || "").trim();
+                const cssClass = String(className || "").trim();
+                if (!stateId || !cssClass || stateId === "[*]") return;
+                if (!stateClassNames.has(stateId)) stateClassNames.set(stateId, new Set());
+                stateClassNames.get(stateId).add(cssClass);
+              };
+
+              const splitClassList = (value) => String(value || "")
+                .split(",")
+                .map((item) => item.trim())
+                .filter(Boolean);
 
               String(source || "").split(/\r?\n/).forEach((rawLine) => {
                 const line = rawLine.trim().replace(/;\s*$/, "");
@@ -9878,69 +9998,381 @@ setTimeout(() => updateTabNavButtons(), 60);
                   return;
                 }
 
+                const stateAliasMatch = line.match(/^state\s+["']([^"']+)["']\s+as\s+([A-Za-z][\w-]*)/i);
+                if (stateAliasMatch) {
+                  stateDisplayNames.set(stateAliasMatch[2], stateAliasMatch[1]);
+                } else if (!line.includes("-->") && !/^acc(?:Title|Descr)\b/i.test(line)) {
+                  const stateDescriptionMatch = line.match(/^([A-Za-z][\w-]*)\s*:\s*(.+)$/);
+                  if (stateDescriptionMatch) {
+                    stateDisplayNames.set(stateDescriptionMatch[1], stateDescriptionMatch[2].trim());
+                  }
+                }
+
+                const inlineClassPattern = /(^|[^\w-])([A-Za-z][\w-]*):::\s*([A-Za-z][\w-]*(?:\s*,\s*[A-Za-z][\w-]*)*)/g;
+                let inlineMatch;
+                while ((inlineMatch = inlineClassPattern.exec(line)) !== null) {
+                  const stateId = inlineMatch[2];
+                  splitClassList(inlineMatch[3]).forEach((className) => addStateClass(stateId, className));
+                }
+
                 const classMatch = line.match(/^class\s+(.+?)\s+([A-Za-z][\w-]*(?:\s*,\s*[A-Za-z][\w-]*)*)$/i);
                 if (!classMatch) return;
 
-                const targets = classMatch[1].split(",").map((item) => item.trim()).filter(Boolean);
-                const classNames = classMatch[2].split(",").map((item) => item.trim()).filter(Boolean);
+                const targets = splitClassList(classMatch[1]);
+                const classNames = splitClassList(classMatch[2]);
 
                 targets.forEach((target) => {
-                  if (!stateClassNames.has(target)) stateClassNames.set(target, new Set());
-                  const bucket = stateClassNames.get(target);
-                  classNames.forEach((className) => bucket.add(className));
+                  classNames.forEach((className) => addStateClass(target, className));
                 });
               });
 
-              return { classDefs, stateClassNames };
+              return { classDefs, stateClassNames, stateDisplayNames };
             };
+
+              const mdMermaidPickReadableTextFromFill = (fillValue) => {
+                const raw = String(fillValue || "").trim().toLowerCase();
+                if (!raw) return "";
+
+                const namedColors = {
+                  black: "#000000",
+                  white: "#ffffff",
+                  red: "#ff0000",
+                  green: "#008000",
+                  blue: "#0000ff",
+                  yellow: "#ffff00",
+                  orange: "#ffa500",
+                  purple: "#800080",
+                  gray: "#808080",
+                  grey: "#808080",
+                  transparent: ""
+                };
+
+                const normalizeHex = (value) => {
+                  const hex = String(value || "").trim().toLowerCase();
+                  const shortHex = hex.match(/^#([0-9a-f]{3})$/i);
+                  if (shortHex) {
+                    return `#${shortHex[1].split("").map((ch) => ch + ch).join("")}`;
+                  }
+
+                  const longHex = hex.match(/^#([0-9a-f]{6})$/i);
+                  return longHex ? `#${longHex[1]}` : "";
+                };
+
+                const readRgb = (value) => {
+                  const hex = normalizeHex(value);
+                  if (hex) {
+                    return [1, 3, 5].map((index) => parseInt(hex.slice(index, index + 2), 16));
+                  }
+
+                  const rgbMatch = String(value || "").match(/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)(?:\s*,[^)]*)?\)$/i);
+                  if (!rgbMatch) return null;
+
+                  return rgbMatch.slice(1, 4).map((part) => {
+                    const n = Number(part);
+                    return Number.isFinite(n) ? Math.min(255, Math.max(0, n)) : 0;
+                  });
+                };
+
+                const rgb = readRgb(namedColors[raw] || raw);
+                if (!rgb) return "";
+
+                const linear = rgb.map((channel) => {
+                  const srgb = channel / 255;
+                  return srgb <= 0.03928 ? srgb / 12.92 : Math.pow((srgb + 0.055) / 1.055, 2.4);
+                });
+                const luminance = (0.2126 * linear[0]) + (0.7152 * linear[1]) + (0.0722 * linear[2]);
+
+                return luminance > 0.52 ? "#111827" : "#ffffff";
+              };
 
             const applyMarkdownMermaidExplicitClassTextContrast = (svg, source) => {
               if (!svg) return;
 
-              const { classDefs, stateClassNames } = mdMermaidParseClassDefsAndAssignments(source);
+              const { classDefs, stateClassNames, stateDisplayNames } = mdMermaidParseClassDefsAndAssignments(source);
               if (!classDefs.size || !stateClassNames.size) return;
 
               const normalizeText = (value) => String(value || "").replace(/\s+/g, " ").trim();
+              const isSvgNode = (node) => node?.namespaceURI === "http://www.w3.org/2000/svg";
+
+              const mdMermaidIsSafeCssValue = (value) => {
+                const rawValue = String(value || "").trim();
+                if (!rawValue) return false;
+
+                /*
+                 * Defesa em profundidade para valores declarados dentro de classDef/style.
+                 * Mantém personalizações legítimas do Mermaid, mas evita transportar para
+                 * style inline/SVG valores com URL remota, protocolo perigoso ou quebra de
+                 * bloco CSS. A página continua local-first e sem parser paralelo.
+                 */
+                if (/[{}<>]/.test(rawValue)) return false;
+                if (/expression\s*\(/i.test(rawValue)) return false;
+                if (/(?:javascript|vbscript|file|data)\s*:/i.test(rawValue)) return false;
+                if (/url\s*\(/i.test(rawValue)) {
+                  const safeUrlSyntax = /url\s*\(\s*['"]?#[A-Za-z0-9_:.-]+['"]?\s*\)/gi;
+                  const withoutSafeUrls = rawValue.replace(safeUrlSyntax, "").trim();
+                  if (withoutSafeUrls) return false;
+                }
+
+                return true;
+              };
+
+              const applyStyle = (node, prop, value, priority = "") => {
+                if (!node || !node.style || !prop || !mdMermaidIsSafeCssValue(value)) return;
+                node.style.setProperty(prop, value, priority);
+              };
 
               const applyTextColor = (node, color) => {
                 if (!node || !node.style || !color) return;
-                node.style.setProperty("color", color);
-                if (node instanceof SVGElement) node.style.setProperty("fill", color);
+                applyStyle(node, "color", color, "important");
+                if (isSvgNode(node)) applyStyle(node, "fill", color, "important");
               };
 
-              const findLabelNodes = (stateName) => {
-                const expected = normalizeText(stateName);
-                if (!expected) return [];
+              const applyTextStyles = (node, props) => {
+                if (!node || !node.style || !props) return;
 
-                return Array.from(svg.querySelectorAll("text, tspan, .nodeLabel, .stateLabel, .labelText"))
-                  .filter((node) => normalizeText(node.textContent) === expected);
+                if (props.color) applyTextColor(node, props.color);
+
+                [
+                  "font-style",
+                  "font-weight",
+                  "font-size",
+                  "font-family",
+                  "font-variant",
+                  "font-stretch",
+                  "letter-spacing",
+                  "word-spacing",
+                  "text-decoration",
+                  "text-transform",
+                  "opacity"
+                ].forEach((prop) => {
+                  if (props[prop]) applyStyle(node, prop, props[prop], "important");
+                });
               };
 
-              stateClassNames.forEach((classNames, stateName) => {
-                let explicitTextColor = "";
-                let fillColor = "";
+              const applyShapeStyles = (node, props) => {
+                if (!node || !node.style || !props) return;
 
+                [
+                  "fill",
+                  "fill-opacity",
+                  "fill-rule",
+                  "stroke",
+                  "stroke-width",
+                  "stroke-dasharray",
+                  "stroke-dashoffset",
+                  "stroke-linecap",
+                  "stroke-linejoin",
+                  "stroke-opacity",
+                  "opacity"
+                ].forEach((prop) => {
+                  if (props[prop]) applyStyle(node, prop, props[prop], "important");
+                });
+              };
+
+              const mergeClassProps = (classNames) => {
+                const merged = Object.create(null);
                 classNames.forEach((className) => {
                   const props = classDefs.get(className);
                   if (!props) return;
-                  if (props.color) explicitTextColor = props.color;
-                  if (props.fill) fillColor = props.fill;
+                  Object.entries(props).forEach(([prop, value]) => {
+                    merged[prop] = value;
+                  });
+                });
+                return merged;
+              };
+
+              const cssEscapeIdent = (value) => {
+                const rawValue = String(value || "").trim();
+                if (!rawValue) return "";
+                if (window.CSS && typeof window.CSS.escape === "function") return window.CSS.escape(rawValue);
+                return rawValue.replace(/[^A-Za-z0-9_-]/g, "\$&");
+              };
+
+              const textStyleProps = [
+                "color",
+                "font-style",
+                "font-weight",
+                "font-size",
+                "font-family",
+                "font-variant",
+                "font-stretch",
+                "letter-spacing",
+                "word-spacing",
+                "text-decoration",
+                "text-transform",
+                "opacity"
+              ];
+
+              const shapeStyleProps = [
+                "fill",
+                "fill-opacity",
+                "fill-rule",
+                "stroke",
+                "stroke-width",
+                "stroke-dasharray",
+                "stroke-dashoffset",
+                "stroke-linecap",
+                "stroke-linejoin",
+                "stroke-opacity",
+                "opacity"
+              ];
+
+              const buildCssDeclarationBlock = (props, allowedProps, options = {}) => {
+                const declarations = [];
+                allowedProps.forEach((prop) => {
+                  const value = props[prop];
+                  if (!value || !mdMermaidIsSafeCssValue(value)) return;
+
+                  if (prop === "color" && options.asSvgTextColor) {
+                    declarations.push(`color:${value} !important`);
+                    declarations.push(`fill:${value} !important`);
+                    return;
+                  }
+
+                  declarations.push(`${prop}:${value} !important`);
+                });
+                return declarations.join(";");
+              };
+
+              const appendClassDefFallbackStyle = () => {
+                const rules = [];
+
+                classDefs.forEach((props, className) => {
+                  const escapedClassName = cssEscapeIdent(className);
+                  if (!escapedClassName) return;
+
+                  const textDeclarations = buildCssDeclarationBlock(props, textStyleProps, { asSvgTextColor: true });
+                  const readableText = (!props.color && props.fill) ? mdMermaidPickReadableTextFromFill(props.fill) : "";
+                  const readableTextDeclarations = readableText && mdMermaidIsSafeCssValue(readableText)
+                    ? `color:${readableText} !important;fill:${readableText} !important`
+                    : "";
+                  const finalTextDeclarations = [textDeclarations, readableTextDeclarations].filter(Boolean).join(";");
+
+                  if (finalTextDeclarations) {
+                    rules.push(`
+.${escapedClassName} text,
+.${escapedClassName} tspan,
+.${escapedClassName} .nodeLabel,
+.${escapedClassName} .stateLabel,
+.${escapedClassName} .labelText,
+.${escapedClassName} foreignObject *,
+.${escapedClassName} foreignobject *,
+text.${escapedClassName},
+tspan.${escapedClassName},
+.nodeLabel.${escapedClassName},
+.stateLabel.${escapedClassName},
+.labelText.${escapedClassName} { ${finalTextDeclarations}; }`);
+                  }
+
+                  const shapeDeclarations = buildCssDeclarationBlock(props, shapeStyleProps);
+                  if (shapeDeclarations) {
+                    rules.push(`
+.${escapedClassName} rect,
+.${escapedClassName} circle,
+.${escapedClassName} ellipse,
+.${escapedClassName} polygon,
+.${escapedClassName} path.label-container,
+.${escapedClassName} path.labelBox,
+rect.${escapedClassName},
+circle.${escapedClassName},
+ellipse.${escapedClassName},
+polygon.${escapedClassName},
+path.label-container.${escapedClassName},
+path.labelBox.${escapedClassName},
+.label-container.${escapedClassName},
+.labelBox.${escapedClassName} { ${shapeDeclarations}; }`);
+                  }
                 });
 
-                /*
-                 * Respeito semântico ao Mermaid:
-                 * - `color` definido no código é preservado pelo próprio Mermaid e não é recalculado;
-                 * - `fill` definido no código é preenchimento do nó. Se não houver `color`, calculamos
-                 *   apenas um fallback legível para o texto com base nesse preenchimento explícito.
-                 * Isso corrige o caso `classDef X fill:white` em temas escuros sem reinterpretar
-                 * `fill` como se fosse cor de texto.
-                 */
-                if (explicitTextColor || !fillColor) return;
+                if (!rules.length) return;
 
-                const readableText = mdMermaidPickReadableTextFromFill(fillColor);
+                const style = document.createElement("style");
+                style.setAttribute("nonce", "noteapp");
+                style.textContent = rules.join("\n");
+                svg.appendChild(style);
+              };
+
+              const findLabelNodesInOwnerGroups = (ownerGroups) => {
+                const labelNodes = new Set();
+                ownerGroups.forEach((group) => {
+                  group.querySelectorAll?.("text, tspan, .nodeLabel, .stateLabel, .labelText, foreignObject *, foreignobject *").forEach((node) => {
+                    if (node.closest?.("defs, marker, style")) return;
+                    if ((node.textContent || "").trim().length > 0) labelNodes.add(node);
+                  });
+                });
+                return Array.from(labelNodes);
+              };
+
+              const findLabelNodes = (stateName) => {
+                const candidates = Array.from(new Set([
+                  stateDisplayNames.get(stateName),
+                  stateName
+                ].map(normalizeText).filter(Boolean)));
+
+                if (!candidates.length) return [];
+
+                return Array.from(svg.querySelectorAll("text, tspan, .nodeLabel, .stateLabel, .labelText"))
+                  .filter((node) => candidates.includes(normalizeText(node.textContent)));
+              };
+
+              const findOwnerGroups = (labelNodes) => {
+                const groups = new Set();
+                labelNodes.forEach((labelNode) => {
+                  const owner = labelNode.closest?.('g.node, g.state, g.stateGroup, g.statediagram-state, g[class*="state"]') ||
+                    labelNode.closest?.("g");
+                  if (owner && owner !== svg) groups.add(owner);
+                });
+                return Array.from(groups);
+              };
+
+              const findShapeNodes = (ownerGroups) => {
+                const shapes = new Set();
+                ownerGroups.forEach((group) => {
+                  group.querySelectorAll?.("rect, circle, ellipse, polygon, path.label-container, path.labelBox").forEach((node) => {
+                    if (node.closest?.("g.edgeLabel, marker, defs")) return;
+                    shapes.add(node);
+                  });
+                });
+                return Array.from(shapes);
+              };
+
+              appendClassDefFallbackStyle();
+
+              stateClassNames.forEach((classNames, stateName) => {
+                const props = mergeClassProps(classNames);
+                const labelNodesByText = findLabelNodes(stateName);
+                const ownerGroups = findOwnerGroups(labelNodesByText);
+                const labelNodes = Array.from(new Set([
+                  ...labelNodesByText,
+                  ...findLabelNodesInOwnerGroups(ownerGroups)
+                ]));
+                const shapeNodes = findShapeNodes(ownerGroups);
+
+                /*
+                 * Preservação semântica do Mermaid:
+                 * - `color`, `font-style`, `font-weight` etc. são propriedades de texto e
+                 *   precisam chegar ao <text>/<tspan> final, porque o SVG sanitizado/pós-processado
+                 *   pode perder a cascata interna do Mermaid;
+                 * - `fill`, `stroke` e propriedades de traço continuam sendo tratadas como estilo
+                 *   da forma do estado, não como cor de texto;
+                 * - se houver `fill` sem `color`, mantém-se o fallback já existente de legibilidade,
+                 *   calculando apenas uma cor de texto compatível com o preenchimento declarado.
+                 */
+                if (Object.keys(props).length) {
+                  labelNodes.forEach((labelNode) => {
+                    applyTextStyles(labelNode, props);
+                    labelNode.querySelectorAll?.("span, p, div, text, tspan").forEach((child) => applyTextStyles(child, props));
+                  });
+
+                  shapeNodes.forEach((shapeNode) => applyShapeStyles(shapeNode, props));
+                }
+
+                if (props.color || !props.fill) return;
+
+                const readableText = mdMermaidPickReadableTextFromFill(props.fill);
                 if (!readableText) return;
 
-                findLabelNodes(stateName).forEach((labelNode) => {
+                labelNodes.forEach((labelNode) => {
                   applyTextColor(labelNode, readableText);
                   labelNode.querySelectorAll?.("span, p, div, text, tspan").forEach((child) => applyTextColor(child, readableText));
                 });
@@ -10176,7 +10608,9 @@ ${svgSelector} .arrowMarkerPath {
                   "nonce","style","class","id","role","aria-label","aria-roledescription","focusable",
                   "xmlns","xmlns:xlink","href","xlink:href","viewBox","preserveAspectRatio",
                   "marker-start","marker-mid","marker-end","dominant-baseline","text-anchor",
-                  "font-family","font-size","font-weight","transform-origin"
+                  "font-family","font-size","font-weight","font-style","text-decoration","letter-spacing",
+                  "fill","fill-opacity","fill-rule","stroke","stroke-width","stroke-dasharray","stroke-dashoffset",
+                  "stroke-linecap","stroke-linejoin","stroke-opacity","opacity","transform-origin"
                 ],
                 FORBID_TAGS: ["script","iframe","object","embed","foreignObject","foreignobject"]
               });
@@ -11632,7 +12066,7 @@ const measure = (viewport, pre, code, block) => {
              };
 
              $$(".markdown-body pre", root).forEach((pre) => {
-               if (pre.closest("figure.code-block")) return;
+               if (pre.closest("figure.code-block") || pre.closest(".mermaid")) return;
 
                const code = pre.querySelector("code");
                if (!code) return;
@@ -11866,9 +12300,13 @@ const measure = (viewport, pre, code, block) => {
             
 
 
-          // Preserva NBSP (ex.: ALT+255 no Windows) como caractere real no preview Markdown.
-          // GitHub mantém esse espaço não separável; aqui fazemos o mesmo sem alterar o conteúdo salvo.
-          const createMarkdownNbspSentinel = (src) => {
+           // Preserva NBSP (ex.: ALT+255 no Windows) como caractere real no preview Markdown.
+           // Usa token dinâmico por renderização, validado contra o próprio texto, para evitar colisão
+           // sem reintroduzir caracteres da Private Use Area (que o validador W3C sinaliza).
+           // Importante: o token precisa ser "inerte" para o parser Markdown.
+           // A versão com underscores podia vazar no preview porque "__...__" pode ser interpretado
+           // como marcador de ênfase forte em alguns contextos. Aqui usamos apenas ASCII alfanumérico.
+           const createMarkdownNbspSentinel = (src) => {
              const base = String(src || "");
              let token = "";
              do {

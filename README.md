@@ -3,272 +3,254 @@
 ![Licença MIT](https://img.shields.io/badge/license-MIT-green.svg)
 ![Arquitetura local-first](https://img.shields.io/badge/architecture-local--first-2ea44f)
 ![Arquivos reais](https://img.shields.io/badge/files-.md%20%7C%20.txt-0969da)
+![Preview Markdown](https://img.shields.io/badge/preview-Markdown%20%2B%20Mermaid%20%2B%20KaTeX-0969da)
 ![Foco desktop](https://img.shields.io/badge/focus-desktop-6f42c1)
-![Sem backend obrigatório](https://img.shields.io/badge/backend-opcional-lightgrey)
-![Pentest revisado](https://img.shields.io/badge/security-pentest%20reviewed-2ea44f)
-![Hardening retestado](https://img.shields.io/badge/hardening-retested-1f883d)
+![Sem backend obrigatório](https://img.shields.io/badge/backend-n%C3%A3o%20obrigat%C3%B3rio-lightgrey)
+![Segurança documentada](https://img.shields.io/badge/security-documented-2ea44f)
 
-Workspace web **local-first** para **organizar uma pasta real do computador** e editar **arquivos `.txt` e `.md` reais** com **abas**, **busca alternável por nome ou nome+conteúdo**, **preview Markdown**, **autosave**, **personalização visual** e **backup/importação em JSON**.
+**ANOTAÇÕES** é um workspace web **local-first** para organizar uma **pasta real do computador** e editar arquivos **`.txt`** e **`.md`** reais pelo navegador, com árvore lateral, abas, busca, preview Markdown avançado, personalização visual e backup/importação em JSON.
 
-> **Segurança documentada:** este repositório inclui o relatório técnico [PENTEST-REPORT.md](./PENTEST-REPORT.md), com resumo executivo, escopo, metodologia, achados principais, matriz resumida de risco, reteste e parecer final da versão atual.
+## Abra e teste agora 🚀
 
-> **Security / Trust / Hardening**
-> - arquivos `.txt` e `.md` reais em pasta real do computador
-> - arquitetura **local-first** sem backend obrigatório como requisito central
-> - fluxo com **autorização manual** para acesso à pasta raiz
-> - abertura inicial da pasta em **modo leitura**, com escrita solicitada só em ações mutáveis
-> - revisão de segurança com **reteste após hardening**
-> - documentação técnica separada para avaliação do estado atual
+Acesse a versão publicada em GitHub Pages:
+
+**https://diego-ch4m4x.github.io/ANOTACOES/**
+
+Clique no link acima, abra a página em **Chrome ou Edge no desktop**, escolha uma pasta raiz do seu computador e teste o fluxo real: criar notas, abrir arquivos `.md`, alternar entre editor e preview, usar abas, buscar conteúdo e personalizar a interface. A proposta é simples: transformar uma pasta comum do seu PC em um ambiente visual de anotações, estudo e documentação.
 
 ![Prévia da interface do ANOTAÇÕES](./social-preview.png)
 
-> Uma proposta simples e direta: usar o navegador como interface para trabalhar sobre **arquivos reais**, sem prender suas anotações a um formato proprietário, banco interno obrigatório ou backend como requisito central.
+> **Nota de segurança:** este projeto manipula arquivos reais da pasta escolhida pelo usuário. Use com uma pasta de teste na primeira execução e faça backup antes de operações grandes de importação, movimentação, renomeação ou exclusão.
 
 ---
 
 ## Sumário
 
 - [O que é](#o-que-é)
-- [Sinais de confiança](#sinais-de-confiança)
-- [Por que este projeto é diferente](#por-que-este-projeto-é-diferente)
-- [Recursos principais](#recursos-principais)
-- [Casos de uso](#casos-de-uso)
-- [Comparação com projetos similares](#comparação-com-projetos-similares)
-- [Como funciona](#como-funciona)
+- [Principais recursos](#principais-recursos)
+- [Preview Markdown avançado](#preview-markdown-avançado)
+- [Como usar no GitHub Pages](#como-usar-no-github-pages)
+- [Como usar localmente](#como-usar-localmente)
 - [Compatibilidade](#compatibilidade)
-- [Privacidade e comportamento](#privacidade-e-comportamento)
-- [Segurança e pentest](#segurança-e-pentest)
-- [Estrutura do repositório](#estrutura-do-repositório)
-- [Como usar](#como-usar)
+- [Privacidade e armazenamento](#privacidade-e-armazenamento)
+- [Segurança e hardening](#segurança-e-hardening)
 - [Limitações conhecidas](#limitações-conhecidas)
+- [Estrutura do repositório](#estrutura-do-repositório)
 - [Licença e atribuições](#licença-e-atribuições)
 
 ---
 
 ## O que é
 
-**ANOTAÇÕES** não foi pensado como apenas mais um editor Markdown no navegador.
+O **ANOTAÇÕES** não é apenas um editor de texto dentro do navegador. Ele foi desenhado como um **workspace local-first** para trabalhar em cima de uma **pasta raiz real** escolhida pelo usuário.
 
-A proposta do projeto é transformar uma **pasta raiz real do computador** em um workspace web de escrita, revisão e organização, mantendo o conteúdo em **arquivos `.txt` e `.md` reais**.
+Na prática, a aplicação permite:
 
-Na prática, isso significa combinar em uma única interface:
+- escolher uma pasta real do computador;
+- listar pastas e arquivos compatíveis em uma árvore lateral;
+- criar, abrir, editar, renomear, mover e excluir arquivos `.txt` e `.md`;
+- trabalhar com várias notas abertas em abas;
+- visualizar Markdown renderizado sem abandonar o fluxo local;
+- exportar/importar a estrutura em JSON;
+- personalizar cores, fontes, tamanhos e opções de exibição.
 
-- **árvore de pastas e arquivos reais**
-- **múltiplas abas**
-- **busca por nome e conteúdo, com alternância de modo**
-- **edição direta de texto e Markdown**
-- **preview Markdown integrado**
-- **backup/importação em JSON**
-- **preferências locais de aparência e uso**
-
-O resultado é uma aplicação web estática com perfil de **workspace local-first**, pensada para quem quer mais ergonomia do que um editor simples, sem abrir mão do controle sobre os próprios arquivos.
+A ideia central é manter suas anotações em arquivos simples, portáveis e fáceis de versionar, sem obrigar o uso de banco de dados, login, backend ou formato proprietário.
 
 ---
 
-## Sinais de confiança
+## Principais recursos
 
-É importante deixar claro **como o projeto se comporta**, **quais premissas de segurança ele assume** e **que tipo de revisão já foi feita**.
+### Arquivos e pastas reais
 
-| Pilar | O que isso sinaliza na prática |
+- Seleção manual de **pasta raiz** pelo navegador.
+- Suporte a arquivos **`.txt`** e **`.md`**.
+- Criação de notas e pastas pela interface.
+- Renomeação, exclusão e movimentação por botões, atalhos ou menu contextual.
+- Atualização da árvore quando arquivos forem modificados fora da página.
+- Persistência de ordem manual da árvore por arquivo auxiliar `.anotacoes-order.json` quando necessário.
+
+### Interface de workspace
+
+- Árvore lateral com pastas e arquivos.
+- Menu contextual na árvore.
+- Abas múltiplas para arquivos abertos.
+- Fixação, reordenação e reabertura de abas fechadas.
+- Fechamento individual, fechamento das outras abas e fechamento em lote.
+- Barra de abas com navegação lateral e opção de quebra em múltiplas linhas.
+- Cabeçalho e árvore recolhíveis.
+- Indicadores visuais de estado salvo/não salvo.
+- Overlay de sincronização para bloquear a interface durante operações longas na pasta raiz.
+
+### Busca e produtividade
+
+- Busca alternável entre **nome** e **nome + conteúdo**.
+- Destaque visual de ocorrências.
+- Busca dentro de arquivos `.txt` e `.md` lidos da pasta escolhida.
+- Atalhos de teclado para salvar, criar nota, criar pasta, renomear, excluir, alternar Markdown, abrir personalização e abrir informações.
+- Autosave opcional.
+- Botão de voltar ao topo no preview Markdown.
+
+### Personalização visual
+
+O painel **Personalização** permite ajustar a experiência sem editar código:
+
+- fundo e texto da árvore;
+- fonte da árvore;
+- tamanho da fonte da árvore;
+- cor do ícone de pasta;
+- cor e espessura das linhas da árvore;
+- fundo e texto do editor/preview;
+- fonte e tamanho do editor;
+- quebra de linha no editor/preview;
+- quebra de abas em múltiplas linhas;
+- restauração dos valores padrão.
+
+---
+
+## Preview Markdown avançado
+
+O preview Markdown do `index.html` foi atualizado para funcionar como uma área de leitura técnica, não apenas como renderização básica.
+
+Recursos observados no arquivo atual:
+
+| Recurso | Como é usado no projeto |
 |---|---|
-| **Arquivos reais** | O conteúdo não fica preso a um formato proprietário nem a um banco interno obrigatório. |
-| **Local-first** | O projeto prioriza o computador do usuário como base do fluxo, reduzindo dependências externas. |
-| **Autorização manual** | O acesso à pasta raiz depende de ação explícita do usuário, alinhando o fluxo ao princípio de menor surpresa. |
-| **Menor privilégio** | A pasta é aberta primeiro em leitura e a escrita só é pedida quando a ação realmente precisa modificar o disco. |
-| **Pentest documentado** | Existe material técnico dedicado para revisão, leitura crítica e validação do estado atual. |
-| **Reteste após hardening** | O relatório não fica apenas na teoria: ele registra nova verificação depois das correções aplicadas. |
+| `markdown-it` | Parser Markdown principal. |
+| HTML nativo no Markdown | Permitido no parser e sanitizado antes de entrar no DOM. |
+| DOMPurify | Sanitização do HTML renderizado. |
+| highlight.js | Destaque de sintaxe em blocos de código. |
+| KaTeX | Renderização de fórmulas matemáticas. |
+| Task lists | Suporte a checklists Markdown. |
+| Footnotes | Suporte a notas de rodapé. |
+| GitHub Alerts | Suporte visual a `> [!NOTE]`, `> [!TIP]`, `> [!IMPORTANT]`, `> [!WARNING]` e `> [!CAUTION]`. |
+| `<details>` / `<summary>` | Acabamento visual para blocos expansíveis HTML dentro do Markdown. |
+| Mermaid | Renderização local de diagramas em blocos ````mermaid`. |
 
-Este não é apenas um protótipo visual interessante, mas uma aplicação com preocupação concreta com **portabilidade, previsibilidade e hardening compatível com sua proposta arquitetural**.
+### Mermaid no preview
 
----
+O projeto inclui `libs/mermaid.min.js` e renderiza diagramas Mermaid localmente no preview Markdown. O fluxo atual também contém tratamentos específicos para:
 
-## Por que este projeto é diferente
-
-### 1. Trabalha com pasta real, não com storage fechado
-A base do fluxo é uma **pasta raiz escolhida manualmente pelo usuário**. A árvore lateral representa arquivos e pastas reais do computador, o que melhora portabilidade, backup externo, interoperabilidade e transparência sobre onde os dados estão.
-
-### 2. O conteúdo continua sendo seu
-O projeto trabalha com **`.txt` e `.md` reais**, em vez de aprisionar tudo em um formato interno. Isso facilita abrir, mover, versionar, copiar ou reaproveitar o mesmo conteúdo em outras ferramentas.
-
-### 3. Vai além de “editor + preview”
-O **ANOTAÇÕES** reúne recursos que, juntos, o aproximam mais de um workspace leve do que de um editor web básico:
-
-- árvore lateral de arquivos e pastas
-- múltiplas abas
-- reordenação, fixação e reabertura de abas
-- abertura rápida das anotações diretas de uma pasta
-- busca com alternância entre **nome** e **nome + conteúdo**
-- autosave opcional
-- personalização visual local
-- exportação/importação de estrutura em JSON
-
-### 4. Markdown forte sem abandonar o fluxo local-first
-O preview foi pensado para um uso real de documentação e anotações técnicas, com suporte a:
-
-- **HTML nativo dentro do Markdown**
-- **emoji local**
-- **blocos de código com destaque de sintaxe**
-- **task lists**
-- **footnotes**
-- **fórmulas com KaTeX**
+- renderização offline via biblioteca local;
+- fallback quando a biblioteca não estiver disponível;
+- sanitização do SVG gerado;
+- ajuste de tamanho para evitar diagramas gigantes/desproporcionais;
+- correções visuais em diagramas de estado;
+- preservação de personalizações Mermaid como `classDef`, `fill`, `stroke`, `color`, `font-weight` e `font-style`;
+- contraste automático quando o diagrama usa preenchimento personalizado sem cor de texto explícita.
 
 ---
 
-## Recursos principais
+## Como usar no GitHub Pages
 
-- abertura manual de **pasta raiz real**
-- navegação em **árvore de pastas e arquivos reais**
-- criação de arquivos `.txt` e `.md`
-- criação, renomeação, exclusão e movimentação de pastas e arquivos
-- reordenação manual de abas e da árvore
-- edição direta de texto puro e Markdown
-- **abas para múltiplos arquivos**
-- fixação, reabertura e fechamento em lote de abas
-- preview Markdown integrado
-- suporte a **HTML nativo dentro do Markdown**
-- destaque de sintaxe para código
-- suporte a **KaTeX**, **task lists** e **footnotes**
-- busca por **nome** ou **nome + conteúdo**
-- autosave opcional
-- atalhos de teclado
-- personalização de aparência da árvore e do editor
-- exportação da pasta raiz para JSON
-- importação de JSON recriando a estrutura real
-- restauração de preferências e estados auxiliares locais
+1. Abra: **https://diego-ch4m4x.github.io/ANOTACOES/**
+2. Use **Chrome** ou **Edge** no desktop.
+3. Clique em **Escolher pasta raiz**.
+4. Autorize uma pasta real do computador.
+5. Crie ou abra arquivos `.txt` e `.md`.
+6. Use **Ctrl+S** para salvar ou ative o **Autosave**.
+7. Use **Atualizar árvore** quando alterar arquivos fora da página.
+8. Use **Exportar JSON** antes de alterações grandes ou migrações.
+
+> Dica: para testar com segurança, comece por uma pasta nova ou uma cópia de uma pasta real.
 
 ---
 
-## Casos de uso
+## Como usar localmente
 
-O projeto pode ser especialmente útil para quem quer:
+Você também pode executar o projeto localmente em `localhost`, o que costuma ser mais previsível para testes.
 
-- organizar notas em **pastas reais do computador**
-- editar **`.txt` e `.md`** com mais conforto e contexto visual
-- manter um fluxo **local-first** sem backend obrigatório
-- usar uma ferramenta leve para **documentação, estudo, rascunhos e anotações técnicas**
-- explorar uma interface web baseada em **File System Access API**
-- publicar uma demo funcional em **GitHub Pages**
+Arquivos auxiliares incluídos:
 
-Também é uma proposta interessante para buscas como:
+- `abrir_html_local_shell.bat`
+- `abrir_html_local_py.bat`
+- `CMD_Leia_abrir-pagina-localmente.txt`
 
-- **editor Markdown local-first**
-- **workspace web para arquivos `.md` e `.txt`**
-- **organizador de notas em pasta local**
-- **aplicação web estática para editar arquivos reais no navegador**
+Fluxo sugerido:
 
----
+1. mantenha `index.html` e a pasta `libs/` no mesmo diretório;
+2. execute um servidor local simples ou use um dos `.bat` auxiliares;
+3. abra a página em `http://127.0.0.1:PORTA/index.html`;
+4. escolha a pasta raiz pela interface.
 
-## Comparação com projetos similares
-
-Esta comparação não existe para alegar equivalência total ou cópia direta. Ela serve para contextualizar o **ANOTAÇÕES** dentro de uma família de ferramentas próximas.
-
-| Projeto | Link | Onde se aproxima | Diferença principal |
-|---|---|---|---|
-| **ANOTAÇÕES** | **Este repositório** | Workspace web local-first para **pasta real do computador**, com **arquivos `.txt` e `.md` reais**, **árvore lateral**, **abas**, **busca**, **preview Markdown**, **personalização visual** e **backup/importação em JSON**. | A proposta central é transformar uma **pasta real** em um espaço de trabalho de escrita, revisão e organização no navegador, sem backend obrigatório. |
-| **Noted** | [github.com/thomasgauvin/noted](https://github.com/thomasgauvin/noted) | Também trabalha direto no **filesystem local**, com organização em pastas e edição de notas Markdown. | O foco público do projeto é mais claramente o de **markdown note-taking app**. |
-| **Impossible-Writer** | [github.com/clarkezyz/Impossible-Writer](https://github.com/clarkezyz/Impossible-Writer) | Compartilha a proposta de **privacidade**, **portabilidade** e trabalho no navegador com conteúdo local. | O diferencial principal dele é **colaboração em tempo real**, com posicionamento mais forte como editor colaborativo. |
-| **mdSilo Web** | [github.com/danloh/mdSilo-web](https://github.com/danloh/mdSilo-web) | É próximo na ideia de base de conhecimento **local-first** sobre arquivos plain-text no navegador. | Na versão web, o próprio projeto informa limitações como **ausência de folder management**, o que o distancia da proposta central do **ANOTAÇÕES**. |
-| **Markdown++** | [github.com/emir/markdown-plus-plus](https://github.com/emir/markdown-plus-plus) | Também conecta o navegador ao **filesystem local** e oferece browser de arquivos, edição e organização. | O foco principal é funcionar como **painel/CMS para static site generators**, com Git/GitHub/GitLab como parte importante da proposta. |
-| **mark** | [github.com/Etschmia/mark](https://github.com/Etschmia/mark) | Se aproxima por ser um editor web que trabalha com **arquivos locais** sem backend obrigatório. | A apresentação pública dele é mais enxuta e mais centrada em **edição Markdown**, sem destacar o mesmo pacote de workspace estrutural. |
-| **Markpad** | [github.com/kr3t3n/markpad](https://github.com/kr3t3n/markpad) | Se aproxima no eixo **local-first**, **offline** e foco em escrita no navegador. | O armazenamento principal é **IndexedDB no navegador**, e não uma **pasta real do computador** como base do fluxo. |
-
-### Leitura rápida da comparação
-
-O diferencial do **ANOTAÇÕES** está na combinação destes blocos dentro da mesma aplicação:
-
-- **pasta raiz real do computador**
-- **arquivos `.txt` e `.md` reais**
-- **árvore lateral e múltiplas abas**
-- **busca por nome e conteúdo**
-- **preview Markdown forte**
-- **personalização visual**
-- **backup/importação JSON**
-- **fluxo local-first sem backend obrigatório**
-
----
-
-## Como funciona
-
-A experiência foi desenhada para uso prático no desktop:
-
-1. o usuário abre a página
-2. autoriza manualmente uma **pasta raiz real**
-3. a árvore lateral passa a refletir essa estrutura
-4. arquivos `.txt` e `.md` podem ser abertos em abas
-5. a edição acontece no centro da interface
-6. o preview Markdown ajuda na revisão visual
-7. busca, abas, preferências e backup tornam o uso contínuo mais confortável
-
-Esse fluxo é interessante para quem quer unir **simplicidade de arquivo local** com **ergonomia de interface web**.
+Abrir diretamente por `file://` pode funcionar parcialmente, mas não é o modo mais confiável para recursos modernos ligados à File System Access API e carregamento de bibliotecas locais.
 
 ---
 
 ## Compatibilidade
 
-| Navegador | Situação |
+| Ambiente | Situação |
 |---|---|
-| Chrome desktop | recomendado |
-| Edge desktop | recomendado |
-| Brave | pode funcionar com limitações ou comportamento inconsistente |
-| Firefox | suporte limitado ou incompatível para a integração principal com pasta raiz |
+| Chrome desktop | Recomendado. |
+| Edge desktop | Recomendado. |
+| Brave | Pode funcionar, mas depende das permissões e políticas do navegador. |
+| Firefox | Não é recomendado para o fluxo principal de pasta raiz real. |
+| Mobile | Não é o foco do projeto. |
+
+O recurso central depende da **File System Access API**, disponível principalmente em navegadores Chromium no desktop.
+
+---
+
+## Privacidade e armazenamento
+
+O conteúdo principal fica em **arquivos reais** dentro da pasta escolhida pelo usuário.
+
+Além disso, o navegador pode armazenar dados auxiliares para melhorar a experiência:
+
+| Local | Uso provável no projeto |
+|---|---|
+| Arquivos `.txt` / `.md` | Conteúdo principal das anotações. |
+| `.anotacoes-order.json` | Ordem manual da árvore em pastas reais. |
+| `localStorage` | Preferências de interface e alguns estados visuais. |
+| `sessionStorage` | Estados temporários da sessão. |
+| `IndexedDB` | Handles da File System Access API para tentar reativar a pasta raiz em sessões futuras, dependendo das permissões do navegador. |
 
 Pontos importantes:
 
-- o recurso central de pasta raiz depende da **File System Access API**
-- para uso confiável, prefira **Chrome ou Edge no desktop**
-- em ambiente público, a autorização da pasta deve ser **manual**
-- se a pasta for alterada fora da página, pode ser necessário **atualizar a árvore**
-- o projeto foi pensado para **desktop**, não para fluxo mobile-first
+- a pasta raiz precisa ser autorizada pelo usuário;
+- o navegador pode pedir confirmação novamente ao reabrir ou reativar a pasta;
+- limpar os dados do site no navegador pode remover preferências, sessão e handles armazenados;
+- o app não usa backend obrigatório para armazenar suas notas;
+- imagens e mídias externas no Markdown podem ser carregadas pelo navegador quando a CSP e o conteúdo permitirem.
 
 ---
 
-## Privacidade e comportamento
+## Segurança e hardening
 
-- As anotações principais ficam em **arquivos reais `.txt` e `.md`** dentro da pasta escolhida pelo usuário.
-- O projeto foi preparado para funcionar **sem backend obrigatório**.
-- Em modo público endurecido no GitHub Pages, a página **não tenta lembrar a pasta raiz** entre aberturas.
-- O app **não persiste `FileSystemHandle` entre sessões**, reduzindo o impacto potencial em cenários de abuso do navegador.
-- Dados auxiliares de **árvore, abas abertas e abas fechadas** priorizam armazenamento de **sessão**; preferências visuais, autosave e alguns estados de interface podem ser guardados localmente pelo navegador.
-- Para uso público, o usuário precisa **autorizar manualmente** a pasta raiz.
-- Quando a ordem manual da árvore precisa ser preservada em disco, o app pode criar um arquivo auxiliar **`.anotacoes-order.json`** dentro da pasta real afetada.
+Este repositório inclui documentação específica de segurança em [PENTEST-REPORT.md](./PENTEST-REPORT.md).
 
-### O que isso significa na prática
+Medidas e características relevantes observadas no `index.html` atual:
 
-- o conteúdo principal continua em **arquivos reais**, não em um banco proprietário do app
-- a experiência pode restaurar preferências de uso sem tentar “tomar posse” permanente da pasta do usuário
-- a ordem visual personalizada da árvore pode depender do arquivo auxiliar `.anotacoes-order.json`
+- **CSP via `<meta http-equiv="Content-Security-Policy">`**;
+- `connect-src 'none'`, reduzindo conexões ativas iniciadas por APIs como `fetch`;
+- scripts locais carregados de `./libs/`;
+- script inline principal protegido por `nonce` e hash na política atual;
+- bloqueio de atributos inline de script por `script-src-attr 'none'`;
+- sanitização do preview Markdown com DOMPurify;
+- renderização Mermaid local com sanitização do SVG resultante;
+- dependências de Markdown, KaTeX, Mermaid e highlight.js distribuídas localmente;
+- ausência de backend obrigatório.
+
+### Ressalvas técnicas importantes
+
+- A CSP é aplicada por **meta tag**, não por header HTTP real.
+- Algumas diretivas de segurança, como `frame-ancestors`, só funcionam adequadamente via header HTTP.
+- A integração com pasta real usa permissões sensíveis do navegador e pode solicitar acesso de leitura/escrita.
+- O código atual contém persistência de handles da File System Access API em IndexedDB para tentativa de reativação, sujeita às regras do navegador.
+- Como a aplicação pode renomear, mover, excluir e sobrescrever arquivos reais, o risco operacional depende da pasta escolhida pelo usuário.
 
 ---
 
-## Segurança e pentest
+## Limitações conhecidas
 
-Além da documentação funcional, o projeto também inclui um relatório técnico específico de segurança:
-
-- [PENTEST-REPORT.md](./PENTEST-REPORT.md) — relatório de pentest estático e revisão lógica de segurança do `index.html`
-
-### O que o relatório cobre
-
-- análise de **CSP** e endurecimento compatível com o modelo single-file
-- avaliação de **XSS** e sanitização do preview Markdown
-- validação do uso de **DOMPurify**, **KaTeX** e emoji local
-- revisão do fluxo de **File System Access** com foco em **menor privilégio**
-- análise de persistência local, superfície de rede e impacto operacional da sessão ativa
-- registro de **reteste** após as correções de hardening
-
-### Leitura rápida do parecer
-
-De acordo com o relatório, a versão atual foi considerada **aprovada para o contexto do projeto**, com uma **ressalva estrutural formal**: a Content Security Policy é aplicada por **meta tag**, e não por **header HTTP real**.
-
-Na prática, isso reforça sinais importantes para quem avalia o repositório:
-
-- existe preocupação explícita com **segurança aplicada**, não apenas com funcionalidades
-- as correções foram **retestadas** após o endurecimento do arquivo principal
-- o projeto preserva a proposta **local-first** sem abandonar critérios técnicos de mitigação e revisão
-- o fluxo abre a pasta em **modo leitura** e só pede escrita em salvar, mover, renomear, deletar, importar e persistir ordem manual
-- o preview Markdown passa por **sanitização** antes da inserção final no DOM
-- a superfície de rede foi reduzida com comportamento **offline-first** para emoji e fechamento de `connect-src`
-
-Esse material é especialmente útil para quem deseja entender melhor o nível de hardening atual do app antes de estudar, adaptar, publicar ou evoluir o projeto.
+- Depende de suporte do navegador à **File System Access API**.
+- Foi pensado para desktop, não para mobile-first.
+- O comportamento pode variar entre navegadores Chromium.
+- O acesso à pasta raiz depende de autorização manual do usuário.
+- Operações de escrita afetam arquivos reais.
+- Alterações feitas fora da aplicação podem exigir **Atualizar árvore**.
+- A ordem manual da árvore pode criar `.anotacoes-order.json` dentro da pasta real.
+- A CSP por meta tag não substitui todos os controles possíveis de um servidor com headers HTTP.
+- O preview permite HTML dentro do Markdown, mas depende de sanitização rigorosa para reduzir risco de XSS.
 
 ---
 
@@ -279,8 +261,9 @@ Esse material é especialmente útil para quem deseja entender melhor o nível d
 ├─ index.html
 ├─ social-preview.png
 ├─ README.md
-├─ PENTEST-REPORT.md
+├─ LICENSE
 ├─ LICENCAS-E-ATRIBUICOES.md
+├─ PENTEST-REPORT.md
 ├─ CMD_Leia_abrir-pagina-localmente.txt
 ├─ abrir_html_local_py.bat
 ├─ abrir_html_local_shell.bat
@@ -288,90 +271,29 @@ Esse material é especialmente útil para quem deseja entender melhor o nível d
    ├─ dompurify.min.js
    ├─ emojis.js
    ├─ github-markdown.css
-   ├─ fonts/
-   │  ├─ KaTeX_*.ttf / .woff / .woff2
-   │  └─ ... (arquivos de fonte do KaTeX)
    ├─ highlight.min.css
    ├─ highlight.min.js
    ├─ katex.min.css
    ├─ katex.min.js
+   ├─ markdown-it.min.js
    ├─ markdown-it-footnote.min.js
    ├─ markdown-it-katex.min.js
    ├─ markdown-it-task-lists.min.js
-   └─ markdown-it.min.js
+   ├─ mermaid.min.js
+   └─ fonts/
+      └─ KaTeX_*.ttf / .woff / .woff2
 ```
-
-> Observação: durante o uso com pasta real, o app pode criar **`.anotacoes-order.json`** dentro de pastas do usuário para persistir a ordem manual da árvore. Esse arquivo é de runtime e não faz parte do conteúdo fixo do repositório.
-
----
-
-## Como usar
-
-Você pode usar o projeto de duas formas:
-
-### 1) Publicação estática em GitHub Pages / HTTPS
-Boa opção para demonstrar a interface, compartilhar o projeto e disponibilizar a aplicação publicamente.
-
-### 2) Execução local em localhost
-Boa opção para testes, validação e comportamento mais previsível da integração com pasta raiz.
-
-Arquivos auxiliares incluídos no repositório:
-
-- `abrir_html_local_shell.bat`
-- `abrir_html_local_py.bat`
-- `CMD_Leia_abrir-pagina-localmente.txt`
-
-> Esses arquivos são auxiliares para abertura local e não são obrigatórios para a publicação do site estático.
-
-### Fluxo rápido de uso
-
-1. abra o `index.html` em **Chrome** ou **Edge** no desktop
-2. clique em **Escolher pasta raiz**
-3. autorize a pasta real que será usada como workspace
-4. crie ou abra arquivos `.txt` e `.md`
-5. salve com **Ctrl+S** ou ative o **Autosave**
-6. use **Atualizar árvore** quando fizer mudanças fora da página
-7. exporte para **JSON** antes de mudanças grandes ou migrações
-
----
-
-## Limitações conhecidas
-
-- o fluxo principal depende da **File System Access API**
-- a experiência ideal é **desktop-first**
-- o suporte entre navegadores não é uniforme
-- a autorização da pasta precisa ser feita manualmente pelo usuário
-- alterações externas na pasta podem exigir atualização da árvore na interface
-- a preservação da ordem manual da árvore em disco depende do arquivo auxiliar **`.anotacoes-order.json`**
-- a CSP atual usa **meta tag**, não **header HTTP real**
-
-Essas limitações não anulam a proposta do projeto; elas apenas deixam claro o contexto ideal de uso e o nível real de hardening esperado para a arquitetura adotada.
 
 ---
 
 ## Licença e atribuições
 
-O **código autoral deste repositório** está licenciado sob a **MIT License**.
+O código autoral do projeto está licenciado sob a **MIT License**. Veja [LICENSE](./LICENSE).
 
-Isso permite usar, estudar, modificar e redistribuir o código, desde que o aviso de copyright e o texto da licença sejam mantidos.
-
-As bibliotecas, os estilos e os demais arquivos de terceiros distribuídos em `libs/` **mantêm suas licenças originais** e **não são relicenciados automaticamente** pela MIT do projeto autoral.
-
-Este projeto integra componentes voltados a:
-
-- sanitização HTML
-- parsing Markdown
-- fórmulas matemáticas
-- destaque de sintaxe
-- estilo visual para Markdown
-
-Arquivos de referência:
-
-- [LICENSE](./LICENSE) — licença do **código autoral**
-- [LICENCAS-E-ATRIBUICOES.md](./LICENCAS-E-ATRIBUICOES.md) — inventário, créditos e orientação prática de redistribuição dos **componentes de terceiros**
+As bibliotecas, fontes, estilos e ativos de terceiros distribuídos em `libs/` mantêm suas próprias licenças de origem. Veja o inventário em [LICENCAS-E-ATRIBUICOES.md](./LICENCAS-E-ATRIBUICOES.md).
 
 ---
 
 ## Fechamento
 
-Se a ideia é ter um **editor Markdown local-first**, mas com estrutura mais próxima de um **workspace web para pasta real**, o **ANOTAÇÕES** ocupa um espaço interessante: simples na arquitetura, prático no uso, transparente no tratamento dos arquivos e mais sólido na apresentação pública por documentar também seu estado atual de segurança e comportamento real de runtime.
+O **ANOTAÇÕES** é uma proposta prática para quem quer unir a simplicidade de arquivos locais com a ergonomia de uma interface web moderna. Ele funciona como editor, organizador e leitor técnico para `.txt` e `.md`, com um diferencial importante: o conteúdo continua em uma pasta real do seu computador. ✨

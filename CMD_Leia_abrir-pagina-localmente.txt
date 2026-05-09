@@ -1,4 +1,4 @@
-H:\Downloads\WEB\TESTE\04_ANOTACOES\TESTE\pagina.html
+C:\CAMINHO\DO\PROJETO\index.html
 
 
 1) Se for usar em arquivo .CMD / .BAT (NÃO RECOMENDADO)

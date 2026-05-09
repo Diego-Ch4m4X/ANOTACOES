@@ -4511,6 +4511,24 @@ html.tree-grabbing .tree .node.selected {
             <span>Abrir anotações da pasta</span><span class="hint">—</span>
          </div>
 
+         <div class="item" id="treeMenuExpandFolder" role="menuitem" tabindex="-1">
+            <span>[+] Expandir pasta</span><span class="hint">→</span>
+         </div>
+         <div class="item" id="treeMenuCollapseFolder" role="menuitem" tabindex="-1">
+            <span>[-] Retrair pasta</span><span class="hint">←</span>
+         </div>
+
+         <div class="sep" role="separator" aria-orientation="horizontal"></div>
+
+         <div class="item" id="treeMenuExpandAll" role="menuitem" tabindex="-1">
+            <span>[+] Expandir tudo</span><span class="hint">raiz</span>
+         </div>
+         <div class="item" id="treeMenuCollapseAll" role="menuitem" tabindex="-1">
+            <span>[-] Retrair tudo</span><span class="hint">raiz</span>
+         </div>
+
+         <div class="sep" role="separator" aria-orientation="horizontal"></div>
+
          <div class="item" id="treeMenuMoveUp" role="menuitem" tabindex="-1">
             <span>Mover pasta acima</span><span class="hint">↑</span>
          </div>
@@ -5444,6 +5462,10 @@ html.tree-grabbing .tree .node.selected {
              treeMenuNewNote: $("#treeMenuNewNote"),
              treeMenuRename: $("#treeMenuRename"),
              treeMenuOpenFolderNotes: $("#treeMenuOpenFolderNotes"),
+             treeMenuExpandFolder: $("#treeMenuExpandFolder"),
+             treeMenuCollapseFolder: $("#treeMenuCollapseFolder"),
+             treeMenuExpandAll: $("#treeMenuExpandAll"),
+             treeMenuCollapseAll: $("#treeMenuCollapseAll"),
              treeMenuMoveUp: $("#treeMenuMoveUp"),
              treeMenuMoveDown: $("#treeMenuMoveDown"),
              treeMenuDelete: $("#treeMenuDelete"),
@@ -5943,6 +5965,7 @@ const bindSidebarToggle = () => {
               rootHandle: null,
               nodeHandles: new Map(),
               currentRootName: "",
+              orderScopeKey: "",
               pendingReconnectHandle: null,
               pendingReconnectActive: false,
               _pendingReconnectArmed: false,
@@ -7098,6 +7121,7 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              state.fs.rootHandle = null;
              state.fs.nodeHandles = new Map();
              state.fs.currentRootName = "";
+             state.fs.orderScopeKey = "";
              clearPendingFsReconnect();
              state.fs._pendingReconnectArmed = false;
              state.data = createDisconnectedData();
@@ -7111,8 +7135,10 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              clearSearchRevealState();
            };
 
-           const FS_ORDER_META_FILENAME = ".anotacoes-order.json";
-           const FS_ORDER_META_VERSION = 1;
+           const FS_ORDER_META_VERSION = 2;
+           const FS_LEGACY_ORDER_META_FILENAMES = [".vivo-note-order.json", ".anotacoes-order.json"];
+           const FS_ORDER_SCOPE_REGISTRY_KEY = "fs-order-scopes-v1";
+           const FS_ORDER_META_KEY_PREFIX = "fs-order-meta-v2";
 
            const createEmptyFsDirectoryOrderMeta = () => ({ version: FS_ORDER_META_VERSION, order: [] });
 
@@ -7130,6 +7156,56 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              return { version: FS_ORDER_META_VERSION, order: normalized };
            };
 
+           const normalizeFsOrderScopeRegistry = (rawRegistry) => {
+             const registry = (rawRegistry && typeof rawRegistry === "object") ? rawRegistry : {};
+             const entries = Array.isArray(registry.entries) ? registry.entries : [];
+             const normalized = [];
+             const seen = new Set();
+             for (const entry of entries) {
+               if (!entry || typeof entry !== "object") continue;
+               const id = String(entry.id || "").trim();
+               if (!id || seen.has(id)) continue;
+               const handle = entry.handle;
+               if (!handle || typeof handle.isSameEntry !== "function") continue;
+               seen.add(id);
+               normalized.push({ id, name: String(entry.name || ""), handle });
+             }
+             return { version: 1, entries: normalized };
+           };
+
+           const createFsOrderScopeId = () => {
+             try {
+               if (crypto && typeof crypto.randomUUID === "function") return crypto.randomUUID();
+             } catch (_) {}
+             return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+           };
+
+           const getOrCreateFsOrderScopeKey = async (rootHandle) => {
+             const rootName = String(rootHandle?.name || "").trim() || "root";
+             if (!rootHandle || typeof rootHandle.isSameEntry !== "function") return `fallback:${rootName}`;
+             try {
+               const registry = normalizeFsOrderScopeRegistry(await idbGet(FS_ORDER_SCOPE_REGISTRY_KEY));
+               for (const entry of registry.entries) {
+                 if (entry.name !== rootName) continue;
+                 try {
+                   if (await entry.handle.isSameEntry(rootHandle)) return entry.id;
+                 } catch (_) {}
+               }
+               const nextEntry = { id: createFsOrderScopeId(), name: rootName, handle: rootHandle };
+               registry.entries.push(nextEntry);
+               await idbSet(FS_ORDER_SCOPE_REGISTRY_KEY, registry);
+               return nextEntry.id;
+             } catch (_) {
+               return `fallback:${rootName}`;
+             }
+           };
+
+           const getFsDirectoryOrderStorageKey = (orderScopeKey, dirRelPath = "") => {
+             const scope = String(orderScopeKey || "fallback");
+             const relPath = String(dirRelPath || "");
+             return `${FS_ORDER_META_KEY_PREFIX}:${encodeStableFsId(scope)}:${encodeStableFsId(relPath || "__root__")}`;
+           };
+
            const getFsOrderEntryKey = (kind, name) => `${String(kind || "").toLowerCase()}:${String(name || "")}`;
 
            const getFsOrderEntryKeyForNode = (node) => {
@@ -7139,34 +7215,63 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              return "";
            };
 
-           const readFsDirectoryOrderMeta = async (dirHandle) => {
-             if (!dirHandle || typeof dirHandle.getFileHandle !== "function") return createEmptyFsDirectoryOrderMeta();
-             try {
-               const metaFileHandle = await dirHandle.getFileHandle(FS_ORDER_META_FILENAME);
-               const metaFile = await metaFileHandle.getFile();
-               const rawText = await metaFile.text();
-               return normalizeFsDirectoryOrderMeta(JSON.parse(rawText || "{}"));
-             } catch (error) {
-               if (["NotFoundError", "TypeMismatchError", "SyntaxError"].includes(error?.name || "")) {
-                 return createEmptyFsDirectoryOrderMeta();
+           const isFsLegacyOrderMetaFilename = (entryName) => FS_LEGACY_ORDER_META_FILENAMES.includes(String(entryName || ""));
+
+           const readLegacyFsDirectoryOrderMeta = async (dirHandle) => {
+             if (!dirHandle || typeof dirHandle.getFileHandle !== "function") return null;
+             for (const fileName of FS_LEGACY_ORDER_META_FILENAMES) {
+               try {
+                 const metaFileHandle = await dirHandle.getFileHandle(fileName);
+                 const metaFile = await metaFileHandle.getFile();
+                 const rawText = await metaFile.text();
+                 return { fileName, meta: normalizeFsDirectoryOrderMeta(JSON.parse(rawText || "{}")) };
+               } catch (error) {
+                 if (["NotFoundError", "TypeMismatchError", "SyntaxError"].includes(error?.name || "")) continue;
                }
-               return createEmptyFsDirectoryOrderMeta();
+             }
+             return null;
+           };
+
+           const removeLegacyFsDirectoryOrderMeta = async (dirHandle, fileName) => {
+             if (!dirHandle || typeof dirHandle.removeEntry !== "function" || !isFsLegacyOrderMetaFilename(fileName)) return false;
+             try {
+               await dirHandle.removeEntry(fileName);
+               return true;
+             } catch (_) {
+               return false;
              }
            };
 
-           const writeFsDirectoryOrderMeta = async (dirHandle, meta) => {
-             if (!dirHandle || typeof dirHandle.getFileHandle !== "function") {
-               throw new Error("Pasta real indisponível para gravar a ordem.");
+           const readFsDirectoryOrderMeta = async (dirHandle, orderScopeKey, dirRelPath = "") => {
+             let idbMeta = createEmptyFsDirectoryOrderMeta();
+             const storageKey = getFsDirectoryOrderStorageKey(orderScopeKey, dirRelPath);
+             try {
+               idbMeta = normalizeFsDirectoryOrderMeta(await idbGet(storageKey));
+             } catch (_) {
+               idbMeta = createEmptyFsDirectoryOrderMeta();
              }
-             const allowed = await ensureFsHandlePermission(dirHandle, "readwrite", { prompt: true });
-             if (!allowed) {
-               throw new Error("Permissão de escrita não concedida para gravar a ordem desta pasta.");
+
+             const legacy = await readLegacyFsDirectoryOrderMeta(dirHandle);
+             let canRemoveLegacyMeta = Boolean(idbMeta.order.length);
+             if (legacy?.meta?.order?.length && !idbMeta.order.length) {
+               try {
+                 await idbSet(storageKey, legacy.meta);
+                 idbMeta = normalizeFsDirectoryOrderMeta(legacy.meta);
+                 canRemoveLegacyMeta = true;
+               } catch (_) {
+                 canRemoveLegacyMeta = false;
+               }
              }
+             if (legacy?.fileName && canRemoveLegacyMeta) {
+               removeLegacyFsDirectoryOrderMeta(dirHandle, legacy.fileName).catch(() => {});
+             }
+             return idbMeta;
+           };
+
+           const writeFsDirectoryOrderMeta = async (orderScopeKey, dirRelPath, meta) => {
              const normalized = normalizeFsDirectoryOrderMeta(meta);
-             const fileHandle = await dirHandle.getFileHandle(FS_ORDER_META_FILENAME, { create: true });
-             const writable = await fileHandle.createWritable();
-             await writable.write(JSON.stringify(normalized, null, 2));
-             await writable.close();
+             if (!orderScopeKey) throw new Error("Escopo IndexedDB indisponível para gravar a ordem.");
+             await idbSet(getFsDirectoryOrderStorageKey(orderScopeKey, dirRelPath), normalized);
              return normalized;
            };
 
@@ -7184,18 +7289,20 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
 
              const orderIndex = new Map(orderList.map((key, index) => [key, index]));
              return fallback.sort((a, b) => {
-               const aIdx = orderIndex.has(getFsOrderEntryKey(a.kind, a.name)) ? orderIndex.get(getFsOrderEntryKey(a.kind, a.name)) : Number.POSITIVE_INFINITY;
-               const bIdx = orderIndex.has(getFsOrderEntryKey(b.kind, b.name)) ? orderIndex.get(getFsOrderEntryKey(b.kind, b.name)) : Number.POSITIVE_INFINITY;
+               const aKey = getFsOrderEntryKey(a.kind, a.name);
+               const bKey = getFsOrderEntryKey(b.kind, b.name);
+               const aIdx = orderIndex.has(aKey) ? orderIndex.get(aKey) : Number.POSITIVE_INFINITY;
+               const bIdx = orderIndex.has(bKey) ? orderIndex.get(bKey) : Number.POSITIVE_INFINITY;
                if (aIdx !== bIdx) return aIdx - bIdx;
                return compareFsEntriesByKindAndName(a, b);
              });
            };
 
-           const collectFsDirectoryEntries = async (dirHandle) => {
-             const dirOrderMeta = await readFsDirectoryOrderMeta(dirHandle);
+           const collectFsDirectoryEntries = async (dirHandle, orderScopeKey = state.fs?.orderScopeKey || "", dirRelPath = "") => {
+             const dirOrderMeta = await readFsDirectoryOrderMeta(dirHandle, orderScopeKey, dirRelPath);
              const entries = [];
              for await (const [entryName, entryHandle] of dirHandle.entries()) {
-               if (entryName === FS_ORDER_META_FILENAME) continue;
+               if (isFsLegacyOrderMetaFilename(entryName)) continue;
                if (entryHandle.kind === "file") {
                  const parsed = splitFsFileName(entryName);
                  if (!FS_ALLOWED_EXTS.has(parsed.ext)) continue;
@@ -7205,7 +7312,7 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              return { dirOrderMeta, entries: sortFsEntries(entries, dirOrderMeta) };
            };
 
-           const buildDataFromFsRoot = async (rootHandle, previousData = null) => {
+           const buildDataFromFsRoot = async (rootHandle, previousData = null, { orderScopeKey = "" } = {}) => {
              const nodes = {};
              const handles = new Map();
              const rootId = FS_ROOT_NODE_ID;
@@ -7226,7 +7333,7 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              handles.set(rootId, rootHandle);
 
              const walk = async (dirHandle, parentId, parentRelPath) => {
-               const { entries } = await collectFsDirectoryEntries(dirHandle);
+               const { entries } = await collectFsDirectoryEntries(dirHandle, orderScopeKey, parentRelPath);
 
                for (const entry of entries) {
                  const relPath = joinFsRelPath(parentRelPath, entry.name);
@@ -7240,7 +7347,7 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
                      name: entry.name,
                      parentId,
                      children: [],
-                     collapsed: !!prevNode?.collapsed,
+                     collapsed: typeof prevNode?.collapsed === "boolean" ? prevNode.collapsed : true,
                      createdAt: prevNode?.createdAt || nowISO(),
                      updatedAt: prevNode?.updatedAt || nowISO(),
                      relPath,
@@ -7344,13 +7451,15 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
                const prevDirty = preserveUiSession ? new Set(state.dirty) : new Set();
                const prevMdMode = state.mdMode;
 
-               const { data, handles } = await buildDataFromFsRoot(rootHandle, prevData);
+               const orderScopeKey = await getOrCreateFsOrderScopeKey(rootHandle);
+               const { data, handles } = await buildDataFromFsRoot(rootHandle, prevData, { orderScopeKey });
 
                state.data = data;
                state.fs.connected = true;
                state.fs.rootHandle = rootHandle;
                state.fs.nodeHandles = handles;
                state.fs.currentRootName = rootHandle.name || "";
+               state.fs.orderScopeKey = orderScopeKey;
                saveFsRootHandle(rootHandle).catch(() => {});
                clearPendingFsReconnect();
                state.fs._pendingReconnectArmed = false;
@@ -7660,7 +7769,7 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
                throw new Error("Pasta inválida para persistir a ordem.");
              }
              const meta = buildFsDirectoryOrderMetaFromFolderNode(folderNode);
-             await writeFsDirectoryOrderMeta(folderHandle, meta);
+             await writeFsDirectoryOrderMeta(state.fs.orderScopeKey, folderNode.relPath || "", meta);
              return true;
            };
 
@@ -9473,6 +9582,12 @@ setTimeout(() => updateTabNavButtons(), 60);
              const canRename = !!n;
              const canDelete = !!n && !isRoot;
              const canOpenFolderNotes = !!n && isFolder(n) && getDirectFileChildren(nodeId).length > 0;
+             const isFolderTarget = !!n && isFolder(n);
+             const hasTreeChildren = isFolderTarget && Array.isArray(n.children) && n.children.length > 0;
+             const canExpandFolder = isFolderTarget && !isRoot && hasTreeChildren && !!n.collapsed;
+             const canCollapseFolder = isFolderTarget && !isRoot && hasTreeChildren && !n.collapsed;
+             const canExpandAll = isRoot && hasTreeChildren;
+             const canCollapseAll = isRoot && hasTreeChildren;
 
              const canMove = !!n && !isRoot && !!n.parentId;
              let canMoveUp = false;
@@ -9495,6 +9610,10 @@ setTimeout(() => updateTabNavButtons(), 60);
              ui.treeMenuNewNote.classList.toggle("disabled", !canCreateInTarget);
              ui.treeMenuRename.classList.toggle("disabled", !canRename);
              ui.treeMenuOpenFolderNotes.classList.toggle("disabled", !canOpenFolderNotes);
+             ui.treeMenuExpandFolder.classList.toggle("disabled", !canExpandFolder);
+             ui.treeMenuCollapseFolder.classList.toggle("disabled", !canCollapseFolder);
+             ui.treeMenuExpandAll.classList.toggle("disabled", !canExpandAll);
+             ui.treeMenuCollapseAll.classList.toggle("disabled", !canCollapseAll);
              ui.treeMenuDelete.classList.toggle("disabled", !canDelete);
              ui.treeMenuMoveUp.classList.toggle("disabled", !canMoveUp);
              ui.treeMenuMoveDown.classList.toggle("disabled", !canMoveDown);
@@ -9543,6 +9662,42 @@ setTimeout(() => updateTabNavButtons(), 60);
              const id = state.treeMenuForNodeId;
              closeTreeMenu();
              openDirectFolderNotes(id);
+           });
+
+           ui.treeMenuExpandFolder.addEventListener("click", async () => {
+             if (ui.treeMenuExpandFolder.classList.contains("disabled")) return;
+             const id = state.treeMenuForNodeId;
+             closeTreeMenu();
+             const ready = await ensureFsRootReadyForTreeInteraction();
+             if (!ready) return;
+             setFolderCollapsedState(id, false, { focus: true });
+           });
+
+           ui.treeMenuCollapseFolder.addEventListener("click", async () => {
+             if (ui.treeMenuCollapseFolder.classList.contains("disabled")) return;
+             const id = state.treeMenuForNodeId;
+             closeTreeMenu();
+             const ready = await ensureFsRootReadyForTreeInteraction();
+             if (!ready) return;
+             setFolderCollapsedState(id, true, { focus: true });
+           });
+
+           ui.treeMenuExpandAll.addEventListener("click", async () => {
+             if (ui.treeMenuExpandAll.classList.contains("disabled")) return;
+             const id = state.treeMenuForNodeId;
+             closeTreeMenu();
+             const ready = await ensureFsRootReadyForTreeInteraction();
+             if (!ready) return;
+             setFolderTreeCollapsedState(id, false, { includeSelf: false, focus: true });
+           });
+
+           ui.treeMenuCollapseAll.addEventListener("click", async () => {
+             if (ui.treeMenuCollapseAll.classList.contains("disabled")) return;
+             const id = state.treeMenuForNodeId;
+             closeTreeMenu();
+             const ready = await ensureFsRootReadyForTreeInteraction();
+             if (!ready) return;
+             setFolderTreeCollapsedState(id, true, { includeSelf: false, focus: true });
            });
 
            ui.treeMenuMoveUp.addEventListener("click", () => {
@@ -13157,8 +13312,8 @@ const renderMarkdownPreview = (mdText, tabId) => {
              return { name: name.value.trim() || initialName, ext: (rMd.checked ? "md" : "txt") };
            };
 
-           const findFolderTarget = () => {
-             const sel = getNode(state.selectedId);
+           const findFolderTarget = ({ preferActiveTab = false } = {}) => {
+             const sel = getNode(getTreeTargetIdFromPosition({ preferActiveTab }));
              if (!sel) return state.data.rootId;
              if (sel.type === "folder") return sel.id;
              return sel.parentId || state.data.rootId;
@@ -13198,8 +13353,8 @@ const renderMarkdownPreview = (mdText, tabId) => {
              }
            };
 
-           const createFolder = async () => {
-             const parentId = findFolderTarget();
+           const createFolder = async ({ preferActiveTab = false } = {}) => {
+             const parentId = findFolderTarget({ preferActiveTab });
              await createFolderAt(parentId);
            };
 
@@ -13277,8 +13432,8 @@ const renderMarkdownPreview = (mdText, tabId) => {
              }
            };
 
-           const createNote = async () => {
-             const parentId = findFolderTarget();
+           const createNote = async ({ preferActiveTab = false } = {}) => {
+             const parentId = findFolderTarget({ preferActiveTab });
              await createNoteAt(parentId);
            };
 
@@ -13291,21 +13446,57 @@ const renderMarkdownPreview = (mdText, tabId) => {
              };
            };
 
-           const getTreeTargetIdFromPosition = () => {
+           const getActiveTabNodeId = () => {
+             const tab = getTab(state.activeTabId);
+             return tab?.nodeId && getNode(tab.nodeId) ? tab.nodeId : null;
+           };
+
+           const isElementInside = (root, target = document.activeElement) => {
+             if (!root || !target) return false;
+             return root === target || (typeof root.contains === "function" && root.contains(target));
+           };
+
+           const isShortcutEditorContext = (target = document.activeElement) => {
+             const editorPanel = document.getElementById("editorPanel");
+             return target === ui.editor ||
+               isElementInside(ui.mdPreviewWrap, target) ||
+               isElementInside(ui.mdPreview, target) ||
+               isElementInside(ui.tabs, target) ||
+               isElementInside(editorPanel, target);
+           };
+
+           const getTreeTargetIdFromPosition = ({ preferActiveTab = false } = {}) => {
              const order = getTreeOrder();
              const focusId = state.treeFocusId;
-             const focusIsInTree = !!(document.activeElement && ui.tree && ui.tree.contains(document.activeElement));
+             const activeEl = document.activeElement;
+             const focusIsInTree = !!(activeEl && ui.tree && ui.tree.contains(activeEl));
+             const activeTabNodeId = getActiveTabNodeId();
 
-             if (focusIsInTree && focusId && order.includes(focusId)) {
+             if (focusIsInTree && focusId && (!order.length || order.includes(focusId)) && getNode(focusId)) {
                return focusId;
              }
 
-             return state.selectedId;
+             if ((preferActiveTab || isShortcutEditorContext(activeEl)) && activeTabNodeId) {
+               return activeTabNodeId;
+             }
+
+             if (state.selectedId && getNode(state.selectedId)) return state.selectedId;
+             if (activeTabNodeId) return activeTabNodeId;
+             return state.data?.rootId && getNode(state.data.rootId) ? state.data.rootId : null;
            };
 
-           const renameSelected = async () => {
+           const syncShortcutTargetSelection = ({ preferActiveTab = false } = {}) => {
+             const id = getTreeTargetIdFromPosition({ preferActiveTab });
+             if (id && getNode(id)) {
+               state.selectedId = id;
+               state.treeFocusId = id;
+               return id;
+             }
+             return null;
+           };
+           const renameSelected = async ({ preferActiveTab = false } = {}) => {
              if (!isFsConnected()) return toast("Escolha a pasta raiz primeiro.");
-             const id = getTreeTargetIdFromPosition();
+             const id = getTreeTargetIdFromPosition({ preferActiveTab });
              const n = getNode(id);
              if (!n) return toast("Selecione um item válido.");
 
@@ -13380,9 +13571,9 @@ const renderMarkdownPreview = (mdText, tabId) => {
              }
            };
 
-           const deleteSelected = async () => {
+           const deleteSelected = async ({ preferActiveTab = false } = {}) => {
              if (!isFsConnected()) return toast("Escolha a pasta raiz primeiro.");
-             const id = state.selectedId;
+             const id = getTreeTargetIdFromPosition({ preferActiveTab });
              const n = getNode(id);
              if (!n) return;
              if (id === state.data.rootId) return toast("Não é possível deletar a pasta raiz.");
@@ -13598,13 +13789,13 @@ const renderMarkdownPreview = (mdText, tabId) => {
              setTimeout(() => URL.revokeObjectURL(url), 0);
            };
 
-           const buildFsJsonDirectorySnapshot = async (dirHandle) => {
-             const { entries } = await collectFsDirectoryEntries(dirHandle);
+           const buildFsJsonDirectorySnapshot = async (dirHandle, orderScopeKey = state.fs?.orderScopeKey || "", dirRelPath = "") => {
+             const { entries } = await collectFsDirectoryEntries(dirHandle, orderScopeKey, dirRelPath);
 
              const children = [];
              for (const entry of entries) {
                if (entry.kind === "directory") {
-                 children.push(await buildFsJsonDirectorySnapshot(entry.handle));
+                 children.push(await buildFsJsonDirectorySnapshot(entry.handle, orderScopeKey, joinFsRelPath(dirRelPath, entry.name)));
                  continue;
                }
 
@@ -13664,16 +13855,17 @@ const renderMarkdownPreview = (mdText, tabId) => {
              };
            };
 
-           const importFsJsonDirectoryIntoHandle = async (dirHandle, directoryNode, stats) => {
+           const importFsJsonDirectoryIntoHandle = async (dirHandle, directoryNode, stats, orderScopeKey = state.fs?.orderScopeKey || "", dirRelPath = "") => {
              const order = [];
              for (const child of directoryNode.children) {
                if (child.type === "directory") {
                  const folderName = normalizeFsEntryName(child.name);
                  if (!folderName) continue;
                  const childHandle = await dirHandle.getDirectoryHandle(folderName, { create: true });
+                 const childRelPath = joinFsRelPath(dirRelPath, folderName);
                  order.push(getFsOrderEntryKey("directory", folderName));
                  stats.folders += 1;
-                 await importFsJsonDirectoryIntoHandle(childHandle, child, stats);
+                 await importFsJsonDirectoryIntoHandle(childHandle, child, stats, orderScopeKey, childRelPath);
                  continue;
                }
 
@@ -13694,7 +13886,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
                if (existed) stats.overwritten += 1;
              }
 
-             await writeFsDirectoryOrderMeta(dirHandle, { version: FS_ORDER_META_VERSION, order });
+             await writeFsDirectoryOrderMeta(orderScopeKey, dirRelPath, { version: FS_ORDER_META_VERSION, order });
            };
 
            const exportAll = async () => {
@@ -13702,7 +13894,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
              try {
                const allowed = await ensureFsHandlePermission(state.fs.rootHandle, "read", { prompt: true });
                if (!allowed) return toast("Permissão de leitura não concedida para exportar a pasta raiz.");
-               const rootSnapshot = await buildFsJsonDirectorySnapshot(state.fs.rootHandle);
+               const rootSnapshot = await buildFsJsonDirectorySnapshot(state.fs.rootHandle, state.fs.orderScopeKey, "");
                const payload = {
                  format: FS_TREE_EXPORT_FORMAT,
                  version: FS_TREE_EXPORT_VERSION,
@@ -14691,7 +14883,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
                }
 
                const stats = { folders: 0, files: 0, overwritten: 0 };
-               await importFsJsonDirectoryIntoHandle(state.fs.rootHandle, payload.root, stats);
+               await importFsJsonDirectoryIntoHandle(state.fs.rootHandle, payload.root, stats, state.fs.orderScopeKey, "");
                await refreshFsTree({ silent: true });
                toast(`Importação concluída ✅ Pastas: ${stats.folders} • Arquivos: ${stats.files}` + (stats.overwritten ? ` • Sobrescritos: ${stats.overwritten}` : ""));
              } catch (error) {
@@ -14756,6 +14948,35 @@ const renderMarkdownPreview = (mdText, tabId) => {
              const folder = typeof folderOrId === 'string' ? getNode(folderOrId) : folderOrId;
              if (!isFolder(folder)) return false;
              return setFolderCollapsedState(folder, !folder.collapsed, options);
+           };
+
+           const setFolderTreeCollapsedState = (folderOrId, collapsed, { includeSelf = true, focus = false } = {}) => {
+             const folder = typeof folderOrId === 'string' ? getNode(folderOrId) : folderOrId;
+             if (!isFolder(folder)) return false;
+             let changed = false;
+             const apply = (folderId, isRootCall = false) => {
+               const current = getNode(folderId);
+               if (!isFolder(current)) return;
+               const shouldApplyToCurrent = includeSelf || !isRootCall;
+               if (shouldApplyToCurrent && current.id !== state.data.rootId && current.collapsed !== collapsed) {
+                 current.collapsed = collapsed;
+                 changed = true;
+               }
+               for (const childId of Array.isArray(current.children) ? current.children : []) {
+                 const child = getNode(childId);
+                 if (isFolder(child)) apply(child.id, false);
+               }
+             };
+             apply(folder.id, true);
+             if (state.data?.rootId && getNode(state.data.rootId)) getNode(state.data.rootId).collapsed = false;
+             if (!changed) {
+               if (focus) focusTreeItem(folder.id);
+               return false;
+             }
+             saveData();
+             scheduleRenderTree();
+             if (focus) focusTreeItem(folder.id);
+             return true;
            };
 
            const openTreeFileById = (fileId, { revealSearch = false } = {}) => {
@@ -15236,10 +15457,16 @@ const renderMarkdownPreview = (mdText, tabId) => {
             }
 
             if (e.key === "F2") {
-              if (typing) return;
+              // F2 deve funcionar no item focado da árvore e também no arquivo ativo
+              // quando o foco está no editor TXT/MD, no preview Markdown ou nas abas.
+              // Campos de busca/diálogo continuam protegidos para não interromper edição de formulário.
+              const preferActiveTab = isShortcutEditorContext(e.target);
+              if (typing && e.target !== ui.editor) return;
+              const targetId = syncShortcutTargetSelection({ preferActiveTab });
+              if (!targetId) return;
               e.preventDefault();
               e.stopPropagation();
-              renameSelected();
+              renameSelected({ preferActiveTab });
               return;
             }
 
@@ -15349,14 +15576,14 @@ const renderMarkdownPreview = (mdText, tabId) => {
             if (ctrl && e.altKey && !e.shiftKey && keyLower === "s") {
               e.preventDefault();
               e.stopPropagation();
-              createFolder();
+              createFolder({ preferActiveTab: isShortcutEditorContext(e.target) });
               return;
             }
 
             if (ctrl && e.altKey && !e.shiftKey && keyLower === "d") {
               e.preventDefault();
               e.stopPropagation();
-              createNote();
+              createNote({ preferActiveTab: isShortcutEditorContext(e.target) });
               return;
             }
 
@@ -15392,9 +15619,13 @@ const renderMarkdownPreview = (mdText, tabId) => {
             }
 
             if ((ctrl && e.key === "Delete") || (e.altKey && e.key === "Delete")) {
+              const preferActiveTab = isShortcutEditorContext(e.target);
+              if (typing && e.target !== ui.editor) return;
+              const targetId = syncShortcutTargetSelection({ preferActiveTab });
+              if (!targetId) return;
               e.preventDefault();
               e.stopPropagation();
-              deleteSelected();
+              deleteSelected({ preferActiveTab });
               return;
             }
           };

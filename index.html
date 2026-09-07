@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta name="description" content="Workspace web local-first para organizar uma pasta raiz real, editar arquivos .txt e .md, usar abas, busca, preview Markdown, personalização e backup/importação em JSON." />
+      <meta name="description" content="Workspace local-first para organizar arquivos .txt e .md em uma pasta real, com árvore, abas, busca, Markdown avançado, personalização e backup JSON." />
       <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
       <meta name="theme-color" content="#0f1a2e" />
       <meta name="application-name" content="ANOTAÇÕES" />
@@ -13,15 +13,15 @@
       <meta property="og:locale" content="pt_BR" />
       <meta property="og:site_name" content="ANOTAÇÕES" />
       <meta property="og:title" content="ANOTAÇÕES — Workspace local-first para .txt/.md em pasta real" />
-      <meta property="og:description" content="Organize uma pasta raiz real, edite arquivos .txt e .md, use abas, busca por conteúdo, preview Markdown, personalização visual e backup/importação em JSON." />
-      <meta property="og:image" content="./social-preview.png" />
+      <meta property="og:description" content="Workspace local-first para organizar arquivos .txt e .md em uma pasta real, com árvore, abas, busca, Markdown avançado, personalização e backup JSON." />
+      <meta property="og:image" content="https://diego-ch4m4x.github.io/ANOTACOES/social-preview.png" />
       <meta property="og:image:width" content="1280" />
       <meta property="og:image:height" content="640" />
       <meta property="og:image:alt" content="Workspace local-first ANOTAÇÕES com árvore de arquivos real, abas, editor e preview Markdown." />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content="ANOTAÇÕES — Workspace local-first para .txt/.md em pasta real" />
-      <meta name="twitter:description" content="Aplicação web estática para editar arquivos .txt e .md em uma pasta real, com abas, busca, preview Markdown, personalização e backup JSON." />
-      <meta name="twitter:image" content="./social-preview.png" />
+      <meta name="twitter:description" content="Workspace local-first para organizar arquivos .txt e .md em uma pasta real, com árvore, abas, busca, Markdown avançado, personalização e backup JSON." />
+      <meta name="twitter:image" content="https://diego-ch4m4x.github.io/ANOTACOES/social-preview.png" />
       <meta name="twitter:image:alt" content="Workspace local-first ANOTAÇÕES com árvore de arquivos real, abas, editor e preview Markdown." />
       <link rel="canonical" href="https://diego-ch4m4x.github.io/ANOTACOES/" />
       <meta property="og:url" content="https://diego-ch4m4x.github.io/ANOTACOES/" />
@@ -29,29 +29,33 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "ANOTAÇÕES",
-        "applicationCategory": "ProductivityApplication",
-        "operatingSystem": "Desktop",
+        "applicationCategory": "UtilitiesApplication",
         "browserRequirements": "Chrome desktop ou Edge desktop com suporte à File System Access API",
         "inLanguage": "pt-BR",
         "isAccessibleForFree": true,
-        "softwareVersion": "1.0.13",
+        "softwareVersion": "1.0.24",
         "url": "https://diego-ch4m4x.github.io/ANOTACOES/",
-        "description": "Workspace web local-first para organizar uma pasta raiz real, editar arquivos .txt e .md, usar abas, busca por conteúdo, preview Markdown, personalização visual e backup/importação em JSON.",
+        "description": "Workspace local-first para organizar arquivos .txt e .md em uma pasta real, com árvore, abas, busca, Markdown avançado, personalização e backup JSON.",
         "featureList": [
-          "Pasta raiz real escolhida manualmente",
-          "Edição de arquivos .txt e .md reais",
-          "Árvore de pastas e arquivos",
-          "Abas múltiplas",
-          "Busca por nome e conteúdo",
-          "Preview Markdown com HTML nativo",
-          "Personalização visual local",
-          "Exportação e importação em JSON",
-          "Publicação estática em GitHub Pages"
-        ]
-      }</script>
+                "Pasta raiz real escolhida manualmente",
+                "Edição de arquivos .txt e .md reais",
+                "Árvore de pastas e arquivos",
+                "Abas múltiplas",
+                "Busca por nome e conteúdo",
+                "Preview Markdown com HTML nativo e modos Editar, Live Preview em split e View",
+                "Imagens locais no Markdown por caminhos relativos à pasta raiz autorizada",
+                "Personalização visual local",
+                "Exportação e importação em JSON",
+                "Publicação estática em GitHub Pages"
+        ],
+        "offers": {
+                "@type": "Offer",
+                "price": 0
+        }
+}</script>
             <!-- Segurança (CSP via META): reforça contra XSS no Preview Markdown.
            Observação: diretivas sem suporte em <meta>, como frame-ancestors, ficam fora desta política e só podem ser aplicadas por header HTTP. -->
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-DV3dLwJgUtPtBSG3YrnoWpX2ByDEnYignXF7t93MIWo='; style-src-elem 'self' 'nonce-noteapp' 'sha256-DV3dLwJgUtPtBSG3YrnoWpX2ByDEnYignXF7t93MIWo='; style-src-attr 'unsafe-inline'; script-src 'self' 'sha256-pM8s5qHj12eTqaENMPXZUflNRzE0NyOB3yw5SwV00UQ=' 'sha256-+kfVW7bkT4qkxIBRBpeIit3V/d5pCL/6Wqia4ouFko8='; script-src-elem 'self' 'sha256-pM8s5qHj12eTqaENMPXZUflNRzE0NyOB3yw5SwV00UQ=' 'sha256-+kfVW7bkT4qkxIBRBpeIit3V/d5pCL/6Wqia4ouFko8='; script-src-attr 'none';" />
+      <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'self'; connect-src 'none'; font-src 'self' data:; img-src 'self' data: https: blob:; media-src 'self' data: https: blob:; style-src 'self' 'nonce-noteapp' 'sha256-B1n0qVsDrnxEEQp+i5tKZqIhuFOTKq1E3EtQ9y9iesw='; style-src-elem 'self' 'nonce-noteapp' 'sha256-B1n0qVsDrnxEEQp+i5tKZqIhuFOTKq1E3EtQ9y9iesw='; style-src-attr 'unsafe-inline'; script-src 'self' 'sha256-5xj1gUyv0BG20JIF48oZThoPrGFrBytbKX06n1QAS/s=' 'sha256-HxrCd2B/ja1/1poHp2yIVX3B8lz94z//ffnWGVUkYB0='; script-src-elem 'self' 'sha256-5xj1gUyv0BG20JIF48oZThoPrGFrBytbKX06n1QAS/s=' 'sha256-HxrCd2B/ja1/1poHp2yIVX3B8lz94z//ffnWGVUkYB0='; script-src-attr 'none';" />
       <meta name="referrer" content="no-referrer" />
       <title>ANOTAÇÕES — Workspace local-first para .txt/.md em pasta real</title>
       <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20color%3D%22%23FFFFFF%22%3E%3Cg%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20fill%3D%22currentColor%22%20fill-opacity%3D%220.3%22%20d%3D%22M22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M20%205v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%3BM22%203v14c0%200.55%20-0.45%201%20-1%201h-14c-0.55%200%20-1%20-0.45%20-1%20-1v-14c0%20-0.55%200.45%20-1%201%20-1h14c0.55%200%201%200.45%201%201Z%22%2F%3E%3C%2Fpath%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%3E%3Canimate%20fill%3D%22freeze%22%20attributeName%3D%22d%22%20dur%3D%220.4s%22%20values%3D%22M8%208h8M8%2012h8M8%2016h5M4%205v14c0%200.55%200.45%201%201%201h14%3BM10%206h8M10%2010h8M10%2014h5M2%206v15c0%200.55%200.45%201%201%201h15%22%2F%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
@@ -75,7 +79,6 @@
             --theme-text-primary: #e8eefc;
             --theme-text-muted: #9fb0d0;
             --theme-border-default: rgba(255, 255, 255, 0.1);
-            --theme-border-soft: rgba(255, 255, 255, 0.07);
             --theme-accent: #7aa7ff;
             --theme-success: #38d9a9;
             --theme-warning: #ffd43b;
@@ -123,9 +126,6 @@
             /* ================================================================
                05) TEMA DO CONTEÚDO / EDITOR / PREVIEW
                ================================================================ */
-            --content-surface-bg: var(--theme-surface-canvas);
-            --content-text-color: var(--theme-text-primary);
-            --content-font-family: var(--font-family-mono);
             --content-font-size: 14px;
             --content-code-font-family: var(--font-family-code-preview);
             --content-code-font-size: calc(var(--content-font-size) - 2pt);
@@ -147,16 +147,13 @@
             --tree-surface-bg: var(--personalizacao-fundo-arvore-esquerda);
             --tree-text-color: var(--personalizacao-cor-texto-arvore-esquerda);
             --tree-font-family: var(--personalizacao-fonte-arvore-esquerda);
-            --tree-hover-bg: rgba(122,167,255,.14);
             --tree-hover-border: rgba(122,167,255,.44);
 
             /* ================================================================
                07) TEMA DAS ABAS / ESTADOS DE NAVEGAÇÃO
                ================================================================ */
-            --tab-bg: #212734;
             --tab-bg-hover: #323844;
             --tab-border: #6D7179;
-            --tab-text: #7E8DA9;
             --tab-text-muted: #707D98;
 
             /* ================================================================
@@ -165,7 +162,6 @@
             --feedback-surface-subtle: rgba(255, 255, 255, 0.03);
             --feedback-surface-strong: rgba(255, 255, 255, 0.05);
             --feedback-text-danger: #ffd6d6;
-            --feedback-bg-danger: rgba(255, 107, 107, 0.1);
             --feedback-text-warning: #fff3bf;
             --feedback-border-warning: rgba(255, 212, 59, 0.4);
             --feedback-bg-warning: rgba(255, 212, 59, 0.08);
@@ -269,7 +265,6 @@
             --focus: var(--theme-focus-ring-strong);
             --mark-bg: var(--theme-highlight-bg);
             --mark-fg: var(--theme-highlight-fg);
-            --ui-border-soft: var(--theme-border-soft);
             --ui-shadow-sm: var(--theme-shadow-sm);
             --ui-ease: var(--motion-ease-standard);
             --ui-speed-base: var(--motion-duration-base);
@@ -315,7 +310,7 @@ body {
             margin: 0;
             background: radial-gradient(1200px 700px at 10% 0%, rgba(122, 167, 255, 0.12), transparent 55%),
                radial-gradient(900px 600px at 90% 20%, rgba(56, 217, 169, 0.1), transparent 55%), var(--theme-surface-canvas, var(--bg));
-            color: var(--md-code-fg, var(--theme-text-primary, var(--text))) !important;
+            color: var(--md-code-fg, var(--theme-text-primary, var(--text)));
             font-family: var(--font-family-sans, var(--ui));
          }
 
@@ -443,7 +438,7 @@ body {
 
          .fmt-info .sub {
             margin-top: 2px;
-            color: var(--md-code-fg, var(--theme-text-muted, var(--muted))) !important;
+            color: var(--md-code-fg, var(--theme-text-muted, var(--muted)));
             font-size: 14px;
          }
 
@@ -461,13 +456,6 @@ body {
             box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 10px 22px rgba(0,0,0,.16);
             user-select: none;
             white-space: nowrap;
-         }
-         .brandLogo {
-            width: 27px;
-            height: 27px;
-            flex: 0 0 27px;
-            display: block;
-            color: var(--theme-text-primary, var(--text));
          }
          .brandLabel {
             display: inline-flex;
@@ -595,7 +583,7 @@ body {
                border: 1px solid rgba(255, 255, 255, 0.18);
                box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
                opacity: 0;
-               pointer-events: none !important;
+               pointer-events: none;
                transition: opacity 140ms ease, transform 140ms ease;
                z-index: 80;
             }
@@ -760,7 +748,7 @@ body {
             position: absolute;
             left: 50%;
             opacity: 0;
-            pointer-events: none !important;
+            pointer-events: none;
             transition: opacity 140ms ease, transform 140ms ease;
          }
          .headerInfoButton[data-tip]::after {
@@ -1025,7 +1013,7 @@ body {
             background-image: none;
             border-color: var(--tree-hover-border);
             box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-            outline: none !important;
+            outline: none;
          }
 
          /* =========================
@@ -1138,17 +1126,6 @@ body {
             font-family: var(--font-family-mono, var(--mono));
             font-size: 12px;
             margin-left: 6px;
-         }
-
-         /* ===========================
-            UX: cursor "Grabbing Hand" ao clicar e segurar na árvore
-            - Não muda o cursor no hover (somente durante o hold/drag)
-            =========================== */
-         html.tree-grabbing,
-         html.tree-grabbing *,
-         body.tree-grabbing,
-         body.tree-grabbing *{
-            cursor: grabbing !important;
          }
 
          mark.hl {
@@ -1357,7 +1334,7 @@ body {
             backdrop-filter: none;
          }
          html.tabs-wrap-enabled .tabsNav {
-            display: none !important;
+            display: none;
          }
          html.tabs-wrap-enabled .tab {
             margin-bottom: 0;
@@ -1601,7 +1578,6 @@ html.tabs-reordering, body.tabs-reordering{
             border-radius: 999px;
          }
          .ctxmenu .item.danger {
-            --ctxmenu-item-hover-bg: var(--feedback-bg-danger);
             color: var(--feedback-text-danger);
          }
 
@@ -1717,9 +1693,9 @@ html.tabs-reordering, body.tabs-reordering{
             width: 100%;
             height: 100%;
             resize: none;
-            border: none !important;
-            outline: none !important;
-            box-shadow: none !important;
+            border: none;
+            outline: none;
+            box-shadow: none;
             border-radius: 0;
             appearance: none;
             -webkit-appearance: none;
@@ -1790,7 +1766,7 @@ html.tabs-reordering, body.tabs-reordering{
          }
 
          .editorSearchMirror .editorFindHit{
-            color: transparent !important;
+            color: transparent;
             -webkit-text-fill-color: transparent;
             /* Fundo semitransparente: mantém o realce sem esconder o texto real
                do textarea que fica logo abaixo do overlay. */
@@ -1801,7 +1777,7 @@ html.tabs-reordering, body.tabs-reordering{
          }
 
          .editorSearchMirror .editorFindHit.active{
-            color: transparent !important;
+            color: transparent;
             -webkit-text-fill-color: transparent;
             /* O texto ativo usa a seleção nativa do textarea.
                Aqui o overlay NÃO pode pintar um fundo sólido,
@@ -1814,21 +1790,21 @@ html.tabs-reordering, body.tabs-reordering{
             /* Preview Markdown: os hits passivos precisam ficar visualmente tão legíveis
                quanto no TXT. Forçamos fundo, cor e box-decoration-break para que o
                realce continue aparecendo mesmo em headings, listas e linhas quebradas. */
-            background: rgba(255, 230, 0, 0.48) !important;
-            color: inherit !important;
-            -webkit-text-fill-color: currentColor !important;
+            background: rgba(255, 230, 0, 0.48);
+            color: inherit;
+            -webkit-text-fill-color: currentColor;
             border-radius: 3px;
             box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16);
             padding: 0 2px;
             box-decoration-break: clone;
             -webkit-box-decoration-break: clone;
-            text-decoration: none !important;
+            text-decoration: none;
          }
 
          .mdPreviewSearchHit.active{
-            background: rgba(76, 141, 255, 0.24) !important;
-            color: inherit !important;
-            -webkit-text-fill-color: currentColor !important;
+            background: rgba(76, 141, 255, 0.24);
+            color: inherit;
+            -webkit-text-fill-color: currentColor;
             box-shadow: inset 0 0 0 1px rgba(76,141,255,.90);
          }
 
@@ -1866,33 +1842,179 @@ html.tabs-reordering, body.tabs-reordering{
          }
 
          .emptyState {
-            position: absolute;
-            inset: 96px 0 44px 0; /* tabs + editor-head */
             display: none;
+            flex: 1 1 auto;
+            min-height: 0;
+            min-width: 0;
             align-items: center;
             justify-content: center;
-            padding: 26px;
-            color: var(--theme-text-muted, var(--muted));
+            overflow: auto;
+            padding: clamp(20px, 4vw, 48px);
+            background: var(--personalizacao-fundo-exibicao-direita);
+            color: var(--personalizacao-cor-texto-exibicao-direita);
             text-align: center;
-            backdrop-filter: blur(2px);
+         }
+         section.editor.is-empty > .editor-head,
+         section.editor.is-empty > .md-workspace {
+            display: none;
+         }
+         section.editor.is-empty > .emptyState {
+            display: flex;
          }
          .emptyCard {
-            position: relative;
+            width: min(760px, 100%);
             max-width: 760px;
-            border: 1px solid var(--utility-empty-card-border, rgba(255,255,255,.09));
-            background: var(--utility-empty-card-bg, linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.024)));
-            border-radius: var(--utility-empty-card-radius, 20px);
-            padding: var(--utility-empty-card-pad-y-top, 24px) var(--utility-empty-card-pad-x, 24px) var(--utility-empty-card-pad-y-bottom, 18px);
-            box-shadow: var(--utility-empty-card-shadow, 0 18px 42px rgba(0, 0, 0, 0.22));
+            margin: auto;
+            padding: 22px 24px 18px;
+            border: 0;
+            background: transparent;
+            border-radius: 0;
+            box-shadow: none;
          }
-         .emptyCard h3 {
-            margin: 0 0 6px;
+         .emptyLogo {
+            width: 72px;
+            height: 72px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 22px;
+            color: var(--emptytitle-fg, var(--personalizacao-cor-texto-exibicao-direita));
+            border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+            border-radius: 20px;
+            background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 88%, currentColor 12%);
+            box-shadow: 0 12px 28px color-mix(in srgb, #000 18%, transparent);
+         }
+         .emptyLogo > svg {
+            width: 42px;
+            height: 42px;
+            display: block;
+         }
+         .emptyCard h2 {
+            margin: 0 0 10px;
             color: var(--emptytitle-fg, var(--theme-text-primary, var(--text)));
-            font-size: 16px;
+            font-size: clamp(20px, 2vw, 26px);
+            line-height: 1.2;
          }
-         .emptyCard p {
-            margin: 0;
+         .emptyCard > p,
+         .emptyRootHint {
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
             line-height: 1.55;
+         }
+         .emptyCard > #emptyText {
+            margin-top: 0;
+            margin-bottom: 0;
+            color: var(--emptytext-fg, var(--theme-text-muted, var(--muted)));
+         }
+         .emptyActions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+         }
+         .emptyActionButton {
+            min-height: 42px;
+            min-width: 150px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding-inline: 16px;
+         }
+         .emptyActionIcon,
+         .emptyInlineIcon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+         }
+         .emptyActionIcon svg {
+            width: 18px;
+            height: 18px;
+            display: block;
+         }
+         .emptyRootHint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 14px;
+            margin-bottom: 0;
+            font-size: 12px;
+            color: color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 72%, transparent);
+         }
+         .emptyInlineIcon svg {
+            width: 16px;
+            height: 16px;
+            display: block;
+         }
+         .emptyState[data-mode="root"] .emptyWorkspaceOnly,
+         .emptyState[data-mode="workspace"] .emptyRootOnly {
+            display: none;
+         }
+         .emptyDivider {
+            width: min(580px, 100%);
+            margin: 26px auto 18px;
+            border-top: 1px solid color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 16%, transparent);
+         }
+         .emptyMeta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px 22px;
+            font-size: 12px;
+            color: color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 74%, transparent);
+         }
+         .emptyShortcutList {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px 18px;
+         }
+         .emptyShortcut,
+         .emptyShortcutKeys {
+            display: inline-flex;
+            align-items: center;
+         }
+         .emptyShortcut {
+            gap: 7px;
+         }
+         .emptyShortcutKeys {
+            gap: 3px;
+         }
+         .emptyShortcutsButton {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 5px 8px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: inherit;
+            font: inherit;
+            font-weight: 700;
+            line-height: 1;
+         }
+         .emptyShortcutsButton:hover,
+         .emptyShortcutsButton:focus-visible {
+            background: color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 8%, transparent);
+            color: var(--emptytitle-fg, var(--personalizacao-cor-texto-exibicao-direita));
+         }
+         .emptyShortcutsButton svg {
+            width: 18px;
+            height: 18px;
+            display: block;
+         }
+         .emptyCard .emptyLead {
+            font-weight: 600;
+         }
+         .emptyCard .emptyInstruction {
+            margin-top: 8px;
          }
 
          .toast {
@@ -1997,34 +2119,7 @@ html.tabs-reordering, body.tabs-reordering{
                   
 
 
-         @media (prefers-reduced-motion: reduce) {
-            header,
-            .pane-title,
-            .tabsBar,
-            .editor-head,
-            .hint,
-            .modal,
-            .ctxmenu,
-            .emptyCard,
-            .toast,
-            .search,
-            .searchMode,
-            .resultsBadge,
-            .tab,
-            .tree .node,
-            button,
-            .badge,
-            .kbd,
-            .clearSearch,
-            .tabsNav,
-            .sidebar-toggle,
-            .editor-head-toggle {
-               transition: none !important;
-            }
-            .dirtyBadge.shake { animation: none !important; }
-            .modal.shake { animation: none !important; }
-            .toast { animation: none !important; }
-         }
+         
 
          .modal header .dirtyBadge:focus{
             outline: var(--utility-dirty-badge-outline, 2px solid rgba(255,255,255,0.22));
@@ -2194,9 +2289,7 @@ html.tabs-reordering, body.tabs-reordering{
          html.fs-sync-active body {
             cursor: progress;
          }
-         @media (prefers-reduced-motion: reduce) {
-            .syncStatusIcon svg { animation: none !important; }
-         }
+         
          .helpText {
             font-size: 12px;
             color: var(--utility-help-text, var(--theme-text-muted, var(--muted)));
@@ -2267,11 +2360,8 @@ html.tabs-reordering, body.tabs-reordering{
             --cc-swatch-border: 1px solid rgba(0,0,0,.25);
             --cc-swatch-outline: 1px solid rgba(255,255,255,.16);
             --cc-hex-border: none;
-            --cc-hex-shadow: none;
             --cc-hex-focus-outline: none;
-            --cc-hex-focus-shadow: none;
             --cc-right-border-left: 1px solid rgba(255,255,255,.14);
-            --cc-right-shadow: none;
             --cc-right-backdrop: blur(8px);
          }
          .modal--customize .customizeHeader{
@@ -2690,13 +2780,13 @@ html.tabs-reordering, body.tabs-reordering{
         }
 
          .markdown-body {
-            background: transparent !important;
+            background: transparent;
             min-width: 0;
-            color: var(--personalizacao-cor-texto-exibicao-direita) !important;
+            color: var(--personalizacao-cor-texto-exibicao-direita);
             max-width: 100%;
-            font-family: var(--personalizacao-fonte-exibicao-direita) !important;
-            font-size: var(--personalizacao-tamanho-fonte-exibicao-direita) !important;
-            line-height: var(--markdown-line-height, 1.6) !important;
+            font-family: var(--personalizacao-fonte-exibicao-direita);
+            font-size: var(--personalizacao-tamanho-fonte-exibicao-direita);
+            line-height: var(--markdown-line-height, 1.6);
             overflow-wrap: anywhere;
             word-break: break-word;
 }
@@ -2711,23 +2801,23 @@ html.tabs-reordering, body.tabs-reordering{
 
          .md-preview-wrap .markdown-body math-renderer.js-display-math{
             display: block;
-            margin: 0 0 16px !important;
-            padding: 0 !important;
-            background: transparent !important;
-            border: 0 !important;
-            overflow-x: auto !important;
-            overflow-y: hidden !important;
+            margin: 0 0 16px;
+            padding: 0;
+            background: transparent;
+            border: 0;
+            overflow-x: auto;
+            overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
          }
 
          .md-preview-wrap .markdown-body .katex-display{
-            margin: 0 !important;
+            margin: 0;
          }
 
          .md-preview-wrap .markdown-body .katex{
-            color: inherit !important;
-            font-size: 1em !important;
+            color: inherit;
+            font-size: 1em;
          }
 
          .md-preview-wrap .markdown-body .katex .katex-html{
@@ -2735,18 +2825,18 @@ html.tabs-reordering, body.tabs-reordering{
          }
 
          .md-preview-wrap .markdown-body .katex .katex-mathml{
-            position: absolute !important;
-            width: 1px !important;
-            height: 1px !important;
-            overflow: hidden !important;
-            clip: rect(1px, 1px, 1px, 1px) !important;
-            clip-path: inset(50%) !important;
-            white-space: nowrap !important;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(1px, 1px, 1px, 1px);
+            clip-path: inset(50%);
+            white-space: nowrap;
          }
 
          .md-preview-wrap .markdown-body math-renderer math,
          .md-preview-wrap .markdown-body math-renderer math *{
-            font-family: math !important;
+            font-family: math;
          }
 
          /* Isola o KaTeX das regras globais da página */
@@ -2754,15 +2844,15 @@ html.tabs-reordering, body.tabs-reordering{
          .md-preview-wrap .markdown-body math-renderer *,
          .md-preview-wrap .markdown-body .katex,
          .md-preview-wrap .markdown-body .katex *{
-            letter-spacing: normal !important;
-            word-spacing: normal !important;
-            text-transform: none !important;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
          }
 
          .md-preview-wrap .markdown-body math-renderer.js-display-math::-webkit-scrollbar{
-            width: 0 !important;
-            height: 0 !important;
-            display: none !important;
+            width: 0;
+            height: 0;
+            display: none;
          }
 
          /* ===========================
@@ -2777,44 +2867,44 @@ html.tabs-reordering, body.tabs-reordering{
          .md-preview-wrap .markdown-body h4,
          .md-preview-wrap .markdown-body h5,
          .md-preview-wrap .markdown-body h6 {
-            font-family: var(--personalizacao-fonte-exibicao-direita) !important;
-            font-weight: 600 !important;
-            line-height: 1.25 !important;
-            margin-top: 24px !important;
-            margin-bottom: 16px !important;
-            padding: 0 !important;
-            border-bottom: none !important;
-            color: var(--personalizacao-cor-texto-exibicao-direita) !important;
+            font-family: var(--personalizacao-fonte-exibicao-direita);
+            font-weight: 600;
+            line-height: 1.25;
+            margin-top: 24px;
+            margin-bottom: 16px;
+            padding: 0;
+            border-bottom: none;
+            color: var(--personalizacao-cor-texto-exibicao-direita);
          }
 
          .md-preview-wrap .markdown-body :is(h1, h2) {
-            padding-bottom: .3em !important;
-            border-bottom: 1px solid rgba(255,255,255,.22) !important;
-            border-bottom: 1px solid color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 22%, transparent) !important;
+            padding-bottom: .3em;
+            border-bottom: 1px solid rgba(255,255,255,.22);
+            border-bottom: 1px solid color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 22%, transparent);
          }
 
          .md-preview-wrap .markdown-body h1 {
-            font-size: 2em !important;
+            font-size: 2em;
          }
 
          .md-preview-wrap .markdown-body h2 {
-            font-size: 1.5em !important;
+            font-size: 1.5em;
          }
 
-         .md-preview-wrap .markdown-body h3 { font-size: 1.25em !important; }
-         .md-preview-wrap .markdown-body h4 { font-size: 1em !important; }
-         .md-preview-wrap .markdown-body h5 { font-size: .875em !important; }
+         .md-preview-wrap .markdown-body h3 { font-size: 1.25em; }
+         .md-preview-wrap .markdown-body h4 { font-size: 1em; }
+         .md-preview-wrap .markdown-body h5 { font-size: .875em; }
          .md-preview-wrap .markdown-body h6 {
-            font-size: .85em !important;
-            color: rgba(255,255,255,.62) !important;
-            color: color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 62%, transparent) !important;
+            font-size: .85em;
+            color: rgba(255,255,255,.62);
+            color: color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 62%, transparent);
          }
 
          .md-preview-wrap .markdown-body > h1:first-child,
          .md-preview-wrap .markdown-body > h2:first-child,
          .md-preview-wrap .markdown-body > h3:first-child,
          .md-preview-wrap .markdown-body p:first-child {
-            margin-top: 0 !important;
+            margin-top: 0;
          }
 
          /* ===========================
@@ -2826,46 +2916,46 @@ html.tabs-reordering, body.tabs-reordering{
             BLOCO 09 — PREVIEW MARKDOWN / HTML NATIVO / CÓDIGO / TABELAS
             ===================================================================== */
          .md-preview-wrap .markdown-body p{
-            margin: 0 0 16px !important;
+            margin: 0 0 16px;
          }
 
          .md-preview-wrap .markdown-body hr{
             height: 0;
             border: 0;
-            border-top: 1px solid rgba(255,255,255,.18) !important;
-            border-top: 1px solid color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 18%, transparent) !important;
-            margin: 24px 0 !important;
-            background: transparent !important;
+            border-top: 1px solid rgba(255,255,255,.18);
+            border-top: 1px solid color-mix(in srgb, var(--personalizacao-cor-texto-exibicao-direita) 18%, transparent);
+            margin: 24px 0;
+            background: transparent;
          }
 
          .md-preview-wrap .markdown-body ul,
          .md-preview-wrap .markdown-body ol{
-            list-style-position: outside !important;
-            padding: 0 0 0 32px !important;
-            margin: 0 0 16px !important;
+            list-style-position: outside;
+            padding: 0 0 0 32px;
+            margin: 0 0 16px;
          }
 
          .md-preview-wrap .markdown-body li{
             display: list-item;
-            color: inherit !important;
+            color: inherit;
          }
 
          .md-preview-wrap .markdown-body li::marker{
-            color: inherit !important;
+            color: inherit;
          }
 
          .md-preview-wrap .markdown-body li > p{
-            margin: 0.25em 0 !important;
+            margin: 0.25em 0;
          }
 
          .md-preview-wrap .markdown-body li > p:empty{
-            display: none !important;
+            display: none;
          }
 
          .md-preview-wrap .markdown-body li > ul,
          .md-preview-wrap .markdown-body li > ol{
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
+            margin-top: 0;
+            margin-bottom: 0;
          }
 
          .md-preview-wrap .markdown-body ol > li::marker{
@@ -2873,12 +2963,12 @@ html.tabs-reordering, body.tabs-reordering{
          }
 
          .md-preview-wrap .markdown-body .task-list-item{
-            list-style-type: none !important;
+            list-style-type: none;
          }
 
          .md-preview-wrap .markdown-body .task-list-item-checkbox,
          .md-preview-wrap .markdown-body .task-list-item input[type="checkbox"]{
-            margin: 0 .2em 0 -1.6em !important;
+            margin: 0 .2em 0 -1.6em;
             vertical-align: middle;
             appearance: none;
             -webkit-appearance: none;
@@ -2922,35 +3012,50 @@ html.tabs-reordering, body.tabs-reordering{
 
          .md-preview-wrap .markdown-body :not(pre) > code,
          .md-preview-wrap .markdown-body :not(pre) > tt{
-            font-family: var(--personalizacao-fonte-bloco-codigo) !important;
-            font-size: .85em !important;
-            padding: .2em .4em !important;
-            margin: 0 !important;
-            color: inherit !important;
-            background: rgba(45,45,45,.84) !important;
-            background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 84%, rgba(255,255,255,.08)) !important;
-            border-radius: 6px !important;
-            border: 0 !important;
+            font-family: var(--personalizacao-fonte-bloco-codigo);
+            font-size: .85em;
+            padding: .2em .4em;
+            margin: 0;
+            color: inherit;
+            background: rgba(45,45,45,.84);
+            background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 84%, rgba(255,255,255,.08));
+            border-radius: 6px;
+            border: 0;
             white-space: break-spaces;
          }
-         /* Preview Markdown: evita a linha branca/transparente indevida ao passar o mouse nos links */
+         /* Links do Markdown: seguem a cor textual escolhida pelo usuário.
+            A identificação do link é preservada por sublinhado e foco visível, sem cor fixa. */
          .md-preview-wrap .markdown-body a,
+         .md-preview-wrap .markdown-body a:visited,
          .md-preview-wrap .markdown-body a:hover,
          .md-preview-wrap .markdown-body a:active,
-         .md-preview-wrap .markdown-body a:focus {
-            text-decoration: none !important;
+         .md-preview-wrap .markdown-body a:focus,
+         .md-preview-wrap .markdown-body a:focus-visible {
+            color: inherit;
+            text-decoration-line: underline;
+            text-decoration-color: currentColor;
+            text-decoration-thickness: .08em;
+            text-underline-offset: .18em;
+         }
+         .md-preview-wrap .markdown-body a:hover {
+            text-decoration-thickness: .12em;
+         }
+         .md-preview-wrap .markdown-body a:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: 2px;
+            border-radius: 2px;
          }
 
          .md-table-scroll {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             margin: 0.75rem 0;
-            border-radius: 0 !important; /* evita arredondamento/apagado indevido nos cantos da tabela */
-            background: transparent !important;
+            border-radius: 0; /* evita arredondamento/apagado indevido nos cantos da tabela */
+            background: transparent;
            }
-         .md-table-scroll table {
-            margin: 0 !important;
-            border-radius: 0 !important;
+         .md-preview-wrap .markdown-body .md-table-scroll table {
+            margin: 0;
+            border-radius: 0;
          }
 
          
@@ -2962,36 +3067,36 @@ html.tabs-reordering, body.tabs-reordering{
             width: 100%;
             border-collapse: collapse;
             margin: 16px 0;
-            background: transparent !important;
-            color: var(--personalizacao-cor-texto-exibicao-direita) !important;
+            background: transparent;
+            color: var(--personalizacao-cor-texto-exibicao-direita);
          }
 
          .md-preview-wrap .markdown-body table th,
          .md-preview-wrap .markdown-body table td{
             padding: 8px 12px;
             border: 1px solid var(--personalizacao-cor-texto-exibicao-direita);
-            background: transparent !important;
-            color: inherit !important;
+            background: transparent;
+            color: inherit;
             vertical-align: middle;
             line-height: 1.4;
          }
 
          .md-preview-wrap .markdown-body table thead th{
             font-weight: 700;
-            background: rgba(255, 255, 255, 0.05) !important;
+            background: rgba(255, 255, 255, 0.05);
          }
 
          /* github-markdown.css colore o fundo em <tr>/<td>; então precisamos zerar e reaplicar no <td> */
          .md-preview-wrap .markdown-body table tr{
-            background: transparent !important;
+            background: transparent;
          }
 
          .md-preview-wrap .markdown-body table tbody tr:nth-child(even) td{
-            background: rgba(255, 255, 255, 0.03) !important;
+            background: rgba(255, 255, 255, 0.03);
          }
 
          .md-preview-wrap .markdown-body table tbody tr:hover td{
-            background: rgba(255, 255, 255, 0.06) !important;
+            background: rgba(255, 255, 255, 0.06);
          }
 
 
@@ -3001,7 +3106,7 @@ html.tabs-reordering, body.tabs-reordering{
          .md-preview-wrap .markdown-body .footnotes,
          .md-preview-wrap .markdown-body .footnotes li,
          .md-preview-wrap .markdown-body .footnotes p{
-            color: var(--personalizacao-cor-texto-exibicao-direita) !important;
+            color: var(--personalizacao-cor-texto-exibicao-direita);
          }
         .markdown-body .footnotes {
             margin-top: 24px;
@@ -3013,21 +3118,21 @@ html.tabs-reordering, body.tabs-reordering{
 
 
          /* ===========================
-            Blockquote (>) — contraste automático (WCAG Relative Luminance)
-            (a cor é calculada via JS e aplicada em --md-bq-fg)
+            Blockquote (>) — texto acompanha a cor definida pelo usuário.
+            Fundo e borda mantêm tratamento visual próprio; GitHub Alerts preservam seus acentos semânticos.
             =========================== */
          .md-preview-wrap .markdown-body blockquote{
-            color: var(--md-bq-fg, inherit) !important;
-            background: rgba(0,0,0,.18) !important;
-            background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 82%, #000 18%) !important;
-            border-left: 4px solid rgba(255,255,255,.62) !important;
-            border-left: 4px solid color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 38%, #fff 62%) !important;
-            box-shadow: inset 1px 0 0 rgba(255,255,255,.28) !important;
-            box-shadow: inset 1px 0 0 color-mix(in srgb, #fff 28%, transparent) !important;
-            border-radius: 0 10px 10px 0 !important;
+            color: var(--personalizacao-cor-texto-exibicao-direita);
+            background: rgba(0,0,0,.18);
+            background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 82%, #000 18%);
+            border-left: 4px solid rgba(255,255,255,.62);
+            border-left: 4px solid color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita) 38%, #fff 62%);
+            box-shadow: inset 1px 0 0 rgba(255,255,255,.28);
+            box-shadow: inset 1px 0 0 color-mix(in srgb, #fff 28%, transparent);
+            border-radius: 0 10px 10px 0;
          }
          .md-preview-wrap .markdown-body blockquote *{
-            color: inherit !important;
+            color: inherit;
          }
 
 
@@ -3044,15 +3149,15 @@ html.tabs-reordering, body.tabs-reordering{
             --md-alert-bg: rgba(47, 129, 247, .10);
             --md-alert-border: rgba(47, 129, 247, .42);
             --md-alert-inset: rgba(47, 129, 247, .30);
-            margin: 16px 0 !important;
-            padding: 12px 14px !important;
-            border: 1px solid var(--md-alert-border) !important;
-            border-left: 4px solid var(--md-alert-accent) !important;
-            border-radius: 12px !important;
-            background: var(--md-alert-bg) !important;
+            margin: 16px 0;
+            padding: 12px 14px;
+            border: 1px solid var(--md-alert-border);
+            border-left: 4px solid var(--md-alert-accent);
+            border-radius: 12px;
+            background: var(--md-alert-bg);
             box-shadow:
                inset 1px 0 0 var(--md-alert-inset),
-               0 10px 24px rgba(0,0,0,.14) !important;
+               0 10px 24px rgba(0,0,0,.14);
          }
          .md-preview-wrap .markdown-body blockquote.md-alert-note{
             --md-alert-accent: #2f81f7;
@@ -3088,14 +3193,14 @@ html.tabs-reordering, body.tabs-reordering{
             display: flex;
             align-items: center;
             gap: 8px;
-            margin: 0 0 8px 0 !important;
-            color: var(--md-alert-accent) !important;
+            margin: 0 0 8px 0;
+            color: var(--md-alert-accent);
             font-weight: 800;
             line-height: 1.25;
             letter-spacing: .01em;
          }
          .md-preview-wrap .markdown-body blockquote.md-alert .md-alert-title *{
-            color: inherit !important;
+            color: inherit;
          }
          .md-preview-wrap .markdown-body blockquote.md-alert .md-alert-icon{
             display: inline-flex;
@@ -3111,10 +3216,10 @@ html.tabs-reordering, body.tabs-reordering{
             text-transform: none;
          }
          .md-preview-wrap .markdown-body blockquote.md-alert > :last-child{
-            margin-bottom: 0 !important;
+            margin-bottom: 0;
          }
          .md-preview-wrap .markdown-body blockquote.md-alert > p:first-of-type{
-            margin-top: 0 !important;
+            margin-top: 0;
          }
 
          /* ===========================
@@ -3140,7 +3245,7 @@ html.tabs-reordering, body.tabs-reordering{
             border: 1px solid var(--md-details-border);
             border-radius: 14px;
             background: var(--md-details-bg);
-            color: var(--md-details-fg) !important;
+            color: var(--md-details-fg);
             overflow: hidden;
             box-shadow: 0 10px 24px rgba(0,0,0,.12);
          }
@@ -3160,7 +3265,7 @@ html.tabs-reordering, body.tabs-reordering{
             cursor: pointer;
             user-select: none;
             list-style: none;
-            color: var(--md-details-fg) !important;
+            color: var(--md-details-fg);
             background: var(--md-details-summary-bg);
             font-weight: 800;
             line-height: 1.35;
@@ -3202,10 +3307,10 @@ html.tabs-reordering, body.tabs-reordering{
             margin-right: 0;
          }
          .md-preview-wrap .markdown-body details > summary + *{
-            margin-top: 0 !important;
+            margin-top: 0;
          }
          .md-preview-wrap .markdown-body details > :last-child{
-            margin-bottom: 0 !important;
+            margin-bottom: 0;
          }
          .md-preview-wrap .markdown-body details :where(p, li, td, th){
             color: inherit;
@@ -3233,8 +3338,8 @@ html.tabs-reordering, body.tabs-reordering{
 
           /* Área rolável (viewport) */
           .markdown-body .code-viewport{
-             background: var(--personalizacao-fundo-exibicao-direita)!important;
-             background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita),var(--auto-contrast-fg) 18%)!important;
+             background: var(--personalizacao-fundo-exibicao-direita);
+             background: color-mix(in srgb, var(--personalizacao-fundo-exibicao-direita),var(--auto-contrast-fg) 18%);
              border: 1px solid var(--md-code-border);
              border-radius: var(--md-code-radius);
              overflow: auto;
@@ -3264,29 +3369,29 @@ html.tabs-reordering, body.tabs-reordering{
           }
           .markdown-body figure.code-block.code-block--mermaid .code-header,
           .markdown-body figure.code-block.code-block--mermaid .code-footer{
-             display: none !important;
+             display: none;
           }
           .markdown-body figure.code-block.code-block--mermaid .code-viewport{
              max-height: none;
              overflow: visible;
              border: 0;
              border-radius: 0;
-             background: transparent !important;
+             background: transparent;
              scrollbar-width: auto;
           }
           .markdown-body figure.code-block.code-block--mermaid .code-viewport pre{
              width: 100%;
              min-width: 0;
-             padding: 0 !important;
+             padding: 0;
           }
 
           /* Reset do <pre> gerado pelo markdown — o "card" é o .code-viewport */
           .markdown-body .code-viewport pre{
-             margin: 0 !important;
-             padding: 12px 54px 14px 14px !important;
-             background: transparent !important;
-             border: 0 !important;
-             overflow: visible !important;
+             margin: 0;
+             padding: 12px 54px 14px 14px;
+             background: transparent;
+             border: 0;
+             overflow: visible;
              width: max-content;
              min-width: 100%;
              box-sizing: border-box;
@@ -3300,7 +3405,7 @@ html.tabs-reordering, body.tabs-reordering{
              font-family: var(--personalizacao-fonte-bloco-codigo);
              font-size: var(--personalizacao-tamanho-fonte-bloco-codigo);
              line-height: 1.35;
-             color: var(--md-code-fg, var(--personalizacao-cor-texto-exibicao-direita)) !important;
+             color: var(--md-code-fg, var(--personalizacao-cor-texto-exibicao-direita));
           }
 
 
@@ -3308,8 +3413,8 @@ html.tabs-reordering, body.tabs-reordering{
              Observação: o bundle JS gera classes .hljs-*; este bloco garante a cor no preview
              sem depender de uma folha externa diferente da já usada pelo app. */
           .markdown-body .code-viewport pre code.hljs{
-             background: transparent !important;
-             color: var(--md-code-fg, var(--personalizacao-cor-texto-exibicao-direita)) !important;
+             background: transparent;
+             color: var(--md-code-fg, var(--personalizacao-cor-texto-exibicao-direita));
           }
           .markdown-body .code-viewport pre code.hljs .hljs-comment,
           .markdown-body .code-viewport pre code.hljs .hljs-quote{ color: #8b949e; }
@@ -3594,25 +3699,25 @@ html.tabs-reordering, body.tabs-reordering{
    .toast{ background: rgba(15, 26, 46, 0.92); }
    .toast::before{ background: linear-gradient(180deg, var(--theme-accent, var(--accent)), var(--ok)); }
    .modal{ background: rgba(15, 26, 46, 0.96); }
-   .md-preview-wrap .markdown-body :is(h1, h2){ border-bottom-color: rgba(255,255,255,.22) !important; }
-   .md-preview-wrap .markdown-body h6{ color: rgba(255,255,255,.62) !important; }
-   .md-preview-wrap .markdown-body hr{ border-top-color: rgba(255,255,255,.18) !important; }
+   .md-preview-wrap .markdown-body :is(h1, h2){ border-bottom-color: rgba(255,255,255,.22); }
+   .md-preview-wrap .markdown-body h6{ color: rgba(255,255,255,.62); }
+   .md-preview-wrap .markdown-body hr{ border-top-color: rgba(255,255,255,.18); }
    .md-preview-wrap .markdown-body .task-list-item-checkbox,
    .md-preview-wrap .markdown-body .task-list-item input[type="checkbox"]{
       border-color: rgba(255,255,255,.35);
       background: rgba(45,45,45,.92);
    }
    .md-preview-wrap .markdown-body :not(pre) > code,
-   .md-preview-wrap .markdown-body :not(pre) > tt{ background: rgba(45,45,45,.84) !important; }
+   .md-preview-wrap .markdown-body :not(pre) > tt{ background: rgba(45,45,45,.84); }
    .md-preview-wrap .markdown-body blockquote{
-      background: rgba(0,0,0,.18) !important;
-      border-left-color: rgba(255,255,255,.62) !important;
-      box-shadow: inset 1px 0 0 rgba(255,255,255,.28) !important;
+      background: rgba(0,0,0,.18);
+      border-left-color: rgba(255,255,255,.62);
+      box-shadow: inset 1px 0 0 rgba(255,255,255,.28);
    }
    .md-preview-wrap .markdown-body blockquote.md-alert{
-      background: rgba(0,0,0,.18) !important;
-      border-color: rgba(255,255,255,.22) !important;
-      border-left-color: var(--md-alert-accent) !important;
+      background: rgba(0,0,0,.18);
+      border-color: rgba(255,255,255,.22);
+      border-left-color: var(--md-alert-accent);
    }
    .md-preview-wrap .markdown-body details{
       background: rgba(0,0,0,.18);
@@ -3621,7 +3726,7 @@ html.tabs-reordering, body.tabs-reordering{
    .md-preview-wrap .markdown-body details > summary{
       background: rgba(255,255,255,.08);
    }
-   .markdown-body .code-viewport{ background: var(--personalizacao-fundo-exibicao-direita) !important; }
+   .markdown-body .code-viewport{ background: var(--personalizacao-fundo-exibicao-direita); }
    .markdown-body .icon-btn:hover{ background: rgba(255,255,255,.16); }
    .markdown-body .icon-btn:focus-visible{ outline-color: rgba(255,255,255,.45); }
    .markdown-body .icon-btn[aria-pressed="true"]{ background: rgba(255,255,255,.12); }
@@ -3670,23 +3775,6 @@ html.tabs-reordering, body.tabs-reordering{
   object-fit:contain;
   display:inline-block;
 }
-
-         /* 🔗 (âncora nos títulos) */
-         .headingAnchor {
-            opacity: 0;
-            margin-left: 8px;
-            font-size: 0.9em;
-            color: var(--theme-text-muted, var(--muted));
-            text-decoration: none;
-            border: 1px solid transparent;
-            padding: 2px 6px;
-            border-radius: 10px;
-         }
-         .markdown-body :is(h1, h2, h3, h4, h5, h6):hover .headingAnchor {
-            opacity: 1;
-            border-color: rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.03);
-         }
 
          .toTop {
             position: sticky;
@@ -3766,7 +3854,7 @@ html.tabs-reordering, body.tabs-reordering{
          }
          
          .modal.modal--info .footer .right > .dialog-cancel-btn {
-            display: none !important;
+            display: none;
          }
 .infoShortcutKey {
             display: inline-flex;
@@ -3947,12 +4035,10 @@ html.tabs-reordering, body.tabs-reordering{
                justify-content: flex-end;
             }
             .emptyState {
-               inset: 108px 0 44px 0;
                padding: 16px;
             }
             .emptyCard {
                padding: 16px;
-               border-radius: 12px;
             }
             .modal.modal--customize {
                width: min(100vw - 16px, 700px);
@@ -3987,7 +4073,16 @@ html.tabs-reordering, body.tabs-reordering{
          @media (max-width: 560px) {
             .emptyCard {
                padding: 18px 16px 15px;
-               border-radius: 18px;
+            }
+            .emptyLogo {
+               width: 62px;
+               height: 62px;
+               margin-bottom: 18px;
+               border-radius: 17px;
+            }
+            .emptyLogo > svg {
+               width: 36px;
+               height: 36px;
             }
             .emptyActions {
                flex-direction: column;
@@ -3996,7 +4091,7 @@ html.tabs-reordering, body.tabs-reordering{
             .emptyActions button {
                width: 100%;
             }
-            .emptyMeta .kbd {
+            .emptyShortcutList {
                display: none;
             }
             .tabsBar {
@@ -4029,10 +4124,10 @@ html.tabs-reordering, body.tabs-reordering{
           #customizeBackdrop :is(button, .swatchBtn, .titleIcon):has(svg) {
             width: 24px;
             height: 24px;
-            padding: 0 !important;
-            display: grid !important;
-            place-items: center !important;
-            line-height: 0 !important;
+            padding: 0;
+            display: grid;
+            place-items: center;
+            line-height: 0;
           }
       
 
@@ -4052,9 +4147,9 @@ html.tabs-reordering, body.tabs-reordering{
   --cc-right-border-current: var(--cc-right-border-left);
   --cc-right-backdrop-current: var(--cc-right-backdrop);
   --cc-box-shadow-current: var(--cc-box-shadow);
-  position:relative; width:100%!important; min-width:0;
-  height:var(--cc-control-h)!important; border-radius:var(--cc-radius)!important; overflow:hidden;
-  background:var(--tint)!important; border:var(--cc-border)!important;
+  position:relative; width:100%; min-width:0;
+  height:var(--cc-control-h); border-radius:var(--cc-radius); overflow:hidden;
+  background:var(--tint); border:var(--cc-border);
   box-shadow: var(--cc-box-shadow-current);
 }
 #customizeBackdrop .color-control.glow{
@@ -4064,40 +4159,40 @@ html.tabs-reordering, body.tabs-reordering{
   --cc-box-shadow-current: var(--cc-glow-box-shadow);
 }
 #customizeBackdrop .color-control .native-color{position:absolute;inset:0;opacity:0;pointer-events:none;}
-#customizeBackdrop .color-control .swatch::before{content:none!important;}
+#customizeBackdrop .color-control .swatch::before{content:none;}
 #customizeBackdrop .color-control .swatch{
-  position:absolute; left:var(--cc-pad)!important; top:50%!important; transform:translateY(-50%);
-  width:var(--cc-swatch)!important; height:var(--cc-swatch)!important; border-radius:6px!important;
-  border:var(--cc-swatch-border)!important; outline:var(--cc-swatch-outline)!important;
-  background:var(--tint)!important; padding:0!important; cursor:pointer;
+  position:absolute; left:var(--cc-pad); top:50%; transform:translateY(-50%);
+  width:var(--cc-swatch); height:var(--cc-swatch); border-radius:6px;
+  border:var(--cc-swatch-border); outline:var(--cc-swatch-outline);
+  background:var(--tint); padding:0; cursor:pointer;
 }
 #customizeBackdrop .color-control .hex{
-  position:absolute; left:calc(var(--cc-pad) + var(--cc-swatch) + var(--cc-swatch-gap))!important;
-  right:calc(var(--cc-right-btn-w) + var(--cc-pad))!important; top:50%!important; transform:translateY(-50%);
-  height:calc(var(--cc-control-h) - 8px)!important; border-radius:var(--cc-hex-radius)!important;
-  border:var(--cc-hex-border)!important; box-shadow: none !important;
-  background:var(--hexBg)!important; color:var(--hexText)!important;
-  padding:0 var(--cc-hex-pad-x)!important; font-family:var(--font-family-mono, var(--mono))!important; font-size:11px!important;
+  position:absolute; left:calc(var(--cc-pad) + var(--cc-swatch) + var(--cc-swatch-gap));
+  right:calc(var(--cc-right-btn-w) + var(--cc-pad)); top:50%; transform:translateY(-50%);
+  height:calc(var(--cc-control-h) - 8px); border-radius:var(--cc-hex-radius);
+  border:var(--cc-hex-border); box-shadow: none;
+  background:var(--hexBg); color:var(--hexText);
+  padding:0 var(--cc-hex-pad-x); font-family:var(--font-family-mono, var(--mono)); font-size:11px;
   font-weight:900; letter-spacing:.08em; text-transform:uppercase; outline:none;
 }
 #customizeBackdrop .color-control .hex:is(:focus, :focus-visible){
-  outline: var(--cc-hex-focus-outline) !important;
-  box-shadow: none !important;
+  outline: var(--cc-hex-focus-outline);
+  box-shadow: none;
 }
 #customizeBackdrop .color-control .hex.invalid{
-  border-color: rgba(255, 80, 80, .85)!important;
-  box-shadow: 0 0 0 2px rgba(255, 80, 80, .22)!important;
+  border-color: rgba(255, 80, 80, .85);
+  box-shadow: 0 0 0 2px rgba(255, 80, 80, .22);
 }
 #customizeBackdrop .color-control .right-btn{
-  position:absolute; right:0; top:0; width:var(--cc-right-btn-w)!important; height:100%!important;
-  border:0!important; padding:0!important; display:grid!important; place-items:center!important;
-  cursor:pointer; border-left:var(--cc-right-border-current)!important; box-shadow: none !important;
-  border-top-left-radius:0!important; border-bottom-left-radius:0!important;
-  background:var(--cc-right-bg)!important; backdrop-filter:var(--cc-right-backdrop-current)!important;
+  position:absolute; right:0; top:0; width:var(--cc-right-btn-w); height:100%;
+  border:0; padding:0; display:grid; place-items:center;
+  cursor:pointer; border-left:var(--cc-right-border-current); box-shadow: none;
+  border-top-left-radius:0; border-bottom-left-radius:0;
+  background:var(--cc-right-bg); backdrop-filter:var(--cc-right-backdrop-current);
 }
 #customizeBackdrop .color-control .right-btn svg,
-#customizeBackdrop .color-control .right-btn .icon{width:16px!important;height:16px!important;flex:0 0 16px!important;}
-#customizeBackdrop .color-control .right-btn svg{color:var(--cc2-icon)!important;filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));}
+#customizeBackdrop .color-control .right-btn .icon{width:16px;height:16px;flex:0 0 16px;}
+#customizeBackdrop .color-control .right-btn svg{color:var(--cc2-icon);filter:drop-shadow(0 6px 10px rgba(0,0,0,.22));}
 
 /* === Swatch quadradinho (não circular) — força raio fixo */
 
@@ -4156,6 +4251,202 @@ html.tabs-reordering, body.tabs-reordering{
 
          
 
+/* =========================================================
+   Markdown: toggle Editar / Live Preview / View
+   - visível somente quando a aba ativa é .md
+   - cada segmento mantém a mesma área 38x38 dos botões vizinhos
+   - uma única borda externa pertence ao md-mode-toggle
+   - glider/opções não desenham bordas completas sobre o perímetro
+   - sem separadores verticais internos entre os 3 modos
+   - ativo usa a cor real do fundo do editor; inativos usam a mesma cor escurecida
+   ========================================================= */
+.toolbar .md-mode-toggle {
+  --md-mode-option-size: var(--app-header-toolbar-btn-size, 38px);
+  --md-mode-radius: var(--app-header-toolbar-btn-radius, 12px);
+  --md-mode-surface: var(--personalizacao-fundo-exibicao-direita);
+  --md-mode-contrast: var(--auto-contrast-fg, var(--theme-text-primary, var(--text)));
+  --md-mode-shell-surface: color-mix(in srgb, var(--md-mode-surface) 38%, #000 62%);
+  --md-mode-inactive-surface: color-mix(in srgb, var(--md-mode-surface) 54%, #000 46%);
+  --md-mode-inactive-hover-surface: color-mix(in srgb, var(--md-mode-surface) 68%, #000 32%);
+  --md-mode-inactive: color-mix(in srgb, #808080 82%, var(--md-mode-contrast) 18%);
+  --md-mode-inactive-hover: color-mix(in srgb, #808080 58%, var(--md-mode-contrast) 42%);
+  --md-mode-outer-border: color-mix(in srgb, var(--md-mode-surface) 68%, var(--md-mode-contrast) 32%);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: calc(var(--md-mode-option-size) * 3);
+  height: var(--md-mode-option-size);
+  padding: 0;
+  border: 0;
+  border-radius: var(--md-mode-radius);
+  background: var(--md-mode-shell-surface);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--md-mode-contrast) 10%, transparent),
+    0 8px 18px rgba(0,0,0,.16);
+  overflow: visible; /* preserva os tooltips dos três botões; cantos externos são tratados nos segmentos */
+  isolation: isolate;
+}
+/* Borda única desenhada acima das superfícies internas para nunca ser encoberta. */
+.toolbar .md-mode-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--md-mode-outer-border);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 4;
+}
+.toolbar .md-mode-toggle.is-hidden { display: none; }
+.toolbar .md-mode-glider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--md-mode-option-size);
+  height: var(--md-mode-option-size);
+  border: 0;
+  border-radius: calc(var(--md-mode-radius) - 1px) 0 0 calc(var(--md-mode-radius) - 1px);
+  background: var(--md-mode-surface);
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.24),
+    inset 0 1px 0 color-mix(in srgb, var(--md-mode-contrast) 20%, transparent);
+  transform: translateX(0);
+  transition: transform .28s var(--ui-ease), background-color .18s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+.toolbar .md-mode-toggle[data-mode="split"] .md-mode-glider {
+  transform: translateX(var(--md-mode-option-size));
+  border-radius: 0;
+}
+.toolbar .md-mode-toggle[data-mode="preview"] .md-mode-glider {
+  transform: translateX(calc(var(--md-mode-option-size) * 2));
+  border-radius: 0 calc(var(--md-mode-radius) - 1px) calc(var(--md-mode-radius) - 1px) 0;
+}
+.toolbar .md-mode-option {
+  position: relative;
+  z-index: 1;
+  width: var(--md-mode-option-size);
+  min-width: var(--md-mode-option-size);
+  height: var(--md-mode-option-size);
+  min-height: var(--md-mode-option-size);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--md-mode-inactive-surface);
+  color: var(--md-mode-inactive);
+  box-shadow: none;
+  opacity: 1;
+  transition: color .18s ease, background-color .18s ease, filter .18s ease;
+}
+.toolbar .md-mode-option[data-md-mode="edit"] {
+  border-radius: calc(var(--md-mode-radius) - 1px) 0 0 calc(var(--md-mode-radius) - 1px);
+}
+.toolbar .md-mode-option[data-md-mode="preview"] {
+  border-radius: 0 calc(var(--md-mode-radius) - 1px) calc(var(--md-mode-radius) - 1px) 0;
+}
+.toolbar .md-mode-option:not([aria-pressed="true"]):hover,
+.toolbar .md-mode-option:not([aria-pressed="true"]):focus-visible {
+  background: var(--md-mode-inactive-hover-surface);
+  border: 0;
+  color: var(--md-mode-inactive-hover);
+  box-shadow: none;
+}
+.toolbar .md-mode-option[aria-pressed="true"] {
+  background: transparent;
+  color: var(--md-mode-contrast);
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.18));
+}
+.toolbar .md-mode-option svg {
+  width: 21px;
+  height: 21px;
+}
+
+/* =========================================================
+   Markdown: workspace + split ajustável
+   - editor e preview mantêm rolagens nativas independentes fisicamente
+   - no modo split, a posição vertical é sincronizada proporcionalmente
+     em ambos os sentidos com proteção contra realimentação de eventos
+   ========================================================= */
+.md-workspace {
+  --md-split-editor-width: 50%;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  background: var(--personalizacao-fundo-exibicao-direita);
+}
+.md-workspace > .editorSearchHost,
+.md-workspace > .md-preview-wrap {
+  min-width: 0;
+  min-height: 0;
+}
+.md-split-divider {
+  display: none;
+  width: 6px;
+  min-width: 6px;
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+  background: color-mix(in srgb, var(--editor-surface-contrast) 72%, transparent);
+  box-shadow: inset 1px 0 0 rgba(255,255,255,.06), inset -1px 0 0 rgba(0,0,0,.18);
+  z-index: 5;
+}
+.md-split-divider:hover,
+.md-split-divider:focus-visible {
+  background: color-mix(in srgb, var(--theme-accent, var(--accent)) 66%, var(--editor-surface-contrast) 34%);
+  outline: none;
+}
+.md-workspace.md-split {
+  display: grid;
+  grid-template-columns: minmax(0, var(--md-split-editor-width)) 6px minmax(0, 1fr);
+}
+.md-workspace.md-split > .editorSearchHost {
+  grid-column: 1;
+  grid-row: 1;
+}
+.md-workspace.md-split > .md-split-divider {
+  display: block;
+  grid-column: 2;
+  grid-row: 1;
+}
+.md-workspace.md-split > .md-preview-wrap {
+  grid-column: 3;
+  grid-row: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hint: acesso único e clicável à lista de atalhos. */
+#hintShortcutsButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  box-shadow: none;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+}
+#hintShortcutsButton:hover,
+#hintShortcutsButton:focus-visible {
+  color: var(--theme-text-primary, var(--text));
+  background: rgba(255,255,255,.05);
+  box-shadow: none;
+}
+#hintShortcutsButton svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
 /* Resize: só ativa no "fio" da direita do sidebar (⟷). */
 .sidebar-resize-handle {
   grid-column: 2;           /* mesma coluna do <aside id="sidebar"> */
@@ -4172,15 +4463,8 @@ html.tabs-reordering, body.tabs-reordering{
 
 /* Quando sidebar estiver recolhido, não pode redimensionar */
 body.sidebar-collapsed .sidebar-resize-handle {
-  display: none !important;
-  pointer-events: none !important;
-}
-
-
-html.is-resizing-sidebar,
-html.is-resizing-sidebar * {
-  cursor: col-resize !important;
-  user-select: none !important;
+  display: none;
+  pointer-events: none;
 }
 
          /* Centralização do SVG */
@@ -4203,16 +4487,16 @@ html.is-resizing-sidebar * {
            border-radius: 999px;
          }
          body.sidebar-collapsed aside#sidebar {
-           width: 0 !important;
-           min-width: 0 !important;
-           overflow: hidden !important;
+           width: 0;
+           min-width: 0;
+           overflow: hidden;
            pointer-events: none;
          }
-         body.sidebar-collapsed aside#sidebar > * { display: none !important; }
+         body.sidebar-collapsed aside#sidebar > * { display: none; }
 
          /* Mobile: mantém layout original e esconde toggle */
          @media (max-width: 860px) {
-           .sidebar-toggle { display: none !important; }
+           .sidebar-toggle { display: none; }
          }
 
 /* === Personalização: Toggle Quebra de Linha (Editor) === */
@@ -4275,8 +4559,8 @@ Edita o existente sem criar estrutura paralela.
 html.tree-grabbing .tree .node,
 html.tree-grabbing .tree .node:hover,
 html.tree-grabbing .tree .node:focus-visible,
-html.tree-grabbing .tree .tree .node.selected {
- transition: none !important;
+html.tree-grabbing .tree .node.selected {
+ transition: none;
 }
 
 /* Refresh da árvore — somente durante atualização */
@@ -4288,30 +4572,85 @@ html.tree-grabbing .tree .tree .node.selected {
 #btnRefreshRoot[aria-busy="true"],
 #btnRefreshRoot[aria-busy="true"]:hover,
 #btnRefreshRoot[aria-busy="true"]:focus-visible {
- transition: none !important;
+ transition: none;
 }
 
 /* Drop hint mais legível sem alterar layout */
 .tree .node[data-drop-pos="before"] {
- border-top-color: rgba(122, 167, 255, 0.78) !important;
+ border-top-color: rgba(122, 167, 255, 0.78);
 }
 
 .tree .node[data-drop-pos="after"] {
- border-bottom-color: rgba(122, 167, 255, 0.78) !important;
+ border-bottom-color: rgba(122, 167, 255, 0.78);
 }
 
 .tree .node[data-drop-pos="inside"] {
- outline: 1px dashed rgba(122, 167, 255, 0.72) !important;
+ outline: 1px dashed rgba(122, 167, 255, 0.72);
  outline-offset: -1px;
 }
 
+         /* =====================================================================
+            CASCATA FINAL — exceções de prioridade deliberadas
+            - toda a UI comum usa cascata/especificidade normal;
+            - prioridade forçada fica restrita a estados globais transitórios
+              (drag/resize) e acessibilidade reduced-motion, onde precisa vencer
+              qualquer cursor/transição local sem criar uma guerra de especificidade.
+            ===================================================================== */
+         html.tree-grabbing,
+         html.tree-grabbing *,
+         body.tree-grabbing,
+         body.tree-grabbing * {
+            cursor: grabbing !important;
+         }
+
+         html.is-resizing-md-split,
+         html.is-resizing-md-split * {
+            cursor: col-resize !important;
+            user-select: none !important;
+         }
+
+         html.is-resizing-sidebar,
+         html.is-resizing-sidebar * {
+            cursor: col-resize !important;
+            user-select: none !important;
+         }
+
+         @media (prefers-reduced-motion: reduce) {
+            header,
+            .pane-title,
+            .tabsBar,
+            .editor-head,
+            .hint,
+            .modal,
+            .ctxmenu,
+            .emptyCard,
+            .toast,
+            .search,
+            .searchMode,
+            .resultsBadge,
+            .tab,
+            .tree .node,
+            button,
+            .badge,
+            .kbd,
+            .clearSearch,
+            .tabsNav,
+            .sidebar-toggle,
+            .editor-head-toggle {
+               transition: none !important;
+            }
+            .dirtyBadge.shake { animation: none !important; }
+            .modal.shake { animation: none !important; }
+            .toast { animation: none !important; }
+            .syncStatusIcon svg { animation: none !important; }
+         }
 </style>
 
       <!-- Libs locais -->
       <!-- =====================================================================
            BLOCO 09B — BIBLIOTECAS EXTERNAS / PREVIEW MARKDOWN
            ===================================================================== -->
-      <script src="./libs/emojis.js?v=anotacoes-1.0.13"></script>
+      <script src="./libs/emojis.js?v=anotacoes-1.0.24"></script>
       <script src="./libs/katex.min.js?v=0.18.4" defer></script>
       <script src="./libs/highlight.min.js?v=11.12.0" defer></script>
       <script src="./libs/dompurify.min.js?v=3.4.14" defer></script>
@@ -4327,7 +4666,7 @@ html.tree-grabbing .tree .tree .node.selected {
          <header id="appHeader">
             <div class="brand" title="ANOTAÇÕES — workspace local-first para .txt e .md em pasta real">
                <span class="brandLabel">ANOTAÇÕES</span>
-               <span class="app-beta-tag">v0.00</span>
+               <span class="app-beta-tag">v1.0</span>
             </div>
 
             <div class="toolbar" role="toolbar" aria-label="Ações">
@@ -4337,10 +4676,13 @@ html.tree-grabbing .tree .tree .node.selected {
                <button type="button" id="btnDelete" class="danger" data-tip="Deletar (Ctrl+Del / Alt+Del)" aria-label="Deletar (Ctrl+Del / Alt+Del)" data-tip-type="danger"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path stroke-dasharray="24" d="M12 20h5c0.5 0 1 -0.5 1 -1v-14M12 20h-5c-0.5 0 -1 -0.5 -1 -1v-14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="24;0"/></path><path stroke-dasharray="18" stroke-dashoffset="18" d="M4 5h16"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.5s" dur="0.3s" to="0"/></path><path stroke-dasharray="10" stroke-dashoffset="10" d="M10 4h4M10 9v7M14 9v7"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.8s" dur="0.2s" to="0"/></path></g></svg><span class="sr-only">Deletar (Ctrl+Del / Alt+Del)</span></button>
                <button type="button" id="btnSave" class="primary" data-tip="Salvar (Ctrl+S)" aria-label="Salvar (Ctrl+S)" data-tip-type="primary"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 21H7m10 0h.803c1.118 0 1.677 0 2.104-.218c.377-.192.683-.498.875-.874c.218-.427.218-.987.218-2.105V9.22c0-.45 0-.675-.048-.889a2 2 0 0 0-.209-.545c-.106-.19-.256-.355-.55-.682l-2.755-3.062c-.341-.378-.514-.57-.721-.708a2 2 0 0 0-.61-.271C15.863 3 15.6 3 15.075 3H6.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C3 4.52 3 5.08 3 6.2v11.6c0 1.12 0 1.68.218 2.107c.192.377.497.683.874.875c.427.218.987.218 2.105.218H7m10 0v-3.803c0-1.118 0-1.678-.218-2.105a2 2 0 0 0-.875-.874C15.48 14 14.92 14 13.8 14h-3.6c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C7 15.52 7 16.08 7 17.2V21m8-14H9"/></svg><span class="sr-only">Salvar (Ctrl+S)</span></button>
 
-               <button type="button" id="btnMdEdit" class="ghost is-hidden" data-tip="Editar conteúdo do Markdown (Ctrl+Alt+E)" aria-label="Editar conteúdo do Markdown (Ctrl+Alt+E)"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-2.3 6.35c.22-.21.22-.56 0-.77L15.42 7.3a.53.53 0 0 0-.77 0l-1 1l2.05 2.05zM7 14.94V17h2.06l6.06-6.06l-2.06-2.06z"/></svg><span class="sr-only">Editar conteúdo do Markdown (Ctrl+Alt+E)</span></button>
-               <button type="button" id="btnMdPreview" class="ghost is-hidden" data-tip="Voltar ao Preview (Ctrl+Alt+E)" aria-label="Voltar ao Preview (Ctrl+Alt+E)"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><g fill="currentColor"><path fill-opacity="0" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 12c1.38 -0.77 4.42 -1.3 8 -1.3c3.58 0 6.62 0.53 8 1.3c-1.38 0.77 -4.42 1.3 -8 1.3c-3.58 0 -6.62 -0.53 -8 -1.3Z"><animate attributeName="d" dur="6s" keyTimes="0;0.03;0.97;1" repeatCount="indefinite" values="M4 12c1.38 -0.77 4.42 -1.3 8 -1.3c3.58 0 6.62 0.53 8 1.3c-1.38 0.77 -4.42 1.3 -8 1.3c-3.58 0 -6.62 -0.53 -8 -1.3Z;M2 12c1.72 -3.83 5.53 -6.5 10 -6.5c4.47 0 8.28 2.67 10 6.5c-1.72 3.83 -5.53 6.5 -10 6.5c-4.47 0 -8.28 -2.67 -10 -6.5Z;M2 12c1.72 -3.83 5.53 -6.5 10 -6.5c4.47 0 8.28 2.67 10 6.5c-1.72 3.83 -5.53 6.5 -10 6.5c-4.47 0 -8.28 -2.67 -10 -6.5Z;M4 12c1.38 -0.77 4.42 -1.3 8 -1.3c3.58 0 6.62 0.53 8 1.3c-1.38 0.77 -4.42 1.3 -8 1.3c-3.58 0 -6.62 -0.53 -8 -1.3Z"/><animate fill="freeze" attributeName="fill-opacity" begin="0.5s" dur="0.15s" to="0.2"/></path><circle cx="12" cy="12"><animate attributeName="r" dur="6s" keyTimes="0;0.03;0.97;1" repeatCount="indefinite" values="0;3;3;0"/></circle></g></svg><span class="sr-only">Voltar ao Preview (Ctrl+Alt+E)</span></button>
-
                <button type="button" id="btnAutosave" class="ghost" data-tip="Autosave ligado (Ctrl+Alt+A)" aria-label="Autosave ligado (Ctrl+Alt+A)"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.1"><path stroke-dasharray="32" d="M12 21c-4.97 0 -9 -4.03 -9 -9c0 -4.97 4.03 -9 9 -9"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="32;0"/></path><path stroke-dasharray="2 4" stroke-dashoffset="6" d="M12 3c4.97 0 9 4.03 9 9c0 4.97 -4.03 9 -9 9" opacity="0"><set fill="freeze" attributeName="opacity" begin="0.45s" to="1"/><animateTransform fill="freeze" attributeName="transform" begin="0.45s" dur="0.6s" type="rotate" values="-180 12 12;0 12 12"/><animate attributeName="stroke-dashoffset" begin="0.85s" dur="0.6s" repeatCount="indefinite" to="0"/></path><path stroke-dasharray="10" stroke-dashoffset="10" d="M12 8v7.5"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.85s" dur="0.2s" to="0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M12 15.5l3.5 -3.5M12 15.5l-3.5 -3.5"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.05s" dur="0.2s" to="0"/></path></g></svg><span class="sr-only">Autosave ligado (Ctrl+Alt+A)</span></button>
+               <div id="mdModeToggle" class="md-mode-toggle is-hidden" role="group" aria-label="Modo Markdown" data-mode="preview">
+                  <span class="md-mode-glider" aria-hidden="true"></span>
+                  <button type="button" id="btnMdEdit" class="md-mode-option" data-md-mode="edit" aria-pressed="false" data-tip="Editar MD (Ctrl+Alt+E)" aria-label="Editar MD (Ctrl+Alt+E)"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h24v24H0z" fill="none"/><g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path fill="currentColor" fill-opacity="0" stroke-dasharray="44" stroke-dashoffset="44" d="M7 17v-4l10 -10l4 4l-10 10h-4"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.3s" dur="0.5s" to="0"/><animate fill="freeze" attributeName="fill-opacity" begin="1s" dur="0.15s" to=".3"/></path><g fill="none"><path stroke-dasharray="20" d="M3 21h18"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="20;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M14 6l4 4"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.8s" dur="0.2s" to="0"/></path></g></g></svg><span class="sr-only">Editar MD (Ctrl+Alt+E)</span></button>
+                  <button type="button" id="btnMdLivePreview" class="md-mode-option" data-md-mode="split" aria-pressed="false" data-tip="Live Preview (Ctrl+Alt+L)" aria-label="Live Preview (Ctrl+Alt+L)"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true"><path d="M0 0h32v32H0z" fill="none"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7S9 1 2 6v22c7-5 14 0 14 0s7-5 14 0V6c-7-5-14 1-14 1m0 0v21"/></svg><span class="sr-only">Live Preview (Ctrl+Alt+L)</span></button>
+                  <button type="button" id="btnMdPreview" class="md-mode-option" data-md-mode="preview" aria-pressed="true" data-tip="View (Ctrl+Alt+V)" aria-label="View (Ctrl+Alt+V)"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h24v24H0z" fill="none"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12c1.38 -0.77 4.42 -1.3 8 -1.3c3.58 0 6.62 0.53 8 1.3c-1.38 0.77 -4.42 1.3 -8 1.3c-3.58 0 -6.62 -0.53 -8 -1.3Z"><animate attributeName="d" dur="6s" keyTimes="0;0.03;0.97;1" repeatCount="indefinite" values="M4 12c1.38 -0.77 4.42 -1.3 8 -1.3c3.58 0 6.62 0.53 8 1.3c-1.38 0.77 -4.42 1.3 -8 1.3c-3.58 0 -6.62 -0.53 -8 -1.3Z;M2 12c1.72 -3.83 5.53 -6.5 10 -6.5c4.47 0 8.28 2.67 10 6.5c-1.72 3.83 -5.53 6.5 -10 6.5c-4.47 0 -8.28 -2.67 -10 -6.5Z;M2 12c1.72 -3.83 5.53 -6.5 10 -6.5c4.47 0 8.28 2.67 10 6.5c-1.72 3.83 -5.53 6.5 -10 6.5c-4.47 0 -8.28 -2.67 -10 -6.5Z;M4 12c1.38 -0.77 4.42 -1.3 8 -1.3c3.58 0 6.62 0.53 8 1.3c-1.38 0.77 -4.42 1.3 -8 1.3c-3.58 0 -6.62 -0.53 -8 -1.3Z"/></path><circle cx="12" cy="12" fill="currentColor"><animate attributeName="r" dur="6s" keyTimes="0;0.03;0.97;1" repeatCount="indefinite" values="0;3;3;0"/></circle></svg><span class="sr-only">View (Ctrl+Alt+V)</span></button>
+               </div>
                <button type="button" id="btnChooseRoot" class="ghost" data-tip="Escolher pasta raiz" aria-label="Escolher pasta raiz"><span class="toolbar-icon-slot" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H10l2 2h7.5A1.5 1.5 0 0 1 21 9.5v8A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/><path d="M7 11l10 10"/></svg></span><span class="sr-only">Escolher pasta raiz</span></button>
                <button type="button" id="btnRefreshRoot" class="ghost" data-tip="Atualizar árvore da pasta raiz" aria-label="Atualizar árvore da pasta raiz"><span class="toolbar-icon-slot" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 0-14.5-4.5"/><path d="M4 4v5h5"/><path d="M4 12a8 8 0 0 0 14.5 4.5"/><path d="M20 20v-5h-5"/></svg></span><span class="sr-only">Atualizar árvore da pasta raiz</span></button>
                <button type="button" id="btnExport" class="ghost" data-tip="Exportar pasta raiz para JSON" aria-label="Exportar pasta raiz para JSON"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><defs><mask id="SVGk4d2PcWu"><path fill="#fff" fill-opacity="0" stroke="#fff" stroke-dasharray="60" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 19h11c2.21 0 4 -1.79 4 -4c0 -2.21 -1.79 -4 -4 -4h-1v-1c0 -2.76 -2.24 -5 -5 -5c-2.42 0 -4.44 1.72 -4.9 4h-0.1c-2.76 0 -5 2.24 -5 5c0 2.76 2.24 5 5 5Z"><animate attributeName="d" dur="12s" keyTimes="0;0.25;0.5;0.75;1" repeatCount="indefinite" values="M7 19h11c2.21 0 4 -1.79 4 -4c0 -2.21 -1.79 -4 -4 -4h-1v-1c0 -2.76 -2.24 -5 -5 -5c-2.42 0 -4.44 1.72 -4.9 4h-0.1c-2.76 0 -5 2.24 -5 5c0 2.76 2.24 5 5 5Z;M6 19h12c2.21 0 4 -1.79 4 -4c0 -2.21 -1.79 -4 -4 -4h0v-1c0 -2.76 -2.24 -5 -5 -5c-2.42 0 -4.44 1.72 -4.9 4h-2.1c-2.76 0 -5 2.24 -5 5c0 2.76 2.24 5 5 5Z;M6 19h11c2.21 0 4 -1.79 4 -4c0 -2.21 -1.79 -4 -4 -4h0v-1c0 -2.76 -2.24 -5 -5 -5c-2.42 0 -4.44 1.72 -4.9 4h-1.1c-2.76 0 -5 2.24 -5 5c0 2.76 2.24 5 5 5Z;M7 19h10c2.21 0 4 -1.79 4 -4c0 -2.21 -1.79 -4 -4 -4h0v-1c0 -2.76 -2.24 -5 -5 -5c-2.42 0 -4.44 1.72 -4.9 4h-0.1c-2.76 0 -5 2.24 -5 5c0 2.76 2.24 5 5 5Z;M7 19h11c2.21 0 4 -1.79 4 -4c0 -2.21 -1.79 -4 -4 -4h-1v-1c0 -2.76 -2.24 -5 -5 -5c-2.42 0 -4.44 1.72 -4.9 4h-0.1c-2.76 0 -5 2.24 -5 5c0 2.76 2.24 5 5 5Z"/><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="60;0"/><animate fill="freeze" attributeName="fill-opacity" begin="0.6s" dur="0.4s" to="1"/></path><path d="M10 17h4v0h3l-5 0l-5 0h3Z"><animate fill="freeze" attributeName="d" begin="1.1s" dur="0.4s" keyTimes="0;0.4;1" values="M10 17h4v0h3l-5 0l-5 0h3Z;M10 17h4v0h3l-5 -5l-5 5h3Z;M10 17h4v-4h3l-5 -5l-5 5h3Z"/><animate attributeName="d" begin="1.5s" dur="1.5s" keyTimes="0;0.25;0.75;1" repeatCount="indefinite" values="M10 17h4v-4h3l-5 -5l-5 5h3Z;M10 17h4v-5h3l-5 -5l-5 5h3Z;M10 17h4v-3h3l-5 -5l-5 5h3Z;M10 17h4v-4h3l-5 -5l-5 5h3Z"/></path></mask></defs><path fill="currentColor" d="M0 0h24v24H0z" mask="url(#SVGk4d2PcWu)"/></svg><span class="sr-only">Exportar pasta raiz para JSON</span></button>
@@ -4354,11 +4696,6 @@ html.tree-grabbing .tree .tree .node.selected {
             </div>
             <span id="statusText" class="sr-only" aria-live="polite">Pronto.</span>
          </header>
-
-         <section class="sr-only" aria-label="Resumo do projeto">
-            <h1>ANOTAÇÕES: workspace local-first para editar arquivos .txt e .md em uma pasta raiz real</h1>
-            <p>Aplicação web estática para organizar uma pasta real do computador com árvore de arquivos, abas, busca por nome e conteúdo, preview Markdown, personalização visual e backup/importação em JSON.</p>
-         </section>
 
          <main>
       <!-- Sidebar toggle (Árvore): recolher/expandir -->
@@ -4411,53 +4748,88 @@ html.tree-grabbing .tree .tree .node.selected {
                      <span class="iconSlot" aria-hidden="true"></span>
                      <span class="sr-only" id="headerToggleSr">Retrair cabeçalho</span>
                   </button>
-                  <div class="path" id="path">Selecione uma nota…</div>
+                  <div class="path" id="path"></div>
                   <div class="editor-head-badges">
                      <div class="badge ok" id="saveBadge" role="status" aria-live="polite" aria-atomic="true">SALVO</div>
                   </div>
                </div>
 
-               <div id="emptyState" class="emptyState">
+               <div id="emptyState" class="emptyState" data-mode="workspace" aria-hidden="true" aria-labelledby="emptyTitle" aria-describedby="emptyText">
                   <div class="emptyCard">
-                     <div class="emptyHero" aria-hidden="true">
-                        <span class="emptyHeroOrb"></span>
-                        <span class="emptyHeroGlyph">✦</span>
+                     <div class="emptyLogo" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" color="#FFFFFF"><g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path fill="currentColor" fill-opacity="0.3" d="M22 3v14c0 0.55 -0.45 1 -1 1h-14c-0.55 0 -1 -0.45 -1 -1v-14c0 -0.55 0.45 -1 1 -1h14c0.55 0 1 0.45 1 1Z"><animate fill="freeze" attributeName="d" dur="0.4s" values="M20 5v14c0 0.55 -0.45 1 -1 1h-14c-0.55 0 -1 -0.45 -1 -1v-14c0 -0.55 0.45 -1 1 -1h14c0.55 0 1 0.45 1 1Z;M22 3v14c0 0.55 -0.45 1 -1 1h-14c-0.55 0 -1 -0.45 -1 -1v-14c0 -0.55 0.45 -1 1 -1h14c0.55 0 1 0.45 1 1Z"/></path><path fill="none" d="M10 6h8M10 10h8M10 14h5M2 6v15c0 0.55 0.45 1 1 1h15"><animate fill="freeze" attributeName="d" dur="0.4s" values="M8 8h8M8 12h8M8 16h5M4 5v14c0 0.55 0.45 1 1 1h14;M10 6h8M10 10h8M10 14h5M2 6v15c0 0.55 0.45 1 1 1h15"/></path></g></svg></div>
+                     <h2 id="emptyTitle">Nenhuma nota aberta</h2>
+                     <p id="emptyText">Selecione um arquivo na árvore à esquerda ou crie um novo documento.</p>
+
+                     <div class="emptyRootOnly">
+                        <div class="emptyActions" role="group" aria-label="Ação inicial">
+                           <button id="btnEmptyChooseRoot" type="button" class="primary emptyActionButton">
+                              <span class="emptyActionIcon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H10l2 2h7.5A1.5 1.5 0 0 1 21 9.5v8A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/><path d="M7 11l10 10"/></svg></span>
+                              <span>Selecionar pasta raiz</span>
+                           </button>
+                        </div>
+                        <p class="emptyRootHint">
+                           <span class="emptyInlineIcon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6H10l2 2h7.5A1.5 1.5 0 0 1 21 9.5v8A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5z"/><path d="M7 11l10 10"/></svg></span>
+                           <span>O mesmo comando está disponível na barra superior.</span>
+                        </p>
                      </div>
-                     <div class="emptyEyebrow">Espaço pronto para produzir</div>
-                     <h2 id="emptyTitle">Selecione uma nota</h2>
-                     <p id="emptyText">
-                        Escolha uma nota na árvore à esquerda. Para Markdown (<code>.md</code>), você verá o preview
-                        pronto e poderá clicar em <b>Editar MD</b> para editar.
-                     </p>
-                     <div class="emptyActions" role="group" aria-label="Ações rápidas">
-                        <button id="btnEmptyNewNote" type="button" class="primary">Nova nota</button>
-                        <button id="btnEmptyNewFolder" type="button" class="ghost">Nova pasta</button>
+                     <div class="emptyWorkspaceOnly">
+                        <div class="emptyActions" role="group" aria-label="Ações rápidas">
+                           <button id="btnEmptyNewNote" type="button" class="primary emptyActionButton">
+                              <span class="emptyActionIcon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><defs><mask id="SVGEcIK9dOLEmptyNote"><g stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path fill="#fff" fill-opacity="0" stroke="#fff" stroke-dasharray="62" d="M13.5 3l5.5 5.5v11.5c0 0.55 -0.45 1 -1 1h-12c-0.55 0 -1 -0.45 -1 -1v-16c0 -0.55 0.45 -1 1 -1Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="62;0"/><animate fill="freeze" attributeName="fill-opacity" begin="0.6s" dur="0.4s" to="1"/></path><path stroke="#000" d="M14 3.5l0 4.5l4.5 0Z" opacity="0"><set fill="freeze" attributeName="opacity" begin="0.6s" to="1"/><animate fill="freeze" attributeName="d" begin="0.6s" dur="0.2s" values="M14 3.5l2.25 2.25l2.25 2.25Z;M14 3.5l0 4.5l4.5 0Z"/></path><path fill="none" stroke="#fff" d="M13.5 3l5.5 5.5" opacity="0"><set fill="freeze" attributeName="opacity" begin="0.6s" to="1"/></path></g><path d="M19 13c3.31 0 6 2.69 6 6c0 3.31 -2.69 6 -6 6c-3.31 0 -6 -2.69 -6 -6c0 -3.31 2.69 -6 6 -6Z" opacity="0"><set fill="freeze" attributeName="opacity" begin="1.1s" to="1"/></path></mask></defs><path fill="currentColor" d="M0 0h24v24H0z" mask="url(#SVGEcIK9dOLEmptyNote)"/><g fill="none" stroke="currentColor" stroke-dasharray="8" stroke-dashoffset="8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path d="M16 19h6"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.1s" dur="0.2s" to="0"/></path><path d="M19 16v6"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.3s" dur="0.2s" to="0"/></path></g></svg></span>
+                              <span>Nova nota</span>
+                           </button>
+                           <button id="btnEmptyNewFolder" type="button" class="ghost emptyActionButton">
+                              <span class="emptyActionIcon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><defs><mask id="SVGUPLe7d8FEmptyFolder"><g stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path fill="#fff" fill-opacity="0" stroke-dasharray="62" d="M12 7h8c0.55 0 1 0.45 1 1v10c0 0.55 -0.45 1 -1 1h-16c-0.55 0 -1 -0.45 -1 -1v-11Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="62;0"/><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" to="1"/></path><path fill="none" d="M12 7h-9v-1c0 -0.55 0.45 -1 1 -1h6Z" opacity="0"><set fill="freeze" attributeName="opacity" begin="0.6s" to="1"/><animate fill="freeze" attributeName="d" begin="0.6s" dur="0.2s" values="M12 7h-9v0c0 0 0.45 0 1 0h6Z;M12 7h-9v-1c0 -0.55 0.45 -1 1 -1h6Z"/></path></g><path d="M19 13c3.31 0 6 2.69 6 6c0 3.31 -2.69 6 -6 6c-3.31 0 -6 -2.69 -6 -6c0 -3.31 2.69 -6 6 -6Z" opacity="0"><set fill="freeze" attributeName="opacity" begin="1.3s" to="1"/></path></mask></defs><path fill="currentColor" d="M0 0h24v24H0z" mask="url(#SVGUPLe7d8FEmptyFolder)"/><g fill="none" stroke="currentColor" stroke-dasharray="8" stroke-dashoffset="8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"><path d="M16 19h6"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.3s" dur="0.2s" to="0"/></path><path d="M19 16v6"><animate fill="freeze" attributeName="stroke-dashoffset" begin="1.5s" dur="0.2s" to="0"/></path></g></svg></span>
+                              <span>Nova pasta</span>
+                           </button>
+                           <button id="btnEmptyCustomize" type="button" class="ghost emptyActionButton">
+                              <span class="emptyActionIcon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"><path stroke-dasharray="22" d="M12 9c1.66 0 3 1.34 3 3c0 1.66 -1.34 3 -3 3c-1.66 0 -3 -1.34 -3 -3c0 -1.66 1.34 -3 3 -3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="22;0"/></path><path stroke-dasharray="44" stroke-dashoffset="44" d="M12 5.5c3.59 0 6.5 2.91 6.5 6.5c0 3.59 -2.91 6.5 -6.5 6.5c-3.59 0 -6.5 -2.91 -6.5 -6.5c0 -3.59 2.91 -6.5 6.5 -6.5Z"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.3s" dur="0.5s" to="0"/><set fill="freeze" attributeName="opacity" begin="0.8s" to="0"/></path><path d="M15.24 6.37c0.41 0.23 0.8 0.51 1.14 0.83c0 0 2.62 -1.08 2.63 -1.06c0 0 1.56 2.7 1.56 2.7c0.01 0.03 -2.22 1.75 -2.22 1.75c0.1 0.45 0.15 0.93 0.15 1.41" opacity="0"><animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/><set fill="freeze" attributeName="opacity" begin="0.8s" to="1"/><animate fill="freeze" attributeName="d" begin="0.8s" dur="0.2s" values="M15.24 6.37c0.41 0.23 0.8 0.51 1.14 0.83c0.22 0.2 0.42 0.41 0.61 0.63c0.47 0.57 0.86 1.22 1.12 1.94c0.09 0.26 0.17 0.54 0.24 0.82c0.1 0.45 0.15 0.93 0.15 1.41;M15.24 6.37c0.41 0.23 0.8 0.51 1.14 0.83c0 0 2.62 -1.08 2.63 -1.06c0 0 1.56 2.7 1.56 2.7c0.01 0.03 -2.22 1.75 -2.22 1.75c0.1 0.45 0.15 0.93 0.15 1.41"/></path><path d="M18.5 11.99c0.01 0.47 -0.04 0.95 -0.15 1.4c0 0 2.25 1.73 2.23 1.75c0 0 -1.56 2.7 -1.56 2.7c-0.02 0.02 -2.63 -1.05 -2.63 -1.05c-0.34 0.31 -0.73 0.59 -1.15 0.83" opacity="0"><animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/><set fill="freeze" attributeName="opacity" begin="0.8s" to="1"/><animate fill="freeze" attributeName="d" begin="0.8s" dur="0.2s" values="M18.5 11.99c0.01 0.47 -0.04 0.95 -0.15 1.4c-0.06 0.29 -0.15 0.57 -0.24 0.84c-0.26 0.69 -0.63 1.35 -1.12 1.94c-0.18 0.21 -0.38 0.42 -0.59 0.62c-0.34 0.31 -0.73 0.59 -1.15 0.83;M18.5 11.99c0.01 0.47 -0.04 0.95 -0.15 1.4c0 0 2.25 1.73 2.23 1.75c0 0 -1.56 2.7 -1.56 2.7c-0.02 0.02 -2.63 -1.05 -2.63 -1.05c-0.34 0.31 -0.73 0.59 -1.15 0.83"/></path><path d="M15.26 17.62c-0.4 0.24 -0.84 0.44 -1.29 0.57c0 0 -0.37 2.81 -0.4 2.81c0 0 -3.12 0 -3.12 0c-0.03 -0.01 -0.41 -2.8 -0.41 -2.8c-0.44 -0.14 -0.88 -0.34 -1.3 -0.58" opacity="0"><animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/><set fill="freeze" attributeName="opacity" begin="0.8s" to="1"/><animate fill="freeze" attributeName="d" begin="0.8s" dur="0.2s" values="M15.26 17.62c-0.4 0.24 -0.84 0.44 -1.29 0.57c-0.28 0.09 -0.57 0.16 -0.85 0.21c-0.73 0.12 -1.49 0.13 -2.24 0c-0.27 -0.05 -0.55 -0.12 -0.83 -0.2c-0.44 -0.14 -0.88 -0.34 -1.3 -0.58;M15.26 17.62c-0.4 0.24 -0.84 0.44 -1.29 0.57c0 0 -0.37 2.81 -0.4 2.81c0 0 -3.12 0 -3.12 0c-0.03 -0.01 -0.41 -2.8 -0.41 -2.8c-0.44 -0.14 -0.88 -0.34 -1.3 -0.58"/></path><path d="M8.76 17.63c-0.41 -0.23 -0.8 -0.51 -1.14 -0.83c0 0 -2.62 1.08 -2.63 1.06c0 0 -1.56 -2.7 -1.56 -2.7c-0.01 -0.03 2.22 -1.75 2.22 -1.75c-0.1 -0.45 -0.15 -0.93 -0.15 -1.41" opacity="0"><animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/><set fill="freeze" attributeName="opacity" begin="0.8s" to="1"/><animate fill="freeze" attributeName="d" begin="0.8s" dur="0.2s" values="M8.76 17.63c-0.41 -0.23 -0.8 -0.51 -1.14 -0.83c-0.22 -0.2 -0.42 -0.41 -0.61 -0.63c-0.47 -0.57 -0.86 -1.22 -1.12 -1.94c-0.09 -0.26 -0.17 -0.54 -0.24 -0.82c-0.1 -0.45 -0.15 -0.93 -0.15 -1.41;M8.76 17.63c-0.41 -0.23 -0.8 -0.51 -1.14 -0.83c0 0 -2.62 1.08 -2.63 1.06c0 0 -1.56 -2.7 -1.56 -2.7c-0.01 -0.03 2.22 -1.75 2.22 -1.75c-0.1 -0.45 -0.15 -0.93 -0.15 -1.41"/></path><path d="M5.5 12.01c-0.01 -0.47 0.04 -0.95 0.15 -1.4c0 0 -2.25 -1.73 -2.23 -1.75c0 0 1.56 -2.7 1.56 -2.7c0.02 -0.02 2.63 1.05 2.63 1.05c0.34 -0.31 0.73 -0.59 1.15 -0.83" opacity="0"><animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/><set fill="freeze" attributeName="opacity" begin="0.8s" to="1"/><animate fill="freeze" attributeName="d" begin="0.8s" dur="0.2s" values="M5.5 12.01c-0.01 -0.47 0.04 -0.95 0.15 -1.4c0.06 -0.29 0.15 -0.57 0.24 -0.84c0.26 -0.69 0.63 -1.35 1.12 -1.94c0.18 -0.21 0.38 -0.42 0.59 -0.62c0.34 -0.31 0.73 -0.59 1.15 -0.83;M5.5 12.01c-0.01 -0.47 0.04 -0.95 0.15 -1.4c0 0 -2.25 -1.73 -2.23 -1.75c0 0 1.56 -2.7 1.56 -2.7c0.02 -0.02 2.63 1.05 2.63 1.05c0.34 -0.31 0.73 -0.59 1.15 -0.83"/></path><path d="M8.74 6.38c0.4 -0.24 0.84 -0.44 1.29 -0.57c0 0 0.37 -2.81 0.4 -2.81c0 0 3.12 0 3.12 0c0.03 0.01 0.41 2.8 0.41 2.8c0.44 0.14 0.88 0.34 1.3 0.58" opacity="0"><animateTransform attributeName="transform" dur="30s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/><set fill="freeze" attributeName="opacity" begin="0.8s" to="1"/><animate fill="freeze" attributeName="d" begin="0.8s" dur="0.2s" values="M8.74 6.38c0.4 -0.24 0.84 -0.44 1.29 -0.57c0.28 -0.09 0.57 -0.16 0.85 -0.21c0.73 -0.12 1.49 -0.13 2.24 0c0.27 0.05 0.55 0.12 0.83 0.2c0.44 0.14 0.88 0.34 1.3 0.58;M8.74 6.38c0.4 -0.24 0.84 -0.44 1.29 -0.57c0 0 0.37 -2.81 0.4 -2.81c0 0 3.12 0 3.12 0c0.03 0.01 0.41 2.8 0.41 2.8c0.44 0.14 0.88 0.34 1.3 0.58"/></path></g></svg></span>
+                              <span>Personalização</span>
+                           </button>
+                        </div>
+                        <div class="emptyDivider" aria-hidden="true"></div>
+                        <div class="emptyMeta">
+                           <div class="emptyShortcutList" aria-label="Atalhos disponíveis neste estado">
+                              <span class="emptyShortcut"><span class="emptyShortcutKeys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">D</span></span><span>Nova nota</span></span>
+                              <span class="emptyShortcut"><span class="emptyShortcutKeys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">S</span></span><span>Nova pasta</span></span>
+                              <span class="emptyShortcut"><span class="emptyShortcutKeys"><span class="kbd">Ctrl</span><span class="kbd">Alt</span><span class="kbd">P</span></span><span>Personalização</span></span>
+                           </div>
+                           <button type="button" id="btnEmptyShortcuts" class="emptyShortcutsButton" aria-label="Abrir atalhos" title="Abrir atalhos">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true"><path d="M0 0h32v32H0z" fill="none"/><path fill="currentColor" d="M28 26H4a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h24a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2M4 10v14h24V10Z"/><path fill="currentColor" d="M10 20h11v2H10zm-4-8h2v2H6zm4 0h2v2h-2zm4 0h2v2h-2zm4 0h2v2h-2zM6 20h2v2H6zm0-4h2v2H6zm4 0h2v2h-2zm4 0h2v2h-2zm8-4h4v2h-4zm0 4h4v2h-4zm-4 0h2v2h-2zm5 4h3v2h-3z"/></svg>
+                              <span>ATALHOS</span>
+                           </button>
+                        </div>
                      </div>
-                     <div class="emptyMeta">Atalhos rápidos: <span class="kbd">Ctrl</span> <span class="kbd">Alt</span> <span class="kbd">D</span> para nota e <span class="kbd">Ctrl</span> <span class="kbd">Alt</span> <span class="kbd">S</span> para pasta.</div>
                   </div>
                </div>
 
-               <!-- Preview (só para .md) — ✅ SEM ÍNDICE -->
-               <div id="mdPreviewWrap" class="md-preview-wrap">
-                  <article id="mdPreview" class="markdown-body" aria-label="Visualização Markdown"></article>
-                  <span id="mdPreviewStatus" class="sr-only" aria-live="polite" aria-atomic="true"></span>
+               <div id="mdWorkspace" class="md-workspace">
+                  <div class="editorSearchHost" id="editorSearchHost">
+                     <div class="editorSearchBackdrop" id="editorSearchBackdrop" aria-hidden="true">
+                        <div class="editorSearchMirror" id="editorSearchMirror"></div>
+                     </div>
+                     <textarea id="editor" aria-label="Editor de notas" disabled></textarea>
+                  </div>
 
-                  <div class="toTop">
-                     <button type="button" id="btnToTop" class="ghost" title="Voltar ao topo" aria-label="Voltar ao topo">↑ <span>Topo</span></button>
+                  <div id="mdSplitDivider" class="md-split-divider" role="separator" aria-orientation="vertical" aria-label="Ajustar largura entre editor e Live Preview" tabindex="0"></div>
+
+                  <!-- Preview (só para .md) — ✅ SEM ÍNDICE -->
+                  <div id="mdPreviewWrap" class="md-preview-wrap">
+                     <article id="mdPreview" class="markdown-body" aria-label="Visualização Markdown"></article>
+                     <span id="mdPreviewStatus" class="sr-only" aria-live="polite" aria-atomic="true"></span>
+
+                     <div class="toTop">
+                        <button type="button" id="btnToTop" class="ghost" title="Voltar ao topo" aria-label="Voltar ao topo">↑ <span>Topo</span></button>
+                     </div>
                   </div>
                </div>
-
-               <div class="editorSearchHost" id="editorSearchHost">
-                  <div class="editorSearchBackdrop" id="editorSearchBackdrop" aria-hidden="true">
-                     <div class="editorSearchMirror" id="editorSearchMirror"></div>
-                  </div>
-                  <textarea id="editor" aria-label="Editor de notas" placeholder="Selecione ou crie uma nota para editar…" disabled></textarea>
-               </div>
-
                <div class="hint">
-                  <div id="hintLeft">Clique na pasta para abrir/fechar. Arraste para mover. Clique duplo para renomear.⚡</div>
+                  <div id="hintLeft">Desenvolvido: Diego dos Santos Leite</div>
                   <div id="hintRight">
-                     Atalhos: <span class="kbd">Ctrl</span> <span class="kbd">Alt</span> <span class="kbd">S</span> / <span class="kbd">Ctrl</span> <span class="kbd">Alt</span> <span class="kbd">D</span> / <span class="kbd">F2</span> / <span class="kbd">Ctrl</span> <span class="kbd">Del</span> - <span class="kbd">Alt</span> <span class="kbd">Del</span>
+                     <button type="button" id="hintShortcutsButton" aria-label="Abrir atalhos" title="Abrir atalhos">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32" aria-hidden="true"><path d="M0 0h32v32H0z" fill="none"/><path fill="currentColor" d="M28 26H4a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h24a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2M4 10v14h24V10Z"/><path fill="currentColor" d="M10 20h11v2H10zm-4-8h2v2H6zm4 0h2v2h-2zm4 0h2v2h-2zm4 0h2v2h-2zM6 20h2v2H6zm0-4h2v2H6zm4 0h2v2h-2zm4 0h2v2h-2zm8-4h4v2h-4zm0 4h4v2h-4zm-4 0h2v2h-2zm5 4h3v2h-3z"/></svg>
+                        <span>ATALHOS</span>
+                     </button>
                   </div>
                </div>
             </section>
@@ -4849,20 +5221,8 @@ html.tree-grabbing .tree .tree .node.selected {
            "use strict";
 
            // Controle interno de build. Não alterar a versão visual v1.0 da interface.
-           const APP_INTERNAL_VERSION = "1.0.13";
+           const APP_INTERNAL_VERSION = "1.0.24";
            const APP_BUILD_CHANNEL = "anotacoes";
-
-    // ✅ Global: detecta se há algum modal aberto (atalhos globais)
-    const isModalOpen = () => {
-      try {
-        // Qualquer backdrop visível indica modal aberto
-        const bd = document.querySelector(".modal-backdrop[style*='display: flex'], .modal-backdrop:not([hidden])");
-        return !!bd;
-      } catch (_) {
-        return false;
-      }
-    };
-
 
            // --- Tree unit (largura por nível) ---------------------------------
            // Calcula automaticamente a largura de 1 "coluna" do prefixo (caractere do box-drawing)
@@ -5334,8 +5694,13 @@ html.tree-grabbing .tree .tree .node.selected {
              btnImport: $("#btnImport"),
              btnCustomize: $("#btnCustomize"),
 
+             mdModeToggle: $("#mdModeToggle"),
              btnMdEdit: $("#btnMdEdit"),
+             btnMdLivePreview: $("#btnMdLivePreview"),
              btnMdPreview: $("#btnMdPreview"),
+             mdWorkspace: $("#mdWorkspace"),
+             mdSplitDivider: $("#mdSplitDivider"),
+             btnHintShortcuts: $("#hintShortcutsButton"),
 
              tree: $("#tree"),
              sidebar: $("#sidebar"),
@@ -5363,9 +5728,15 @@ html.tree-grabbing .tree .tree .node.selected {
              editorSearchBackdrop: $("#editorSearchBackdrop"),
              editorSearchMirror: $("#editorSearchMirror"),
 
+             editorPanel: $("#editorPanel"),
              emptyState: $("#emptyState"),
+             emptyTitle: $("#emptyTitle"),
+             emptyText: $("#emptyText"),
+             btnEmptyChooseRoot: $("#btnEmptyChooseRoot"),
              btnEmptyNewNote: $("#btnEmptyNewNote"),
              btnEmptyNewFolder: $("#btnEmptyNewFolder"),
+             btnEmptyCustomize: $("#btnEmptyCustomize"),
+             btnEmptyShortcuts: $("#btnEmptyShortcuts"),
 
              mdPreviewWrap: $("#mdPreviewWrap"),
              mdPreview: $("#mdPreview"),
@@ -5761,16 +6132,32 @@ const bindSidebarResize = () => {
   let startX = 0;
   let startW = 0;
   let pointerId = null;
+  let moveRaf = 0;
+  let pendingWidth = null;
+  let lastAppliedWidth = null;
 
   const getCurrentSidebarWidth = () => {
     const w = sidebar.getBoundingClientRect().width;
     return Number.isFinite(w) && w > 0 ? w : SIDEBAR_W_DEFAULT;
   };
 
+  const flushWidth = () => {
+    moveRaf = 0;
+    if (!Number.isFinite(pendingWidth)) return;
+    lastAppliedWidth = applySidebarWidthPx(pendingWidth, { persist: false });
+    pendingWidth = null;
+  };
+
+  const queueWidth = (candidate) => {
+    pendingWidth = candidate;
+    if (moveRaf) return;
+    moveRaf = requestAnimationFrame(flushWidth);
+  };
+
   const onMove = (e) => {
     if (!dragging) return;
     const dx = e.clientX - startX;
-    applySidebarWidthPx(startW + dx);
+    queueWidth(startW + dx);
     e.preventDefault();
   };
 
@@ -5779,10 +6166,27 @@ const bindSidebarResize = () => {
     dragging = false;
     pointerId = null;
 
+    if (moveRaf) {
+      cancelAnimationFrame(moveRaf);
+      moveRaf = 0;
+    }
+    flushWidth();
+
+    if (Number.isFinite(lastAppliedWidth)) {
+      try { localStorage.setItem(SIDEBAR_WIDTH_KEY, String(lastAppliedWidth)); } catch (_) {}
+    }
+
     document.documentElement.classList.remove('is-resizing-sidebar');
     window.removeEventListener('pointermove', onMove, true);
     window.removeEventListener('pointerup', stop, true);
     window.removeEventListener('pointercancel', stop, true);
+
+    // O preview refluí naturalmente durante o drag. Recalcula os controles de
+    // code blocks uma única vez no tamanho final, sem executar trabalho pesado
+    // a cada pixel do movimento.
+    try { scheduleMdCodeBlockLayoutRefresh(ui.mdPreview, { force: true }); } catch (_) {}
+    try { scheduleMdPreviewToTopVisibility(); } catch (_) {}
+    try { if (state.mdMode === 'split') resyncMdSplitScroll(); } catch (_) {}
   };
 
   handle.addEventListener('pointerdown', (e) => {
@@ -5792,6 +6196,8 @@ const bindSidebarResize = () => {
     pointerId = e.pointerId;
     startX = e.clientX;
     startW = getCurrentSidebarWidth();
+    pendingWidth = null;
+    lastAppliedWidth = startW;
 
     try { handle.setPointerCapture(pointerId); } catch {}
 
@@ -5875,7 +6281,7 @@ const bindSidebarToggle = () => {
             searchMode: "all", // "all" (nome+conteúdo) | "name" (somente nome)
             _searchCache: new Map(),
             searchReveal: null,
-             mdMode: "preview", // preview | edit
+             mdMode: "preview", // preview | split | edit
              md: null,
              tabState: new Map(), // tabId -> {wrap:boolean, draft?:string|null}
              _autosaveTimer: null,
@@ -6135,7 +6541,7 @@ const bindSidebarToggle = () => {
               return;
             }
 
-            if (state.mdMode !== "preview" || ui.mdPreviewWrap.style.display === "none") {
+            if (!(["preview", "split"].includes(state.mdMode)) || ui.mdPreviewWrap.style.display === "none") {
               clearMdPreviewSearchHighlights();
               return;
             }
@@ -6273,8 +6679,6 @@ const bindSidebarToggle = () => {
            };
 
            // ===== Atalhos de teclado (Tabs) =====
-           // Alias de compatibilidade mantido sem duplicar detector.
-           const jsModalOpen = isModalOpen;
 
            const activateRelativeTab = (dir) => {
              try {
@@ -7182,32 +7586,11 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              }
            };
 
-           const clearFsRootHandle = async () => {
-             try {
-               await idbDelete(FS_ROOT_HANDLE_KEY);
-               return true;
-             } catch (_) {
-               return false;
-             }
-           };
+           
 
-           const saveFsRootParentHandle = async (handle) => {
-             if (!handle) return false;
-             try {
-               await idbSet(FS_ROOT_PARENT_HANDLE_KEY, handle);
-               return true;
-             } catch (_) {
-               return false;
-             }
-           };
+           
 
-           const loadFsRootParentHandle = async () => {
-             try {
-               return await idbGet(FS_ROOT_PARENT_HANDLE_KEY);
-             } catch (_) {
-               return null;
-             }
-           };
+           
 
            const clearFsRootParentHandle = async () => {
              try {
@@ -7974,33 +8357,7 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              document.addEventListener("keydown", handler, { capture: true, once: true });
            };
 
-           const armPendingFsReconnectGesture = () => {
-             armFsOneShotGesture({
-               isActive: () => !!state.fs?.pendingReconnectActive,
-               armedKey: "_pendingReconnectArmed",
-               run: () => Promise.resolve()
-                 .then(() => {
-                   pulseStatus("Confirme o acesso do Chrome para reativar a pasta raiz…", 2200);
-                   return tryReconnectPendingFsRootFromUserGesture();
-                 })
-                 .then((restored) => {
-                   if (restored) {
-                     applySuccessfulFsReconnectUi();
-                     return;
-                   }
-                   if (state.fs?.pendingReconnectActive) {
-                     toast("A pasta raiz lembrada ainda precisa da sua confirmação no Chrome. Clique na árvore ou no botão da pasta para tentar novamente.");
-                     pulseStatus("Confirme a permissão da pasta raiz no Chrome.", 3000);
-                   }
-                 })
-                 .catch(() => {
-                   if (state.fs?.pendingReconnectActive) {
-                     toast("Não foi possível reativar a pasta raiz lembrada agora. Clique na árvore ou no botão da pasta para tentar novamente.");
-                     pulseStatus("Reativação da pasta raiz não concluída.", 2400);
-                   }
-                 })
-             });
-           };
+           
 
            const markPendingInitialFsRootPick = () => {
              state.fs.pendingInitialPickActive = true;
@@ -8619,110 +8976,7 @@ if (ui.tabsScroll && ui.btnTabsLeft && ui.btnTabsRight && !ui.tabsScroll.dataset
              return `${file.name}:${file.size}:${file.lastModified}`;
            };
 
-           const isImmediateParentHandleForRoot = async (parentHandle, rootHandle) => {
-             if (!parentHandle || !rootHandle) return false;
-             try {
-               if (typeof parentHandle.resolve === "function") {
-                 const rel = await parentHandle.resolve(rootHandle);
-                 if (Array.isArray(rel) && rel.length === 1) return true;
-               }
-             } catch (_) {}
-
-             try {
-               const directChild = await parentHandle.getDirectoryHandle(rootHandle.name, { create: false });
-               if (directChild && typeof directChild.isSameEntry === "function") {
-                 return await directChild.isSameEntry(rootHandle);
-               }
-             } catch (_) {}
-
-             return false;
-           };
-
-           const getStoredImmediateParentHandleForRootRename = async (rootHandle) => {
-             const parentHandle = await loadFsRootParentHandle();
-             if (!parentHandle) return null;
-             const allowed = await ensureFsHandlePermission(parentHandle, "readwrite", { prompt: false });
-             if (!allowed) return null;
-             return await isImmediateParentHandleForRoot(parentHandle, rootHandle) ? parentHandle : null;
-           };
-
-           
-const buildRootParentLinkDialog = ({ mode = "rename" } = {}) => {
-             const wrap = createDialogGroup();
-
-             const intro = mode === "setup"
-               ? "Para a função de <b>renomear a pasta raiz</b> funcionar melhor neste navegador, a aplicação também pode guardar acesso à <b>pasta pai imediata</b> da raiz."
-               : "Neste navegador, <b>renomear a pasta raiz</b> pode exigir acesso também à <b>pasta pai imediata</b> da raiz atual.";
-
-             const hint = mode === "setup"
-               ? "Isso é opcional agora. Se você vincular já, a renomeação da raiz tende a não abrir outro fluxo surpresa depois."
-               : "Sem essa vinculação, o navegador pode precisar abrir um segundo seletor antes de concluir a renomeação.";
-
-             wrap.innerHTML = `
-               <h4>Vincular pasta pai da raiz</h4>
-               <div class="dangerText dangerText--inherit">
-                 ${intro}
-                 <br><br>
-                 ${hint}
-                 <br><br>
-                 Quando o seletor abrir, escolha <b>a pasta PAI imediata da raiz atual</b> — não escolha a própria raiz.
-               </div>
-             `;
-             return wrap;
-           };
-
-           const askToLinkImmediateParentForRootRename = async ({ mode = "rename" } = {}) => {
-             const res = await showDialog({
-               title: mode === "setup" ? "Preparar renomeação da raiz" : "Renomear pasta raiz",
-               bodyEl: buildRootParentLinkDialog({ mode }),
-               okText: mode === "setup" ? "Vincular agora" : "Continuar",
-               cancelText: mode === "setup" ? "Agora não" : "Cancelar",
-               danger: false
-             });
-             return !!res?.ok;
-           };
-
-           const pickImmediateParentHandleForRootRename = async (rootHandle, { skipIntroDialog = false, mode = "rename" } = {}) => {
-             if (!rootHandle || typeof window.showDirectoryPicker !== "function") {
-               throw new Error("Escolha de pasta não suportada neste navegador.");
-             }
-
-             const storedParent = await getStoredImmediateParentHandleForRootRename(rootHandle);
-             if (storedParent) return storedParent;
-
-             if (!skipIntroDialog) {
-               const wantsToContinue = await askToLinkImmediateParentForRootRename({ mode });
-               if (!wantsToContinue) return null;
-             }
-
-             let parentHandle = null;
-             try {
-               parentHandle = await window.showDirectoryPicker({ mode: "readwrite" });
-             } catch (error) {
-               if (error?.name === "AbortError") return null;
-               throw error;
-             }
-
-             const allowed = await ensureFsHandlePermission(parentHandle, "readwrite", { prompt: true });
-             if (!allowed) throw new Error("Permissão negada para a pasta pai.");
-
-             const isValidParent = await isImmediateParentHandleForRoot(parentHandle, rootHandle);
-             if (!isValidParent) {
-               throw new Error("Selecione a pasta pai imediata da raiz atual.");
-             }
-
-             await saveFsRootParentHandle(parentHandle).catch(() => {});
-             return parentHandle;
-           };
-
-           const maybeOfferFsRootParentLink = async (rootHandle) => {
-             if (!rootHandle) return null;
-             const storedParent = await getStoredImmediateParentHandleForRootRename(rootHandle);
-             if (storedParent) return storedParent;
-             return await pickImmediateParentHandleForRootRename(rootHandle, { skipIntroDialog: false, mode: "setup" });
-           };
-
-           const saveTabs = () => {
+                      const saveTabs = () => {
              const payload = {
                tabs: state.tabs,
                activeTabId: state.activeTabId,
@@ -8982,6 +9236,7 @@ const buildRootParentLinkDialog = ({ mode = "rename" } = {}) => {
 
            const applyPrefsToCSS = () => {
              PreferencesLivePreview.apply(state.prefs);
+             try { syncMdCodeBlockTypographyLayout(); } catch (_) {}
              // se o preview MD estiver aberto, mantém o contraste do codebox consistente com as cores atuais
              try { updateMdPreviewContrast(ui.mdPreview); } catch {}
              // Mermaid precisa ser renderizado novamente quando o fundo efetivo muda,
@@ -9048,21 +9303,9 @@ const buildRootParentLinkDialog = ({ mode = "rename" } = {}) => {
               return null;
             };
 
-            const closeTabsForNodeId = (nodeId) => {
-              const tabIds = state.tabs.filter((t) => t.nodeId === nodeId).map((t) => t.id);
-              for (const tid of tabIds) closeTab(tid);
-            };
+            
 
-            const deleteSingleFileNode = (fileId) => {
-              const n = getNode(fileId);
-              if (!n || !isFile(n)) return;
-
-              closeTabsForNodeId(fileId);
-
-              if (n.parentId) removeChild(n.parentId, fileId);
-              delete state.data.nodes[fileId];
-              state.dirty.delete(fileId);
-            };
+            
 
             const confirmOverwrite = async ({ name, ext, folderId, actionLabel }) => {
               const wrap = document.createElement("div");
@@ -10932,7 +11175,29 @@ setTimeout(() => updateTabNavButtons(), 60);
              ui.saveBadge.className = dirty ? "badge dirty" : "badge ok";
            };
 
-           const showEmpty = (show) => (ui.emptyState.style.display = show ? "flex" : "none");
+           const showEmpty = (show) => {
+             if (!ui.emptyState) return;
+             ui.editorPanel?.classList.toggle("is-empty", !!show);
+             ui.emptyState.setAttribute("aria-hidden", show ? "false" : "true");
+             if (!show) return;
+
+             const connected = isFsConnected();
+             const pendingReconnect = !connected && !!state.fs?.pendingReconnectActive;
+             ui.emptyState.dataset.mode = connected ? "workspace" : "root";
+
+             if (ui.emptyTitle) {
+               ui.emptyTitle.textContent = connected
+                 ? "Nenhuma nota aberta"
+                 : (pendingReconnect ? "Reative sua pasta de notas" : "Selecione sua pasta de notas");
+             }
+             if (ui.emptyText) {
+               ui.emptyText.textContent = connected
+                 ? "Selecione um arquivo na árvore à esquerda ou crie um novo documento."
+                 : (pendingReconnect
+                     ? "A pasta lembrada foi restaurada. Clique na página para reativar o acesso ou selecione a pasta raiz novamente."
+                     : "Para começar, escolha a pasta raiz que contém seus arquivos .txt e .md.");
+             }
+           };
 
            /* ---------- Markdown (SEM TOC) ---------- */
            const mdReady = () =>
@@ -11225,7 +11490,7 @@ setTimeout(() => updateTabNavButtons(), 60);
                  * - estado sem fill explícito herda o fundo da página;
                  * - classDef com fill/color/stroke continua sendo aplicado pelo Mermaid;
                  * - classDef parcial, como `font-style:italic`, não ganha fundo extra.
-                 * Sem uso de !important.
+                 * Sem prioridade CSS forçada nesta etapa.
                  */
                 const neutralThemeVariables = {
                   darkMode: !onLightBackground,
@@ -11587,6 +11852,14 @@ setTimeout(() => updateTabNavButtons(), 60);
                 "opacity"
               ];
 
+              /*
+               * Exceção deliberada e isolada de prioridade CSS:
+               * este fallback atua somente dentro do SVG gerado pelo Mermaid e reproduz
+               * classDef/style explícito do próprio autor. O Mermaid pode emitir estilos
+               * inline nos elementos internos; por isso a prioridade "important" é
+               * necessária aqui para preservar a estilização autoral após sanitização e
+               * pós-processamento. Ela não participa da cascata visual da UI do app.
+               */
               const buildCssDeclarationBlock = (props, allowedProps, options = {}) => {
                 const declarations = [];
                 allowedProps.forEach((prop) => {
@@ -12336,21 +12609,6 @@ ${edgeFallbackRules}`;
                   return 16;
                 };
 
-                const estimateSvgTextWidth = (line, fontSize) => {
-                  const chars = Array.from(String(line || ""));
-                  const units = chars.reduce((sum, char) => {
-                    if (/\s/.test(char)) return sum + 0.38;
-                    if (/[ilI.,:;!|']/.test(char)) return sum + 0.38;
-                    if (/[mwMW@#%&]/.test(char)) return sum + 0.94;
-                    if (/[A-Z]/.test(char)) return sum + 0.74;
-                    if (/[0-9]/.test(char)) return sum + 0.62;
-                    if (/[<>~=+\-_/\()\[\]{}]/.test(char)) return sum + 0.66;
-                    return sum + 0.62;
-                  }, 0);
-
-                  return Math.max(0, units * fontSize);
-                };
-
                 decodeMermaidSvgTextEntities(svg);
 
                 const hasSvgClass = (node, className) =>
@@ -12494,7 +12752,7 @@ ${edgeFallbackRules}`;
                  * que já vem deslocado por `transform="translate(...)"`. Por isso o texto
                  * ficava visualmente encostado/correndo para um lado. A correção usa o
                  * retângulo real como caixa de referência, desconta o translate acumulado
-                 * do grupo de texto e centraliza as linhas sem `!important` e sem criar
+                 * do grupo de texto e centraliza as linhas sem prioridade CSS forçada e sem criar
                  * renderizador paralelo.
                  */
                 const normalizedLabelBoxes = [];
@@ -12525,11 +12783,6 @@ ${edgeFallbackRules}`;
                   const item = readSvgRectBox(rect);
                   if (!Number.isFinite(item.x) || !Number.isFinite(item.y) || !Number.isFinite(item.width) || !Number.isFinite(item.height) || item.width <= 0 || item.height <= 0) return;
 
-                  const isNoteLike = !!ownerGroup.closest("g.notes, g.note, .note, .noteGroup, g.statediagram-note") ||
-                    hasSvgClass(ownerGroup, "note") ||
-                    hasSvgClass(ownerGroup, "noteGroup") ||
-                    hasSvgClass(ownerGroup, "statediagram-note") ||
-                    !!ownerGroup.querySelector("g.label.noteLabel, foreignObject .nodeLabel, foreignobject .nodeLabel");
                   const lineSets = textNodes.map(getSvgTextLines).filter((lines) => lines.length > 0);
                   if (!lineSets.length) return;
 
@@ -13160,8 +13413,9 @@ ${edgeFallbackRules}`;
               });
             };
 
-            const renderMermaidDiagrams = async (rootEl) => {
+            const renderMermaidDiagrams = async (rootEl, { renderSeq = 0 } = {}) => {
               const root = rootEl || ui?.mdPreview || document;
+              const isStale = () => renderSeq > 0 && renderSeq !== __mdPreviewRenderSeq;
               const blocks = Array.from(root.querySelectorAll(".mermaid")).filter((block) => !block.dataset.mermaidRendered);
               if (!blocks.length) return;
 
@@ -13182,6 +13436,11 @@ ${edgeFallbackRules}`;
               const renderBox = getMarkdownMermaidRenderBox();
 
               for (const block of blocks) {
+                if (isStale()) return;
+                // Permite paint/input entre diagramas pesados. Não altera conteúdo nem ordem.
+                await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+                if (isStale() || !block.isConnected || !root.contains(block)) return;
+
                 const source = block.textContent || "";
                 try { __mdMermaidSourceByBlock.set(block, source); } catch (_) {}
                 syncMarkdownMermaidRenderBoxSize(renderBox, block);
@@ -13196,6 +13455,7 @@ ${edgeFallbackRules}`;
                 try {
                   renderBox.textContent = "";
                   const result = await renderMermaidSvg(source, svgId, renderBox);
+                  if (isStale() || !block.isConnected || !root.contains(block)) return;
                   const safeSvg = normalizeMermaidSvgSize(injectMarkdownMermaidContrastStyle(sanitizeMermaidSvg(result.svg), block, source));
 
                   if (!safeSvg || !/<svg[\s>]/i.test(safeSvg)) {
@@ -13255,7 +13515,7 @@ ${edgeFallbackRules}`;
                 if (seq !== __mdMermaidThemeRefreshSeq) return;
 
                 const root = ui?.mdPreview;
-                if (!root || state?.mdMode !== "preview") return;
+                if (!root || !(["preview", "split"].includes(state?.mdMode))) return;
 
                 const blocks = Array.from(root.querySelectorAll?.(".mermaid") || []);
                 if (!blocks.length) return;
@@ -13518,6 +13778,279 @@ ${edgeFallbackRules}`;
                 Aqui protegemos APENAS o HTML que nasce do Markdown.
               ========================================================= */
 
+
+           /* =========================================================
+              Markdown — imagens locais relativas à pasta raiz FS
+              ---------------------------------------------------------
+              Semântica:
+              - ./imagem.png e ../imagem.png: relativos ao diretório do .md atual;
+              - /assets/imagem.png: relativo à pasta raiz selecionada;
+              - imagem.png: relativo ao diretório do .md atual;
+              - http(s), data:, blob: e SVG inline continuam no pipeline existente.
+
+              Segurança / performance:
+              - nunca usa file:// nem converte caminho local em URL de rede;
+              - o src relativo é neutralizado durante a sanitização, antes da injeção no DOM;
+              - resolve somente descendentes do rootHandle autorizado;
+              - ".." nunca pode escapar acima da raiz;
+              - o arquivo é exposto ao <img> por Object URL (blob:) temporária;
+              - cache por relPath + lastModified + size evita releitura em cada tecla do Live Preview;
+              - Object URLs antigas são revogadas ao mudar/remover imagens ou sair do Preview.
+              ========================================================= */
+           const MD_LOCAL_IMAGE_ATTR = "data-md-local-src";
+           const MD_LOCAL_IMAGE_CACHE_TTL_MS = 5000;
+           const MD_LOCAL_IMAGE_MAX_CONCURRENCY = 4;
+           const MD_LOCAL_IMAGE_DIR_CACHE_LIMIT = 128;
+           const MD_LOCAL_IMAGE_FALLBACK_EXT_RE = /\.(?:png|jpe?g|gif|webp|svg|avif|bmp|ico)$/i;
+
+           let __mdLocalImageRootHandle = null;
+           const __mdLocalImageCache = new Map();
+           const __mdLocalImageDirHandleCache = new Map();
+
+           const isMarkdownLocalImageReference = (raw) => {
+             const value = String(raw ?? "").trim();
+             if (!value || value.startsWith("#") || value.startsWith("//")) return false;
+             // Qualquer esquema explícito pertence ao pipeline normal (https:, data:, blob:, etc.).
+             if (/^[a-z][a-z0-9+.-]*:/i.test(value)) return false;
+             return true;
+           };
+
+           const revokeMdLocalImageUrl = (url) => {
+             if (!url) return;
+             try { URL.revokeObjectURL(url); } catch (_) {}
+           };
+
+           const releaseMarkdownLocalImageCache = () => {
+             __mdLocalImageCache.forEach((entry) => revokeMdLocalImageUrl(entry?.url));
+             __mdLocalImageCache.clear();
+             __mdLocalImageDirHandleCache.clear();
+             __mdLocalImageRootHandle = null;
+           };
+
+           const ensureMarkdownLocalImageRoot = () => {
+             const rootHandle = isFsConnected() ? state.fs?.rootHandle : null;
+             if (rootHandle !== __mdLocalImageRootHandle) {
+               releaseMarkdownLocalImageCache();
+               __mdLocalImageRootHandle = rootHandle || null;
+             }
+             return rootHandle || null;
+           };
+
+           const touchMdLocalImageDirHandle = (relPath, handle) => {
+             const key = String(relPath || "");
+             if (!handle) return;
+             if (__mdLocalImageDirHandleCache.has(key)) __mdLocalImageDirHandleCache.delete(key);
+             __mdLocalImageDirHandleCache.set(key, handle);
+             while (__mdLocalImageDirHandleCache.size > MD_LOCAL_IMAGE_DIR_CACHE_LIMIT) {
+               const oldestKey = __mdLocalImageDirHandleCache.keys().next().value;
+               __mdLocalImageDirHandleCache.delete(oldestKey);
+             }
+           };
+
+           const decodeMdLocalImageSegment = (segment) => {
+             try {
+               const decoded = decodeURIComponent(String(segment || ""));
+               if (!decoded || decoded.includes("/") || decoded.includes("\\") || decoded.includes("\u0000")) return null;
+               return decoded;
+             } catch (_) {
+               return null;
+             }
+           };
+
+           const normalizeMarkdownLocalImagePath = (raw, mdRelPath = "") => {
+             const original = String(raw ?? "").trim();
+             if (!isMarkdownLocalImageReference(original)) return null;
+
+             const value = original.replace(/\\/g, "/");
+             const rootRelative = value.startsWith("/");
+             const segments = rootRelative
+               ? []
+               : String(mdRelPath || "").split("/").filter(Boolean).slice(0, -1);
+
+             const sourceSegments = (rootRelative ? value.replace(/^\/+/, "") : value).split("/");
+             for (const rawSegment of sourceSegments) {
+               if (!rawSegment || rawSegment === ".") continue;
+               const segment = decodeMdLocalImageSegment(rawSegment);
+               if (!segment) return null;
+               if (segment === ".") continue;
+               if (segment === "..") {
+                 if (!segments.length) return null; // nunca escapar acima da raiz autorizada
+                 segments.pop();
+                 continue;
+               }
+               segments.push(segment);
+             }
+
+             if (!segments.length) return null;
+             return segments.join("/");
+           };
+
+           const resolveMarkdownLocalImageFileHandle = async (relPath) => {
+             const rootHandle = ensureMarkdownLocalImageRoot();
+             if (!rootHandle) throw new Error("MD_LOCAL_IMAGE_ROOT_UNAVAILABLE");
+
+             const parts = String(relPath || "").split("/").filter(Boolean);
+             if (!parts.length) throw new Error("MD_LOCAL_IMAGE_PATH_INVALID");
+
+             let dirHandle = rootHandle;
+             let dirRelPath = "";
+             for (let i = 0; i < parts.length - 1; i += 1) {
+               const name = parts[i];
+               const nextDirRelPath = dirRelPath ? `${dirRelPath}/${name}` : name;
+               const cached = __mdLocalImageDirHandleCache.get(nextDirRelPath);
+               if (cached) {
+                 dirHandle = cached;
+                 touchMdLocalImageDirHandle(nextDirRelPath, cached);
+               } else {
+                 dirHandle = await dirHandle.getDirectoryHandle(name, { create: false });
+                 touchMdLocalImageDirHandle(nextDirRelPath, dirHandle);
+               }
+               dirRelPath = nextDirRelPath;
+             }
+
+             return await dirHandle.getFileHandle(parts[parts.length - 1], { create: false });
+           };
+
+           const isSupportedMarkdownLocalImageFile = (file, relPath) => {
+             const mime = String(file?.type || "").toLowerCase();
+             if (mime.startsWith("image/")) return true;
+             return MD_LOCAL_IMAGE_FALLBACK_EXT_RE.test(String(relPath || ""));
+           };
+
+           const getMarkdownLocalImageObjectUrl = async (relPath, renderSeq) => {
+             ensureMarkdownLocalImageRoot();
+             if (renderSeq !== __mdPreviewRenderSeq) return null;
+             const now = Date.now();
+             let cached = __mdLocalImageCache.get(relPath) || null;
+
+             if (cached?.url && (now - Number(cached.checkedAt || 0)) < MD_LOCAL_IMAGE_CACHE_TTL_MS) {
+               return cached.url;
+             }
+
+             let fileHandle = cached?.fileHandle || null;
+             let file = null;
+             try {
+               if (!fileHandle) fileHandle = await resolveMarkdownLocalImageFileHandle(relPath);
+               file = await fileHandle.getFile();
+             } catch (_) {
+               // Handle de arquivo pode ficar obsoleto após substituição externa; uma nova resolução é segura.
+               if (renderSeq !== __mdPreviewRenderSeq) return null;
+               if (cached?.url) revokeMdLocalImageUrl(cached.url);
+               __mdLocalImageCache.delete(relPath);
+               fileHandle = await resolveMarkdownLocalImageFileHandle(relPath);
+               file = await fileHandle.getFile();
+             }
+
+             if (renderSeq !== __mdPreviewRenderSeq) return null;
+             if (!isSupportedMarkdownLocalImageFile(file, relPath)) {
+               throw new Error("MD_LOCAL_IMAGE_UNSUPPORTED_TYPE");
+             }
+
+             const lastModified = Number(file?.lastModified || 0);
+             const size = Number(file?.size || 0);
+             if (cached?.url && cached.lastModified === lastModified && cached.size === size) {
+               cached.fileHandle = fileHandle;
+               cached.checkedAt = now;
+               return cached.url;
+             }
+
+             if (cached?.url) revokeMdLocalImageUrl(cached.url);
+             const url = URL.createObjectURL(file);
+             __mdLocalImageCache.set(relPath, {
+               relPath,
+               fileHandle,
+               url,
+               lastModified,
+               size,
+               checkedAt: now,
+             });
+             return url;
+           };
+
+           const pruneMarkdownLocalImageCache = (usedRelPaths) => {
+             const keep = usedRelPaths instanceof Set ? usedRelPaths : new Set();
+             for (const [relPath, entry] of __mdLocalImageCache.entries()) {
+               if (keep.has(relPath)) continue;
+               revokeMdLocalImageUrl(entry?.url);
+               __mdLocalImageCache.delete(relPath);
+             }
+           };
+
+           const resolveMarkdownLocalImages = async (rootEl, tabId, renderSeq) => {
+             const rootHandle = ensureMarkdownLocalImageRoot();
+             const tab = getTab(tabId);
+             const node = tab ? getNode(tab.nodeId) : null;
+             const placeholders = Array.from(rootEl?.querySelectorAll?.(`img[${MD_LOCAL_IMAGE_ATTR}]`) || []);
+             const usedRelPaths = new Set();
+
+             if (!rootHandle || !node || node.ext !== "md" || !placeholders.length) {
+               if (renderSeq === __mdPreviewRenderSeq) pruneMarkdownLocalImageCache(usedRelPaths);
+               return;
+             }
+
+             // Agrupa referências repetidas para que a mesma imagem física seja aberta uma única vez por render.
+             const groups = new Map();
+             placeholders.forEach((img) => {
+               const raw = String(img.getAttribute(MD_LOCAL_IMAGE_ATTR) || "").trim();
+               const relPath = normalizeMarkdownLocalImagePath(raw, node.relPath || "");
+               if (!relPath) {
+                 img.setAttribute("data-md-local-image-state", "invalid");
+                 img.setAttribute("title", `Caminho de imagem local inválido: ${raw}`);
+                 return;
+               }
+               usedRelPaths.add(relPath);
+               if (!groups.has(relPath)) groups.set(relPath, []);
+               groups.get(relPath).push({ img, raw });
+             });
+
+             const pendingGroups = Array.from(groups.entries());
+             let nextIndex = 0;
+             const resolveOneGroup = async ([relPath, targets]) => {
+               try {
+                 const objectUrl = await getMarkdownLocalImageObjectUrl(relPath, renderSeq);
+                 if (!objectUrl || renderSeq !== __mdPreviewRenderSeq) return;
+
+                 targets.forEach(({ img }) => {
+                   if (!img.isConnected) return;
+                   img.loading = "lazy";
+                   img.decoding = "async";
+                   img.setAttribute("src", objectUrl);
+                   img.setAttribute("data-md-local-image-state", "ready");
+                   img.removeAttribute(MD_LOCAL_IMAGE_ATTR);
+
+                   const resyncAfterImage = () => {
+                     if (renderSeq !== __mdPreviewRenderSeq) return;
+                     scheduleMdPreviewToTopVisibility();
+                     if (state.mdMode === "split") requestAnimationFrame(() => scheduleMdSplitScrollSync(ui.editor, { force: true }));
+                   };
+                   img.addEventListener("load", resyncAfterImage, { once: true });
+                   img.addEventListener("error", resyncAfterImage, { once: true });
+                 });
+               } catch (_) {
+                 if (renderSeq !== __mdPreviewRenderSeq) return;
+                 targets.forEach(({ img, raw }) => {
+                   if (!img.isConnected) return;
+                   img.removeAttribute("src");
+                   img.setAttribute("data-md-local-image-state", "error");
+                   img.setAttribute("title", `Imagem local não encontrada ou não suportada: ${raw}`);
+                 });
+               }
+             };
+
+             const worker = async () => {
+               while (true) {
+                 const index = nextIndex;
+                 nextIndex += 1;
+                 if (index >= pendingGroups.length) return;
+                 await resolveOneGroup(pendingGroups[index]);
+               }
+             };
+
+             const workerCount = Math.min(MD_LOCAL_IMAGE_MAX_CONCURRENCY, pendingGroups.length);
+             await Promise.all(Array.from({ length: workerCount }, () => worker()));
+             if (renderSeq === __mdPreviewRenderSeq) pruneMarkdownLocalImageCache(usedRelPaths);
+           };
+
            // Flag para garantir que hooks do DOMPurify sejam registrados só 1 vez
            let __mdPurifyHooksInstalled = false;
 
@@ -13537,7 +14070,11 @@ ${edgeFallbackRules}`;
                      const raw = (data && data.attrValue != null) ? String(data.attrValue).trim() : "";
                      const v = raw.replace(/\u0000/g, ""); // remove NUL
 
-                     // Permite fragmentos (#ancora) e URLs relativas
+                     // IMG relativo é resolvido depois exclusivamente contra o rootHandle autorizado.
+                     const isImgSrc = name === "src" && String(node?.nodeName || "").toUpperCase() === "IMG";
+                     if (isImgSrc && isMarkdownLocalImageReference(v)) return;
+
+                     // Permite fragmentos (#ancora) e URLs relativas já homologadas.
                      if (v.startsWith("#") || v.startsWith("/") || v.startsWith("./") || v.startsWith("../")) return;
 
                      // Normaliza para checagem de protocolo
@@ -13570,6 +14107,18 @@ ${edgeFallbackRules}`;
                    }
                  } catch (_) {}
                });
+
+               // Neutraliza src local antes de o HTML entrar no DOM. Assim ./../ não dispara
+               // uma requisição relativa ao endereço da própria página durante o render.
+               window.DOMPurify.addHook("afterSanitizeAttributes", (node) => {
+                 try {
+                   if (String(node?.nodeName || "").toUpperCase() !== "IMG") return;
+                   const src = String(node.getAttribute?.("src") || "").trim();
+                   if (!isMarkdownLocalImageReference(src)) return;
+                   node.setAttribute(MD_LOCAL_IMAGE_ATTR, src);
+                   node.removeAttribute("src");
+                 } catch (_) {}
+               });
              } catch (_) {
                // Se o hook falhar, ainda teremos a sanitização padrão do DOMPurify
              }
@@ -13597,7 +14146,7 @@ ${edgeFallbackRules}`;
                ],
                ADD_ATTR: [
                  'xmlns','xmlns:xlink','display','mathvariant','encoding','class','aria-hidden','role',
-                 'id','target','rel','loading','decoding','width','height','alt','title','aria-label',
+                 'id','target','rel','loading','decoding','width','height','alt','title','aria-label','data-md-local-src','data-md-local-image-state',
                  'type','checked','disabled','open','src',
                  'viewBox','preserveAspectRatio','fill','fill-opacity','fill-rule','stroke','stroke-width','stroke-linecap','stroke-linejoin','stroke-dasharray','stroke-dashoffset','stroke-opacity',
                  'cx','cy','r','rx','ry','x','y','x1','x2','y1','y2','d','points','transform','opacity','offset','stop-color','stop-opacity','href','xlink:href','focusable'
@@ -13621,21 +14170,6 @@ ${edgeFallbackRules}`;
                const txt = h.textContent.trim();
                if (!txt) return;
                if (!h.id) h.id = slugify(txt);
-               if (h.querySelector(".headingAnchor")) return;
-
-               const a = document.createElement("a");
-               a.className = "headingAnchor";
-               a.href = `#${h.id}`;
-               a.textContent = "🔗";
-               a.title = "Copiar link do título";
-               a.addEventListener("click", async (e) => {
-                 e.preventDefault();
-                 const link = `${location.href.split("#")[0]}#${h.id}`;
-                 try { await navigator.clipboard.writeText(link); toast("Link copiado ✅"); }
-                 catch { toast("Não foi possível copiar."); }
-                 history.replaceState(null, "", `#${h.id}`);
-               });
-               h.appendChild(a);
              });
            };
 
@@ -13746,6 +14280,119 @@ ${edgeFallbackRules}`;
            };
 
            
+
+           /* =========================================================
+              Markdown code blocks — scheduler de layout compartilhado
+              ---------------------------------------------------------
+              Causa-raiz do travamento antigo:
+              cada code block criava seu próprio ResizeObserver (viewport,
+              <pre> e <code>) e executava medições de layout a cada reflow.
+              Redimensionar sidebar/split multiplicava o trabalho pelo número
+              de blocos e podia saturar a main thread.
+
+              Arquitetura atual:
+              - 1 ResizeObserver para a largura do preview;
+              - refreshers registrados em WeakMap (sem reter DOM antigo);
+              - trabalho dividido em pequenos lotes por frame;
+              - durante drag/resize global, o DOM refluí por CSS sem medições;
+              - no fim do drag, um refresh final é executado;
+              - nenhuma mudança no conteúdo/renderização do Markdown.
+              ========================================================= */
+           const __mdCodeBlockRefreshers = new WeakMap();
+           let __mdCodeBlockLayoutRaf = 0;
+           let __mdCodeBlockLayoutSeq = 0;
+           let __mdCodeBlockResizeObserver = null;
+           let __mdCodeBlockObservedWrap = null;
+           let __mdCodeBlockObservedWidth = -1;
+           let __mdCodeTypographyKey = "";
+
+           const isMdLayoutResizeInProgress = () =>
+             document.documentElement.classList.contains("is-resizing-sidebar") ||
+             document.documentElement.classList.contains("is-resizing-md-split");
+
+           const scheduleMdCodeBlockLayoutRefresh = (rootEl, { force = false } = {}) => {
+             const root = rootEl || ui?.mdPreview;
+             if (!root || typeof root.querySelectorAll !== "function") return;
+             if (!force && isMdLayoutResizeInProgress()) return;
+
+             const seq = ++__mdCodeBlockLayoutSeq;
+             if (__mdCodeBlockLayoutRaf) {
+               cancelAnimationFrame(__mdCodeBlockLayoutRaf);
+               __mdCodeBlockLayoutRaf = 0;
+             }
+
+             const blocks = Array.from(root.querySelectorAll("figure.code-block"));
+             let index = 0;
+
+             const step = () => {
+               if (seq !== __mdCodeBlockLayoutSeq) return;
+               __mdCodeBlockLayoutRaf = 0;
+               const started = performance.now();
+
+               while (index < blocks.length) {
+                 const block = blocks[index++];
+                 if (!block?.isConnected) continue;
+                 const refresh = __mdCodeBlockRefreshers.get(block);
+                 if (typeof refresh === "function") refresh();
+
+                 // Mantém o frame responsivo em documentos com muitos blocos.
+                 if ((performance.now() - started) >= 6) break;
+               }
+
+               if (index < blocks.length && seq === __mdCodeBlockLayoutSeq) {
+                 __mdCodeBlockLayoutRaf = requestAnimationFrame(step);
+               }
+             };
+
+             __mdCodeBlockLayoutRaf = requestAnimationFrame(step);
+           };
+
+           const bindMdCodeBlockLayoutObserver = () => {
+             const wrap = ui?.mdPreviewWrap;
+             if (!wrap || __mdCodeBlockObservedWrap === wrap) return;
+
+             try { __mdCodeBlockResizeObserver?.disconnect?.(); } catch (_) {}
+             __mdCodeBlockResizeObserver = null;
+             __mdCodeBlockObservedWrap = wrap;
+             __mdCodeBlockObservedWidth = -1;
+
+             if (!("ResizeObserver" in window)) {
+               addWindowResizeTask(() => scheduleMdCodeBlockLayoutRefresh(ui.mdPreview));
+               return;
+             }
+
+             try {
+               __mdCodeBlockResizeObserver = new ResizeObserver((entries) => {
+                 const entry = entries?.[0];
+                 const width = Math.round(Number(entry?.contentRect?.width) || Number(wrap.clientWidth) || 0);
+                 if (width === __mdCodeBlockObservedWidth) return;
+                 __mdCodeBlockObservedWidth = width;
+                 scheduleMdCodeBlockLayoutRefresh(ui.mdPreview);
+               });
+               __mdCodeBlockResizeObserver.observe(wrap);
+             } catch (_) {
+               __mdCodeBlockResizeObserver = null;
+               addWindowResizeTask(() => scheduleMdCodeBlockLayoutRefresh(ui.mdPreview));
+             }
+           };
+
+           const invalidateMdCodeBlockMeasureCache = (rootEl) => {
+             const root = rootEl || ui?.mdPreview;
+             if (!root?.querySelectorAll) return;
+             root.querySelectorAll("code[data-md-measured-line-width]").forEach((code) => {
+               code.removeAttribute("data-md-measured-line-width");
+             });
+           };
+
+           const syncMdCodeBlockTypographyLayout = () => {
+             const size = Number(state?.prefs?.editorTamanho) || 14;
+             const nextKey = `console:${size}`;
+             if (__mdCodeTypographyKey === nextKey) return;
+             __mdCodeTypographyKey = nextKey;
+             invalidateMdCodeBlockMeasureCache(ui.mdPreview);
+             scheduleMdCodeBlockLayoutRefresh(ui.mdPreview, { force: true });
+           };
+
            const decorateCodeBlocks = (rootEl, tabId) => {
              // IMPORTANTE: wrap (quebra de linha) é POR BLOCO. Não persiste em "Personalização" e não usa tabState.
              const root = rootEl || ui?.mdPreview || document;
@@ -13874,36 +14521,46 @@ const measure = (viewport, pre, code, block) => {
 
   let measuredLineW = 0;
 
-  try {
-    const raw = (code?.textContent ?? "");
-    // pega a linha mais longa (por caracteres) e mede em pixels com a mesma fonte do <code>
-    const lines = raw.split(/\r?\n/);
-    let longest = "";
-    for (const ln of lines) if (ln.length > longest.length) longest = ln;
+  // O <pre> usa width:max-content, então scrollWidth resolve o caminho normal.
+  // A sonda offscreen é apenas fallback para o caso legado em que o navegador
+  // não reflita o overflow de um descendente. O resultado é cacheado por bloco
+  // e invalidado somente quando a tipografia do preview muda.
+  const fastHasOverflowX = (Math.ceil(fastScrollW) - Math.ceil(viewportWidth)) > 1;
+  if (!fastHasOverflowX) {
+    const cachedWidth = Number(code?.dataset?.mdMeasuredLineWidth);
+    if (Number.isFinite(cachedWidth) && cachedWidth >= 0) {
+      measuredLineW = cachedWidth;
+    } else {
+      try {
+        const raw = (code?.textContent ?? "");
+        const lines = raw.split(/\r?\n/);
+        let longest = "";
+        for (const ln of lines) if (ln.length > longest.length) longest = ln;
 
-    // se não há linha longa, pula a medição cara
-    if (longest.length > 40) {
-      const probe = document.createElement("span");
-      probe.textContent = longest;
-      probe.style.position = "absolute";
-      probe.style.left = "-99999px";
-      probe.style.top = "-99999px";
-      probe.style.whiteSpace = "pre";
-      probe.style.pointerEvents = "none";
-      probe.style.visibility = "hidden";
+        if (longest.length > 40) {
+          const probe = document.createElement("span");
+          probe.textContent = longest;
+          probe.style.position = "absolute";
+          probe.style.left = "-99999px";
+          probe.style.top = "-99999px";
+          probe.style.whiteSpace = "pre";
+          probe.style.pointerEvents = "none";
+          probe.style.visibility = "hidden";
 
-      const cs = window.getComputedStyle(code);
-      probe.style.fontFamily = cs.fontFamily;
-      probe.style.fontSize = cs.fontSize;
-      probe.style.fontWeight = cs.fontWeight;
-      probe.style.letterSpacing = cs.letterSpacing;
-      probe.style.fontVariantLigatures = cs.fontVariantLigatures;
-      // mede dentro do próprio bloco para herdar renderização (zoom/antialias)
-      block.appendChild(probe);
-      measuredLineW = probe.getBoundingClientRect().width;
-      probe.remove();
+          const cs = window.getComputedStyle(code);
+          probe.style.fontFamily = cs.fontFamily;
+          probe.style.fontSize = cs.fontSize;
+          probe.style.fontWeight = cs.fontWeight;
+          probe.style.letterSpacing = cs.letterSpacing;
+          probe.style.fontVariantLigatures = cs.fontVariantLigatures;
+          block.appendChild(probe);
+          measuredLineW = probe.getBoundingClientRect().width;
+          probe.remove();
+        }
+        if (code?.dataset) code.dataset.mdMeasuredLineWidth = String(Math.max(0, measuredLineW));
+      } catch {}
     }
-  } catch {}
+  }
 
   const contentWidth = Math.max(fastScrollW, measuredLineW);
   const hasOverflowX = (Math.ceil(contentWidth) - Math.ceil(viewportWidth)) > 1;
@@ -14022,8 +14679,7 @@ const measure = (viewport, pre, code, block) => {
                  const isWrapped = block.classList.toggle("wrap");
                  syncWrapVisual(isWrapped);
                  refresh();
-                 refresh();
-               raf(refresh);
+                 raf(refresh);
                });
 
                copyUI.btn.addEventListener("click", async () => {
@@ -14070,22 +14726,16 @@ const measure = (viewport, pre, code, block) => {
                syncWrapVisual(false);
                syncFooterState(block, footerUI);
 
-               raf(refresh);
+               __mdCodeBlockRefreshers.set(block, refresh);
 
                viewport.addEventListener("scroll", () => {
                  if (!block.classList.contains("show-fade") && viewport.scrollHeight <= viewport.clientHeight + 1) return;
                  updateFade(block, viewport);
                }, { passive: true });
-
-               try {
-                 const ro = new ResizeObserver(() => refresh());
-                 ro.observe(viewport);
-                 ro.observe(pre);
-                 ro.observe(code);
-               } catch {
-                 window.addEventListener("resize", refresh, { passive: true });
-               }
              });
+
+             bindMdCodeBlockLayoutObserver();
+             scheduleMdCodeBlockLayoutRefresh(root, { force: true });
            };
 
            const postprocessLinksAndImages = (rootEl) => {
@@ -14115,8 +14765,12 @@ const measure = (viewport, pre, code, block) => {
 
                const img = document.createElement("img");
                img.alt = "";
-               img.src = href;
-               img.referrerPolicy = "no-referrer";
+               if (isMarkdownLocalImageReference(href)) {
+                 img.setAttribute(MD_LOCAL_IMAGE_ATTR, href);
+               } else {
+                 img.src = href;
+                 img.referrerPolicy = "no-referrer";
+               }
                img.loading = "lazy";
                img.decoding = "async";
                img.style.maxWidth = "100%";
@@ -14251,22 +14905,14 @@ const measure = (viewport, pre, code, block) => {
                  vp.style.setProperty("--auto-contrast-fg", fg);
                 vp.style.setProperty("--md-code-fg", "var(--auto-contrast-fg)");
                });
-// 2) Blockquotes: define --md-bq-fg pela luminância do FUNDO efetivo do <blockquote>
-               root.querySelectorAll?.(".markdown-body blockquote").forEach((bq) => {
-                 const rgb = mdEffectiveBgRgb(bq);
-                 const fg = mdPickFgFromRgb(rgb.r, rgb.g, rgb.b);
-                 bq.style.setProperty("--auto-contrast-fg", fg);
-                bq.style.setProperty("--md-bq-fg", "var(--auto-contrast-fg)");
-               });
-
-               // Details/Summary: mesmo cálculo de contraste aplicado ao card recolhível.
+               // 2) Details/Summary: contraste automático do card recolhível.
                root.querySelectorAll?.(".markdown-body details").forEach((details) => {
                  const rgb = mdEffectiveBgRgb(details);
                  const fg = mdPickFgFromRgb(rgb.r, rgb.g, rgb.b);
                  details.style.setProperty("--auto-contrast-fg", fg);
                  details.style.setProperty("--md-details-fg", "var(--auto-contrast-fg)");
                });
-               // 3) Mermaid: aplica o mesmo contraste automático ao container que recebe o SVG.
+               // 3) Mermaid: aplica contraste automático ao container que recebe o SVG.
                // As regras CSS internas do Mermaid são sobrescritas por variáveis locais do bloco,
                // evitando texto preto/invisível quando o preview usa tema escuro ou personalizado.
                root.querySelectorAll?.(".markdown-body .mermaid").forEach((block) => {
@@ -14423,7 +15069,97 @@ const measure = (viewport, pre, code, block) => {
              };
            })();
 
-const renderMarkdownPreview = (mdText, tabId) => {
+           /* =========================================================
+              Live Preview: sincronização vertical bidirecional de scroll
+              - usa progresso proporcional porque editor e Markdown renderizado
+                possuem alturas estruturalmente diferentes
+              - evita loop editor -> preview -> editor por posição esperada
+              - usa requestAnimationFrame para coalescer eventos de wheel/drag/keys
+              ========================================================= */
+           let mdSplitScrollSyncRaf = 0;
+           let mdSplitScrollSource = null;
+           let mdSplitLastScrollSource = null;
+           let mdSplitExpectedEditorTop = null;
+           let mdSplitExpectedPreviewTop = null;
+
+           const getMdSplitMaxScrollTop = (el) => {
+             if (!el) return 0;
+             return Math.max(0, (Number(el.scrollHeight) || 0) - (Number(el.clientHeight) || 0));
+           };
+
+           const consumeExpectedMdSplitScroll = (el) => {
+             if (!el) return false;
+             const isEditor = el === ui.editor;
+             const expected = isEditor ? mdSplitExpectedEditorTop : mdSplitExpectedPreviewTop;
+             if (!Number.isFinite(expected)) return false;
+             const matched = Math.abs((Number(el.scrollTop) || 0) - expected) <= 1.5;
+             if (isEditor) mdSplitExpectedEditorTop = null;
+             else mdSplitExpectedPreviewTop = null;
+             return matched;
+           };
+
+           const scheduleMdSplitScrollSync = (sourceEl, { force = false } = {}) => {
+             if (state.mdMode !== "split" || !ui.editor || !ui.mdPreviewWrap) return;
+             if (sourceEl !== ui.editor && sourceEl !== ui.mdPreviewWrap) return;
+
+             if (!force && consumeExpectedMdSplitScroll(sourceEl)) return;
+             if (!force) mdSplitLastScrollSource = sourceEl;
+
+             mdSplitScrollSource = sourceEl;
+             if (mdSplitScrollSyncRaf) return;
+
+             mdSplitScrollSyncRaf = requestAnimationFrame(() => {
+               mdSplitScrollSyncRaf = 0;
+               if (state.mdMode !== "split") return;
+
+               const source = mdSplitScrollSource || mdSplitLastScrollSource || ui.editor;
+               const target = source === ui.editor ? ui.mdPreviewWrap : ui.editor;
+               const sourceMax = getMdSplitMaxScrollTop(source);
+               const targetMax = getMdSplitMaxScrollTop(target);
+               const sourceTop = Math.max(0, Math.min(Number(source.scrollTop) || 0, sourceMax));
+               const ratio = sourceMax > 0 ? sourceTop / sourceMax : 0;
+               const nextTop = Math.max(0, Math.min(targetMax, ratio * targetMax));
+
+               if (Math.abs((Number(target.scrollTop) || 0) - nextTop) <= 1) return;
+
+               if (target === ui.editor) mdSplitExpectedEditorTop = nextTop;
+               else mdSplitExpectedPreviewTop = nextTop;
+               target.scrollTop = nextTop;
+             });
+           };
+
+           const resyncMdSplitScroll = () => {
+             if (state.mdMode !== "split") return;
+             scheduleMdSplitScrollSync(mdSplitLastScrollSource || ui.editor, { force: true });
+           };
+
+           const bindMdSplitScrollSync = () => {
+             if (!ui.editor || !ui.mdPreviewWrap || !bindElementOnce(ui.editor, "mdSplitScrollSyncBound")) return;
+
+             ui.editor.addEventListener("scroll", () => {
+               scheduleMdSplitScrollSync(ui.editor);
+             }, { passive: true });
+
+             ui.mdPreviewWrap.addEventListener("scroll", () => {
+               scheduleMdSplitScrollSync(ui.mdPreviewWrap);
+             }, { passive: true });
+
+             try {
+               if ("ResizeObserver" in window && ui.mdPreview) {
+                 const roMdSplitSync = new ResizeObserver(() => {
+                   if (state.mdMode === "split") resyncMdSplitScroll();
+                 });
+                 roMdSplitSync.observe(ui.mdPreview);
+                 window.__mdSplitScrollResizeObserver = roMdSplitSync;
+               }
+             } catch (_) {}
+           };
+
+let __mdPreviewRenderSeq = 0;
+
+           const renderMarkdownPreview = (mdText, tabId) => {
+             const sourceText = String(mdText ?? "");
+             const renderSeq = ++__mdPreviewRenderSeq;
              const md = ensureMarkdown();
              if (!md) {
                ui.mdPreview.innerHTML = `<p class="md-loading-status">⚠️ Carregando bibliotecas do preview…</p>`;
@@ -14431,7 +15167,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
                return;
              }
 
-             const { text: src, nbspSentinel } = protectMarkdownSpecialChars(preprocessMarkdownForImages(mdText || ""));
+             const { text: src, nbspSentinel } = protectMarkdownSpecialChars(preprocessMarkdownForImages(sourceText));
 
              let html = md.render(src);
 
@@ -14443,12 +15179,13 @@ const renderMarkdownPreview = (mdText, tabId) => {
              ui.mdPreview.innerHTML = html;
              if (ui.mdPreviewStatus) ui.mdPreviewStatus.textContent = 'Preview Markdown atualizado.';
              postprocessLinksAndImages(ui.mdPreview);
+             resolveMarkdownLocalImages(ui.mdPreview, tabId, renderSeq).catch(() => {});
              markTightLists(ui.mdPreview);
              wrapTables(ui.mdPreview);
              decorateGithubAlerts(ui.mdPreview);
              addHeadingAnchors(ui.mdPreview);
              decorateCodeBlocks(ui.mdPreview, tabId);
-             renderMermaidDiagrams(ui.mdPreview);
+             renderMermaidDiagrams(ui.mdPreview, { renderSeq });
 
              try {
                // Os blocos fenced já são renderizados pelo callback `highlight` do markdown-it.
@@ -14469,19 +15206,141 @@ const renderMarkdownPreview = (mdText, tabId) => {
              try { updateEditorChromeContrast(); } catch {}
              scheduleMdPreviewToTopVisibility();
              try { scheduleMdPreviewSearchRefresh({ scrollActive: false }); } catch (_) {}
+             if (state.mdMode === "split") requestAnimationFrame(() => scheduleMdSplitScrollSync(ui.editor, { force: true }));
            };
 
-           ui.btnMdEdit.addEventListener("click", () => {
-             state.mdMode = "edit";
+           const syncMdModeToggle = (node = null) => {
+             if (!ui.mdModeToggle) return;
+             const isMd = !!node && node.ext === "md";
+             ui.mdModeToggle.classList.toggle("is-hidden", !isMd);
+             if (!isMd) return;
+             const mode = ["edit", "split", "preview"].includes(state.mdMode) ? state.mdMode : "preview";
+             ui.mdModeToggle.dataset.mode = mode;
+             [ui.btnMdEdit, ui.btnMdLivePreview, ui.btnMdPreview].forEach((btn) => {
+               if (!btn) return;
+               btn.setAttribute("aria-pressed", btn.dataset.mdMode === mode ? "true" : "false");
+             });
+           };
+
+           const setMarkdownMode = (mode) => {
+             const tab = getTab(state.activeTabId);
+             const n = tab ? getNode(tab.nodeId) : null;
+             if (!n || n.ext !== "md" || !["edit", "split", "preview"].includes(mode)) return;
+             if (state.mdMode !== "preview") persistActiveEditorState();
+             if (mode === "preview") flushPendingAutosaveForActiveTab("abertura do View");
+             if (mode === "split") mdSplitLastScrollSource = ui.editor;
+             state.mdMode = mode;
              updateEditorForActiveTab();
-           });
-           ui.btnMdPreview.addEventListener("click", () => {
-             persistActiveEditorState();
-             flushPendingAutosaveForActiveTab("abertura do Preview");
-             state.mdMode = "preview";
-             updateEditorForActiveTab();
-           });
-          // Ctrl+Alt+E foi consolidado no router global de atalhos.
+           };
+
+           let mdLivePreviewTimer = 0;
+           const scheduleLiveMarkdownPreview = () => {
+             clearTimeout(mdLivePreviewTimer);
+             if (state.mdMode !== "split") return;
+             mdSplitLastScrollSource = ui.editor;
+             mdLivePreviewTimer = setTimeout(() => {
+               mdLivePreviewTimer = 0;
+               const tab = getTab(state.activeTabId);
+               const n = tab ? getNode(tab.nodeId) : null;
+               if (!n || n.ext !== "md" || state.mdMode !== "split") return;
+               renderMarkdownPreview(String(ui.editor.value ?? ""), tab.id);
+             }, 120);
+           };
+
+           const bindMdSplitResize = () => {
+             const handle = ui.mdSplitDivider;
+             const workspace = ui.mdWorkspace;
+             if (!handle || !workspace || !bindElementOnce(handle, "mdSplitBound")) return;
+
+             let dragging = false;
+             let startX = 0;
+             let startW = 0;
+             let moveRaf = 0;
+             let pendingWidth = null;
+
+             const applyWidth = (candidate, { syncScroll = true } = {}) => {
+               const total = workspace.getBoundingClientRect().width;
+               if (!Number.isFinite(total) || total <= 12) return;
+               const dividerW = Math.max(6, handle.getBoundingClientRect().width || 6);
+               const usable = Math.max(0, total - dividerW);
+               const minPane = Math.min(240, Math.max(120, usable * 0.25));
+               const next = Math.max(minPane, Math.min(Number(candidate) || usable / 2, usable - minPane));
+               workspace.style.setProperty("--md-split-editor-width", `${Math.round(next)}px`);
+               if (syncScroll && state.mdMode === "split") resyncMdSplitScroll();
+             };
+
+             const flushWidth = () => {
+               moveRaf = 0;
+               if (!Number.isFinite(pendingWidth)) return;
+               applyWidth(pendingWidth, { syncScroll: false });
+               pendingWidth = null;
+             };
+
+             const onMove = (event) => {
+               if (!dragging) return;
+               pendingWidth = startW + (event.clientX - startX);
+               if (!moveRaf) moveRaf = requestAnimationFrame(flushWidth);
+               event.preventDefault();
+             };
+
+             const stop = () => {
+               if (!dragging) return;
+               dragging = false;
+
+               if (moveRaf) {
+                 cancelAnimationFrame(moveRaf);
+                 moveRaf = 0;
+               }
+               flushWidth();
+
+               document.documentElement.classList.remove("is-resizing-md-split");
+               window.removeEventListener("pointermove", onMove, true);
+               window.removeEventListener("pointerup", stop, true);
+               window.removeEventListener("pointercancel", stop, true);
+
+               // Recalcula somente no tamanho final; durante o drag o CSS faz o reflow.
+               try { scheduleMdCodeBlockLayoutRefresh(ui.mdPreview, { force: true }); } catch (_) {}
+               try { resyncMdSplitScroll(); } catch (_) {}
+               try { scheduleMdPreviewToTopVisibility(); } catch (_) {}
+             };
+
+             handle.addEventListener("pointerdown", (event) => {
+               if (state.mdMode !== "split") return;
+               dragging = true;
+               startX = event.clientX;
+               startW = ui.editorSearchHost?.getBoundingClientRect().width || (workspace.getBoundingClientRect().width / 2);
+               pendingWidth = null;
+               try { handle.setPointerCapture(event.pointerId); } catch (_) {}
+               document.documentElement.classList.add("is-resizing-md-split");
+               window.addEventListener("pointermove", onMove, true);
+               window.addEventListener("pointerup", stop, true);
+               window.addEventListener("pointercancel", stop, true);
+               event.preventDefault();
+               event.stopPropagation();
+             });
+
+             handle.addEventListener("keydown", (event) => {
+               if (state.mdMode !== "split" || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+               const current = ui.editorSearchHost?.getBoundingClientRect().width || (workspace.getBoundingClientRect().width / 2);
+               applyWidth(current + (event.key === "ArrowLeft" ? -24 : 24));
+               try { scheduleMdCodeBlockLayoutRefresh(ui.mdPreview, { force: true }); } catch (_) {}
+               event.preventDefault();
+             });
+
+             addWindowResizeTask(() => {
+               if (state.mdMode !== "split") return;
+               const current = ui.editorSearchHost?.getBoundingClientRect().width || (workspace.getBoundingClientRect().width / 2);
+               applyWidth(current);
+               try { scheduleMdCodeBlockLayoutRefresh(ui.mdPreview); } catch (_) {}
+             });
+           };
+
+           ui.btnMdEdit.addEventListener("click", () => setMarkdownMode("edit"));
+           ui.btnMdLivePreview.addEventListener("click", () => setMarkdownMode("split"));
+           ui.btnMdPreview.addEventListener("click", () => setMarkdownMode("preview"));
+           bindMdSplitResize();
+           bindMdSplitScrollSync();
+          // Ctrl+Alt+E/L/V são consolidados no router global de atalhos.
            ui.btnToTop.addEventListener("click", () => ui.mdPreviewWrap.scrollTo({ top: 0, behavior: getTabScrollBehavior() }));
            ui.mdPreviewWrap.addEventListener("scroll", () => {
              scheduleMdPreviewToTopVisibility();
@@ -14518,23 +15377,18 @@ const renderMarkdownPreview = (mdText, tabId) => {
 
            const updateEditorForActiveTab = () => {
              const tab = getTab(state.activeTabId);
+             if (ui.mdWorkspace) ui.mdWorkspace.classList.remove("md-split");
+             clearTimeout(mdLivePreviewTimer);
+
              if (!tab) {
-               ui.path.textContent = isFsConnected()
-                 ? "Selecione uma nota…"
-                 : (state.fs?.pendingReconnectActive ? "Reative a pasta raiz…" : "Escolha a pasta raiz…");
+               releaseMarkdownLocalImageCache();
+               ui.path.textContent = "";
               try { updateEditorChromeContrast(); } catch {}
-               ui.editor.value = isFsConnected()
-                 ? ""
-                 : (state.fs?.pendingReconnectActive
-                     ? "A árvore lembrada foi restaurada. Clique uma vez na página para o navegador reativar o acesso à pasta raiz sem precisar escolhê-la novamente."
-                     : "Conecte uma pasta raiz real para começar a trabalhar com arquivos .txt e .md.");
+               ui.editor.value = "";
                ui.editor.disabled = true;
                ui.mdPreviewWrap.style.display = "none";
                scheduleMdPreviewToTopVisibility();
-               ui.editorSearchHost.style.display = "flex";
-               ui.editor.style.display = "block";
-               ui.btnMdEdit.style.display = "none";
-               ui.btnMdPreview.style.display = "none";
+               syncMdModeToggle(null);
                state.mdMode = "preview";
                showEmpty(true);
                clearEditorSearchOverlay();
@@ -14551,33 +15405,50 @@ const renderMarkdownPreview = (mdText, tabId) => {
             try { updateEditorChromeContrast(); } catch {}
 
              if (n.ext === "md") {
+               syncMdModeToggle(n);
+               const tabState = readTabState(tab.id);
+               const draft = (tabState.draft ?? n.content ?? "");
+
                if (state.mdMode === "edit") {
+                 releaseMarkdownLocalImageCache();
                  ui.editor.disabled = false;
                  ui.editorSearchHost.style.display = "flex";
                  ui.editor.style.display = "block";
                  ui.mdPreviewWrap.style.display = "none";
                  scheduleMdPreviewToTopVisibility();
-                 ui.btnMdEdit.style.display = "none";
-                 ui.btnMdPreview.style.display = "inline-flex";
-                 const tabState = readTabState(tab.id);
-                 ui.editor.value = (tabState.draft ?? n.content ?? "");
+                 ui.editor.value = draft;
                  restoreEditorViewState(tabState);
                  requestAnimationFrame(() => applySearchRevealToCurrentEditor({ forceSelect: true }));
+                 clearMdPreviewSearchHighlights();
+               } else if (state.mdMode === "split") {
+                 ui.mdWorkspace?.classList.add("md-split");
+                 ui.editor.disabled = false;
+                 ui.editorSearchHost.style.display = "flex";
+                 ui.editor.style.display = "block";
+                 ui.mdPreviewWrap.style.display = "block";
+                 ui.editor.value = draft;
+                 restoreEditorViewState(tabState);
+                 renderMarkdownPreview(draft, tab.id);
+                 requestAnimationFrame(() => applySearchRevealToCurrentEditor({ forceSelect: true }));
+                 scheduleMdPreviewSearchRefresh({ scrollActive: false });
+                 scheduleMdPreviewToTopVisibility();
+                 mdSplitLastScrollSource = ui.editor;
+                 requestAnimationFrame(() => scheduleMdSplitScrollSync(ui.editor, { force: true }));
                } else {
+                 state.mdMode = "preview";
+                 syncMdModeToggle(n);
                  ui.editorSearchHost.style.display = "none";
                  ui.editor.style.display = "none";
                  ui.mdPreviewWrap.style.display = "block";
                  scheduleMdPreviewToTopVisibility();
-                 ui.btnMdEdit.style.display = "inline-flex";
-                 ui.btnMdPreview.style.display = "none";
-                 renderMarkdownPreview(((state.tabState.get(tab.id)?.draft) ?? n.content ?? ""), tab.id);
+                 renderMarkdownPreview(draft, tab.id);
                  clearEditorSearchOverlay();
                  scheduleMdPreviewSearchRefresh({ scrollActive: true });
                }
              } else {
+               releaseMarkdownLocalImageCache();
                state.mdMode = "preview";
-               ui.btnMdEdit.style.display = "none";
-               ui.btnMdPreview.style.display = "none";
+               syncMdModeToggle(null);
                ui.mdPreviewWrap.style.display = "none";
                scheduleMdPreviewToTopVisibility();
                ui.editorSearchHost.style.display = "flex";
@@ -14602,15 +15473,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
              } catch (_) {}
            };
 
-           const rerenderActiveMarkdownPreview = () => {
-             try {
-               const tab = getTab(state.activeTabId);
-               const n = tab ? getNode(tab.nodeId) : null;
-               if (n && n.ext === "md" && state.mdMode === "preview") {
-                 renderMarkdownPreview(((state.tabState.get(tab.id)?.draft) ?? n.content ?? ""), tab.id);
-               }
-             } catch {}
-           };
+           
 
            /* =========================
               CRUD + Dialog + atalhos
@@ -14634,18 +15497,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
              const tab = getTab(state.activeTabId);
              const n = tab ? getNode(tab.nodeId) : null;
 
-             if (n && n.ext === "md") {
-               if (state.mdMode === "preview") {
-                 ui.btnMdEdit.style.display = "inline-flex";
-                 ui.btnMdPreview.style.display = "none";
-               } else {
-                 ui.btnMdEdit.style.display = "none";
-                 ui.btnMdPreview.style.display = "inline-flex";
-               }
-             } else {
-               ui.btnMdEdit.style.display = "none";
-               ui.btnMdPreview.style.display = "none";
-             }
+             syncMdModeToggle(n);
            };
 
            /* ----- Modais travados + shake ----- */
@@ -16618,6 +17470,8 @@ const renderMarkdownPreview = (mdText, tabId) => {
                  { keys: ["Ctrl", "S"], action: "Salvar" },
                  { keys: ["Ctrl", "Alt", "A"], action: "Auto-Save" },
                  { keys: ["Ctrl", "Alt", "E"], action: "Editar-MD" },
+                  { keys: ["Ctrl", "Alt", "L"], action: "Live Preview" },
+                  { keys: ["Ctrl", "Alt", "V"], action: "View" },
                  { keys: ["Ctrl", "Alt", "P"], action: "Personalização" },
                  { keys: ["Ctrl", "Alt", "I"], action: "Informações" },
                  { keys: ["Esc"], action: "Limpa busca ou fecha diálogo aberto" }
@@ -16718,7 +17572,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
                },
                {
                  title: "Recursos externos e rede",
-                 text: "A CSP mantém <code>connect-src 'none'</code> para impedir conexões JavaScript por fetch/XHR/WebSocket. Imagens ou mídias HTTPS explicitamente colocadas no Markdown ainda podem ser carregadas pelo navegador por <code>img-src/media-src</code>; imagens externas recebem <code>referrerpolicy=no-referrer</code>. Se não quiser qualquer acesso externo, use somente recursos locais/data/blob nas notas."
+                 text: "A CSP mantém <code>connect-src 'none'</code> para impedir conexões JavaScript por fetch/XHR/WebSocket. Imagens ou mídias HTTPS explicitamente colocadas no Markdown ainda podem ser carregadas pelo navegador por <code>img-src/media-src</code>; imagens externas recebem <code>referrerpolicy=no-referrer</code>. Imagens locais do Markdown podem usar <code>./</code> ou <code>../</code> em relação ao arquivo atual e <code>/</code> em relação à pasta raiz autorizada; elas são lidas pelo File System Access API e expostas ao preview por URL <code>blob:</code> temporária, sem conexão de rede. SVG inline escrito diretamente no Markdown permanece suportado pelo pipeline sanitizado atual."
                },
                {
                  title: "Backup recomendado",
@@ -16776,6 +17630,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
              ui.dialogBody.innerHTML = "";
              ui.dialogLeft.innerHTML = "";
              ui.dialogBody.removeAttribute("style");
+             ui.dialogBody.appendChild(createInfoMainView());
 
              ui.btnDialogCancel.hidden = true;
              ui.btnDialogCancel.style.display = "none";
@@ -16784,33 +17639,6 @@ const renderMarkdownPreview = (mdText, tabId) => {
              ui.btnDialogOk.textContent = "Fechar";
              ui.btnDialogOk.className = "dialog-action-btn dialog-ok-btn primary";
              ui.btnDialogCancel.onclick = null;
-             ui.btnDialogClose.onclick = null;
-             ui.btnDialogOk.onclick = null;
-
-             const renderFooterAction = (page, renderPage) => {
-               ui.dialogLeft.innerHTML = "";
-               const actionBtn = document.createElement("button");
-               actionBtn.type = "button";
-               actionBtn.className = `dialog-action-btn ${page === "shortcuts" ? "dialog-cancel-btn ghost" : "dialog-ok-btn primary"}`;
-               actionBtn.textContent = page === "shortcuts" ? "← Voltar para informações" : "Conheça os atalhos";
-               actionBtn.addEventListener("click", () => renderPage(page === "shortcuts" ? "main" : "shortcuts"));
-               ui.dialogLeft.appendChild(actionBtn);
-             };
-
-             const renderPage = (page) => {
-               ui.dialogBody.innerHTML = "";
-               const view = page === "shortcuts"
-                 ? createInfoShortcutsView()
-                 : createInfoMainView();
-               ui.dialogBody.appendChild(view);
-               renderFooterAction(page, renderPage);
-               requestAnimationFrame(() => {
-                 ui.dialogBody.scrollTop = 0;
-               });
-             };
-
-             renderPage("main");
-             openModal(ui.dialogBackdrop);
 
              const closeInfo = () => {
                dialogModal?.classList.remove("modal--info");
@@ -16819,17 +17647,54 @@ const renderMarkdownPreview = (mdText, tabId) => {
                ui.btnDialogCancel.style.display = "";
                closeStandardDialog();
              };
-
              ui.btnDialogOk.onclick = closeInfo;
              ui.btnDialogClose.onclick = closeInfo;
 
+             openModal(ui.dialogBackdrop);
              requestAnimationFrame(() => {
-               const firstFocusable = getFocusables(ui.dialogBody)[0] || getFocusables(ui.dialogLeft)[0] || ui.btnDialogOk || getBackdropModal(ui.dialogBackdrop);
-               if (firstFocusable) focusElementSafely(firstFocusable);
+               ui.dialogBody.scrollTop = 0;
+               focusElementSafely(ui.btnDialogOk || getBackdropModal(ui.dialogBackdrop));
+             });
+           };
+
+           const openShortcutsDialog = () => {
+             if (!ui.dialogBackdrop || !ui.dialogBody) return;
+
+             const dialogModal = ui.dialogBackdrop.querySelector(".modal");
+             dialogModal?.classList.add("modal--info");
+             ui.dialogTitle.textContent = "Atalhos";
+             ui.dialogBody.innerHTML = "";
+             ui.dialogLeft.innerHTML = "";
+             ui.dialogBody.removeAttribute("style");
+             ui.dialogBody.appendChild(createInfoShortcutsView());
+
+             ui.btnDialogCancel.hidden = true;
+             ui.btnDialogCancel.style.display = "none";
+             ui.btnDialogOk.hidden = false;
+             ui.btnDialogOk.style.display = "";
+             ui.btnDialogOk.textContent = "Fechar";
+             ui.btnDialogOk.className = "dialog-action-btn dialog-ok-btn primary";
+             ui.btnDialogCancel.onclick = null;
+
+             const closeShortcuts = () => {
+               dialogModal?.classList.remove("modal--info");
+               ui.dialogLeft.innerHTML = "";
+               ui.btnDialogCancel.hidden = false;
+               ui.btnDialogCancel.style.display = "";
+               closeStandardDialog();
+             };
+             ui.btnDialogOk.onclick = closeShortcuts;
+             ui.btnDialogClose.onclick = closeShortcuts;
+
+             openModal(ui.dialogBackdrop);
+             requestAnimationFrame(() => {
+               ui.dialogBody.scrollTop = 0;
+               focusElementSafely(ui.btnDialogOk || getBackdropModal(ui.dialogBackdrop));
              });
            };
 
            ui.btnInfo?.addEventListener("click", openInfoDialog);
+           ui.btnHintShortcuts?.addEventListener("click", openShortcutsDialog);
 
            ui.btnCustomize.addEventListener("click", openCustomize);
            ui.btnCustomizeClose.addEventListener("click", () => {
@@ -16925,8 +17790,11 @@ const renderMarkdownPreview = (mdText, tabId) => {
            /* ===== Botões ===== */
            ui.btnNewFolder.addEventListener("click", createFolder);
           ui.btnNewNote.addEventListener("click", createNote);
+          ui.btnEmptyChooseRoot?.addEventListener("click", () => ui.btnChooseRoot?.click());
           ui.btnEmptyNewFolder?.addEventListener("click", () => ui.btnNewFolder?.click());
           ui.btnEmptyNewNote?.addEventListener("click", () => ui.btnNewNote?.click());
+          ui.btnEmptyCustomize?.addEventListener("click", () => ui.btnCustomize?.click());
+          ui.btnEmptyShortcuts?.addEventListener("click", openShortcutsDialog);
            ui.btnRename.addEventListener("click", renameSelected);
            ui.btnDelete.addEventListener("click", deleteSelected);
            ui.btnSave.addEventListener("click", saveActive);
@@ -17459,6 +18327,7 @@ const renderMarkdownPreview = (mdText, tabId) => {
              if (!n) return;
              writeEditorViewStateToTabState(ensureTabState(tab.id), { includeDraft: true });
              setDirty(n.id, true);
+             if (n.ext === "md" && state.mdMode === "split") scheduleLiveMarkdownPreview();
              if (state.autosave) scheduleAutosave();
            });
 
@@ -17703,15 +18572,14 @@ const renderMarkdownPreview = (mdText, tabId) => {
               return;
             }
 
-            if (ctrl && e.altKey && !e.shiftKey && isKeyE) {
+            if (ctrl && e.altKey && !e.shiftKey && (isKeyE || keyLower === "l" || keyLower === "v")) {
               const tab = getTab(state.activeTabId);
               const n = tab ? getNode(tab.nodeId) : null;
               if (!n || n.ext !== "md") return;
               e.preventDefault();
               e.stopPropagation();
               if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
-              state.mdMode = (state.mdMode === "preview") ? "edit" : "preview";
-              updateEditorForActiveTab();
+              setMarkdownMode(isKeyE ? "edit" : (keyLower === "l" ? "split" : "preview"));
               return;
             }
 

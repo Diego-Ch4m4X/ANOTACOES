@@ -16,7 +16,7 @@ Acesse a versão publicada em GitHub Pages:
 
 **https://diego-ch4m4x.github.io/ANOTACOES/**
 
-Clique no link acima, abra a página em **Chrome ou Edge no desktop**, escolha uma pasta raiz do seu computador e teste o fluxo real: criar notas, abrir arquivos `.md`, alternar entre editor e preview, usar abas, buscar conteúdo e personalizar a interface. A proposta é simples: transformar uma pasta comum do seu PC em um ambiente visual de anotações, estudo e documentação.
+Clique no link acima, abra a página em **Chrome ou Edge no desktop**, escolha uma pasta raiz do seu computador e teste o fluxo real: criar notas, abrir arquivos `.md`, usar os modos **Editar**, **Live Preview** e **View**, trabalhar com abas, buscar conteúdo e personalizar a interface. A proposta é simples: transformar uma pasta comum do seu PC em um ambiente visual de anotações, estudo e documentação.
 
 ![Prévia da interface do ANOTAÇÕES](./social-preview.png)
 
@@ -24,7 +24,7 @@ Clique no link acima, abra a página em **Chrome ou Edge no desktop**, escolha u
 
 ---
 
-> **Atualização v1.0.13:** incorpora o núcleo de desempenho e integridade homologado no VIVO NOTE v1.0.23: Fast Root Attach, handles lazy, MOVE/RENAME incremental, baseline físico pós-operação, normalização de extensão e Save com readback. A primeira indexação sem cache continua podendo demorar em raízes grandes; o ganho principal ocorre nas reconexões e operações estruturais subsequentes.
+> **Atualização v1.0.24:** preserva integralmente a otimização de performance do Markdown e o suporte a **imagens locais** introduzido na v1.0.22, incluindo resolução relativa ao arquivo `.md`, resolução por `/` a partir da pasta raiz, Object URLs `blob:` temporárias, cache por `lastModified + size`, concorrência controlada e preservação do SVG inline sanitizado. A v1.0.23 ajustou a experiência visual do Preview Markdown para que **citações `>` e links respeitem a cor de texto escolhida pelo usuário**: blockquotes deixam de usar cor textual de auto-contraste e links deixam de depender do azul fixo `#4493F2`, herdando a cor do texto e permanecendo identificáveis por sublinhado/foco acessível. O workspace também ganhou **Empty States nativos com os SVGs reais da própria aplicação e somente atalhos realmente existentes**. A v1.0.24 corrige a integração desse Empty State com o editor legado: quando não há documento ativo, `editor-head` e `mdWorkspace` deixam de competir visualmente com o estado vazio; sem raiz autorizada a aplicação orienta a seleção/reativação da pasta, e com raiz ativa porém nenhuma aba aberta mostra **“Nenhuma nota aberta”** com ações para Nova nota, Nova pasta, Personalização e acesso aos Atalhos. As mensagens legadas de editor vazio foram removidas. A publicação/SEO permanece sincronizada, incluindo `softwareVersion` v1.0.24.
 
 ## Sumário
 
@@ -54,7 +54,7 @@ Na prática, a aplicação permite:
 - listar pastas e arquivos compatíveis em uma árvore lateral;
 - criar, abrir, editar, renomear, mover e excluir arquivos `.txt` e `.md`;
 - trabalhar com várias notas abertas em abas;
-- visualizar Markdown renderizado sem abandonar o fluxo local;
+- trabalhar com Markdown em três modos — **Editar**, **Live Preview** e **View** — sem abandonar o fluxo local;
 - exportar/importar a estrutura em JSON;
 - personalizar cores, fontes, tamanhos e opções de exibição.
 
@@ -89,14 +89,43 @@ A ideia central é manter suas anotações em arquivos simples, portáveis e fá
 - Cabeçalho e árvore recolhíveis.
 - Indicadores visuais de estado salvo/não salvo.
 - Overlay de sincronização para bloquear a interface durante operações longas na pasta raiz.
+- Em arquivos `.md`, controle dedicado de três modos: **Editar**, **Live Preview** e **View**.
+- **Live Preview** em split com editor e preview simultâneos, divisor vertical redimensionável e scroll bidirecional sincronizado proporcionalmente.
+- **Preview Markdown otimizado:** View e Live Preview evitam observers por bloco de código, coalescem redimensionamentos por frame e reduzem trabalho redundante durante resize/renderização.
+- **Empty State sem pasta raiz:** quando ainda não existe pasta autorizada, o canvas do workspace mostra orientação direta para selecionar ou reativar a pasta raiz, reutilizando o SVG e o fluxo reais da toolbar.
+- **Empty State com raiz e nenhuma aba:** quando a pasta já está conectada mas nenhum documento está aberto, o workspace mostra **Nenhuma nota aberta** com ações reais para **Nova nota**, **Nova pasta**, **Personalização** e acesso a **ATALHOS**.
+
+### Estados vazios do workspace
+
+O estado visual do workspace é derivado da situação real da aplicação, sem reutilizar o editor como mensagem de fallback:
+
+```text
+sem pasta raiz autorizada
+→ orientação para selecionar/reativar a pasta raiz
+
+pasta raiz ativa + nenhuma aba aberta
+→ “Nenhuma nota aberta”
+
+aba ativa
+→ editor / Live Preview / View
+```
+
+Nos estados vazios, `editor-head` e `mdWorkspace` ficam fora da apresentação visual, evitando a sobreposição com mensagens legadas do editor. Os botões reutilizam os **SVGs reais já existentes na página** e chamam os mesmos comandos homologados da toolbar. Os atalhos exibidos no Empty State correspondem somente aos atalhos realmente registrados no aplicativo:
+
+- `Ctrl+Alt+D` — Nova nota;
+- `Ctrl+Alt+S` — Nova pasta;
+- `Ctrl+Alt+P` — Personalização.
+
+A lista completa continua centralizada no botão **ATALHOS** da própria interface.
 
 ### Busca e produtividade
 
 - Busca alternável entre **nome** e **nome + conteúdo**.
 - Destaque visual de ocorrências.
 - Busca dentro de arquivos `.txt` e `.md` lidos da pasta escolhida.
-- Atalhos de teclado para salvar, criar nota, criar pasta, renomear, excluir, alternar Markdown, navegar por abas, personalizar a interface e abrir informações; veja a seção [Atalhos de teclado](#atalhos-de-teclado).
+- Atalhos de teclado para salvar, criar nota, criar pasta, renomear, excluir, selecionar os modos Markdown, navegar por abas, personalizar a interface e abrir informações; veja a seção [Atalhos de teclado](#atalhos-de-teclado).
 - Autosave opcional.
+- Botão **⌨ ATALHOS** no rodapé para abrir a lista de comandos diretamente pela interface.
 - Botão de voltar ao topo no preview Markdown.
 
 ### Personalização visual
@@ -122,13 +151,15 @@ Os atalhos abaixo fazem parte do fluxo principal da aplicação e foram pensados
 
 > **Nota sobre macOS:** internamente, a aplicação trata o modificador principal como `Ctrl` no Windows/Linux e como `Cmd` no macOS quando aplicável. Na documentação abaixo, `Ctrl` representa esse modificador principal.
 
+A lista de atalhos também pode ser aberta diretamente pela interface usando o botão **⌨ ATALHOS** no rodapé.
+
 ### Regras de contexto dos atalhos
 
 - **F2** renomeia o item correto conforme o contexto: item focado na árvore, arquivo ativo no editor, arquivo ativo no preview ou aba ativa.
 - Atalhos destrutivos como **Ctrl+Del** e **Alt+Del** usam o mesmo critério de alvo ativo para evitar excluir um item antigo selecionado por engano.
 - Atalhos globais são bloqueados em campos de formulário, busca e diálogos quando isso poderia interromper digitação normal.
 - Em modais abertos, **Esc** fecha o diálogo quando permitido e **Tab** permanece preso dentro do modal para preservar acessibilidade básica de foco.
-- Em arquivos Markdown, **Ctrl+Alt+E** alterna entre modo de edição e preview somente quando a aba ativa é `.md`.
+- Em arquivos Markdown, os três modos possuem comandos independentes e só atuam quando a aba ativa é `.md`: **Ctrl+Alt+E** abre **Editar**, **Ctrl+Alt+L** abre **Live Preview** e **Ctrl+Alt+V** abre **View**.
 
 ### Tabela de atalhos
 
@@ -155,10 +186,12 @@ Os atalhos abaixo fazem parte do fluxo principal da aplicação e foram pensados
 | Abas | `Ctrl+Shift+→` | Mover aba ativa para a direita | Mantém abas fixadas e não fixadas em seus respectivos grupos. |
 | Abas | `Ctrl+Shift+T` | Reabrir aba fechada | Reabre a última aba fechada quando houver histórico disponível. |
 | Abas | `Ctrl+Alt+Shift+T` | Reabrir aba fechada | Alternativa aceita pelo fluxo atual. |
-| Markdown | `Ctrl+Alt+E` | Alternar editor/preview Markdown | Só atua quando o arquivo ativo é `.md`. |
+| Markdown | `Ctrl+Alt+E` | Abrir **Editar MD** | Só atua quando o arquivo ativo é `.md`. |
+| Markdown | `Ctrl+Alt+L` | Abrir **Live Preview** | Exibe editor e preview simultaneamente em split redimensionável. |
+| Markdown | `Ctrl+Alt+V` | Abrir **View** | Exibe somente o preview Markdown renderizado. |
 | Interface | `Ctrl+Alt+P` | Abrir personalização | Abre o painel de ajustes visuais. |
 | Interface | `Ctrl+Alt+A` | Ligar/desligar Autosave | Alterna o salvamento automático. |
-| Interface | `Ctrl+Alt+I` | Abrir informações | Mostra informações do app, ambiente e atalhos. |
+| Interface | `Ctrl+Alt+I` | Abrir informações | Mostra informações do app e do ambiente. |
 | Editor | `Ctrl+Alt+U` | Converter seleção para MAIÚSCULAS | Atua apenas quando há seleção válida no editor ativo. |
 | Editor | `Ctrl+Alt+Y` | Converter seleção para minúsculas | Atua apenas quando há seleção válida no editor ativo. |
 | Editor | `Tab` | Inserir indentação | No editor, insere tabulação ou indenta bloco selecionado. |
@@ -178,7 +211,11 @@ Os atalhos abaixo fazem parte do fluxo principal da aplicação e foram pensados
 
 ## Preview Markdown avançado
 
-O preview Markdown do `index.html` foi atualizado para funcionar como uma área de leitura técnica, não apenas como renderização básica.
+O preview Markdown do `index.html` foi atualizado para funcionar como uma área de leitura técnica, não apenas como renderização básica. Em arquivos `.md`, a interface oferece três estados no mesmo controle: **Editar**, **Live Preview** e **View**.
+
+No **Live Preview**, editor e preview ficam visíveis simultaneamente em um split cujo divisor vertical pode ser redimensionado. O preview acompanha as alterações do draft durante a edição e os dois painéis mantêm scroll bidirecional sincronizado de forma proporcional.
+
+Na v1.0.21, o pipeline de layout do preview foi otimizado para evitar travamentos em documentos Markdown grandes: os blocos de código usam gerenciamento compartilhado de resize/layout, atualizações pesadas são agendadas em pequenos lotes por frame, o resize da sidebar e do divisor do split é coalescido e o Mermaid deixa de continuar trabalho pertencente a uma renderização já substituída. Isso reduz bloqueios da main thread sem alterar o conteúdo renderizado.
 
 Recursos observados no arquivo atual:
 
@@ -194,8 +231,37 @@ Recursos observados no arquivo atual:
 | GitHub Alerts | Suporte visual a `> [!NOTE]`, `> [!TIP]`, `> [!IMPORTANT]`, `> [!WARNING]` e `> [!CAUTION]`. |
 | `<details>` / `<summary>` | Acabamento visual para blocos expansíveis HTML dentro do Markdown. |
 | Mermaid | Renderização local de diagramas em blocos ````mermaid`. |
+| Modos Markdown | Toggle contextual com **Editar**, **Live Preview** e **View**, visível somente quando o arquivo ativo é `.md`. |
+| Live Preview | Editor e preview simultâneos em split redimensionável, com atualização contínua do draft e scroll bidirecional sincronizado proporcionalmente. |
+| Performance do preview | Layout de blocos de código com observação compartilhada, agendamento por frame e processamento em lotes; resize da sidebar/split coalescido para reduzir trabalho síncrono repetitivo. |
+| Âncoras H1–H6 | Os headings recebem IDs funcionais para navegação por `#hash`; o antigo clipe/botão visual de hover foi removido. |
+| Citações `>` | O texto do blockquote segue a **cor de texto configurada pelo usuário**; fundo, borda e tratamento estrutural continuam próprios do componente. GitHub Alerts mantêm suas cores semânticas específicas. |
+| Links Markdown | Links, `:visited`, `:hover`, `:active` e `:focus` herdam a cor do texto configurada, sem azul fixo. A identificação visual permanece por sublinhado e foco acessível. |
+| Imagens locais | `./` e `../` resolvem em relação ao `.md` atual; `/` resolve a partir da pasta raiz autorizada. Os arquivos são carregados via File System Access API e exibidos por Object URL `blob:` temporária. |
 
 > **Nota de manutenção sobre KaTeX:** no `index.html` atual, a renderização matemática é feita por regras próprias registradas no `markdown-it`, usando `window.katex` diretamente. Portanto, o funcionamento observado depende de `libs/katex.min.js`, `libs/katex.min.css` e das fontes em `libs/fonts/`. O arquivo `libs/markdown-it-katex.min.js` permanece listado no repositório por compatibilidade histórica, rastreabilidade de distribuição e inventário de licenças; se ele for removido fisicamente no futuro, remova também sua entrada em `LICENCAS-E-ATRIBUICOES.md`.
+
+### Imagens locais no Markdown
+
+Quando a pasta raiz estiver conectada, imagens físicas dentro dela podem ser referenciadas diretamente no Markdown sem usar URL externa:
+
+```md
+![Imagem ao lado da nota](./imagens/topologia.png)
+![Imagem na pasta-pai](../assets/diagrama.webp)
+![Imagem a partir da raiz](/assets/logo.svg)
+```
+
+Regras de resolução:
+
+- `./` e caminhos relativos simples, como `imagens/foto.jpg`, usam como base o diretório do arquivo `.md` atual;
+- `../` sobe diretórios, mas nunca pode escapar acima da pasta raiz autorizada;
+- `/` significa a raiz do workspace selecionado no ANOTAÇÕES;
+- `http://`/`https://`, `data:` e outros esquemas explícitos continuam pertencendo ao pipeline já existente e não são tratados como arquivo local;
+- SVG inline, por exemplo `<svg>...</svg>`, continua sendo renderizado pelo pipeline HTML + DOMPurify atual e não é convertido em `blob:`.
+
+Para arquivos locais, o ANOTAÇÕES usa a File System Access API apenas dentro da raiz autorizada, cria uma Object URL `blob:` temporária para o elemento `<img>` e revoga URLs antigas quando deixam de ser necessárias. O cache do preview evita reabrir a mesma imagem a cada atualização do Live Preview; metadados `lastModified + size` são revalidados periodicamente para substituir a Object URL quando o arquivo físico mudar.
+
+> Esta funcionalidade pertence somente às variantes com File System Access API. **ANOTAÇÕES_noAPI não recebe esse recurso**, preservando sua arquitetura browser-only sem acesso à pasta real.
 
 ### Mermaid no preview
 
@@ -220,9 +286,10 @@ O projeto inclui `libs/mermaid.min.js` e renderiza diagramas Mermaid localmente 
    - Na **primeira sincronização**, a indexação completa pode levar vários minutos em raízes grandes ou armazenadas em rede.
    - Preserve os dados locais do navegador para que as próximas aberturas da mesma raiz possam usar o snapshot/cache local.
 5. Crie ou abra arquivos `.txt` e `.md`.
-6. Use **Ctrl+S** para salvar ou ative o **Autosave**.
-7. Use **Atualizar árvore** quando alterar arquivos fora da página.
-8. Use **Exportar JSON** antes de alterações grandes ou migrações.
+6. Em arquivos `.md`, escolha **Editar**, **Live Preview** ou **View** no controle Markdown.
+7. Use **Ctrl+S** para salvar ou ative o **Autosave**.
+8. Use **Atualizar árvore** quando alterar arquivos fora da página.
+9. Use **Exportar JSON** antes de alterações grandes ou migrações.
 
 > Dica: para testar com segurança, comece por uma pasta nova ou uma cópia de uma pasta real.
 
@@ -402,6 +469,8 @@ Este repositório inclui documentação específica de segurança em [PENTEST-RE
 
 Medidas e características relevantes observadas no `index.html` atual:
 
+> **Higiene de CSS:** o projeto evita `!important` como solução normal de especificidade. As ocorrências remanescentes são restritas a exceções técnicas auditadas, como estados globais temporários, acessibilidade (`prefers-reduced-motion`) e compatibilidade controlada do Mermaid. Correções futuras devem preferir cascata, escopo e especificidade mínima suficiente. O ciclo v1.0.23–v1.0.24 também removeu dependências visuais fixas desnecessárias do Preview e eliminou o fluxo legado de mensagens do editor vazio em vez de apenas escondê-lo.
+
 - **CSP via `<meta http-equiv="Content-Security-Policy">`**;
 - `connect-src 'none'`, reduzindo conexões ativas iniciadas por APIs como `fetch`;
 - scripts locais carregados de `./libs/`;
@@ -460,6 +529,8 @@ A partir da v1.0.12, o Preview Markdown usa exclusivamente o bundle local `libs/
 
 A árvore abaixo representa a estrutura esperada do repositório completo. Alguns itens são documentos ou auxiliares de execução local e não necessariamente são carregados diretamente pelo `index.html` em tempo de execução.
 
+> **Favicon:** não existe arquivo de favicon externo na estrutura atual. O ícone é um **SVG interno embutido diretamente no `index.html`**.
+
 ```text
 .
 ├─ index.html
@@ -503,3 +574,5 @@ As bibliotecas, fontes, estilos e ativos de terceiros distribuídos em `libs/` m
 ## Fechamento
 
 O **ANOTAÇÕES** é uma proposta prática para quem quer unir a simplicidade de arquivos locais com a ergonomia de uma interface web moderna. Ele funciona como editor, organizador e leitor técnico para `.txt` e `.md`, com um diferencial importante: o conteúdo continua em uma pasta real do seu computador. ✨
+
+**Release documentada neste README: v1.0.24.**
